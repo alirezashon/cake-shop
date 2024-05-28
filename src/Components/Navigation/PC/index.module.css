@@ -176,8 +176,8 @@
 
 .profile {
   font-size: 6vh;
-  color: #e5f3a3;
-  background-color: rgb(77, 149, 26);
+  color: #fbffe8;
+  background-color: rgb(255, 153, 0);
   border-radius: 23vh;
   border: 0.3vh rgb(239, 255, 234) dashed;
   cursor: pointer;

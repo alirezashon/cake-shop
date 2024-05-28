@@ -187,25 +187,22 @@ const PC: React.FC<NavProps> = ({
         </div>
         <div className={styles.leftSide}>
           <div className={styles.iconBox}>
-            <div>
-              <Basket
-                isBasketOpen={isBasketOpen}
-                setIsBasketOpen={setIsBasketOpen}
-                basket={basket}
-                setBasket={setBasketStore}
-                basketData={basketData}
-                totalPrice={totalPrice}
-              />
-            </div>
-            <div>
-              <FaUserCircle
-                className={styles.profile}
-                onClick={() => {
-                  setLoading(true)
-                  window.location.href = "/profile"
-                }}
-              />
-            </div>
+            <Basket
+              isBasketOpen={isBasketOpen}
+              setIsBasketOpen={setIsBasketOpen}
+              basket={basket}
+              setBasket={setBasketStore}
+              basketData={basketData}
+              totalPrice={totalPrice}
+            />
+
+            <FaUserCircle
+              className={styles.profile}
+              onClick={() => {
+                setLoading(true)
+                window.location.href = "/profile"
+              }}
+            />
           </div>
           <div>
             <SearchBarComponent />
