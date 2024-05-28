@@ -1,0 +1,194 @@
+/** @format */
+@keyframes borderance {
+	0% {
+		border-radius: 0 2vh;
+	}
+
+	22% {
+		border-radius: 1vh 1vh;
+	}
+
+	47% {
+		border-radius: 2vh 0;
+	}
+
+	77% {
+		border-radius: 3vh 1vh;
+	}
+
+	97% {
+		border-radius: 2vh 2vh;
+	}
+}
+
+.productBox {
+	z-index: 9;
+	width: 100vw;
+	background: linear-gradient(
+		44deg,
+		rgba(92, 130, 72, 0.9) 2%,
+		rgb(206, 246, 169) 22%,
+		rgba(97, 130, 13, 0.9) 99%
+	);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(23vw, 0fr));
+	justify-content: center;
+	padding: 2vh;
+}
+
+.header {
+	background: linear-gradient(
+		44deg,
+		rgba(24, 78, 3, 0.9) 2%,
+		rgb(195, 233, 182) 22%,
+		rgba(44, 119, 4, 0.9) 99%
+	);
+	text-align: center;
+}
+
+.subImagesBox {
+	display: grid;
+	grid-area: 1vh;
+	grid-template-columns: repeat(auto-fit, minmax(7vw, 0fr));
+	width: 100%;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.subImage {
+	border-radius: 22vh;
+	cursor: no-drop;
+}
+
+.subImage:hover {
+	opacity: 0.5;
+}
+
+.imageBoxHead {
+	color: aliceblue;
+	text-wrap: nowrap;
+	width: 100%;
+	background: linear-gradient(
+		44deg,
+		rgba(231, 164, 10, 0.9) 2%,
+		rgb(247, 101, 23) 22%,
+		rgba(248, 132, 44, 0.9) 99%
+	);
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	border-radius: 1vh;
+	padding: 0.3vh 1vh;
+	margin: 2vh 0.2vh;
+}
+
+.productBoxRow {
+	background: linear-gradient(
+		222deg,
+		rgba(126, 169, 28, 0.9),
+		rgba(184, 220, 162, 0.96),
+		rgba(137, 201, 35, 0.9)
+	);
+	border: 0.4vh ridge rgb(154, 238, 126);
+	margin: 1vh;
+	padding: 2vh;
+	display: flex;
+	justify-content: space-around;
+}
+
+.productBoxRow label {
+	background: radial-gradient(rgba(2, 50, 16, 0.9), rgba(8, 119, 26, 0.9));
+	padding: 0.5vh 1vh;
+	border-radius: 0.7vh;
+	color: white;
+	text-wrap: nowrap;
+	height: fit-content;
+}
+
+.productBoxRow input {
+	outline: none;
+	border: 0.3vh ridge rgba(174, 241, 91, 0.9);
+	border-radius: 0.6vh;
+	padding: 1vh;
+	text-align: center;
+}
+
+.productBoxRow textarea {
+	width: 60%;
+	padding: 1vh;
+	border-radius: 1vh;
+	border: 0.5vh rgba(91, 201, 241, 0.9) ridge;
+	direction: rtl;
+}
+
+.productBox input[type='submit'] {
+	background: linear-gradient(
+		22deg,
+		rgba(99, 121, 211, 0.9),
+		rgba(121, 221, 129)
+	);
+}
+
+.submit {
+	color: rgb(242, 228, 255);
+	border: 0.5vh double rgb(199, 233, 230);
+	border-radius: 1vh;
+	padding: 1vh 2vh;
+	cursor: pointer;
+	text-align: center;
+	background: linear-gradient(
+		2deg,
+		rgba(20, 99, 53, 0.9),
+		rgba(4, 117, 25, 0.9),
+		rgb(5, 103, 23)
+	);
+	animation: borderance infinite 7s;
+}
+
+.colorBox {
+	border: 0.2vh rgb(191, 246, 102) dashed;
+	border-radius: 2vh;
+	background: linear-gradient(
+		45deg,
+		rgb(60, 107, 18),
+		rgb(152, 222, 67),
+		rgb(19, 129, 11)
+	);
+	display: flex;
+	justify-content: space-around;
+	padding: 2vh 4vh;
+}
+
+.color {
+	border: 0.4vh solid snow;
+	width: 4vh;
+	height: 4vh;
+	border-radius: 22vh;
+	outline: none;
+	border: none;
+	cursor: pointer;
+}
+
+.color:hover {
+	border-radius: 0.5vh;
+	transform: scale(1.3);
+}
+@media (max-width: 999px) {
+	.productBox {
+		grid-template-columns: repeat(auto-fit, minmax(43vw, 0fr));
+	}
+
+	.subImagesBox {
+		grid-template-columns: repeat(auto-fit, minmax(12vw, 0fr));
+	}
+}
+
+@media (max-width: 666px) {
+	.productBox {
+		grid-template-columns: repeat(auto-fit, minmax(83vw, 0fr));
+	}
+
+	.subImagesBox {
+		grid-template-columns: repeat(auto-fit, minmax(18vw, 0fr));
+	}
+}

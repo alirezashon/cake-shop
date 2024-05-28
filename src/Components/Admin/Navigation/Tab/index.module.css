@@ -1,0 +1,25 @@
+.tabBar {
+  width: 100vw;
+  height: 7vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  background: linear-gradient(
+    110deg,
+    rgba(153, 194, 42, 0.945),
+    rgb(99, 185, 75),
+    rgba(149, 250, 87, 0.9)
+  );
+}
+.tab {
+  width: 10%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.4vh rgba(255, 248, 252, 0.9) dashed;
+  border-radius: 0.6vh;
+  cursor: pointer;
+}

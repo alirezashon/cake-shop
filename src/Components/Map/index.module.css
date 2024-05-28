@@ -1,0 +1,96 @@
+/** @format */
+
+.container {
+	height: 100%;
+	width: 100%;
+	border-radius: 0.5vh;
+}
+
+.map {
+	width: 100%;
+	min-height: 33vh;
+	border: 0.4vh ridge rgb(115, 167, 12);
+	border-radius: 0.7vh;
+	padding: 0.1vh;
+}
+
+.formBox {
+	border-radius: 1vh;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(23%, 0fr));
+	justify-content: space-around;
+	gap: 1vh;
+	font-size: 2vh;
+	background-color: #ffffff;
+}
+
+.formBoxRow {
+	grid-template-columns: repeat(auto-fit, minmax(22%, 0fr));
+	display: flex;
+	padding: 1vh;
+}
+
+.formBoxRow label {
+	margin: 1vh;
+	text-wrap: nowrap;
+}
+
+.formBoxRow input {
+	border: 0.4vh ridge rgb(115, 167, 12);
+	outline: none;
+	max-height: 5vh;
+	min-width: 33%;
+	text-align: center;
+	border-radius: 0.5vh;
+}
+
+.formBoxRow input:hover {
+	transform: scale(1.03, 1.05);
+}
+.addressBox {
+	position: relative;
+}
+
+.addressBox textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+	line-height: 1.5;
+	resize: none;
+}
+
+.addressBox label {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	font-size: 14px;
+	color: #777;
+	transition: all 0.3s ease-in-out;
+	pointer-events: none;
+}
+
+.addressBox textarea:focus + label,
+.addressBox textarea:not(:placeholder-shown) + label {
+	top: -15px;
+	font-size: 12px;
+	color: #333;
+}
+
+.addressBox textarea:focus {
+	outline: none;
+	border-color: #4caf50;
+	box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.address {
+	border: 0.3vh ridge #ffffff;
+	min-width: 60%;
+	min-height: 20vh;
+}
+@media (max-width: 999px) {
+	.container {
+		height: 40vh;
+	}
+}

@@ -1,0 +1,124 @@
+/**
+ * components/ChatUI.module.css
+ *
+ * @format
+ */
+
+.chatContainer {
+	position: fixed;
+	bottom: 5vh;
+	right: 5vh;
+}
+
+.chatIcon {
+	padding: 1.5vh;
+	border: 0.3vh dashed rgb(238, 245, 110);
+	background: radial-gradient(#ff6600, #d88225);
+	color: white;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.chatIcon:hover {
+	transform: rotate(360deg);
+	background: radial-gradient(#ff7b00, #b98942);
+}
+
+.chatBox {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 22vw;
+	height: 70vh;
+	background-color: #f4f4f4;
+	border: 0.5vh double #f1d46c;
+	overflow-y: auto;
+	box-shadow: 1px 1px 0.1vh 1px rgb(205, 156, 43) inset;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	color: rgba(39, 28, 1, 0.9);
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 0.2vh 1vh;
+	text-align: center;
+	background: radial-gradient(
+		rgba(217, 181, 18, 0.9),
+		rgba(234, 149, 21, 0.653)
+	);
+}
+
+.cross {
+	transition: transform 0.7s;
+	color: rgb(244, 94, 0);
+	background-color: #ffffffc8;
+	border-radius: 0 0  7vh 7vh 	;
+	padding: 0.3vh;
+	border: 0.1vh dashed rgb(245, 151, 27);
+}
+
+.cross:hover {
+	cursor: grabbing;
+	color: rgba(252, 107, 3, 0.9);
+	transform: rotate(90deg);
+}
+
+.messages {
+	flex: 1;
+	overflow-y: auto;
+	padding: 10px;
+}
+
+.message {
+	overflow-x: hidden;
+	width: 90%;
+	padding: 1vh;
+	margin-bottom: 5px;
+	border-radius: 0.4vh 1vh 2vh 1vh;
+	word-wrap: break-word;
+	direction: rtl;
+ }
+
+.userMessage {
+	align-self: flex-end;
+	background: radial-gradient(#007bff, #42afb9);
+	color: white;
+}
+
+.otherMessage {
+	background-color: #eaeaea;
+}
+
+.inputContainer {
+	display: flex;
+	padding: 10px;
+}
+
+.input {
+	flex: 1;
+	padding: 1vh;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-right: 1vh;
+}
+
+.sendButton {
+	padding: 1vh 2vh;
+	border: none;
+    background: radial-gradient(#007bff, #42afb9);	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+@media (max-width: 999px) {
+	.chatBox {
+		width: 80vw;
+	}
+}

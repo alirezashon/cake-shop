@@ -1,0 +1,26 @@
+/** @format */
+
+.container {
+	direction: rtl;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+	justify-content: space-around;
+}
+ 
+.related {
+	width: 80%;
+}
+@media (max-width: 777px) {
+	.container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 1vh;
+	}
+	.related {
+		width: 100%;
+	}
+	.container div:first-child {
+		margin-bottom: 1vh;
+	}
+}

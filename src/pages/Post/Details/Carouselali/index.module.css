@@ -1,0 +1,231 @@
+/** @format */
+
+@keyframes container {
+	25% {
+		background-image: repeating-linear-gradient(
+			90deg,
+			#3c8d9a,
+			#3c689a 5vh,
+			#93c7d3 5vh,
+			#f7eeff 10vh
+		);
+	}
+
+	50% {
+		background-image: repeating-linear-gradient(
+			-40deg,
+			#3c8d9a,
+			#3c689a 5vh,
+			#93c7d3 5vh,
+			#f7eeff 10vh
+		);
+	}
+
+	75% {
+		background-image: repeating-linear-gradient(
+			90deg,
+			#3c8d9a,
+			#3c689a 5vh,
+			#93c7d3 5vh,
+			#f7eeff 10vh
+		);
+	}
+}
+
+@keyframes carouselali {
+	0% {
+		width: 0;
+	}
+
+	50% {
+		width: 22%;
+		border: double rgb(255, 245, 47);
+	}
+}
+
+@keyframes imagelinor {
+	10% {
+		box-shadow: 1px 1px 7vh 1px rgba(255, 255, 252, 0.9);
+	}
+
+	40% {
+		box-shadow: 1px 1px 9vh 1px rgb(255, 213, 0);
+	}
+
+	90% {
+		box-shadow: 1px 1px 7vh 1px rgba(255, 254, 251, 0.9);
+	}
+}
+@keyframes rotate {
+    0%{transform: rotate(0deg) scale(1.2);
+    }
+    
+    100% {
+        transform: rotate(360deg) scale(1.1);}
+}
+.container {
+	width: 100%;
+	height: 50vh;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.carouselaliContainer {
+	animation: container infinite 7s;
+	width: 99%;
+	height: 100%;
+	margin: 1vh 0.5vh;
+	padding: 1vh 0;
+	background-image: repeating-linear-gradient(
+		40deg,
+		#3c8d9a,
+		#3c689a 5vh,
+		#93c7d3 5vh,
+		#f7eeff 10vh
+	);
+	border: ridge 0.7vh rgba(195, 234, 250, 0.9);
+	border-radius: 11vh 1vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all 1s ease-in-out;
+}
+
+.carouselali {
+	background: linear-gradient(
+		45deg,
+		rgba(249, 251, 212, 0.965),
+		rgba(0, 234, 255, 0.811),
+		rgba(226, 253, 255, 0.811)
+	);
+	animation: carouselali 2s;
+	width: 100%;
+	height: 97%;
+	border: dotted 0.3vh rgba(9, 135, 245, 0.9);
+	border-radius: 1vh 3vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+}
+
+.circaliBox {
+	width: fit-content;
+	padding: 0.1vh 1vh;
+	height: 3%;
+	border-radius: 4vh;
+	z-index: 2;
+	opacity: 0.8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: radial-gradient(
+		rgba(0, 255, 174, 0.119),
+		rgba(244, 255, 254, 0.132)
+	);
+	background: linear-gradient(
+		45deg,
+		rgb(248, 43, 43),
+		rgb(232, 165, 41),
+		rgb(193, 3, 32)
+	);
+	border: 0.3vh dashed rgba(0, 1, 33, 0.367);
+}
+
+.circaliBox:hover {
+	opacity: 0.9;
+}
+
+.circali {
+	border-radius: 100vh;
+	width: 3vh;
+	height: 3vh;
+	margin: 0.1vh 1vh;
+	background: repeating-radial-gradient(
+		rgb(0, 81, 212),
+		rgb(255, 254, 244),
+		rgb(212, 60, 0),
+		rgb(212, 60, 0)
+	);
+	border: double 0.4vh rgba(235, 151, 5, 0.9);
+}
+
+.circali:hover {
+	transform: scale(1.1) rotate(360deg);
+	transition: transform 2s;
+	border: dashed 0.4vh rgba(255, 244, 239, 0.811);
+}
+
+.circalActive {
+	transform: scale(1.2) rotate(360deg);
+	background: repeating-radial-gradient(
+		rgb(212, 60, 0),
+		rgb(255, 244, 149),
+		rgb(0, 81, 212),
+		rgb(255, 254, 244)
+	);
+	background-color: rgba(0, 140, 255, 0.883);
+	border: dashed 0.4vh rgba(255, 244, 239, 0.811);
+}
+
+.image {
+	animation: imagelinor infinite 7s;
+	height: 91%;
+	width: 98%;
+	opacity: 1;
+	border: double rgba(255, 126, 21, 0.9) 0.7vh;
+	box-shadow: 1px 1px 11vh 1px rgba(222, 192, 44, 0.9);
+	border-radius: 7vh 1vh;
+	transition: all 1s ease-in-out;
+}
+
+.directionsIcon {
+	border-radius: 1vh;
+    opacity: .67;
+    color: rgba(255, 255, 255, 0.934);
+    background: radial-gradient(red,orange);
+    border-radius: 13vh;
+    cursor: pointer;
+}
+
+.directionsIcon:first-child {
+	transform: rotate(270deg);
+}
+
+.directionsIcon:last-child {
+	transform: rotate(90deg);
+ }
+.directionsIcon:hover {
+    animation: rotate .7s infinite backwards;
+    opacity: 0.9;
+}
+
+.containerali {
+	width: 99%;
+	height: 4%;
+    border: dashed .2vh rgb(206, 232, 255);
+	border-radius: 5vh;
+	background:linear-gradient(313deg,rgb(3, 3, 59),rgb(32, 133, 167),rgb(16, 146, 129));
+	box-shadow: 1px 1px 9px 1px rgba(0, 1, 25, 0.934),
+		1px 1px 5px 1px rgba(0, 234, 255, 0.811) inset;
+}
+
+.contorali {
+	height: 100%;
+	border-radius: 4vh;
+	border: 0.7vh ridge rgb(210, 250, 255);
+	background: radial-gradient(rgb(206, 232, 255), rgb(71, 237, 255));
+	cursor: pointer;
+}
+
+@media (max-width: 675px) {
+	.container {
+		height: 30vh;
+	}
+
+	.circali {
+		width: 93%;
+		height: 93%;
+	}
+}

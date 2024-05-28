@@ -1,0 +1,134 @@
+.productBox {
+    width: 100vw;
+    background: linear-gradient(44deg,
+            rgba(237, 130, 23, 0.9) 2%,
+            rgb(255, 250, 186) 22%,
+            rgba(229, 151, 17, 0.9) 99%);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(27vw, 1fr));
+    justify-content: center;
+    padding: 2vh;
+}
+
+.header {
+    background: linear-gradient(44deg,
+            rgba(44, 78, 3, 0.9) 2%,
+            rgb(219, 233, 182) 22%,
+            rgba(35, 119, 4, 0.9) 99%);
+    text-align: center;
+}
+
+
+.subImage {
+    border-radius: 22vh;
+    cursor: no-drop;
+}
+
+.subImage:hover {
+    opacity: .5;
+}
+
+.imageBoxHead {
+    color: aliceblue;
+    text-wrap: nowrap;
+    width: 100%;
+    background: linear-gradient(44deg,
+            rgba(231, 164, 10, 0.9) 2%,
+            rgb(247, 101, 23) 22%,
+            rgba(248, 132, 44, 0.9) 99%);
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    border-radius: 1vh;
+    padding: 0.3vh 1vh;
+    margin: 2vh .2vh;
+}
+
+.productBoxRow {
+    background: linear-gradient(4deg,
+            rgba(255, 176, 29, 0.9),
+            rgba(243, 255, 22, 0.9),
+            rgba(239, 151, 8, 0.9));
+    border: 0.4vh ridge rgb(242, 238, 12);
+    margin: 1vh;
+    padding: 2vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+.productBoxRow label {
+    background: radial-gradient(rgba(242, 118, 10, 0.9), rgba(250, 191, 27, 0.9));
+    padding: 0.5vh 1vh;
+    border-radius: 0.7vh;
+    color: white;
+    text-wrap: nowrap;
+    height: fit-content;
+}
+
+.productBoxRow input {
+    outline: none;
+    border: 0.3vh ridge rgba(235, 195, 17, 0.9);
+    border-radius: 0.6vh;
+    padding: 1vh;
+    text-align: center;
+}
+
+.productBoxRow textarea {
+    width: 60%;
+    padding: 1vh;
+    border-radius: 1vh;
+    border: 0.5vh rgba(91, 201, 241, 0.9) ridge;
+    direction: rtl;
+}
+
+.productBox input[type='submit'] {
+    background: linear-gradient(22deg,
+            rgba(99, 121, 211, 0.9),
+            rgba(121, 221, 129));
+}
+
+@media (max-width: 999px) {
+    .productBox {
+        grid-template-columns: repeat(auto-fit, minmax(43vw, 0fr));
+    }
+
+    .subImagesBox {
+        grid-template-columns: repeat(auto-fit, minmax(12vw, 0fr));
+    }
+}
+
+@media (max-width: 666px) {
+    .productBox {
+        grid-template-columns: repeat(auto-fit, minmax(83vw, 0fr));
+    }
+
+    .subImagesBox {
+        grid-template-columns: repeat(auto-fit, minmax(18vw, 0fr));
+    }
+}
+
+.selectList {
+    background: linear-gradient(55deg, #f1ce08, #ee8711, rgb(249, 222, 20));
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    border: double 0.5vh #d1fffd;
+    border-radius: 0.5vh;
+}
+
+.selectList:hover {
+    border: dashed 0.2vh #d1fffd;
+    background: linear-gradient(95deg, #063f3b, #189a94);
+    transform: scale(1.01);
+}
+
+.selectList option {
+    background-color: #90f6f1;
+    color: #000c1e;
+}
+
+.selectList option:nth-child(odd) {
+    color: #ffffff;
+    background-color: rgba(13, 117, 135, 0.756);
+    border-end-end-radius: 22vh;
+}

@@ -1,0 +1,9 @@
+version: 3.7
+services:
+  amjad:
+    build: ./
+
+    networks:
+      default:
+        external:
+          name: nginxproxy

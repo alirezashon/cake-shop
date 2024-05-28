@@ -1,0 +1,398 @@
+/** @format */
+
+@keyframes loading {
+	0% {
+		background: linear-gradient(0deg, rgb(216, 226, 202), rgb(254, 255, 252));
+	}
+
+	20% {
+		background: linear-gradient(36deg, rgb(216, 226, 202), rgb(254, 255, 252));
+	}
+
+	40% {
+		background: linear-gradient(66deg, rgb(216, 226, 202), rgb(254, 255, 252));
+	}
+
+	60% {
+		background: linear-gradient(96deg, rgb(216, 226, 202), rgb(254, 255, 252));
+	}
+
+	80% {
+		background: linear-gradient(136deg, rgb(216, 226, 202), rgb(254, 255, 252));
+	}
+
+	100% {
+		background: linear-gradient(236deg, rgb(216, 226, 202), rgb(254, 255, 252));
+	}
+}
+
+.loading td {
+	height: 12vh;
+	width: 16vh;
+	margin: 0.5vh;
+	border-radius: 1vh;
+	animation: loading 0.7s infinite alternate-reverse;
+}
+
+.header {
+	background: repeating-linear-gradient(
+		2deg,
+		rgba(178, 206, 37, 0.853),
+		rgba(200, 255, 224, 0.8),
+		rgba(138, 242, 100, 0.8)
+	);
+	text-align: center;
+	color: #01311c;
+}
+.insertox{
+	width: 100%;
+	height: 70vh;
+	position: absolute;
+	
+}
+.container {
+	width: 100%;
+	height: 100%;
+	background: repeating-radial-gradient(
+		rgba(144, 206, 37, 0.853),
+		rgba(192, 235, 154, 0.8),
+		rgba(211, 252, 161, 0.8)
+	);
+	padding: 4vh;
+	overflow-y: auto;
+}
+
+.actionBox {
+	background: repeating-linear-gradient(
+		7deg,
+		rgba(176, 208, 128, 0.853),
+		rgba(239, 255, 229, 0.8),
+		rgba(219, 250, 226, 0.8)
+	);
+	border: ridge 0.7vh;
+	border-radius: 2vh;
+	border-image: linear-gradient(to left, #fcfff8, #ffb908, #fdfff8);
+	border-image-slice: 11;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1vh;
+}
+
+.searchBox {
+	height: 7vh;
+	display: flex;
+}
+
+.searchBox input {
+	padding: 5px;
+	margin-right: 10px;
+}
+
+.add {
+	cursor: pointer;
+	background: radial-gradient(
+		rgba(120, 255, 122, 0.9),
+		rgba(30, 136, 57, 0.9),
+		rgba(187, 242, 99, 0.9)
+	);
+	color: #fff;
+	border: double 0.3vh rgba(242, 255, 252, 0.8);
+	border-radius: 7vh;
+}
+
+.tableContainer {
+	margin-top: 2vh;
+}
+
+.tableContainer table {
+	width: 100%;
+	cursor: pointer;
+	font-size: 2vh;
+	overflow-x: auto;
+}
+
+.tableContainer table th {
+	background: linear-gradient(
+		22deg,
+		rgba(209, 234, 99, 0.9),
+		rgba(219, 254, 194, 0.9),
+		rgba(141, 223, 123, 0.9)
+	);
+	border: ridge 1vh;
+	border-image: linear-gradient(to left, #edfbe8, #f9fff8, #c2ed95);
+	border-image-slice: 22;
+}
+
+.tableContainer table td {
+	background-color: #f9fff8;
+	border: 1vh double rgba(96, 234, 54, 0.8);
+	border-radius: 1vh;
+}
+
+.tableContainer table th,
+.tableContainer table td {
+	padding: 1vh;
+	text-align: center;
+}
+
+.tableContainer table th:hover,
+.tableContainer table td:hover {
+	transform: scale(1.07);
+}
+
+.tableImage {
+	border-radius: 7vh;
+	border: 1vh ridge;
+	border-image: linear-gradient(
+		22deg,
+		rgba(230, 255, 185, 0.9),
+		rgba(170, 228, 137, 0.9),
+		rgba(60, 231, 103, 0.9)
+	);
+}
+
+.tableImage:hover {
+	border-image-slice: 2;
+}
+
+.actionButton {
+	align-self: center;
+	cursor: pointer;
+	position: absolute;
+	background: linear-gradient(
+		22deg,
+		rgba(177, 213, 99, 0.9),
+		rgba(255, 135, 37, 0.9),
+		rgba(213, 213, 99, 0.9)
+	);
+	color: #fff;
+	font-size: 5vh;
+	padding: 1vh;
+	border-radius: 4vh;
+}
+
+.actionButton:hover {
+	transform: scale(1.3) rotate(22deg);
+	animation: loading 3s infinite;
+	color: #dc3545;
+	margin-top: 1vh;
+}
+
+.colorBox {
+	border-radius: 22vh;
+	width: 3vh;
+	height: 3vh;
+	display: inline-block;
+	margin: 0.1vh;
+}
+
+/*  */
+
+/* Second Parren styles start */
+.actionContainer {
+	position: fixed;
+	overflow: auto;
+	width: 97%;
+	height: 93vh;
+	background: radial-gradient(
+		rgba(224, 152, 89, 0.9),
+		rgba(227, 134, 52, 0.9) 80%,
+		rgba(228, 209, 35, 0.9)
+	);
+	border: double 0.7vh rgba(241, 230, 79, 0.9);
+	border-radius: 0 22vh;
+	padding: 1vh;
+	margin-left: 1.5%;
+	top: 2vh;
+}
+
+.cross {
+	border: dashed 0.2vh rgba(248, 248, 248);
+	background: radial-gradient(
+		rgba(250, 72, 1, 0.9) 48%,
+		rgba(241, 65, 42, 0.9),
+		rgba(241, 133, 61, 0.9)
+	);
+	color: #fafbfc;
+	padding: 0.4vh;
+	border-radius: 7vh;
+	font-size: 5vh;
+}
+
+.subImagesBox {
+	display: flex;
+	justify-content: space-around;
+}
+
+.subImage {
+	border-radius: 7vh;
+}
+
+.subImage:hover {
+	transform: scale(1.2) rotate(180deg);
+}
+
+.cross:hover {
+	transform: rotate(360deg) scale(1.1);
+	border: double;
+	cursor: pointer;
+}
+/* styles.module.css */
+
+.actionContainer form {
+	width: 95%;
+	background: linear-gradient(rgba(77, 205, 225, 0.9), rgba(54, 147, 234, 0.8));
+	border-radius: 22vh 0;
+	padding: 6vh 2vh;
+	display: grid;
+	border: ridge 0.5vh rgba(141, 246, 225, 0.9);
+	grid-template-columns: repeat(auto-fit, minmax(33vh, 1fr));
+	grid-template-rows: repeat(auto-fit, minmax(22vh, 1fr));
+	justify-content: space-around;
+	overflow: auto;
+ }
+.actionImageBox {
+	position: relative;
+	width: fit-content;
+	background: none;
+}
+.actionImage {
+	border-radius: 7vh;
+}
+.productBoxRow {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.customFileUpload {
+	position: relative;
+	display: inline-block;
+	padding: 10px 20px;
+	color: white;
+	background: linear-gradient(45deg, #ff7e5f, #feb47b);
+	border-radius: 25px;
+	overflow: hidden;
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+.customFileUpload input[type='file'] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	opacity: 0;
+	z-index: 2;
+}
+
+.customFileUpload:hover {
+	background: linear-gradient(45deg, #ff9773, #ffa08b);
+}
+.actionContainer form input,
+.actionContainer form input[type='number'] {
+	width: fit-content;
+	text-align: center;
+	border-radius: 0.7vh;
+	height: fit-content;
+	border: 0.3vh ridge rgba(2, 39, 78, 0.9);
+	padding: 0.4vh 1vh;
+	box-sizing: border-box;
+}
+
+.actionContainer form input:hover {
+	transform: scale(1.1);
+}
+.subImagesBox {
+	display: grid;
+	grid-area: 1vh;
+	grid-template-columns: repeat(auto-fit, minmax(7vw, 0fr));
+	width: 100%;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.subImage {
+	border-radius: 22vh;
+	cursor: no-drop;
+}
+
+.subImage:hover {
+	opacity: 0.5;
+}
+
+.imageBoxHead {
+	color: aliceblue;
+	text-wrap: nowrap;
+	width: 100%;
+	background: linear-gradient(
+		44deg,
+		rgba(231, 164, 10, 0.9) 2%,
+		rgb(247, 101, 23) 22%,
+		rgba(248, 132, 44, 0.9) 99%
+	);
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	border-radius: 1vh;
+	padding: 0.3vh 1vh;
+	margin: 2vh 0.2vh;
+}
+.buttonBox {
+	display: flex;
+	width: 100%;
+	text-align: center;
+	background: linear-gradient(
+		22deg,
+		rgba(248, 129, 50, 0.9),
+		rgb(221, 208, 121),
+		rgb(235, 149, 22)
+	);
+	padding: 4vh;
+	border-radius: 0 12vh;
+	border: 0.3vh ridge rgba(248, 208, 9, 0.979);
+}
+.delete {
+	width: 49%;
+	cursor: pointer;
+	background-color: #dc3545;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+}
+.update {
+	width: 49%;
+	background: linear-gradient(
+		22deg,
+		rgba(99, 121, 211, 0.9),
+		rgba(121, 221, 129)
+	);
+	color: #0e0444;
+}
+.update:hover,.delete:hover{
+	transform: scale(1.1);
+	cursor: pointer;
+	border: .7vh double rgb(216, 226, 202);
+}
+@media (max-width: 768px) {
+	.actionContainer {
+		top: 0;
+		padding: 0;
+	}
+	.actionContainer form {
+		top: 0;
+		padding: 0;
+	}
+	.actionImageBox {
+		top: 0;
+		margin: 0;
+	}
+
+	.actionImage {
+		width: 100%;
+		height: auto;
+	}
+}

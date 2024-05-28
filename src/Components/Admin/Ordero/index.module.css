@@ -1,0 +1,66 @@
+/** @format */
+
+.container {
+	width: 100%;
+}
+
+.toolBox {
+	background: linear-gradient(22deg, rgb(167, 242, 121), rgba(116, 128, 98, 0.9));
+	height: fit-content;
+	padding: 1vh;
+	text-align: center;
+}
+
+.toolBox h4 {
+	background-color: aliceblue;
+	border: dashed .2vh rgba(30, 116, 3, 0.9);
+	border-radius: 1vh;
+}
+
+.toolBox div {
+	display: inline-block;
+	margin: 1vh 1vh;
+	background: rgb(247, 249, 227);
+	padding: 0.3vh 1vh;
+	border-radius: 1vh;
+	border-left: 0.4vh solid rgb(66, 159, 20);
+	cursor: pointer;
+}
+
+.orderBox {
+	padding: 1vh;
+	border: 0.4vh ridge rgba(147, 218, 40, 0.9);
+}
+
+.order {
+	margin: 1vh 0;
+	border-radius: 0.5vh;
+	border: 0.4vh rgba(66, 132, 12, 0.9) ridge;
+	display: grid;
+	gap: 1vh;
+	grid-template-columns: repeat(auto-fit, minmax(29%, 0fr));
+	justify-content: space-between;
+	width: 100%;
+	padding: 1vh;
+}
+
+.orderDetail {
+	direction: rtl;
+	display: flex;
+	justify-content: space-around;
+	border-radius: 0.5vh;
+	border: 0.5vh double rgb(75, 244, 103);
+	color: rgb(220, 239, 255);
+	background: linear-gradient(2deg, rgb(66, 114, 95), rgba(64, 111, 94, 0.9));
+	height: fit-content;
+}
+
+.orderDetail:hover,
+.toolBox div:hover {
+	transform: scale(1.05);
+	cursor: pointer;
+}
+
+.orderDetailRow {
+	margin: 0.4vh 2vh;
+}

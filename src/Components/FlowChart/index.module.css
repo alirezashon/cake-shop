@@ -1,0 +1,142 @@
+/** @format */
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg) scale(1.2);
+	}
+
+	100% {
+		transform: rotate(360deg) scale(1.1);
+	}
+}
+
+.header {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	background: linear-gradient(
+		15deg,
+		rgb(105, 193, 10),
+		rgba(206, 237, 111, 0.9),
+		rgb(112, 208, 15)
+	);
+	color: rgb(40, 79, 1);
+}
+
+.header h2 {
+	background: linear-gradient(
+		22deg,
+		rgba(184, 188, 59, 0.9),
+		rgb(249, 248, 210)
+	);
+	padding: 0.2vh 2vh;
+	border-radius: 1vh;
+	border-block: 0.4vh double rgb(255, 253, 241);
+}
+
+.container {
+	background: radial-gradient(rgba(255, 241, 232, 0.934), rgb(196, 227, 85));
+	overflow-y: auto;
+	color: rgb(255, 250, 243);
+}
+
+.flow {
+	margin: 2vh 1vh;
+	background: radial-gradient(
+		rgb(255, 230, 216),
+		rgb(247, 247, 247),
+		rgb(248, 255, 216)
+	);
+	border: 0.3vh ridge rgba(53, 160, 196, 0.7);
+}
+
+.flowBase {
+	background: linear-gradient(rgb(153, 190, 50), rgba(91, 173, 9, 0.9));
+}
+
+.flowDomainActive {
+	background: linear-gradient(
+		rgb(141, 175, 3),
+		rgba(152, 226, 87, 0.7),
+		rgba(47, 103, 4, 0.9)
+	);
+	border: 0.7vh double #f7ae05;
+}
+
+.flowDomain {
+	background: radial-gradient(
+		rgba(201, 226, 58, 0.7),
+		rgb(131, 155, 26),
+		rgba(228, 245, 104, 0.7)
+	);
+	border: 1vh double rgb(247, 233, 25);
+}
+
+.buttonBox {
+	display: flex;
+	width: 40%;
+	justify-content: space-around;
+	background: linear-gradient(
+		rgba(112, 222, 202, 0.4),
+		rgba(44, 198, 182, 0.3)
+	);
+	align-items: center;
+	border-radius: 1vh;
+}
+
+.next,
+.last {
+	border-radius: 1vh;
+	opacity: 0.67;
+	color: rgba(255, 255, 255, 0.934);
+	border-radius: 13vh;
+	cursor: pointer;
+	font-size: 6vh;
+}
+
+.next {
+	transform: rotate(270deg);
+}
+
+.last {
+	transform: rotate(90deg);
+}
+
+.next:hover,
+.last:hover {
+	animation: rotate 1s infinite backwards;
+	opacity: 0.9;
+}
+
+.stateContainer {
+	width: 100%;
+	height: 77%;
+}
+
+.directionRight,
+.directionLeft {
+	border-radius: 1vh;
+	opacity: 0.67;
+	color: rgba(255, 255, 255, 0.934);
+	border-radius: 13vh;
+	cursor: pointer;
+	position: absolute;
+	top: 50vh;
+	z-index: 7;
+}
+
+.directionLeft {
+	left: 5px;
+	transform: rotate(270deg);
+}
+
+.directionRight {
+	right: 9px;
+	transform: rotate(90deg);
+}
+
+.directionRight:hover,
+.directionLeft:hover {
+	animation: rotate 0.7s infinite backwards;
+	opacity: 0.9;
+}

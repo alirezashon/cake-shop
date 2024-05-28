@@ -1,0 +1,25 @@
+/** @format */
+.drawer{
+    background: linear-gradient(5deg,rgba(99,123,98,.9),rgba(247,247,247,.9),rgba(126, 221, 91, 0.9));
+    border-right: dashed rgb(0, 139, 42) .3vh;
+	position: fixed;
+}
+.item {
+    background: linear-gradient(225deg, rgb(148, 255, 8), rgba(247, 247, 247,1), rgb(85, 151, 28));
+	width: 98%;
+}
+.icon {
+	font-size: 3vw;
+}
+.icon:hover {
+    cursor: pointer;
+	margin: 0.7vh;
+	transition: all 0.5s;
+    border-right: ridge 1vh rgb(68, 118, 76);
+    border-radius: 1vh;
+}
+@media (max-width: 777px) {
+	.icon {
+		font-size: 4vw;
+	}
+}

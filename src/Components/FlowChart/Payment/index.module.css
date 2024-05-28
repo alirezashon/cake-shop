@@ -1,0 +1,150 @@
+/** @format */
+
+.pay {
+	display: flex;
+	justify-content: center;
+}
+
+.pay p {
+	padding: 0.5vh 12vw;
+	border: 0.4vh double rgb(233, 249, 206);
+	width: fit-content;
+	border-radius: 1vh;
+	background: linear-gradient(2deg, rgb(32, 78, 4), rgb(146, 222, 39));
+}
+
+.pay p:hover {
+	background: linear-gradient(2deg, rgb(4, 78, 69), rgb(39, 164, 222));
+	transform: scale(1.2, 1.04);
+	cursor: pointer;
+}
+
+.container {
+	direction: rtl;
+}
+
+.descriptions {
+	background: linear-gradient(
+		222deg,
+		rgba(187, 205, 146, 0.9),
+		rgba(88, 114, 25, 0.9),
+		rgba(226, 236, 177, 0.9)
+	);
+	width: fit-content;
+	margin: 2vh;
+	padding: 2vh;
+	border-radius: 1vh;
+	border: 0.3vh dashed rgba(255, 255, 236, 0.9);
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	font-size: 2vh;
+	width: 98%;
+}
+
+.descriptions p {
+	text-wrap: nowrap;
+}
+
+.cardImage {
+	width: 60vw;
+	height: 40vh;
+	opacity: 0.4;
+	border-radius: 4vh;
+	border: 0.7vh ridge rgba(255, 245, 245);
+	cursor: pointer;
+}
+
+.cardDetails {
+	width: 58%;
+	position: absolute;
+	top: 48vh;
+	left: 21%;
+	display: flex;
+	flex-direction: column;
+}
+
+.cardNumber,
+.cardName {
+	cursor: copy;
+	background-color: rgb(236, 255, 255);
+	text-wrap: nowrap;
+	color: rgb(100, 30, 0);
+	padding: 0.3vh 5vh;
+	border-radius: 1vh;
+}
+
+.cardImage:hover {
+	opacity: 0.6;
+	border: 0.5vh ridge rgb(240, 74, 41);
+}
+
+.fileInputContainer {
+	position: relative;
+}
+
+.fileInput {
+	position: absolute;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.fileInputContainer,
+.fileInput {
+	color: rgb(255, 255, 255);
+	background: linear-gradient(to right, #05691d, #94bb05);
+	border-radius: 50%;
+	padding: 20px;
+	width: 100px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 0.3vh dashed rgb(236, 255, 255);
+}
+
+.fileInputContainer:hover {
+	transform: rotate(30deg);
+	background: linear-gradient(to right, #edf64c, #f6a309);
+}
+
+.upload {
+	font-size: 5vh;
+	color: #ffe7d2;
+}
+
+.image {
+	border-radius: 7vh;
+}
+
+.send {
+	background: linear-gradient(to right, #edf64c, #f6a309);
+	display: flex;
+	justify-content: center;
+}
+
+.send p {
+	padding: 0 7vh;
+	border-radius: 1vh;
+	border: 0.4vh solid rgb(236, 255, 255);
+	background: linear-gradient(to right, #f9df14, #b2ec47, #f3e929);
+	width: fit-content;
+}
+
+.send p:hover {
+	transform: scale(1.5) rotate(3deg);
+	cursor: pointer;
+	background: linear-gradient(to right, #36a41a, #c3ec47, #9fbb22);
+}
+
+@media (max-width: 777px) {
+	.cardImage {
+		width: 90vw;
+	}
+
+	.cardDetails {
+		left: 28%;
+	}
+}

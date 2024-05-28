@@ -1,0 +1,122 @@
+.container {
+  display: flex;
+  direction: rtl;
+  width: 100vw;
+}
+.profItems {
+  width: 23%;
+  display: flex;
+}
+
+.itemsBox {
+  display: flex;
+  flex-direction: column;
+  border: dashed 0.3vh rgb(187, 219, 128);
+  width: 100%;
+  padding: 1vh;
+  height: fit-content;
+  border-radius: 0.5vh;
+  margin-top: 1vh;
+}
+.item,
+.selected {
+  border-bottom: 0.3vh rgb(84, 152, 96) ridge;
+  text-align: center;
+  padding: 1vh 3vh 2vh 4vh;
+  cursor: pointer;
+  color: rgb(35, 0, 55);
+  background: radial-gradient(rgb(232, 253, 221), rgb(209, 225, 168));
+}
+
+.item:hover,
+.selected {
+  border: none;
+  color: aliceblue;
+  border-right: ridge 2vh rgb(252, 255, 248);
+  border-left: ridge 2vh rgb(184, 255, 91);
+  border-radius: 0 22vh;
+  background: radial-gradient(rgb(78, 152, 94), rgb(14, 140, 56));
+  transform: scale(1.1);
+}
+
+.profileBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(2deg, rgba(165, 200, 38, 0.9), rgb(15, 87, 35));
+  padding: 1vh;
+}
+.profiletail {
+  margin: 1vh 0.2vh;
+  padding: 0.2vh;
+  background: linear-gradient(2deg, rgba(71, 141, 18, 0.9), rgb(78, 178, 61));
+}
+.profiletail p {
+  background-color: aliceblue;
+  padding: 1vh 4vh;
+  margin: 1vh;
+  text-wrap: nowrap;
+  cursor: pointer;
+  font-size: small;
+  border: dashed 0.1vh rgba(99, 128, 98, 0.9);
+}
+.image {
+  border: ridge 0.2vh rgba(248, 248, 248);
+  border-radius: 22vh;
+}
+.iconedit {
+  font-size: 3vh;
+  align-self: center;
+  color: aliceblue;
+  border-radius: 4vh;
+  background-color: rgb(237, 111, 49);
+}
+.iconedit:hover {
+  transform: scale(1.3);
+}
+.onput {
+  animation: onput 1s;
+  border: 0.1vh ridge rgb(188, 255, 64);
+  border-radius: .3vh;
+  outline: none;
+}
+.submit {
+  background: linear-gradient(rgb(84, 216, 28), rgb(45, 145, 17));
+  border: 0.2vh ridge rgb(198, 252, 232);
+  color: white;
+  border-radius: 0.5vh;
+  height: fit-content;
+  align-self: center;
+}
+.submit:hover {
+  transform: scale(1.05, 1.21);
+  cursor: pointer;
+  border: 0.2vh ridge rgb(8, 135, 89);
+  background: linear-gradient(rgb(153, 218, 126), rgb(46, 152, 17));
+}
+@media (max-width: 1111px) {
+  .profItems {
+    width: 70%;
+  }
+}
+@media (max-width: 777px) {
+  .container {
+    display: block;
+  }
+  .profItems {
+    width: 100%;
+  }
+  .profileBox {
+    width: 100%;
+  }
+  .profileBox p {
+    border-radius: 11vh 1vh;
+    border: ridge 0.4vh rgb(252, 255, 248);
+    margin: 0;
+  }
+
+  .itemsBox {
+    width: 100%;
+  }
+}

@@ -1,0 +1,170 @@
+/** @format */
+.container {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(22vw, 0fr));
+	gap: 1vh;
+	justify-content: center;
+	direction: rtl;
+}
+
+.menuBox {
+	display: flex;
+	direction: rtl;
+	background: linear-gradient(
+		222deg,
+		rgba(139, 251, 10, 0.9),
+		rgba(209, 229, 98, 0.9),
+		rgba(243, 255, 210, 0.9)
+	);
+	border: 0.3vh dashed rgb(242, 255, 226);
+}
+
+.daysSection {
+	direction: rtl;
+	width: 18%;
+	font-size: 2vh;
+	display: flex;
+	align-items: center;
+	background: rgba(21, 144, 113, 0.818)
+}
+
+.day {
+	width: 100%;
+	border-block: 0.3vh dashed rgb(255, 242, 226);
+	background: linear-gradient(
+		22deg,
+		rgba(42, 226, 186, 0.9),
+		rgba(204, 248, 255, 0.9),
+		rgba(51, 233, 166, 0.9)
+	);
+	color: rgba(1, 44, 12, 0.9);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.day:hover {
+	color: rgb(240, 248, 255);
+	background: radial-gradient(
+		rgba(210, 246, 93, 0.9),
+		rgba(135, 238, 1, 0.9),
+		rgba(246, 251, 175, 0.9)
+	);
+	border-radius: 7vh;
+}
+
+.timeSection {
+	width: 100%;
+	background: linear-gradient(
+		222deg,
+		rgba(15, 106, 27, 0.9),
+		rgba(152, 222, 102, 0.9),
+		rgba(38, 99, 46, 0.9)
+	);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(33%, 100%));
+	justify-content: space-around;
+	gap: 1vh;
+	padding: .5vh;
+	font-size: 2vh;
+}
+
+.timeRow {
+	text-wrap: nowrap;
+	color: #063e14;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1vh 2vh;
+	border: 0.3vh ridge rgb(242, 255, 240);
+ 	border-radius: 0.7vh;
+	background: linear-gradient(
+		22deg,
+		rgba(194, 235, 45, 0.9),
+		rgba(235, 251, 141, 0.907),
+		rgba(163, 233, 51, 0.9)
+	);
+	cursor: pointer;
+}
+
+.timeRow:hover {
+	transform: scale(1.1);
+}
+
+.times {
+	font-size: 2vh;
+	display: grid;
+	padding: 0.7vh;
+	margin: 0.4vh;
+	gap: 2vh;
+	grid-template-columns: repeat(auto-fit, minmax(18%, 1fr));
+}
+
+.time {
+	width: fit-content;
+	padding: 0.6vh 1vh;
+	border-radius: 1vh;
+	background: linear-gradient(
+		2deg,
+		rgba(255, 136, 8, 0.9),
+		rgba(250, 147, 30, 0.9),
+		rgba(235, 135, 42, 0.9)
+	);
+	border: 0.4vh ridge rgba(255, 142, 28, 0.9);
+	color: #ffffff;
+}
+
+.checkboxInput {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	width: 16px;
+	height: 16px;
+	border: 1px solid #feffe0;
+	outline: none;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	border-radius: 50%;
+}
+
+.checkboxInput:checked {
+	background-color: #ef7c09;
+	border: 1px solid #f52310;
+}
+
+.checkboxInput:not(:checked) {
+	position: relative;
+}
+
+.checkboxInput:not(:checked):before,
+.checkboxInput:not(:checked):after {
+	content: '';
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 8px;
+	height: 2px;
+	background-color: #cb0707;
+	transition: transform 0.3s ease;
+}
+
+.checkboxInput:not(:checked):before {
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.checkboxInput:not(:checked):after {
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+@media (max-width: 1111px) {
+	.container {
+		grid-template-columns: repeat(auto-fit, minmax(28vw, 1fr));
+	}
+}
+@media (max-width: 777px) {
+	.container {
+		grid-template-columns: repeat(auto-fit, minmax(44%, 1fr));
+	}
+}

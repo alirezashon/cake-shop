@@ -1,0 +1,65 @@
+.switchWrapper {
+    margin-top: 1vh;
+    padding: 0.1vh;
+    background: linear-gradient(44deg,
+            rgba(255, 255, 255, 0.503),
+            rgba(133, 185, 13, 0.202));
+    border-radius: 1vh;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.switch {
+    position: relative;
+    width: 10vh;
+    height: 5vh;
+    appearance: none;
+    outline: none;
+    border: double 0.7vh rgba(239, 255, 214, 0.844);
+    background: linear-gradient(rgba(163, 249, 137, 0.7),
+            rgba(75, 148, 53, 0.7),
+            rgba(200, 230, 158, 0.7));
+    box-shadow: 1px 1px 7px 1px #c1ff6a, 1px 1px 1px 1px #408b0a8e inset;
+    border-radius: 17px;
+    cursor: pointer;
+}
+
+.switch:before {
+    content: '';
+    position: absolute;
+    width: 4vh;
+    height: 4vh;
+    background: radial-gradient(rgba(75, 222, 22, 0.8),
+            rgba(159, 251, 30, 0.9),
+            rgba(81, 235, 46, 0.8));
+    border-radius: 50%;
+    transition: all 0.5s ease-in-out;
+}
+
+.switch:checked:before {
+    transform: translateX(5vh);
+    height: 3.3vh;
+    width: 3.2vh;
+    border: 0.3vh rgba(230, 245, 219, 0.8) dashed;
+}
+
+.label {
+    background: radial-gradient(rgb(149, 237, 16),
+            rgba(154, 222, 52, 0.942),
+            rgba(69, 231, 40, 0.942));
+    border-radius: 4vh;
+    padding: 0.5vh 1vh;
+    margin: 0 1vh;
+    font-size: 2.23vh;
+    color: #fffefd;
+    text-shadow: 1px 1px 11px #39fe08, 1px 1px 1px #020502;
+    border: double 0.6vh #efffcee6;
+}
+
+.selectedRadio {
+    background: linear-gradient(rgb(172, 243, 40),
+            rgba(143, 235, 68, 0.942),
+            rgba(192, 255, 56, 0.942));
+    border: double .3vh #f4ffd8e6;
+}

@@ -1,0 +1,238 @@
+/** @format */
+
+@keyframes borderanimate {
+	30% {
+		border-radius: 44vh 22vh;
+		border: ridge 0.3vh rgba(11, 22, 55, 0.4);
+		box-shadow: 1px 1px 7px 1px rgba(16, 219, 234, 0.5),
+			1px 1px 7px 1px #cdd6a9 inset;
+	}
+
+	50% {
+		border-radius: 12vh 55vh;
+		border: dotted 0.5vh rgba(254, 167, 4, 07);
+		box-shadow: 1px 1px 7px 1px rgba(16, 219, 234, 0.5),
+			1px 1px 7px 1px #a0d8eb inset;
+	}
+
+	60% {
+		border-radius: 33vh 33vh;
+		border: ridge 0.7vh rgba(11, 22, 55, 0.4);
+		box-shadow: 1px 1px 7px 1px rgba(16, 219, 234, 0.5),
+			1px 1px 7px 1px #f8eea0 inset;
+	}
+
+	90% {
+		border-radius: 55vh 44vh;
+		border: ridge 0.9vh rgba(253, 207, 1, 0.4);
+		box-shadow: 1px 1px 7px 1px rgba(16, 219, 234, 0.5),
+			1px 1px 7px 1px #90dffa inset;
+	}
+}
+
+.animate {
+	animation: borderanimate 2s;
+}
+
+.container {
+	text-wrap: nowrap;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: radial-gradient(
+		rgb(255, 235, 163),
+		rgb(249, 239, 56),
+		rgb(145, 112, 4)
+	);
+}
+
+.formBox {
+	width: 50%;
+	height: 67%;
+	background: repeating-linear-gradient(
+		190deg,
+		rgba(247, 179, 30, 0.7),
+		rgba(63, 164, 214, 0.929),
+		rgba(255, 161, 9, 0.9)
+	);
+	border-radius: 100vh 1vh;
+	padding-top: 3vh;
+}
+
+.logo {
+	position: absolute;
+	height: 44vh;
+	top: 28vh;
+	left: 33vw;
+	width: 33vw;
+	border-radius: 7vw;
+	border: 0.3vh rgb(255, 200, 0) dashed;
+}
+
+.formShadow {
+	position: absolute;
+	width: 50%;
+	height: 67%;
+	background: repeating-linear-gradient(
+		190deg,
+		rgba(242, 228, 77, 0.7),
+		rgba(175, 242, 254, 0.4),
+		rgba(220, 134, 22, 0.9)
+	);
+	border-radius: 1vh 100vh;
+	border: ridge 1vh #fff87ce9;
+	animation: borderanimate 7s;
+	flex-direction: column;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.formInnerBox {
+	padding-top: 3vh;
+	background: repeating-linear-gradient(
+			190deg,
+			rgba(252, 148, 43, 0.836) 7%,
+			rgba(248, 245, 41, 0.769) 50%,
+			rgba(219, 80, 16, 0.9)
+		)
+		22%;
+	border-radius: 0 0 12vh 2vh;
+	border: ridge 0.2vh rgba(234, 255, 9, 0.9);
+	width: 80%;
+	height: 87%;
+	margin-left: 2vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	animation: borderanimate 7s;
+}
+
+.formRow {
+	background: repeating-linear-gradient(
+		190deg,
+		rgba(242, 228, 77, 0.7),
+		rgba(0, 150, 177, 0.4),
+		rgba(22, 207, 220, 0.9)
+	);
+	width: 90%;
+	height: 22%;
+	margin-top: 4vh;
+	padding: 1vh;
+	border-radius: 2vh 4vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	color: #000110;
+}
+
+.formRow input {
+	width: fit-content;
+	width: 55%;
+	padding: 1vh;
+	direction: rtl;
+	text-align: center;
+	height: 67%;
+	font-size: 1vw;
+	margin-left: 1vh;
+	border: ridge 0.2vh rgb(255, 238, 192);
+	border-radius: 0.7vh;
+	outline: none;
+}
+
+.formRow label {
+	text-wrap: nowrap;
+	margin-left: 1vh;
+	font-size: 2vh;
+	padding: 1vh;
+	border-radius: 0.5vh;
+	background: linear-gradient(rgb(247, 220, 123), rgb(203, 245, 253));
+}
+
+.slash {
+	background: radial-gradient(
+		rgb(154, 216, 255),
+		rgb(145, 233, 250),
+		rgb(198, 240, 255)
+	);
+	opacity: 0.4;
+	padding: 0.1vh 1vh;
+	border-radius: 77vh;
+}
+
+.buttonBox {
+	background: radial-gradient(
+		rgba(249, 185, 21, 0.4),
+		rgba(249, 234, 72, 0.926),
+		rgba(255, 238, 108, 0.6),
+		rgba(188, 233, 228, 0.7)
+	);
+	width: 77%;
+	height: 7vh;
+	display: flex;
+	margin: 3vh;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 55vh 12vh;
+	border: ridge 1vh rgba(6, 121, 166, 0.4);
+	box-shadow: 1px 1px 7px 1px rgba(245, 245, 90, 0.5),
+		1px 1px 7px 2px #f3b008 inset;
+}
+
+.buttonBox button {
+	font-size: 2vh;
+	padding: 0.7vh 1vh;
+	cursor: pointer;
+}
+
+.formRow input:hover,
+.formRow label:hover,
+.submit:hover {
+	animation: borderanimate 0.2s reverse;
+	transform: scale(1.2);
+	cursor: pointer;
+}
+
+.submit {
+	width: 77%;
+	border-radius: 14vh 2vh;
+	background: linear-gradient(
+		22deg,
+		rgba(244, 168, 63, 0.9),
+		rgba(112, 221, 212, 0.9)
+	);
+	border: dashed 0.3vh #e3f7ff;
+}
+
+@media (max-width: 777px) {
+	.formBox {
+		width: 97%;
+	}
+
+	.formShadow {
+		width: 97%;
+	}
+
+	.formRow {
+		width: 100%;
+	}
+
+	.formRow input {
+		width: 64%;
+		font-size: 2vh;
+	}
+
+	.logo {
+		left: 14%;
+		opacity: 0.5;
+		border: none;
+		width: 72%;
+	}
+
+	.buttonBox {
+		margin-top: 2vh;
+	}
+}

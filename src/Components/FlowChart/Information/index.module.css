@@ -1,0 +1,86 @@
+/** @format */
+
+.register {
+	display: flex;
+	justify-content: center;
+}
+.register p {
+	padding: 0.5vh 22vw;
+	border: 0.4vh double rgb(143, 210, 25);
+	width: fit-content;
+	border-radius: 1vh;
+	background: linear-gradient(2deg, rgb(32, 78, 4), rgb(146, 222, 39));
+}
+.register p:hover {
+	background: linear-gradient(2deg, rgb(4, 78, 69), rgb(39, 164, 222));
+	transform: scale(1.2, 1.04);
+	cursor: pointer;
+}
+.container {
+	border-radius: 1vh;
+	margin: 1vh;
+	padding: 1vh;
+	display: flex;
+	padding: 1vh;
+	flex-direction: row-reverse;
+}
+
+.formBox {
+	border-radius: 1vh;
+	max-width: 53vw;
+	display: grid;
+	height: auto;
+	direction: rtl;
+	font-size: 2vh;
+	grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+	gap: 1vh;
+	padding: 2vh;
+}
+
+.formBoxRow {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1.5vh;
+}
+
+.formBoxRow label {
+	text-wrap: nowrap;
+	margin-bottom: 0.5vh;
+}
+
+.formBoxRow input {
+	border: 0.3vh ridge rgba(40, 206, 43, 0.9);
+	outline: none;
+	height: 5vh;
+	text-align: center;
+	border-radius: 0.5vh;
+}
+
+.formBoxRow input:hover {
+	transform: scale(1.03, 1.05);
+}
+
+.mapBox {
+	width: 47%;
+	height: auto;
+}
+.loadingContainer {
+	top:0;
+	left: 40%;
+}
+@media (max-width: 999px) {
+	.container {
+		flex-direction: column;
+		width: 97%;
+		align-items: center;
+		color: rgb(0, 0, 51);
+	}
+
+	.formBox {
+		grid-template-columns: repeat(auto-fit, minmax(80%, 1fr));
+	}
+
+	.mapBox {
+		width: 100vw;
+	}
+}

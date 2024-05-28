@@ -1,0 +1,24 @@
+/** @format */
+
+.container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+	justify-items: center;
+	gap: 1vh;
+}
+
+.model {
+	text-align: center;
+}
+
+.image {
+	background-color: rgb(241, 200, 118);
+	border-radius: 22vh;
+	padding: .5vh;
+}
+
+@media (max-width: 777px) {
+	.container {
+		grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
+	}
+}
