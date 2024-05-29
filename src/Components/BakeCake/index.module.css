@@ -1,23 +1,20 @@
-.container {
-  background-image: repeating-linear-gradient(
-    90deg,
-    #f4e469,
-    #fde459,
-    #ffe015,
-    #f7ffee
-  );
-}
 .tags {
+display: flex;
+background-image: repeating-linear-gradient(22deg, #f4ff5d, #ff6a00);
+width: 100%;
+  height: 90vh;
+  overflow:auto;
   justify-content: space-around;
-  display: flex;
 }
-.tagBox {
+.tagBox {height: fit-content;
+  animation: 2s openit infinite;
+  margin-left: 5vw;
+  width: 10%;
   padding: 1vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-image: repeating-linear-gradient(22deg, #faaf2d, #fbe242);
-  overflow-x: auto;
 }
 .image {
   cursor: pointer;
@@ -29,13 +26,7 @@
   transform: scale(1.05) rotate(180deg);
   cursor: pointer;
 }
-.toolBox {
-  width: 100%;
-  height: 70vh;
-  display: flex;
-  justify-content: space-around;
-  background-image: repeating-linear-gradient(22deg, #fff195, #fff86c);
-}
+
 .tools {
   display: flex;
   flex-direction: column;
@@ -43,6 +34,7 @@
   background-image: repeating-linear-gradient(22deg, #b8d393, #f7ffee);
   padding: 2vh;
   height: fit-content;
+  width: fit-content  ;
 }
 .toolName {
   background-image: repeating-linear-gradient(22deg, #7ecb3b, #76a93c);

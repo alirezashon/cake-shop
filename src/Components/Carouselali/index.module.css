@@ -1,219 +1,237 @@
 /** @format */
 
 @keyframes container {
-	25% {
-		background-image: repeating-linear-gradient(90deg,
-				#7e9a3c,
-				#819a3c 5vh,
-				#b8d393 5vh,
-				#f7ffee 10vh);
-	}
+  25% {
+    background-image: repeating-linear-gradient(
+      90deg,
+      #efb61a,
+      #fba329 5vh,
+      #ecd170 5vh,
+      #fffbee 10vh
+    );
+  }
 
-	50% {
-		background-image: repeating-linear-gradient(40deg,
-				#609a3c,
-				#3c9a50 5vh,
-				#abd393 5vh,
-				#f3ffee 10vh);
-	}
+  50% {
+    background-image: repeating-linear-gradient(
+      40deg,
+      #d8d86b,
+      #ecf063 5vh,
+      #d2d393 5vh,
+      #f3ffee 10vh
+    );
+  }
 
-	75% {
-		background-image: repeating-linear-gradient(90deg,
-				#7b9a3c,
-				#839a3c 5vh,
-				#bed393 5vh,
-				#f4ffee 10vh);
-	}
+  75% {
+    background-image: repeating-linear-gradient(
+      90deg,
+      #e0dc5c,
+      #d1d627 5vh,
+      #d7e36a 5vh,
+      #f4ffee 10vh
+    );
+  }
 }
 
 @keyframes carouselali {
-	0% {
-		width: 0;
-	}
+  0% {
+    width: 0;
+  }
 
-	50% {
-		width: 22%;
-		border: double rgb(255, 245, 47);
-	}
+  50% {
+    width: 22%;
+    border: double rgb(255, 245, 47);
+  }
 }
 
 @keyframes imagelinor {
-	10% {
-		box-shadow: 1px 1px 7vh 1px rgba(255, 255, 252, 0.9);
-	}
+  10% {
+    box-shadow: 1px 1px 7vh 1px rgba(255, 255, 252, 0.9);
+  }
 
-	40% {
-		box-shadow: 1px 1px 9vh 1px rgb(255, 213, 0);
-	}
+  40% {
+    box-shadow: 1px 1px 9vh 1px rgb(255, 213, 0);
+  }
 
-	90% {
-		box-shadow: 1px 1px 7vh 1px rgba(255, 254, 251, 0.9);
-	}
+  90% {
+    box-shadow: 1px 1px 7vh 1px rgba(255, 254, 251, 0.9);
+  }
 }
 
 @keyframes rotate {
-	0% {
-		transform: rotate(0deg) scale(1.2);
-	}
+  0% {
+    transform: rotate(0deg) scale(1.2);
+  }
 
-	100% {
-		transform: rotate(360deg) scale(1.1);
-	}
+  100% {
+    transform: rotate(360deg) scale(1.1);
+  }
 }
 
 .container {
-	width: 100%;
-	height: 50vh;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .carouselaliContainer {
-	animation: container 7s;
-	width: 99%;
-	height: 100%;
-	margin: 1vh 0.5vh;
-	padding: 1vh 0;
-	background-image: repeating-linear-gradient(40deg,
-			#89d66b,
-			#68ad13 5vh,
-			#f2ffdd 5vh,
-			#ffffff 10vh);
-	border: ridge 0.7vh rgba(218, 215, 51, 0.601);
-	border-radius: 11vh 1vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transition: all 1s ease-in-out;
+  animation: container 7s;
+  width: 99%;
+  height: 100%;
+  margin: 1vh 0.5vh;
+  padding: 1vh 0;
+  background-image: repeating-linear-gradient(
+    40deg,
+    #d6c66b,
+    #eebe20 5vh,
+    #fbf5a0 5vh,
+    #ffffff 10vh
+  );
+  border: ridge 0.7vh rgba(255, 251, 42, 0.918);
+  border-radius: 11vh 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s ease-in-out;
 }
 
 .carouselali {
-	background: linear-gradient(45deg,
-			rgba(249, 251, 212, 0.965),
-			rgba(136, 255, 0, 0.811),
-			rgba(226, 253, 255, 0.811));
-	animation: carouselali 2s;
-	width: 100%;
-	height: 97%;
-	border: dotted 0.1vh rgba(26, 111, 63, 0.9);
-	border-radius: 1vh 3vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	cursor: pointer;
+  background: linear-gradient(
+    45deg,
+    rgba(241, 246, 148, 0.965),
+    rgba(255, 179, 0, 0.811),
+    rgba(248, 247, 188, 0.811)
+  );
+  animation: carouselali 2s;
+  width: 100%;
+  height: 97%;
+  border: dotted 0.1vh rgba(242, 229, 45, 0.9);
+  border-radius: 1vh 3vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 }
 
 .circaliBox {
-	width: fit-content;
-	padding: 0.1vh 1vh;
-	height: 3vh;
-	border-radius: 4vh;
-	z-index: 2;
-	opacity: 0.8;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: linear-gradient(45deg,
-			rgb(251, 255, 233),
-			rgb(227, 255, 142),
-			rgb(238, 255, 219));
-	border: 0.3vh dashed rgba(0, 1, 33, 0.367);
+  width: fit-content;
+  padding: 0.1vh 1vh;
+  height: 3vh;
+  border-radius: 4vh;
+  z-index: 2;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    45deg,
+    rgb(251, 255, 233),
+    rgb(255, 249, 142),
+    rgb(238, 255, 219)
+  );
+  border: 0.3vh dashed rgba(195, 192, 26, 0.79);
 }
 
 .circaliBox:hover {
-	opacity: 0.9;
+  opacity: 0.9;
 }
 
 .circali {
-	border-radius: 100vh;
-	width: 3vh;
-	height: 3vh;
-	margin: 0.1vh 1vh;
-	background: repeating-radial-gradient(rgb(181, 241, 52),
-			rgb(255, 254, 244),
-			rgb(142, 164, 34),
-			rgb(201, 212, 0));
-	border: double 0.4vh rgba(216, 235, 5, 0.9);
+  border-radius: 100vh;
+  width: 3vh;
+  height: 3vh;
+  margin: 0.1vh 1vh;
+  background: repeating-radial-gradient(
+    rgb(241, 235, 52),
+    rgb(255, 254, 244),
+    rgb(247, 196, 43),
+    rgb(231, 206, 40)
+  );
+  border: double 0.4vh rgba(246, 224, 25, 0.9);
 }
 
 .circali:hover {
-	transform: scale(1.1) rotate(360deg);
-	transition: transform 2s;
-	border: dashed 0.4vh rgba(255, 244, 239, 0.811);
+  transform: scale(1.1) rotate(360deg);
+  transition: transform 2s;
+  border: dashed 0.4vh rgba(255, 244, 239, 0.811);
 }
 
 .circalActive {
-	transform: scale(1.2) rotate(360deg);
-	background: repeating-radial-gradient(rgb(212, 60, 0),
-			rgb(255, 244, 149),
-			rgb(148, 188, 3),
-			rgb(215, 232, 171));
-	background-color: rgba(0, 140, 255, 0.883);
-	border: dashed 0.4vh rgba(255, 244, 239, 0.811);
+  transform: scale(1.2) rotate(360deg);
+  background: repeating-radial-gradient(
+    rgb(212, 148, 0),
+    rgb(255, 244, 149),
+    rgb(226, 174, 61),
+    rgb(242, 233, 153)
+  );
+  background-color: rgba(255, 242, 0, 0.883);
+  border: dashed 0.4vh rgba(255, 253, 239, 0.811);
 }
 
 .image {
-	animation: imagelinor infinite 7s;
-	height: 91%;
-	width: 98%;
-	opacity: 1;
-	border: double rgba(101, 177, 0, 0.9) 0.7vh;
-	box-shadow: 1px 1px 11vh 1px rgba(222, 192, 44, 0.9);
-	border-radius: 7vh 1vh;
-	transition: all 1s ease-in-out;
+  animation: imagelinor infinite 7s;
+  height: 91%;
+  width: 98%;
+  opacity: 1;
+  border: double rgba(239, 218, 24, 0.9) 0.7vh;
+  box-shadow: 1px 1px 11vh 1px rgba(222, 160, 44, 0.9);
+  border-radius: 7vh 1vh;
+  transition: all 1s ease-in-out;
 }
 
 .directionsIcon {
-	border-radius: 1vh;
-	opacity: 0.67;
-	color: rgba(255, 255, 255, 0.934);
-	background: radial-gradient(rgb(13, 255, 0), rgb(28, 149, 3));
-	border-radius: 13vh;
-	cursor: pointer;
+  border-radius: 1vh;
+  opacity: 0.67;
+  color: rgba(255, 255, 255, 0.934);
+  background: radial-gradient(rgb(255, 213, 0), rgb(214, 203, 36));
+  border-radius: 13vh;
+  cursor: pointer;
 }
 
 .directionsIcon:first-child {
-	transform: rotate(270deg);
+  transform: rotate(270deg);
 }
 
 .directionsIcon:last-child {
-	transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .directionsIcon:hover {
-	animation: rotate 0.7s infinite backwards;
-	opacity: 0.9;
+  animation: rotate 0.7s infinite backwards;
+  opacity: 0.9;
 }
 
 .containerali {
-	width: 99%;
-	height: 4%;
-	border: dashed 0.2vh rgb(206, 232, 255);
-	border-radius: 5vh;
-	background: linear-gradient(313deg,
-			rgb(43, 59, 3),
-			rgb(32, 167, 43),
-			rgb(103, 146, 16));
-	box-shadow: 1px 1px 9px 1px rgba(0, 1, 25, 0.934),
-		1px 1px 5px 1px rgba(191, 255, 0, 0.811) inset;
+  width: 99%;
+  height: 4%;
+  border: dashed 0.2vh rgb(206, 232, 255);
+  border-radius: 5vh;
+  background: linear-gradient(
+    313deg,
+    rgb(207, 193, 36),
+    rgb(220, 185, 43),
+    rgb(232, 160, 27)
+  );
+  box-shadow: 1px 1px 9px 1px rgba(25, 24, 0, 0.934),
+    1px 1px 5px 1px rgba(255, 247, 0, 0.811) inset;
 }
 
 .contorali {
-	height: 100%;
-	border-radius: 4vh;
-	border: 0.7vh ridge rgb(210, 250, 255);
-	background: radial-gradient(rgb(206, 232, 255), rgb(71, 237, 255));
-	cursor: pointer;
+  height: 100%;
+  border-radius: 4vh;
+  border: 0.7vh ridge rgb(254, 255, 210);
+  background: radial-gradient(rgb(250, 255, 206), rgb(255, 243, 71));
+  cursor: pointer;
 }
 
 @media (max-width: 675px) {
-	.container {
-		height: 30vh;
-	}
+  .container {
+    height: 30vh;
+  }
 
-	.circali {
-		width: 93%;
-		height: 93%;
-	}
+  .circali {
+    width: 93%;
+    height: 93%;
+  }
 }

@@ -1,7 +1,7 @@
 /** @format */
 
 import { useRef, RefObject, useState } from 'react'
-import styles from './index.module.css'
+import styles from '../Inserto.module.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
 import List from './List'

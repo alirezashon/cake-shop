@@ -9,7 +9,9 @@ import { Tools, Tags } from "../../DTO"
 const List: React.FC = () => {
   const [data, setData] = useState<[Tools[], Tags[]] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [showTag, setShowTag] = useState<string>("")
+  const [showTag, setShowTag] = useState<number[]>([])
+  const [cakeState,setCakeState] = useState<[number,number][]>([])
+  const [tagribute, setTagribute] = useState<[number, number] | [] | null>(null) //[index of tool ,weight]
   const fetchData = async () => {
     try {
       const response = await fetch("/api/data/Post/Client/bakeTool", {
@@ -24,6 +26,7 @@ const List: React.FC = () => {
         const result = await response.json()
         setData([result.tools, result.tags])
         setIsLoading(false)
+        console.table(result)
       } else {
         toast.error("خطا")
         setIsLoading(false)
@@ -36,63 +39,55 @@ const List: React.FC = () => {
   useEffect(() => {
     !data && fetchData()
   }, [])
-
+  const showTools = (tag: string) => {
+    const toolsid: number[] | null =
+      data &&
+      data[0]
+        .map((tool, index) => (tool.tag === tag ? index : -1))
+        .filter((index) => index !== -1)
+    toolsid && setShowTag(toolsid)
+  }
   return (
-    <div className={styles.tableContainer}>
-      <i className={styles.cako} ></i>
-      <div className={styles.header}>ابزار ساخت کیک</div>
-      {isLoading ? (
-        Array.apply(0, Array(7)).map((x, i) => (
-          <div key={i} className={styles.loading}>
-            <div className={styles.loadingRect}></div>
-            <div className={styles.loadingSquare}></div>
-          </div>
-        ))
-      ) : (
-        // نمایش تگ ها
-        <div className={styles.container}>
-          <div className={styles.tags}>
-            {data &&
-              data[1]?.map((tool) => (
-                <div
-                  className={styles.tagBox}
-                  onClick={() => setShowTag(tool._id)}
-                  onMouseOver={()=>showTag.length<0&& setShowTag(tool._id)}
-                >
-                  <Image
-                    src={`data:image/jpeg;base64,${tool.src}`}
-                    alt=''
-                    width={313}
-                    height={313}
-                    className={styles.image}
-                  />
-                  <div className='tag'>{tool.name}</div>
-                </div>
-              ))}
-          </div>
-        </div>
-      )}
-      <div className={styles.toolBox}>
-        {showTag &&
-          data &&
-          data[0].map(
-            (tool) =>
-              showTag === tool.tag && (
-                // نمایش لوازم هر تگ
-                <div className={styles.tools}>
-                  <Image
-                    src={`data:image/jpeg;base64,${tool.src}`}
-                    alt={tool.name}
-                    width={313}
-                    height={313}
-                    className={styles.image}
-                  />
-                  <div className={styles.toolName}>{tool.name}</div>
-                  <div className={styles.toolPrice}>{tool.price}</div>
-                </div>
-              )
-          )}
-      </div>
+    <div className={styles.tags}>
+      {data &&
+        data[1].map((tag, index) => (
+          <>
+            {/* // نمایش تگ ها */}
+
+            <div
+              className={styles.tagBox}
+              onClick={() => showTools(tag._id)}
+              onMouseOver={() => showTools(tag._id)}
+            >
+              <Image
+                src={`data:image/jpeg;base64,${tag.src}`}
+                alt=''
+                width={313}
+                height={313}
+                className={styles.image}
+              />
+              <div className='tag'>{tag.name}</div>
+              {/* // نمایش لوازم هر تگ */}
+              {showTag.length > 0 &&
+                data[0][showTag[0]].tag === tag._id &&
+                showTag?.map((indx) => (
+                  <div className={styles.tools}>
+                    <Image
+                      src={`data:image/jpeg;base64,${data[0][indx].src}`}
+                      alt={data[0][index].name}
+                      width={313}
+                      height={313}
+                      className={styles.image}
+                    />
+                    <div className={styles.toolName}>{data[0][indx].name}</div>
+                    <div className={styles.toolPrice}>
+                      {data[0][indx].price}
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </>
+        ))}
     </div>
   )
 }
