@@ -1,22 +1,16 @@
-import { useRef, RefObject, useState, useEffect } from "react"
-import styles from "../Inserto.module.css"
+/** @format */
+
+import { useRef, RefObject, useState } from "react"
+import styles from "../../Inserto.module.css"
 import "react-toastify/dist/ReactToastify.css"
 import { toast, ToastContainer, Zoom } from "react-toastify"
 import List from "./List"
-import Tago from "./Tags"
-import TagList from "./Tags/List"
-import { Tags } from "@/DTO"
-
-const Tools: React.FC = () => {
+const Tags: React.FC = () => {
   const refs: {
-    [key: string]: RefObject<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement>
   } = {
     name: useRef<HTMLInputElement>(null),
     src: useRef<HTMLInputElement>(null),
-    price: useRef<HTMLInputElement>(null),
-    tag: useRef<HTMLSelectElement>(null),
   }
   const [image, setImage] = useState<string>()
   const [action, setAction] = useState<string>("(*I&n()s*e(r&t*^%t^O&n*E(")
@@ -28,38 +22,6 @@ const Tools: React.FC = () => {
     ],
     ["ایجاد", "به روزرسانی", "حذف"],
   ]
-  //GOT TAGS from here
-  const [tags, setTags] = useState<Tags[] | null>(null)
-  const [loadingTags, setLoadingTags] = useState<boolean>(true)
-
-  const fetchTags = async () => {
-    try {
-      const response = await fetch("/api/data/Post/Admin/Tags/GET", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          authType: "^c(a)ta*sEa)*(t)A&g^o%s#x%sA!",
-        }),
-      })
-
-      if (response.ok) {
-        const result = await response.json()
-        setTags(result.tags)
-        setLoadingTags(false)
-      } else {
-        toast.error("خطا")
-        setLoadingTags(false)
-      }
-    } catch (error) {
-      toast.error("خطا")
-      setLoadingTags(false)
-    }
-  }
-
-  useEffect(() => {
-    !tags && fetchTags()
-  }, [])
-
   const setFile = () => {
     const reader = new FileReader()
     reader.onloadend = () => {
@@ -75,7 +37,7 @@ const Tools: React.FC = () => {
   const inserToDB = async () => {
     try {
       const dataToSend = {
-        authType: "^c(a)t*E(Tso^soalsgfs^$#m!",
+        authType: "^c(a)t*E(T*t(A&g*o^x^o$s#m!",
         data: Object.keys(refs)
           .map((refName) => ({
             [refName]: refName !== "src" ? refs[refName].current?.value : image,
@@ -83,7 +45,8 @@ const Tools: React.FC = () => {
           .reduce((acc, curr) => ({ ...acc, ...curr }), {}),
         action: "(*I&n()s*e(r&t*^%t^O&n*E(",
       }
-      const response = await fetch("/api/data/Post/Admin/Tools", {
+
+      const response = await fetch("/api/data/Post/Admin/Tags", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataToSend),
@@ -95,7 +58,6 @@ const Tools: React.FC = () => {
       } else {
         toast.error("اوه اوه")
       }
-      location.reload()
     } catch (error) {
       console.error("Error:", error)
       toast.error("An error occurred. Please try again later.")
@@ -114,8 +76,6 @@ const Tools: React.FC = () => {
         }}
         transition={Zoom}
       />
-
-      <List />
       <select
         className={styles.selectList}
         onChange={(e) => setAction(e.target.value)}
@@ -138,38 +98,28 @@ const Tools: React.FC = () => {
         {Object.keys(refs).map((refName, index) => (
           <div key={index} className={styles.productBoxRow}>
             <label>{refName}</label>
-            {refName !== "tag" ? (
+            {refName !== "description" ? (
               <>
                 <input
                   ref={refs[refName] as RefObject<HTMLInputElement>}
                   placeholder={refName}
                   type={refName === "src" ? "file" : "text"}
                   onChange={() => refName === "src" && setFile()}
-                  style={ { display:`${refName === "src" && image &&"none"}`  }}
                 />
               </>
             ) : (
-              <select
-                ref={refs[refName] as RefObject<HTMLSelectElement>}
-                className={styles.selectList}
-                onChange={(e) => setAction(e.target.value)}
-                value={action}
-              >
-                {tags?.map((tag) => (
-                  <option key={tag._id} value={tag._id}>
-                    {tag.name}
-                  </option>
-                ))}
-              </select>
+              <textarea
+                placeholder='توضیحات . . . '
+                ref={refs[refName] as RefObject<HTMLTextAreaElement>}
+                onChange={() => setFile()}
+              ></textarea>
             )}
           </div>
         ))}
-        <button type='submit' className={styles.submito}>تایید</button>
+        <button type='submit' className={styles.submito} >تایید</button>
       </form>
-      <TagList data={tags} isLoading={loadingTags} />
-      <Tago />
     </>
   )
 }
 
-export default Tools
+export default Tags

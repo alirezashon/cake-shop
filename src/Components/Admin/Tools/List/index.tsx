@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import Image from "next/image"
 import { MdEditDocument } from "react-icons/md"
-import styles from "./index.module.css" // Update with your CSS file path
+import styles from "../../List.module.css" // Update with your CSS file path
 
 interface Tools {
   _id: string
@@ -21,35 +21,34 @@ const List: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const fetchData = async () => {
-	try {
-	  const response = await fetch("/api/data/Post/Admin/Tools/GET", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({
-		  authType: "^c(a)ta*sEa0c(Tzol&i^*o%l#sA!",
-		}),
-	  })
+    try {
+      const response = await fetch("/api/data/Post/Admin/Tools/GET", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authType: "^c(a)ta*sEa0c(Tzol&i^*o%l#sA!",
+        }),
+      })
 
-	  if (response.ok) {
-		const result = await response.json()
-		setData(result)
-		setIsLoading(false)
-	  } else {
-		toast.error("خطا")
-		setIsLoading(false)
-	  }
-	} catch (error) {
-	  toast.error("خطا")
-	  setIsLoading(false)
-	}
+      if (response.ok) {
+        const result = await response.json()
+        setData(result)
+        setIsLoading(false)
+      } else {
+        toast.error("خطا")
+        setIsLoading(false)
+      }
+    } catch (error) {
+      toast.error("خطا")
+      setIsLoading(false)
+    }
   }
   useEffect(() => {
-
-    fetchData()
+    !data && fetchData()
   }, [])
 
   return (
-	  <div className={styles.tableContainer}>
+    <div className={styles.tableContainer}>
       <div className={styles.header}>ابزار ساخت کیک</div>
       {isLoading ? (
         Array.apply(0, Array(7)).map((x, i) => (
@@ -73,9 +72,7 @@ const List: React.FC = () => {
               <tr key={brand._id}>
                 <td>{brand.name}</td>
                 <td>
-                    <div  className={styles.colorBox}>
-                      {brand.price}
-                    </div>
+                  <div className={styles.colorBox}>{brand.price}</div>
                 </td>
                 <td>
                   <Image

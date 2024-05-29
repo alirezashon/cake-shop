@@ -3,12 +3,11 @@
 import React, { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import Image from "next/image"
-import { MdEditDocument } from "react-icons/md"
 import styles from "./index.module.css" // Update with your CSS file path
-import { Tools } from "../../DTO"
+import { Tools, Tags } from "../../DTO"
 
 const List: React.FC = () => {
-  const [data, setData] = useState<Tools[] | null>(null)
+  const [data, setData] = useState<[Tools[], Tags[]] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [showTag, setShowTag] = useState<string>("")
   const fetchData = async () => {
@@ -23,7 +22,7 @@ const List: React.FC = () => {
 
       if (response.ok) {
         const result = await response.json()
-        setData(result.tools)
+        setData([result.tools, result.tags])
         setIsLoading(false)
       } else {
         toast.error("خطا")
@@ -40,6 +39,7 @@ const List: React.FC = () => {
 
   return (
     <div className={styles.tableContainer}>
+      <i className={styles.cako} ></i>
       <div className={styles.header}>ابزار ساخت کیک</div>
       {isLoading ? (
         Array.apply(0, Array(7)).map((x, i) => (
@@ -53,38 +53,46 @@ const List: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.tags}>
             {data &&
-              data?.map((tool) => (
+              data[1]?.map((tool) => (
                 <div
                   className={styles.tagBox}
-                  onClick={() => setShowTag(tool.tag)}
+                  onClick={() => setShowTag(tool._id)}
+                  onMouseOver={()=>showTag.length<0&& setShowTag(tool._id)}
                 >
                   <Image
-                    src={"/omage/موز.jpg"}
+                    src={`data:image/jpeg;base64,${tool.src}`}
                     alt=''
                     width={313}
                     height={313}
-                    className={styles.tagimage}
+                    className={styles.image}
                   />
-                  <div className='tag'>{tool.tag}</div>
-                  {showTag === tool.tag && (
-                  // نمایش لوازم هر تگ
-                    <div className={styles.toolBox}>
-                      <div className='toolName'>{tool.name}</div>
-                      <div className='toolPrice'>{tool.price}</div>
-                      <Image
-                        src={`data:image/jpeg;base64,${tool.src}`}
-                        alt={tool.name}
-                        width={313}
-                        height={313}
-                        className={styles.tagimage}
-                      />
-                    </div>
-                  )}
+                  <div className='tag'>{tool.name}</div>
                 </div>
               ))}
           </div>
         </div>
       )}
+      <div className={styles.toolBox}>
+        {showTag &&
+          data &&
+          data[0].map(
+            (tool) =>
+              showTag === tool.tag && (
+                // نمایش لوازم هر تگ
+                <div className={styles.tools}>
+                  <Image
+                    src={`data:image/jpeg;base64,${tool.src}`}
+                    alt={tool.name}
+                    width={313}
+                    height={313}
+                    className={styles.image}
+                  />
+                  <div className={styles.toolName}>{tool.name}</div>
+                  <div className={styles.toolPrice}>{tool.price}</div>
+                </div>
+              )
+          )}
+      </div>
     </div>
   )
 }

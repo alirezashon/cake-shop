@@ -7,7 +7,6 @@ import { MdAddCircle } from 'react-icons/md'
 import { FaMinus } from 'react-icons/fa'
 import { Add, Remove, Get } from '../../Basket/Actions'
 import styles from './index.module.css'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Post } from '@/DTO'
 

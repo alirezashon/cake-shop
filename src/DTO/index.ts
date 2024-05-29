@@ -44,3 +44,8 @@ export interface Tools {
   src: string
   tag: string
 }
+export interface Tags {
+  _id: string
+  name: string
+  src: string
+}

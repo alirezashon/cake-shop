@@ -1,10 +1,10 @@
 .container {
   background-image: repeating-linear-gradient(
     90deg,
+    #f4e469,
+    #fde459,
     #ffe015,
-    #f4e469 5vh,
-    #b8d393 5vh,
-    #f7ffee 10vh
+    #f7ffee
   );
 }
 .tags {
@@ -12,21 +12,41 @@
   display: flex;
 }
 .tagBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-image: repeating-linear-gradient(9deg,
-    #7e9a3c,
-    #819a3c 5vh,
-    #b8d393 5vh,
-    #f7ffee 10vh);
+  padding: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: repeating-linear-gradient(22deg, #faaf2d, #fbe242);
+  overflow-x: auto;
 }
-.tagimage {
+.image {
+  cursor: pointer;
   width: 12vh;
   height: 12vh;
   border-radius: 22vh;
 }
 .tagimage:hover {
-transform: scale(1.05)rotate(180deg);
-cursor: pointer;
+  transform: scale(1.05) rotate(180deg);
+  cursor: pointer;
+}
+.toolBox {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  justify-content: space-around;
+  background-image: repeating-linear-gradient(22deg, #fff195, #fff86c);
+}
+.tools {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: repeating-linear-gradient(22deg, #b8d393, #f7ffee);
+  padding: 2vh;
+  height: fit-content;
+}
+.toolName {
+  background-image: repeating-linear-gradient(22deg, #7ecb3b, #76a93c);
+}
+.toolPrice {
+  background-image: repeating-linear-gradient(22deg, #bfec80, #9ce34a);
 }
