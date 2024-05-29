@@ -1,0 +1,32 @@
+.container {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #ffe015,
+    #f4e469 5vh,
+    #b8d393 5vh,
+    #f7ffee 10vh
+  );
+}
+.tags {
+  justify-content: space-around;
+  display: flex;
+}
+.tagBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: repeating-linear-gradient(9deg,
+    #7e9a3c,
+    #819a3c 5vh,
+    #b8d393 5vh,
+    #f7ffee 10vh);
+}
+.tagimage {
+  width: 12vh;
+  height: 12vh;
+  border-radius: 22vh;
+}
+.tagimage:hover {
+transform: scale(1.05)rotate(180deg);
+cursor: pointer;
+}

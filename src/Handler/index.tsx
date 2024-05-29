@@ -21,6 +21,9 @@ const ModOne = dynamic(() => import('../Components/PostBox/ModOne'), {
 const ChatUI = dynamic(() => import('../Components/Chat'), {
 	loading: () => <div className={styles.loadingChat}></div>,
 })
+const BakeCake = dynamic(() => import('../Components/BakeCake'), {
+	loading: () => <div className={styles.loadingBake}></div>,
+})
 interface Props {
 	posts: Post[]
 	brands: Brand[]
@@ -64,6 +67,7 @@ const Handler: React.FC<Props> = ({
 					<div>
 						<Carouselali structure={carousel} />
 					</div>
+					<BakeCake/>
 					<div>
 						<CircularLinks props={brands} />
 					</div>

@@ -25,11 +25,11 @@ const Drawer: React.FC<Props> = ({ setDrawerOpen, setContentId }) => {
   const icons = [
     {
       tag: <FcCustomerSupport />,
-      name: "پشتیبانی",
+      name: "ایجاد پست",
     },
     {
       tag: <FcSettings />,
-      name: "ساز و کار",
+      name: "برند و کتگوری",
     },
     {
       tag: <FcDoughnutChart />,
@@ -37,11 +37,11 @@ const Drawer: React.FC<Props> = ({ setDrawerOpen, setContentId }) => {
     },
     {
       tag: <FcShipped />,
-      name: "مرسولات",
+      name: "کروژل",
     },
     {
       tag: <FcSalesPerformance />,
-      name: "بازدهی",
+      name: "سفارش ها",
     },
   ]
   const handleMouseEnter = () => {

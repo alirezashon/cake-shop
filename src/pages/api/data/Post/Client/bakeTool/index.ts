@@ -1,8 +1,8 @@
 /** @format */
 
 import { NextApiRequest, NextApiResponse } from "next"
-import Tools from "../../../../../../../models/Tools"
-import db from "../../../../../../../utils"
+import Tools from "../../../../../../models/Tools"
+import db from "../../../../../../utils"
 
 const cateBrand = async (req: NextApiRequest, res: NextApiResponse) => {
   try {

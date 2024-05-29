@@ -49,7 +49,7 @@ import List from './List'
 
 			const data = await response.json()
  			if (data.success) {
-				toast.success('ریختش خوبه')
+				toast.success('موفق')
 			} else {
 				toast.error('اوه اوه')
 			}
@@ -107,7 +107,7 @@ import List from './List'
 						)}
 					</div>
 				))}
-				<button type='submit'>بریز توش</button>
+				<button type='submit'>تایید</button>
 			</form>
 		</>
 	)

@@ -1,3 +1,4 @@
 .block{
+    padding: 1vw 3vw 7vh 3vw;
     border-top: ridge .5vh rgba(81, 205, 83, 0.9);
 }

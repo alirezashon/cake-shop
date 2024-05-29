@@ -86,7 +86,7 @@ const Admin: React.FC = () => {
 			const data = await response.json()
 			console.log('data', dataToSend)
 			if (data.success) {
-				toast.success('ریختش خوبه')
+				toast.success('موفق')
 			} else {
 				toast.error('اوه اوه')
 			}

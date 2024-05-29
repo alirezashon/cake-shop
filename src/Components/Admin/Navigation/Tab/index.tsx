@@ -3,7 +3,8 @@
 import { CSSProperties } from 'react'
 import styles from './index.module.css'
 const Tabs = [
-	'درخواست های باز',
+	'ابزار ساخت کیک',
+	// 'درخواست های باز',
 	'مرجوعی',
 	'مدیریت محصولات',
 	'تبلیغات',

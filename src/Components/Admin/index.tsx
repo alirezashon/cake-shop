@@ -9,6 +9,7 @@ import Ordero from "./Ordero"
 import styles from "./index.module.css"
 import Drawer from "./Navigation/Drawer"
 import Tab from "./Navigation/Tab"
+import Tools from "./Tools"
 interface Post {
   _id: string
   title: string
@@ -35,6 +36,7 @@ const Admin: React.FC = () => {
     <Carousel />,
     <Story />,
     <Ordero />,
+    <Tools />,
   ]
   useEffect(() => {
     const fetcher = async () => {
@@ -45,7 +47,7 @@ const Admin: React.FC = () => {
           body: JSON.stringify({
             category: "@L$L%O%F#D%M^",
             authType: "G&E!T*P^R$O#D$U^C@T*S",
-          }), // Update with your authType
+          }),
         })
 
         if (res.ok) {

@@ -98,7 +98,7 @@ const PostAdmin: React.FC<Props> = ({ data, isLoading }) => {
 				const data = await response.json()
 				console.log(response.status, 'data', dataToSend)
 				if (data.success) {
-					toast.success('ریختش خوبه')
+					toast.success('موفق')
 				} else {
 					toast.error('اوه اوه')
 				}
