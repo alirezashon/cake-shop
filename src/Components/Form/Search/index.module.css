@@ -14,7 +14,7 @@
 .textBox {
 	height: 100%;
 	padding: 0.4vh;
-	border: 0.3vh ridge #9ac62c;
+	border: 0.3vh ridge #fa931c;
 	border-radius: 0 1vh 1vh 0;
 	outline: none;
 	direction: rtl;
@@ -27,11 +27,11 @@
 	justify-content: center;
 	align-items: center;
 	padding: 0.2vh;
-	border: 0.4vh double rgba(255, 221, 212, 0.9);
+	border: 0.4vh double rgba(255, 175, 84, 0.9);
 	background: radial-gradient(
-		rgba(138, 191, 64, 0.9),
-		rgb(77, 149, 26),
-		rgba(75, 127, 23, 0.726)
+		rgba(248, 191, 45, 0.9),
+		rgb(255, 223, 40),
+		rgba(255, 187, 0, 0.915)
 	);
 	color: #fffff7;
 	cursor: pointer;
@@ -40,7 +40,7 @@
 
 .submitButton:hover,
 .textBox:hover {
-	border: 0.4vh double rgba(202, 249, 60, 0.9);
+	border: 0.4vh double rgba(255, 169, 20, 0.9);
 	transform: scale(1.04);
 }
 
@@ -53,10 +53,11 @@
 .searchOptionBox {
 	width: 70vw;
 	height: 50vh;
-	border: 0.2vh ridge rgba(94, 104, 4, 0.9);
+	border: 0.2vh ridge rgba(254, 239, 25, 0.9);
 	z-index: 34;
 	position: fixed;
 	margin-top: -2vh;
 	left: 0;
 	background-color: #fffffd;
 }
+.searchIcon:hover{transform: rotate(-25deg);}

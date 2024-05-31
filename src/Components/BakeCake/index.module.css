@@ -1,12 +1,13 @@
 .tags {
-display: flex;
-background-image: repeating-linear-gradient(22deg, #f4ff5d, #ff6a00);
-width: 100%;
+  display: flex;
+  background-image: repeating-linear-gradient(22deg, #f4ff5d, #ff6a00);
+  width: 100%;
   height: 90vh;
-  overflow:auto;
+  overflow: auto;
   justify-content: space-around;
 }
-.tagBox {height: fit-content;
+.tagBox {
+  height: fit-content;
   animation: 2s openit infinite;
   margin-left: 5vw;
   width: 10%;
@@ -14,6 +15,7 @@ width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
   background-image: repeating-linear-gradient(22deg, #faaf2d, #fbe242);
 }
 .image {
@@ -34,11 +36,42 @@ width: 100%;
   background-image: repeating-linear-gradient(22deg, #b8d393, #f7ffee);
   padding: 2vh;
   height: fit-content;
-  width: fit-content  ;
+  width: fit-content;
 }
+
 .toolName {
   background-image: repeating-linear-gradient(22deg, #7ecb3b, #76a93c);
 }
 .toolPrice {
   background-image: repeating-linear-gradient(22deg, #bfec80, #9ce34a);
+}
+.cake {
+  background-image: repeating-linear-gradient(22deg, #fd0808, #9ce34a);
+  width: 22vw;
+  height: 44vh;
+  position: absolute;
+  align-self: flex-end;
+}
+.cakheader{
+  height: 5vh;
+  background-image: repeating-linear-gradient(22deg, #ff8000, #ffb006);
+
+}
+.cakedetails {
+  border: 1vh red ;
+  background-image: repeating-linear-gradient(22deg, #8feb0e, #9ce34a);
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+}
+.icon {
+  color: #ebffda;
+  font-size: 22vh;
+}
+.cakedetails div,
+.cakedetails h1 {
+  border-bottom: .3vh rgb(255, 132, 0) dashed;
+  background-image: repeating-linear-gradient(22deg, #8feb0e, #9ce34a);
+  width: 100%;
+  text-align: center;
 }

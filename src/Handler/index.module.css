@@ -12,29 +12,29 @@
 .loadingNav {
 	background: linear-gradient(
 		25deg,
-		rgb(179, 229, 92),
-		rgb(238, 249, 196),
-		rgb(175, 224, 89)
+		rgb(255, 201, 54),
+		rgb(253, 253, 150),
+		rgb(255, 199, 29)
 	);
 	height: 9vh;
 }
 .loadingStory {
 	height: 22vh;
 	background-color: #ffffff;
-	box-shadow: 1px 1px 7px 1px #f4ffd9, 1px 1px 11vh 1vh #cbe934 inset;
+	box-shadow: 1px 1px 7px 1px #fffbd9, 1px 1px 11vh 1vh #ffba2f inset;
 }
 .loadingCirculate {
 	height: 7vh;
-	background-color: #b3e934;
+	background-color: #e9a734;
 }
 .loadingCarousel {
 	height: 33vh;
 	background-image: repeating-linear-gradient(
 		90deg,
-		#609a3c,
-		#3c9a50 5vh,
-		#abd393 5vh,
-		#f3ffee 10vh
+		#e5d457,
+		#fdb21c 5vh,
+		#f6b566 5vh,
+		#ff9c23 10vh
 	);
 }
 .loadingPost {
