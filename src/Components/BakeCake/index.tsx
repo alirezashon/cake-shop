@@ -6,6 +6,8 @@ import Image from "next/image"
 import styles from "./index.module.css" // Update with your CSS file path
 import { Tools, Tags } from "../../DTO"
 import { FaBirthdayCake } from "react-icons/fa"
+import { GiCrossMark } from "react-icons/gi"
+import { FaAnglesDown } from "react-icons/fa6"
 
 const List: React.FC = () => {
   const [data, setData] = useState<[Tools[], Tags[]] | null>(null)
@@ -13,21 +15,21 @@ const List: React.FC = () => {
   const [showTag, setShowTag] = useState<number[]>([])
   const [cakeState, setCakeState] = useState<[number, number][]>([
     [2, 0.25],
-    [1, 12.22],
-    [0, 0.6],
+    [1, 2.22],
+    [2, 0.25],
+    [4, 0.22],
+    [3, 0.25],
+    [0, 2.22],
   ])
+  const [showcakimage, setShowcakimage] = useState<boolean>(true)
   const [cakosition, setCakosition] = useState<{
-    isDrago: boolean
-    x: number
-    y: number
-    offsetX: number
-    offsetY: number
+    isCakopen: boolean
+    x: number | null
+    y: number | null
   }>({
-    isDrago: false,
-    x: 110,
-    y: 110,
-    offsetX: 0,
-    offsetY: 0,
+    isCakopen: true,
+    x: null,
+    y: null,
   })
 
   const fetchData = async () => {
@@ -73,51 +75,14 @@ const List: React.FC = () => {
         ;[0, 1].includes(tagIndex)
           ? setCakosition((prevState) => ({
               ...prevState,
-              x: (window.innerWidth * 44) / 100,
+              x: (window.innerWidth * 66) / 100,
             }))
           : setCakosition((prevState) => ({
               ...prevState,
-              x: (window.innerWidth * 44) / 100,
+              x: (window.innerWidth * 4) / 100,
             }))
       }
     }
-  }
-
-  // drap and drog
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    const cakeElement = e.currentTarget.parentElement
-    if (!cakeElement) return
-
-    const { left, top } = cakeElement.getBoundingClientRect()
-    const offsetX = e.clientX - left
-    const offsetY = e.clientY - top
-
-    setCakosition({
-      isDrago: true,
-      x: left,
-      y: top,
-      offsetX,
-      offsetY,
-    })
-  }
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cakosition.isDrago) return
-    else {
-      setCakosition((prevState) => ({
-        ...prevState,
-        x: e.clientX - prevState.offsetX,
-        y: e.clientY - prevState.offsetY,
-      }))
-    }
-  }
-
-  const handleMouseUp = () => {
-    setCakosition((prevState) => ({
-      ...prevState,
-      isDragging: false,
-    }))
   }
 
   return (
@@ -160,33 +125,60 @@ const List: React.FC = () => {
             </div>
           </>
         ))}
-      <div
-        className={styles.cake}
-        style={{
-          left: `${cakosition.x}px`,
-          top: `${cakosition.y}px`,
-          position: "absolute",
-        }}
-        >
+      {cakosition.isCakopen ? (
         <div
-          className={styles.cakheader}
-          onMouseMove={(e) => handleMouseMove(e)} // Add the onMouseMove to the parent div
-          onMouseDown={(e) => handleMouseDown(e)}
-          // onMouseUp={handleMouseUp} // Add the onMouseUp to the parent div
-        ></div>
-        <div className={styles.cakimage}>
-          <FaBirthdayCake className={styles.icon} />
+          className={styles.cake}
+          style={{
+            left: `${cakosition.x}px`,
+            top: `${cakosition.y}px`,
+            position: "absolute",
+          }}
+        >
+          <div className={styles.cakheader}>
+            <GiCrossMark
+              className={styles.closeIcon}
+              onClick={() =>
+                setCakosition((prv) => ({ ...prv, isCakopen: false }))
+              }
+            />
+            <p>
+              وزن کیک : {cakeState.reduce((acc, [, second]) => acc + second, 0)}
+              &nbsp; کیلوگرم
+            </p>
+          </div>
+          <div
+            className={styles.cakimage}
+            style={{
+              transform: `${showcakimage ? "" : "translateY(22vh)"}`,
+              zIndex: 0,
+            }}
+          >
+            <FaAnglesDown
+              className={styles.showimgicon}
+              onClick={() => setShowcakimage(!showcakimage)}
+              style={{ transform: `rotate(${showcakimage ? 0 : 180}deg)` }}
+            />
+            <FaBirthdayCake className={styles.icon} />
+          </div>
+          <div className={styles.cakedetails}>
+            {cakeState.map((tool) => (
+              <div key={tool[0]}>
+                <div>
+                  <p>{data && data[0][tool[0]].name} </p>
+                  <p>{data && (data[0][tool[0]].price * tool[1]).toFixed(2)}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className={styles.cakedetails}>
-          <h1>{cakeState.reduce((acc, [, second]) => acc + second, 0)}</h1>
-          {cakeState.map((tool) => (
-            <div key={tool[0]}>
-              <div>{data && data[0][tool[0]].price * tool[1]}</div>
-              <div>{data && data[0][tool[0]].name}</div>
-            </div>
-          ))}
+      ) : (
+        <div
+          className={styles.cakolate}
+          onClick={() => setCakosition((prv) => ({ ...prv, isCakopen: true }))}
+        >
+          <FaBirthdayCake />
         </div>
-      </div>
+      )}
     </div>
   )
 }

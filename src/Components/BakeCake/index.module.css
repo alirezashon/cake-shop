@@ -45,33 +45,106 @@
 .toolPrice {
   background-image: repeating-linear-gradient(22deg, #bfec80, #9ce34a);
 }
+.cakolate {
+  background-image: repeating-linear-gradient(22deg, #eded01, #fa8108);
+  border: 0.3vh dashed rgb(255, 252, 204);
+  color: rgb(255, 252, 204);
+  font-size: 5vh;
+  cursor: pointer;
+  position: absolute;
+  align-self: flex-end;
+  width: 9vh;
+  height: 9vh;
+  border-radius: 22vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cakolate:hover {
+  transform: scale(1.1) rotate(180deg);
+}
 .cake {
-  background-image: repeating-linear-gradient(22deg, #fd0808, #9ce34a);
+  background-color: #ebffda;
   width: 22vw;
   height: 44vh;
   position: absolute;
   align-self: flex-end;
+  border-radius: 1vh;
+  border: 1vh double rgb(255, 132, 0);
 }
-.cakheader{
-  height: 5vh;
-  background-image: repeating-linear-gradient(22deg, #ff8000, #ffb006);
-
+.cakheader {
+  display: flex;
+  height: 18%;
+  justify-content: space-between;
+  padding: 0 1vh;
+  color: #e3f5ff;
+  align-items: center;
+  border-bottom: 0.3vh dashed rgb(255, 252, 204);
+  background-image: repeating-linear-gradient(222deg, #2c1a00ec, #935518);
+}
+.showimgicon {
+  left: 0;
+  position: absolute;
+  color: #fffaf5;
+  background-color: #eba50e;
+  font-size: 4vh;
+  border-radius: 4vh;
+  padding: .5vh;
+  border: .3vh dashed rgb(255, 221, 0);
+  cursor: pointer;
+}
+.closeIcon {
+  border: 0.2vh dashed rgb(255, 132, 0);
+  padding: 0.3vh;
+  background-color: rgb(255, 252, 204);
+  border-radius: 22vh;
+  cursor: pointer;
+  font-size: 5vh;
+  color: #ff6600;
+}
+.closeIcon:hover {
+  color: #ff4d00;
+  transform: scale(1.1) rotate(180deg);
 }
 .cakedetails {
-  border: 1vh red ;
-  background-image: repeating-linear-gradient(22deg, #8feb0e, #9ce34a);
+  overflow-y: auto;
+  border: 1vh red;
+  background-image: repeating-linear-gradient(22deg, #f8d304, #fffed1);
   display: flex;
   flex-direction: column;
   direction: rtl;
+  width: 100%;
+  height: 82%;
+}
+.cakimage {
+  border-block: 0.7vh ridge rgb(255, 132, 0);
+  border-radius: 1vh;
+  position: absolute;
+  padding: 0 1vh;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  top: -23vh;
+  background-color: #e3f5ff;
 }
 .icon {
+  background-color: #f9930d;
+  border-radius: 11vh;
+  padding: 1vh;
   color: #ebffda;
   font-size: 22vh;
 }
-.cakedetails div,
-.cakedetails h1 {
-  border-bottom: .3vh rgb(255, 132, 0) dashed;
-  background-image: repeating-linear-gradient(22deg, #8feb0e, #9ce34a);
+.cakedetails div {
+  background-image: repeating-linear-gradient(22deg, #eba50e, #fedd27);
+  color: #f24f09;
   width: 100%;
+  display: flex;
+  justify-content: space-around;
   text-align: center;
+}
+.cakedetails div:hover {
+  cursor: pointer;
+  border-radius: 2vh;
+  border-block: 0.7vh double rgb(255, 132, 0);
+  transform: scale(0.94);
 }
