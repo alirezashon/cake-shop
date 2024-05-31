@@ -96,8 +96,8 @@ a {
 	content: 'ali';
 	animation: 2s rotateBall infinite alternate-reverse;
 	background: radial-gradient(
-		rgba(186, 222, 54, 0.689),
-		rgba(119, 178, 9, 0.735)
+		rgba(243, 145, 18, 0.689),
+		rgba(249, 109, 2, 0.735)
 	);
 	border: dashed 0.4vh #ffffff;
 	border-radius: 44vh;

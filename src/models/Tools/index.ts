@@ -9,6 +9,7 @@ const toolsSchema = new mongoose.Schema({
     ref: "Tags", 
     required: true,
   },
+  minMax:[Number,Number]
 });
 
 const Tools = mongoose.models.Tools || mongoose.model("Tools", toolsSchema);

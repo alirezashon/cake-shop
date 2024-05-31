@@ -5,7 +5,7 @@ import { toast } from "react-toastify"
 import Image from "next/image"
 import styles from "./index.module.css" // Update with your CSS file path
 import { Tools, Tags } from "../../DTO"
-import { FaBirthdayCake } from "react-icons/fa"
+import { FaBirthdayCake, FaCheck, FaEdit } from "react-icons/fa"
 import { GiCrossMark } from "react-icons/gi"
 import { FaAnglesDown } from "react-icons/fa6"
 
@@ -13,14 +13,14 @@ const List: React.FC = () => {
   const [data, setData] = useState<[Tools[], Tags[]] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [showTag, setShowTag] = useState<number[]>([])
-  const [cakeState, setCakeState] = useState<[number, number][]>([
-    [2, 0.25],
-    [1, 2.22],
-    [2, 0.25],
-    [4, 0.22],
-    [3, 0.25],
-    [0, 2.22],
-  ])
+  const [cakeState, setCakeState] = useState<[number, number, boolean][]>([
+    [1, 2.22, false],
+    [2, 0.25, false],
+    [2, 0.25, true],
+    [4, 0.22, false],
+    [3, 0.25, false],
+    [0, 2.22, false],
+  ]) //[toolIndex,weight,[maxPercentage,minPercentage],isEdditing]
   const [showcakimage, setShowcakimage] = useState<boolean>(true)
   const [cakosition, setCakosition] = useState<{
     isCakopen: boolean
@@ -85,6 +85,8 @@ const List: React.FC = () => {
     }
   }
 
+
+  
   return (
     <div className={styles.tags}>
       {data &&
@@ -161,11 +163,38 @@ const List: React.FC = () => {
             <FaBirthdayCake className={styles.icon} />
           </div>
           <div className={styles.cakedetails}>
-            {cakeState.map((tool) => (
-              <div key={tool[0]}>
-                <div>
+            {cakeState.map((tool, index) => (
+              <div key={index}>
+                {tool[2] && (
+                  <div className={styles.cakedetailoption}>
+                    <input type='range' />
+                    <FaCheck  onClick={() =>
+                        setCakeState((prevState) =>
+                          prevState.map((item, i) =>
+                            i === index ? [item[0], item[1], false] : item
+                          )
+                        )
+                      }/>
+                  </div>
+                )}
+                <div className={styles.cakedetail}>
+                  <p>
+                    <FaEdit
+                      className={styles.editicon}
+                      onClick={() =>
+                        setCakeState((prevState) =>
+                          prevState.map((item, i) =>
+                            i === index ? [item[0], item[1], true] : item
+                          )
+                        )
+                      }
+                    />
+                  </p>
                   <p>{data && data[0][tool[0]].name} </p>
-                  <p>{data && (data[0][tool[0]].price * tool[1]).toFixed(2)}</p>
+                  <p>
+                    {data && (data[0][tool[0]].price * tool[1]).toFixed(0)}
+                    تومان
+                  </p>
                 </div>
               </div>
             ))}
