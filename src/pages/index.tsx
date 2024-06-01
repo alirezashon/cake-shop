@@ -111,10 +111,10 @@ const RootPage: NextPage<Props> = ({ posts, brands, carousel }) => {
 						height: '100vh',
 						background: ` repeating-linear-gradient(
 			90deg,
-				#609a3c,
-				#3c9a50 5vh,
-				#abd393 5vh,
-				#f3ffee 10vh
+			#d6c66b,
+			#eebe20 5vh,
+			#fbf5a0 5vh,
+			#ffffff 10vh
 		)`,
 					}}></div>
 			) : (

@@ -6,9 +6,9 @@ import Image from "next/image"
 import styles from "./index.module.css" // Update with your CSS file path
 import { Tools, Tags } from "../../DTO"
 import { FaBirthdayCake, FaCheck, FaEdit } from "react-icons/fa"
-import { GiCrossMark } from "react-icons/gi"
+import { GiCrossMark, GiReturnArrow } from "react-icons/gi"
 import { FaAnglesDown } from "react-icons/fa6"
-
+import { Knob } from "primereact/knob"
 const List: React.FC = () => {
   const [data, setData] = useState<[Tools[], Tags[]] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -85,8 +85,6 @@ const List: React.FC = () => {
     }
   }
 
-
-  
   return (
     <div className={styles.tags}>
       {data &&
@@ -136,6 +134,15 @@ const List: React.FC = () => {
             position: "absolute",
           }}
         >
+          <p>
+            {data && data[0] && data[0].length > 0
+              ? cakeState.reduce(
+                  (sum, item) =>
+                    sum + item[1] * data[0][data[0].length - 1].price,
+                  0
+                )
+              : 0}
+          </p>
           <div className={styles.cakheader}>
             <GiCrossMark
               className={styles.closeIcon}
@@ -167,14 +174,54 @@ const List: React.FC = () => {
               <div key={index}>
                 {tool[2] && (
                   <div className={styles.cakedetailoption}>
-                    <input type='range' />
-                    <FaCheck  onClick={() =>
+                    <Knob
+                      value={tool[1]}
+                      valueTemplate={"{value}%"}
+                      className={styles.range}
+                      min={
+                        data?.[0]?.[tool[0]]?.minMax?.[0] !== undefined &&
+                        !isNaN(data[0][tool[0]].minMax[0])
+                          ? parseInt(`${data[0][tool[0]].minMax[0]}`)
+                          : 0
+                      }
+                      max={
+                        data?.[0]?.[tool[0]]?.minMax?.[1] !== undefined &&
+                        !isNaN(data[0][tool[0]].minMax[1])
+                          ? parseInt(`${data[0][tool[0]].minMax[1]}`)
+                          : 20
+                      }
+                      onChange={(e) =>
                         setCakeState((prevState) =>
                           prevState.map((item, i) =>
-                            i === index ? [item[0], item[1], false] : item
+                            i === index ? [item[0], e.value, item[2]] : item
                           )
                         )
-                      }/>
+                      }
+                      valueColor='yellow'
+                      rangeColor='white'
+                    />
+                    <div className={styles.inputiconos}>
+                      <FaCheck
+                        className={styles.checko}
+                        onClick={() =>
+                          setCakeState((prevState) =>
+                            prevState.map((item, i) =>
+                              i === index ? [item[0], item[1], false] : item
+                            )
+                          )
+                        }
+                      />
+                      <GiReturnArrow
+                        className={styles.returnarrow}
+                        onClick={() =>
+                          setCakeState((prevState) =>
+                            prevState.map((item, i) =>
+                              i === index ? [item[0], item[1], false] : item
+                            )
+                          )
+                        }
+                      />
+                    </div>
                   </div>
                 )}
                 <div className={styles.cakedetail}>

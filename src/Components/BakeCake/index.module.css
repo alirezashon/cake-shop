@@ -37,6 +37,11 @@
   padding: 2vh;
   height: fit-content;
   width: fit-content;
+  border-radius: 111%;
+  margin: 1vh;
+}
+.tools:hover{
+transform: rotate(23deg);
 }
 
 .toolName {
@@ -113,6 +118,14 @@
   color: #ff4d00;
   transform: scale(1.1) rotate(180deg);
 }
+.checko{
+  background-color: #fef8b5;
+  color: #049913;
+  font-size: 3vh;
+  border-radius: 4vh; 
+  padding: .2vh;
+  border: .2vh dashed rgb(255, 132, 0);
+}
 .cakedetails {
   overflow-y: auto;
   border: 1vh red;
@@ -169,4 +182,8 @@
   position: absolute;
   left: 100%;
   background-color: rgb(255, 252, 204);
+}
+.range{
+  color: red;
+  background: #eba50e;
 }

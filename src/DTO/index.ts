@@ -43,6 +43,7 @@ export interface Tools {
   price: number
   src: string
   tag: string
+  minMax:[number,number]
 }
 export interface Tags {
   _id: string

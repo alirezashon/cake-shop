@@ -17,6 +17,8 @@ const Tools: React.FC = () => {
     src: useRef<HTMLInputElement>(null),
     price: useRef<HTMLInputElement>(null),
     tag: useRef<HTMLSelectElement>(null),
+    min: useRef<HTMLSelectElement>(null),
+    max: useRef<HTMLSelectElement>(null),
   }
   const [image, setImage] = useState<string>()
   const [action, setAction] = useState<string>("(*I&n()s*e(r&t*^%t^O&n*E(")
