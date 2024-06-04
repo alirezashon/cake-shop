@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+}
+.basketSide {
+  width: 27%;
+  background-color: white;
+border: .3vh solid rgb(178, 178, 178);}
+.menuSide {
+  width: 67%;
+}
+.categoryBox {
+  display: flex;
+  width: 100%;
+  height: 22vh;
+  padding: 0.5vh 4vh;
+  overflow-x: hidden;
+  border: 0.2vh solid rgb(178, 178, 178);
+}
+
+.category {
+  margin: 2vh;
+  width: fit-content;
+  background-color: rgb(197, 232, 232);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(251, 142, 64);
+  color: white;
+  margin: 3vh;
+  width: 8vh;
+  height: 6vh;
+  font-size: 5vh;
+}
+.leftIcon,
+.rightIcon {
+  cursor: pointer;
+  position: absolute;
+  background-color: aliceblue;
+  color: rgb(255, 123, 79);
+  font-size: 4vh;
+  border-radius: 7vh;
+  top: 8vh;
+  right: 3.3vh;
+}
+.leftIcon:hover {
+  transform: scale(1.2) rotate(170deg);
+}
+
+.rightIcon:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+.leftIcon {
+  left: 32%;
+  transform: rotate(180deg);
+}
+.menuSearchBox{
+    
+}
+
+@media (max-width: 777px) {
+  .categoryBox {
+    width: 100%;
+  }
+}
