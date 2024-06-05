@@ -1,9 +1,10 @@
-import Store from '../Components/Store'
-export default function Home() {
-
+import Store from "../Components/Store"
+import {sampleData} from '../Components/Store/content'
+const Home = () => {
   return (
     <div>
-<Store/>
+      <Store data={sampleData}/>
     </div>
-  );
+  )
 }
+export default Home

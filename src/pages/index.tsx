@@ -2,7 +2,7 @@
 import { NextSeo } from 'next-seo'
 import { useEffect, useState } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
-import { Brand, Post } from '../DTO'
+import { Product,Category } from '../DTO'
 import dynamic from 'next/dynamic'
 import { Get } from '../Components/Basket/Actions'
 
@@ -11,8 +11,8 @@ const Handler = dynamic(() => import('../Handler'), {
 })
 
 interface Props {
-	posts: Post[]
-	brands: Brand[]
+	product: Product[]
+	categories: Category[]
 	carousel: [
 		{
 			_id: string
@@ -23,59 +23,46 @@ interface Props {
 	]
 }
 
-const RootPage: NextPage<Props> = ({ posts, brands, carousel }) => {
+const RootPage: NextPage<Props> = ({ product, categories, carousel }) => {
 	const [loading, setLoading] = useState<boolean>(true)
-	const [basketStore, setBasketStore] = useState<string[][]>([])
-	const [basketData, setBasketData] = useState<Post[]>([])
 	const [totalPrice, setTotalPrice] = useState<[number, number]>([0, 0])
+	const [basketData, setBasketData] = useState<Product[]>([])
 
-	const fetchData = async () => {
-		const basketString = Get()
-		if (basketData) {
-			setBasketStore(basketString)
-			bascalculator(basketString)
-			await getData(basketString[1])
-			setLoading(false)
-		}
-	}
 
-	const getData = async (data: string[]) => {
-		try {
-			const response = await fetch('/api/data/Post/Client/bulk', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					bulkID: data,
-					authType: 'G&E!T*P^R$O#D$U^C@T*B^u$l*K$',
-				}),
-			})
-			const result = await response.json()
-			setBasketData(result.products)
-		} catch (error) {
-			console.error('Error fetching data:', error)
-		}
-	}
+	// const getData = async (data: string[]) => {
+	// 	try {
+	// 		const response = await fetch('/api/data/Post/Client/bulk', {
+	// 			method: 'POST',
+	// 			headers: { 'Content-Type': 'application/json' },
+	// 			body: JSON.stringify({
+	// 				bulkID: data,
+	// 				authType: 'G&E!T*P^R$O#D$U^C@T*B^u$l*K$',
+	// 			}),
+	// 		})
+	// 		const result = await response.json()
+	// 		setBasketData(result.products)
+	// 	} catch (error) {
+	// 		console.error('Error fetching data:', error)
+	// 	}
+	// }
 
-	const bascalculator = (data: string[][]) => {
-		const [totalPrice, totalQuantity] = data[0].reduce(
-			(acc, item) => {
-				const parts = item.split('*2%2&7(7)5%5!1@2')
-				const itemPrice = parseInt(parts[1]) * parseInt(parts[3])
-				const itemQuantity = parseInt(parts[3])
-				return [acc[0] + itemPrice, acc[1] + itemQuantity]
-			},
-			[0, 0]
-		)
-		setTotalPrice([totalPrice, totalQuantity])
-	}
-	const updateBasket = (item: string[][]) => {
-		setBasketStore(item)
-		bascalculator(basketStore)
-	}
-	useEffect(() => {
-		fetchData()
-	}, []) // Empty dependency array to run only once after initial render
-
+	// const bascalculator = (data: string[][]) => {
+	// 	const [totalPrice, totalQuantity] = data[0].reduce(
+	// 		(acc, item) => {
+	// 			const parts = item.split('*2%2&7(7)5%5!1@2')
+	// 			const itemPrice = parseInt(parts[1]) * parseInt(parts[3])
+	// 			const itemQuantity = parseInt(parts[3])
+	// 			return [acc[0] + itemPrice, acc[1] + itemQuantity]
+	// 		},
+	// 		[0, 0]
+	// 	)
+	// 	setTotalPrice([totalPrice, totalQuantity])
+	// }
+	// const updateBasket = (item: string[][]) => {
+	// 	setBasketStore(item)
+	// 	bascalculator(basketStore)
+	// }
+	
 	return (
 		<>
 			<NextSeo
@@ -119,13 +106,10 @@ const RootPage: NextPage<Props> = ({ posts, brands, carousel }) => {
 					}}></div>
 			) : (
 				<Handler
-					posts={posts}
-					brands={brands}
-					carousel={carousel}
-					basket={basketStore}
-					setBasket={updateBasket}
-					basketData={basketData}
+					products={product}
 					totalPrice={totalPrice}
+					categories={categories}
+					basketData={basketData}
 				/>
 			)}
 		</>
@@ -147,20 +131,20 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 		)
 		const result = await res.json()
 
-		const posts = result.products || []
-		const brands = result.brands || []
+		const product = result.products || []
+		const categories = result.categories || []
 		const carousel = result.carousel || []
 
 		return {
 			props: {
-				posts,
+				product,
 				carousel,
-				brands,
+				categories,
 			},
 		}
 	} catch (error) {
 		console.error('Error fetching initial props:', error)
-		return { props: { posts: [], carousel: [], brands: [] } }
+		return { props: { product: [], carousel: [], categories: [] } }
 	}
 }
 

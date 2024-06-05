@@ -6,11 +6,11 @@ import { AiOutlineShoppingCart } from "react-icons/ai"
 import { GiCrossMark } from "react-icons/gi"
 import Products from "./Products"
 import { RingLoader } from "react-spinners"
-import { Post } from "@/DTO"
+import { Product } from "@/DTO"
 interface BasketProps {
   basket: string[][]
   setBasket: (items: string[][]) => void
-  basketData: Post[]
+  basketData: Product[]
   totalPrice: [number, number]
   isBasketOpen: boolean
   setIsBasketOpen: (value: boolean) => void

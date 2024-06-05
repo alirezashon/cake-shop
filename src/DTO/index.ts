@@ -1,25 +1,17 @@
-export interface Post {
+export interface Product {
   _id: string
   title: string
   src: string
-  subImages: string[]
   price: number
-  categories: string[]
-  type: string
-  size: String
-  color: String[]
-  quantity: number
+  categories: string
   description: string
   keywords: string[]
-  seen?: boolean
 }
 
-export interface Brand {
+export interface  Category{
   _id: string
   name: string
-  en: string
   src: string
-  description: string
   keywords: [string]
 }
 
