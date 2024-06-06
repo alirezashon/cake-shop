@@ -4,28 +4,52 @@
   font-size: 2vh;
 }
 .basketSide {
+  direction: rtl;
   width: 27%;
   height: 37vh;
   background-color: white;
-  border: .1vh solid rgb(178, 178, 178);
+  border: 0.1vh solid rgb(178, 178, 178);
 }
-.basketHead{
- height: 15%;
- display: flex;
- justify-content:space-between;
- padding: .4vh 3vh;
- align-items: center;
+.basketHead {
+  height: 15%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4vh 3vh;
+  align-items: center;
 }
-.garbage{
+.garbage {
   color: red;
-font-size: 3vh;}
-.basketController{
-      border-block: .1vh solid rgb(178, 178, 178);
-height: 30%;
+  font-size: 3vh;
 }
-.menuSide {
-  width: 67%;
+.basketController {
+  display: flex;
+  justify-content: space-between;
+  border-block: 0.1vh solid rgb(178, 178, 178);
+  align-items: center;
+  padding: 0.4vh 3vh;
+  height: 33%;
 }
+.priceaction {
+  justify-content: space-around;
+  width: 23%;
+  display: flex;
+  align-items: center;
+}
+.titlePrice {
+}
+.inceriment {
+  border: 0.1vh solid #ccc;
+  border-radius: 0.4vh;
+  color: rgb(24, 114, 128);
+  padding: 0.3vh;
+}
+.deceriment {
+  border: 0.1vh solid #ccc;
+  border-radius: 0.4vh;
+  color: red;
+  padding: 0.3vh;
+}
+
 .categoryBox {
   display: flex;
   width: 100%;
@@ -46,7 +70,7 @@ height: 30%;
   flex-direction: column;
   align-items: center;
 }
-.icon {
+.categorimage{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,8 +81,8 @@ height: 30%;
   height: 6vh;
   font-size: 5vh;
 }
-.leftIcon,
-.rightIcon {
+.leftDirection,
+.rightDirection {
   cursor: pointer;
   position: absolute;
   background-color: aliceblue;
@@ -66,16 +90,15 @@ height: 30%;
   font-size: 4vh;
   border-radius: 7vh;
   top: 8vh;
-  right: 3.3vh;
 }
-.leftIcon:hover {
+.leftDirection:hover {
   transform: scale(1.2) rotate(170deg);
 }
 
-.rightIcon:hover {
+.rightDirection:hover {
   transform: scale(1.2) rotate(10deg);
 }
-.leftIcon {
+.leftDirection {
   left: 32%;
   transform: rotate(180deg);
 }
@@ -85,7 +108,13 @@ height: 30%;
   height: 100%;
   border-radius: 0.5vh;
 }
+
+/* start menu */
+
 .menuSearchBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   direction: rtl;
   border-inline: #ccc 0.2vh ridge;
   padding: 1vh;
@@ -114,13 +143,20 @@ height: 30%;
   position: absolute;
   margin-left: 7%;
 }
+.basketIcon{
+  font-size: 4vh;
+  border: #81dfc7 .1vh ridge;
+  padding: .3vh;
+  border-radius: 4vh;
+  color: #f58438;
+}
 /* product styles start from here */
 .producto {
   display: grid;
   justify-content: space-around;
   padding: 2vh 0;
   grid-template-columns: repeat(auto-fit, minmax(30%, 0fr));
-  grid-template-rows: repeat(auto-fit, minmax(44vh, 0fr));
+  grid-template-rows: repeat(auto-fit, minmax(33vh, 1fr));
   width: 100%;
   text-align: center;
   gap: 1vh;
@@ -132,11 +168,12 @@ height: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 2vh;
 }
 
 .productimage {
   width: 100%;
-  height: 67%;
+  height: 56%;
   transition: opacity 0.3s ease;
   cursor: pointer;
 }
@@ -164,8 +201,9 @@ height: 30%;
 }
 
 .productTitle {
-  margin-top: 10px;
-  font-size: 1.2em;
+  width: 100%;
+
+  justify-content: flex-start;
 }
 
 .priceaction {
@@ -181,6 +219,14 @@ height: 30%;
 }
 
 @media (max-width: 777px) {
+
+  .basketSide {
+    position: absolute;
+    z-index: 7;
+  }
+  .menuSide {
+    width: 100%;
+  }
   .categoryBox {
     width: 100%;
   }
