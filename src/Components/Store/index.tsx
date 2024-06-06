@@ -9,36 +9,33 @@ import { FaMinus } from "react-icons/fa"
 import { Add, Get, Remove } from "../Basket/Actions"
 import { useBasket } from "@/Context"
 import { FaBasketShopping } from "react-icons/fa6"
+import { searchEngine } from "./content"
 import { GiCrossMark } from "react-icons/gi"
-
 interface Props {
   data: [Category[], Product[]]
 }
 const Store: React.FC<Props> = ({ data }) => {
   const refs: {
-    [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement>
+    [key: string]: RefObject<HTMLInputElement | HTMLDivElement>
   } = {
     search: useRef<HTMLInputElement>(null),
+    categoryBoxRef: useRef<HTMLDivElement>(null),
   }
-  const { basket, setBasket } = useBasket()
-  const [isMobile, setIsMobile] = useState<boolean>(true)
-  const [isBasketOpen, setIsBasketOpen] = useState<boolean>(true)
-  const categoryBoxRef = useRef<HTMLDivElement>(null)
-  const [showProducto, setShowProducto] = useState<string>("")
+  const { basket, setBasket, total, setTotal } = useBasket()
+  const [showProducto, setShowProducto] = useState<number>()
   const [productover, setProductover] = useState<number | null>(null)
-
-  useEffect(() => {
-    innerWidth > 878 && setIsMobile(false)
-  }, [])
   const scrollLeft = () => {
-    if (categoryBoxRef.current) {
-      categoryBoxRef.current.scrollBy({ left: -100, behavior: "smooth" })
+    if (refs.categoryBoxRef.current) {
+      refs.categoryBoxRef.current.scrollBy({ left: -100, behavior: "smooth" })
     }
   }
+  useEffect(() => {
+    setBasket(Get())
+  }, [])
 
   const scrollRight = () => {
-    if (categoryBoxRef.current) {
-      categoryBoxRef.current.scrollBy({ left: 100, behavior: "smooth" })
+    if (refs.categoryBoxRef.current) {
+      refs.categoryBoxRef.current.scrollBy({ left: 100, behavior: "smooth" })
     }
   }
   const increment = (id: string, price: number) => {
@@ -50,57 +47,89 @@ const Store: React.FC<Props> = ({ data }) => {
     Remove(id)
     setBasket(Get())
   }
-  const count = 314
-  const totalPrice = 3143137137
-  const title = "شیرینی کره "
 
   return (
     <>
       <div className={styles.container}>
-        {isBasketOpen && (
-          <div className={styles.basketSide}>
-            <div className={styles.basketHead}>
-              <div>
-                سبد خرید
-                {`(${count})`}
-              </div>
-              <GiCrossMark
-                className={styles.garbage}
-                onClick={() => setIsBasketOpen(false)}
-              />
+        <div className={styles.basketSide}>
+          <div className={styles.basketHead}>
+            <div>
+              سبد خرید
+              {total}
             </div>
-            {basket.map((product) => (
+            <MdDeleteForever className={styles.garbage} />
+          </div>
+          <div className={styles.basketDetail}>
+            <p>هزینه ی کل</p>
+
+            {`${
+              basket[0]?.reduce((acc, d) => {
+                const parts = d.split("*2%2&7(7)5%5!1@2")
+                const prico = parseInt(parts[3]) * parseInt(parts[1])
+                return acc + prico
+              }, 0) || 0
+            } تومان `}
+          </div>
+          <div className={styles.productInBasket}>
+            {basket[0]?.map((product) => (
               <div className={styles.basketController}>
                 <div className={styles.titlePrice}>
                   <p>
-                    {/* {data[1][data[1].findIndex((d) => d._id === product)]?.title} */}
+                    {`${
+                      data &&
+                      data[1][
+                        data[1].findIndex(
+                          (pro) =>
+                            pro._id === product.split("*2%2&7(7)5%5!1@2")[2]
+                        )
+                      ].title
+                    }`}
                   </p>
-                  <MdDeleteForever className={styles.garbage} />
-
                   <p>
-                    {`${totalPrice}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    {`${
+                      data &&
+                      data[1][
+                        data[1].findIndex(
+                          (pro) =>
+                            pro._id === product.split("*2%2&7(7)5%5!1@2")[2]
+                        )
+                      ].price
+                    }`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     تومان
                   </p>
                 </div>
-                <div className={styles.priceaction}>
-                  <MdAddCircle className={styles.inceriment} size={"3vh"} />
-                  <p className={styles.total}>{count}</p>
-                  <FaMinus className={styles.deceriment} size={"3vh"} />
+                <div className={styles.priceAction}>
+                  <MdAddCircle
+                    className={styles.inceriment}
+                    size={"3vh"}
+                    onClick={() =>
+                      increment(
+                        product.split("*2%2&7(7)5%5!1@2")[2],
+                        parseInt(product.split("*2%2&7(7)5%5!1@2")[1])
+                      )
+                    }
+                  />
+                  <p className={styles.total}>
+                    {product.split("*2%2&7(7)5%5!1@2")[3]}
+                  </p>
+                  <FaMinus
+                    className={styles.deceriment}
+                    size={"3vh"}
+                    onClick={() =>
+                      decrement(product.split("*2%2&7(7)5%5!1@2")[2])
+                    }
+                  />
                 </div>
               </div>
             ))}
-            <div className={styles.basketDetail}></div>
           </div>
-        )}
-        <div
-          className={styles.menuSide}
-          style={{ width:!isMobile? `${ isBasketOpen ? 67 : 90}%`:`${99}%` }}
-        >
-          <div className={styles.categoryBox} ref={categoryBoxRef}>
+          <button className={styles.buy}>تکمیل خرید</button>
+        </div>
+        <div className={styles.menuSide}>
+          <div className={styles.categoryBox} ref={refs.categoryBoxRef}>
             <IoIosArrowForward
               className={styles.leftDirection}
               onClick={scrollLeft}
-              style={{ left: `${isBasketOpen ? 32 : 5.5}%` }}
             />
             {data &&
               data[0].map((cat, catindex) => (
@@ -119,7 +148,6 @@ const Store: React.FC<Props> = ({ data }) => {
             <IoIosArrowForward
               className={styles.rightDirection}
               onClick={scrollRight}
-              style={{ right: `${isBasketOpen ? 2 : 5.5}%` }}
             />
           </div>
           <div className={styles.menuSearchBox}>
@@ -132,10 +160,18 @@ const Store: React.FC<Props> = ({ data }) => {
               />
               <BiSearch className={styles.searchIcon} />
             </form>
-            <FaBasketShopping
-              className={styles.basketIcon}
-              onClick={() => setIsBasketOpen(!isBasketOpen)}
-            />
+            <div className={styles.seearchEngine}>
+              {searchEngine[1]?.map((parent, index) => (
+                <div
+                  className={styles.searchIndex}
+                  ref={refs[parent[0][index]]}
+                  onClick={() => refs[parent[0][index]].current}
+                >
+                  {parent[0]}
+                </div>
+              ))}
+            </div>
+            <FaBasketShopping className={styles.basketicon} />
           </div>
           <div className={styles.producto}>
             {data &&
@@ -144,6 +180,7 @@ const Store: React.FC<Props> = ({ data }) => {
                   key={productindex}
                   className={styles.product}
                   onMouseOver={() => setProductover(productindex)}
+                  onClick={() => setShowProducto(productindex)}
                   onMouseLeave={() => setProductover(null)}
                 >
                   <Image
@@ -161,14 +198,18 @@ const Store: React.FC<Props> = ({ data }) => {
                     </div>
                   )}
                   <p className={styles.producTitle}>{product.title}</p>
-                  <div className={"priceaction"}>
-                    <div className={styles.controlBox}>
-                      <MdAddCircle
-                        className={styles.inceriment}
-                        size={"3vh"}
-                        onClick={() => increment(product._id, product.price)}
-                      />
-                      {product && basket[1]?.includes(product._id) ? (
+                  <div className={styles.priceaction}>
+                    <p className={styles.productprice}>
+                      {product.price}
+                      {" تومان "}
+                    </p>
+                    {product && basket[1]?.includes(product._id) ? (
+                      <div className={styles.controlBox}>
+                        <MdAddCircle
+                          className={styles.inceriment}
+                          size={"4vh"}
+                          onClick={() => increment(product._id, product.price)}
+                        />
                         <p className={styles.total}>
                           {parseInt(
                             `${
@@ -176,36 +217,49 @@ const Store: React.FC<Props> = ({ data }) => {
                                 "*2%2&7(7)5%5!1@2"
                               )[3]
                             }`
-                          ) * product.price}
+                          )}
                         </p>
-                      ) : null}
-                      <FaMinus
-                        className={styles.deceriment}
-                        size={"3vh"}
-                        onClick={() => decrement(product._id)}
+                        <FaMinus
+                          className={styles.deceriment}
+                          size={"4vh"}
+                          onClick={() => decrement(product._id)}
+                        />
+                      </div>
+                    ) : (
+                      <MdAddCircle
+                        className={styles.inceriment}
+                        size={"4vh"}
+                        onClick={() => increment(product._id, product.price)}
                       />
-                    </div>
-                    <p className={styles.productprice}>{product.price}</p>
+                    )}
                   </div>
-                  {showProducto === product._id && (
-                    <div key={productindex} className={styles.productself}>
-                      <p className={styles.producTitle}>{product.title}</p>
-                      <Image
-                        // src={`data:image/jpeg;base64,${obj.src}`}
-                        src={product.src}
-                        alt={product.title}
-                        width={200}
-                        height={200}
-                        className={styles.productimage}
-                      />
-                      <p className={styles.productprice}>{product.price}</p>
-                      <p className={styles.productprice}>
-                        {product.description}
-                      </p>
-                    </div>
-                  )}
                 </div>
               ))}
+            {showProducto && data[1][showProducto] && (
+              <div className={styles.productself}>
+                <GiCrossMark
+                  onClick={() => setShowProducto(-1)}
+                  className={styles.garbage}
+                />
+                <p className={styles.producTitle}>
+                  {data[1][showProducto].title}
+                </p>
+                <Image
+                  // src={`data:image/jpeg;base64,${obj.src}`}
+                  src={data[1][showProducto].src}
+                  alt={data[1][showProducto].title}
+                  width={200}
+                  height={200}
+                  className={styles.productimage}
+                />
+                <p className={styles.productprice}>
+                  {data[1][showProducto].price}
+                </p>
+                <p className={styles.productprice}>
+                  {data[1][showProducto].description}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
