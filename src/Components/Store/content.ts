@@ -1,9 +1,6 @@
 export const searchEngine = [
-  ["price", "calorie"],
-  [
-    ["قیمت", ["گرانترین", "ارزان ترین"]],
-    ["کالری", ["بیشترین", "کمترین"]],
-  ],
+  ["قیمت", ["گرانترین", "ارزان ترین"]],
+  ["کالری", ["بیشترین", "کمترین"]],
   ,
 ]
 export const sampleData = [
@@ -96,14 +93,13 @@ export const sampleData = [
   [
     // Products for "Electronics"
     {
-      _id: "60f73adf4f1c2a00224b8e21",
-      title: "Smartphone",
+      _id: "60f73adf4f1c2a00224b8e22",
+      title: "Laptopo",
       src: "/images/cako.png",
-      price: 699,
+      price: 999,
       categories: "60f73adf4f1c2a00224b8e11",
-      description:
-        "Latest model with high-resolution display and fast processor.Latest model with high-resolution display and fast processor.",
-      keywords: ["mobile", "phone", "tech"],
+      description: "Powerful laptop with long battery life and sleek design.",
+      keywords: ["computer", "portable", "tech"],
     },
     {
       _id: "60f73adf4f1c2a00224b8e22",
