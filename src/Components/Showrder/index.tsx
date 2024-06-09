@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import styles from './index.module.css'
-import { Post } from '@/DTO'
+import { Product } from '@/DTO'
 
 interface OrderProducts {
 	orders: Order[] | null
@@ -12,7 +12,7 @@ interface OrderProducts {
 interface Order {
 	ticketID: string
 	status: string
-	products: [Post]
+	products: [Product]
 	totalPrice: number
 	attachment: string
 }

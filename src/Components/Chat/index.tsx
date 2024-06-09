@@ -18,13 +18,13 @@ const ChatUI = () => {
 	const [showChat, setShowChat] = useState(false)
 	const [messages, setMessages] = useState<Message[]>([])
 	const [newMessage, setNewMessage] = useState('')
+	const [client, setClient] = useState<string>('')
 	// const dummyChatHistory: Message[] = [
 	// 	{ id: 2, content: 'الکی مثلا یه مشکلی داشتم قبلا اینجا پیاماش مونده بوده باشه', sender: 'user' },
 	// 	{ id: 1, content: 'سلام در خدمت که خب آها باشه ردیفه مرسی که ممنون سپاسگذارتیم', sender: 'other' },
 	// ]
 	// setMessages(dummyChatHistory)
 
-	const client: string[] = JSON.parse(localStorage.getItem('user') || '[]')
 	const fetchChatHistory = async () => {
 		const response = await fetch('/api/chat/GET', {
 			headers: { 'Content-Type': 'application/json' },
@@ -34,8 +34,9 @@ const ChatUI = () => {
 		const data = await response.json()
 		data.messages && setMessages(data.messages)
 	}
-
+	
 	useEffect(() => {
+		!client && setClient(JSON.parse(localStorage.getItem('user') || ''))
 		fetchChatHistory()
 	}, [])
 

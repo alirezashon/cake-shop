@@ -1,7 +1,6 @@
 import { BiSolidMessageSquareEdit } from "react-icons/bi"
 import styles from "./index.module.css"
 import { useState } from "react"
-import { CircleLoader } from "react-spinners"
 
 interface Props {
   address: string | undefined | null
@@ -97,10 +96,7 @@ const Address: React.FC<Props> = ({
             {newmew && newmew[1] === index && (
               <>
                 {loading && (
-                  <CircleLoader
-                    color='#a5cd37'
-                    style={{ position: "absolute" }}
-                  />
+                  <div className=""></div>
                 )}
                 <input
                   value={"ثبت"}

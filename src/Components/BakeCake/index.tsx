@@ -1,7 +1,6 @@
 /** @format */
 
 import { useEffect, useState } from "react"
-import { toast } from "react-toastify"
 import Image from "next/image"
 import styles from "./index.module.css" // Update with your CSS file path
 import { Tools, Tags } from "../../DTO"
@@ -48,11 +47,9 @@ const List: React.FC = () => {
         setIsLoading(false)
         console.table(result)
       } else {
-        toast.error("خطا")
         setIsLoading(false)
       }
     } catch (error) {
-      toast.error("خطا")
       setIsLoading(false)
     }
   }

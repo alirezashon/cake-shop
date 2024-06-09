@@ -3,7 +3,7 @@ export const searchEngine = [
   ["کالری", ["بیشترین", "کمترین"]],
   ,
 ]
-export const sampleData = [
+export const data = [
   [
     {
       _id: "60f73adf4f1c2a00224b8e11",

@@ -9,13 +9,12 @@ import { useState, useEffect } from "react"
 import Orders from "./Orders/index"
 import Favorites from "./Favorites/index"
 import LastSeen from "./LastSeen/index"
-import { Post } from "@/DTO"
-import { CircleLoader } from "react-spinners"
+import { Product } from "@/DTO"
 
 interface Order {
   ticketID: string
   status: string
-  products: [Post]
+  products: [Product]
   totalPrice: number
   attachment: string
 }
@@ -129,10 +128,7 @@ const Profile = () => {
                   {newmew && newmew[1] === index && (
                     <>
                       {updating && (
-                        <CircleLoader
-                          color='#a5cd37'
-                          style={{ position: "absolute" }}
-                        />
+                        <div className=""></div>
                       )}
                       <input
                         value={"ثبت"}

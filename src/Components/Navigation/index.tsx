@@ -3,20 +3,12 @@
 import { useState, useEffect } from "react"
 import Mobile from "./Mobile"
 import DesktopNav from "./PC"
-import { Post } from "../../DTO"
+import { Product } from "@/DTO"
 
 interface NavProps {
-  basket: string[][]
-  setBasketStore: (items: string[][]) => void
-  basketData: Post[]
-  totalPrice: [number, number]
+  basketData: Product[]
 }
-const Navbar: React.FC<NavProps> = ({
-  basket,
-  setBasketStore,
-  basketData,
-  totalPrice,
-}) => {
+const Navbar: React.FC<NavProps> = ({ basketData }) => {
   const [isMobile, setIsMobile] = useState(false)
   const [isBasketOpen, setIsBasketOpen] = useState<boolean>(false)
 
@@ -40,22 +32,16 @@ const Navbar: React.FC<NavProps> = ({
     <nav style={{ marginBottom: `${isMobile ? "7vh" : "8vh"}`, zIndex: 44 }}>
       {isMobile ? (
         <Mobile
-          basket={basket}
           basketData={basketData}
-          setBasketStore={setBasketStore}
-          totalPrice={totalPrice}
           isBasketOpen={isBasketOpen}
           setIsBasketOpen={setIsBasketOpen}
         />
       ) : (
         <div>
           <DesktopNav
+            basketData={basketData}
             isBasketOpen={isBasketOpen}
             setIsBasketOpen={setIsBasketOpen}
-            basket={basket}
-            basketData={basketData}
-            setBasketStore={setBasketStore}
-            totalPrice={totalPrice}
           />
         </div>
       )}

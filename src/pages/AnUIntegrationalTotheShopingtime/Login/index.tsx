@@ -5,8 +5,6 @@ import Image from 'next/image'
 import styles from './index.module.css'
 import { SignInoghlia } from '../../../Components/Auth'
 import Router from 'next/router'
-import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer, Zoom } from 'react-toastify'
 
 const Login: React.FC = () => {
 	const [phone, setPhone] = useState<string>()
@@ -24,16 +22,7 @@ const Login: React.FC = () => {
 
 	return (
 		<>
-			<ToastContainer
-				position={'top-right'}
-				newestOnTop
-				pauseOnHover
-				style={{
-					transform: 'rotate(-7deg)',
-					margin: '2vh',
-				}}
-				transition={Zoom}
-			/>
+		
 			<div className={styles.container}>
 				<div className={`${styles.formBox}  ${isLoading && styles.animate}`}>
 					{!isLoading && (

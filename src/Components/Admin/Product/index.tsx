@@ -10,21 +10,16 @@ const ProductManager: React.FC = () => {
   const toast = useRef<Toast>(null)
 
   const refs: {
-    [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement>
+    [key: string]: RefObject<HTMLInputElement | HTMLSelectElement>
   } = {
-    titleEn: useRef<HTMLInputElement>(null),
-    titleFA: useRef<HTMLInputElement>(null),
-    titleAR: useRef<HTMLInputElement>(null),
+    title: useRef<HTMLInputElement>(null),
     src: useRef<HTMLInputElement>(null),
-    descriptionEn: useRef<HTMLInputElement>(null),
-    descriptionFA: useRef<HTMLInputElement>(null),
-    descriptionAR: useRef<HTMLInputElement>(null),
-    keywordsEn: useRef<HTMLInputElement>(null),
-    keywordsFA: useRef<HTMLInputElement>(null),
-    keywordsAR: useRef<HTMLInputElement>(null),
+    price: useRef<HTMLInputElement>(null),
+    category: useRef<HTMLSelectElement>(null),
+    description: useRef<HTMLInputElement>(null),
+    keywords: useRef<HTMLInputElement>(null),
   }
   const [image, setImage] = useState<string>()
-  const [link, setLink] = useState<string>()
   const [action, setAction] = useState<string>("(*I&n()s*e(r&t*^%t^O&n*E(")
   const [data, setData] = useState<Product[] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -78,35 +73,22 @@ const ProductManager: React.FC = () => {
       setAction(")U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(")
       const itemToEdit = data.find((item) => item._id === editItemId)
       if (itemToEdit) {
-        refs.titleEn.current!.value = itemToEdit?.title?.en
-        refs.titleFA.current!.value = itemToEdit?.title?.fa
-        refs.titleAR.current!.value = itemToEdit?.title?.ar
-        refs.descriptionEn.current!.value = itemToEdit?.description?.en
-        refs.descriptionFA.current!.value = itemToEdit?.description?.fa
-        refs.descriptionAR.current!.value = itemToEdit?.description?.ar
-        refs.keywordsEn.current!.value =
-          itemToEdit?.keywords?.en?.join(",") || ""
-        refs.keywordsFA.current!.value =
-          itemToEdit?.keywords?.fa?.join(",") || ""
-        refs.keywordsAR.current!.value =
-          itemToEdit?.keywords?.ar?.join(",") || ""
-        setImage(itemToEdit.src)
-        setLink(itemToEdit.link)
+        refs.title.current!.value = itemToEdit?.title
+        refs.description.current!.value = itemToEdit?.description
+        refs.keywords.current!.value = itemToEdit?.keywords?.join(",") || ""
+        itemToEdit.categories
+        refs.category.current!.value = itemToEdit.src
       }
     }
+
     !data && getData()
   }, [
     editItemId,
     data,
-    refs.titleEn,
-    refs.titleFA,
-    refs.titleAR,
-    refs.descriptionEn,
-    refs.descriptionFA,
-    refs.descriptionAR,
-    refs.keywordsEn,
-    refs.keywordsFA,
-    refs.keywordsAR,
+    refs.title,
+    refs.description,
+    refs.keywords,
+    refs.category,
   ])
   const setFile = () => {
     const reader = new FileReader()
@@ -122,26 +104,21 @@ const ProductManager: React.FC = () => {
   }
   const inserToDB = async () => {
     try {
+      toast.current?.show({
+        severity: "info",
+        summary: "",
+        detail: "در حال اجرای درخواست ...",
+        life: 3000,
+      })
       const dataToSend = {
         authType: "^c(a)t*E(Tso^soalsgfs^$#m!",
         data: {
-          title: {
-            en: refs.titleEn.current?.value || "",
-            fa: refs.titleFA.current?.value || "",
-            ar: refs.titleAR.current?.value || "",
-          },
-          link: link,
+          title: refs.title.current?.value || "",
           src: image,
-          description: {
-            en: refs.descriptionEn.current?.value || "",
-            fa: refs.descriptionFA.current?.value || "",
-            ar: refs.descriptionAR.current?.value || "",
-          },
-          keywords: {
-            en: refs.keywordsEn.current?.value?.split(",") || [],
-            fa: refs.keywordsFA.current?.value?.split(",") || [],
-            ar: refs.keywordsAR.current?.value?.split(",") || [],
-          },
+          price: parseInt(`${refs.price?.current?.value}`),
+          categories: refs.category.current?.value || "",
+          description: refs.description?.current?.value || "",
+          keywords: refs.keywords.current?.value.split(",") || [],
         },
         action: action,
       }
@@ -157,7 +134,6 @@ const ProductManager: React.FC = () => {
       })
 
       const data = await response.json()
-      console.log(dataToSend)
       if (data.success) {
         toast.current?.show({
           severity: "success",
@@ -216,24 +192,6 @@ const ProductManager: React.FC = () => {
           inserToDB()
         }}
       >
-        {categories && (
-          <>
-            <span>link</span>
-            <select
-              className={styles.selectList}
-              onChange={(e) => {
-                setLink(e.target.value)
-              }}
-              value={link}
-            >
-              {categories.map((category) => (
-                <option key={category._id} value={category._id}>
-                  {category.name.fa}
-                </option>
-              ))}
-            </select>
-          </>
-        )}
         {Object.keys(refs).map((refName, index) => (
           <div key={index} className={styles.productBoxRow}>
             <label>{refName}</label>
@@ -245,12 +203,31 @@ const ProductManager: React.FC = () => {
                 height={77}
               />
             )}
-            <input
-              ref={refs[refName] as RefObject<HTMLInputElement>}
-              placeholder={refName}
-              type={refName === "src" ? "file" : "text"}
-              onChange={() => refName === "src" && setFile()}
-            />
+            {refName !== "category" ? (
+              <input
+                ref={refs[refName] as RefObject<HTMLInputElement>}
+                placeholder={refName}
+                type={refName === "src" ? "file" : "text"}
+                onChange={() => refName === "src" && setFile()}
+              />
+            ) : (
+              categories && (
+                <>
+                  <select
+                    ref={refs.category as RefObject<HTMLSelectElement>}
+                    className={styles.selectList}
+                    onChange={(e) => setAction(e.target.value)}
+                    value={refs.category.current?.value}
+                  >
+                    {categories.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
+                </>
+              )
+            )}
           </div>
         ))}
         <button type='submit' className={styles.submito}>

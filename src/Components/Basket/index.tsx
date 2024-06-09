@@ -5,25 +5,22 @@ import styles from "./index.module.css"
 import { AiOutlineShoppingCart } from "react-icons/ai"
 import { GiCrossMark } from "react-icons/gi"
 import Products from "./Products"
-import { RingLoader } from "react-spinners"
-import { Product } from "@/DTO"
+ import { Product } from "@/DTO"
+import { useBasket } from "@/Context"
+
 interface BasketProps {
-  basket: string[][]
-  setBasket: (items: string[][]) => void
   basketData: Product[]
-  totalPrice: [number, number]
   isBasketOpen: boolean
   setIsBasketOpen: (value: boolean) => void
 }
 const Basket: React.FC<BasketProps> = ({
-  basket,
-  setBasket,
   basketData,
-  totalPrice,
   isBasketOpen,
   setIsBasketOpen,
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [totalPrice, setTotalPrice] = useState<[number, number]>([0, 0])
+  const { basket, setBasket } = useBasket()
 
   const closeNav = (event: MouseEvent) => {
     if (
@@ -36,6 +33,18 @@ const Basket: React.FC<BasketProps> = ({
   }
 
   useEffect(() => {
+    setTotalPrice([
+      basket[0]?.reduce((acc, d) => {
+        const parts = d.split("*2%2&7(7)5%5!1@2")
+        const count = parseInt(parts[1])
+        return acc + count
+      }, 0) || 0,
+      basket[0]?.reduce((acc, d) => {
+        const parts = d.split("*2%2&7(7)5%5!1@2")
+        const prico = parseInt(parts[3])
+        return acc + prico
+      }, 0) || 0,
+    ])
     window.addEventListener("click", closeNav)
     return () => {
       window.removeEventListener("click", closeNav)
@@ -50,14 +59,7 @@ const Basket: React.FC<BasketProps> = ({
     <>
       {isLoading && (
         <div>
-          <RingLoader
-            className={styles.loadingContainer}
-            color={"white"}
-            loading={isLoading}
-            size={150}
-            aria-label='Loading Spinner'
-            data-testid='loader'
-          />
+        
         </div>
       )}
       {isBasketOpen ? (

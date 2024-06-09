@@ -4,11 +4,10 @@ import { Category, Product } from "../DTO"
 import dynamic from "next/dynamic"
 import styles from "./index.module.css"
 
-const Carouselali = dynamic(() => import("../Components/Carouselali"), {
-  loading: () => <div className={styles.loadingCarousel}></div>,
-})
-
 const ChatUI = dynamic(() => import("../Components/Chat"), {
+  loading: () => <div className={styles.loadingChat}></div>,
+})
+const Store = dynamic(() => import("../Components/Store"), {
   loading: () => <div className={styles.loadingChat}></div>,
 })
 const BakeCake = dynamic(() => import("../Components/BakeCake"), {
@@ -20,21 +19,13 @@ interface Props {
   totalPrice: [number, number]
   basketData: Product[]
 }
-const Handler: React.FC<Props> = ({
-  products,
-  totalPrice,
-  categories,
-  basketData,
-}) => {
+const Handler: React.FC<Props> = ({ products, categories }) => {
   return (
     <>
       {products && (
         <div style={{ display: "grid", gap: "1vh" }}>
-          {/* <div>
-            <Carouselali structure={carousel} />
-          </div> */}
-          <BakeCake />
-
+          {/* <BakeCake /> */}
+          <Store data={[categories, products]} />
           <div>
             <ChatUI />
           </div>

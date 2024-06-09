@@ -2,13 +2,13 @@
 
 import Link from "next/link"
 import styles from "./index.module.css"
-import { useEffect, useState } from "react"
-import Search from "../../Form/Search"
+import { RefObject, useEffect, useRef, useState } from "react"
 import { items } from "../items"
 import { FaUserCircle } from "react-icons/fa"
 import Basket from "../../Basket"
-import { Post } from "../../../DTO"
-import { HashLoader } from "react-spinners"
+import { Product } from "../../../DTO"
+import { BiSearch } from "react-icons/bi"
+
 interface Items {
   category: string
   brands: string[] | subOption[]
@@ -18,22 +18,21 @@ interface subOption {
   products: string[]
 }
 interface NavProps {
-  basket: string[][]
-  setBasketStore: (items: string[][]) => void
-  basketData: Post[]
-  totalPrice: [number, number]
+  basketData: Product[]
   isBasketOpen: boolean
   setIsBasketOpen: (value: boolean) => void
 }
 
 const Mobile: React.FC<NavProps> = ({
-  setBasketStore,
-  basket,
   basketData,
-  totalPrice,
   isBasketOpen,
   setIsBasketOpen,
 }) => {
+  const refs: {
+    [key: string]: RefObject<HTMLInputElement | HTMLDivElement>
+  } = {
+    search: useRef<HTMLInputElement>(null),
+  }
   const [drawer, setDrawer] = useState<{
     item: number
     category: number
@@ -54,22 +53,19 @@ const Mobile: React.FC<NavProps> = ({
   }, [drawer, setDrawer])
   return (
     <>
-      {loading && (
-        <div className={"loadingSpin"}>
-          <HashLoader
-            className={"loadingSpinner"}
-            color={"#499b01"}
-            loading={loading}
-            size={150}
-            aria-label='Loading Spinner'
-            data-testid='loader'
-          />
-        </div>
-      )}
+      {loading && <div className={"loadingSpin"}></div>}
       {drawer ? (
         <div className={styles.drawer}>
           <div className={styles.searchBox}>
-            <Search />
+            <form className={styles.searchBar}>
+              <input
+                ref={refs.search as RefObject<HTMLInputElement>}
+                className={styles.searchInput}
+                type='search'
+                placeholder={"جستجو ..."}
+              />
+              <BiSearch className={styles.searchIcon} />
+            </form>
           </div>
           {items.map((item: Items, index) => (
             <div key={index} className={styles.itemBox}>
@@ -144,10 +140,7 @@ const Mobile: React.FC<NavProps> = ({
               <Basket
                 isBasketOpen={isBasketOpen}
                 setIsBasketOpen={setIsBasketOpen}
-                basket={basket}
-                setBasket={setBasketStore}
                 basketData={basketData}
-                totalPrice={totalPrice}
               />
             </div>
             <div>

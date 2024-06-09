@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import Orders from '../../Showrder'
-import { Post } from '@/DTO'
+import { Product } from '@/DTO'
 
 interface Order {
 	ticketID: string
 	status: string
-	products: [Post]
+	products: [Product]
 	totalPrice: number
 	attachment: string
 }

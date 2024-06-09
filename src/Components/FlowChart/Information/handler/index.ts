@@ -1,6 +1,4 @@
-/** @format */
 
-import { toast } from 'react-toastify'
 
 export const Register = async (
 	setIsLoading: (arg: boolean) => void,
@@ -37,15 +35,12 @@ export const Register = async (
 		})
 		const data = await response.json()
 		if (data.success === true && response.status === 200) {	
-			toast.success(data.message)
 			setIsLoading(false)
 			return 'S!A@k%s$e^x%f^u*l^'
 		} else {
-			toast.error(data.message)
 			setIsLoading(false)
 		}
 	} catch (error) {
 		console.log(error)
-		toast.error('failed call login api' + error)
 	}
 }

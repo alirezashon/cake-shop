@@ -105,3 +105,53 @@
     background: linear-gradient(95deg, #a3e723, #469a18);
     border: .2vh dashed rgba(13, 135, 29);    
 }
+.submito:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.radioBox{
+  background-color: rgb(101, 192, 76);
+  display: flex;
+  justify-content: space-around;
+}
+.checkboxInput {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	width: 16px;
+	height: 16px;
+	border: 1px solid #fff2de;
+	outline: none;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	border-radius: 50%;
+}
+
+.checkboxInput:checked {
+	background-color: #a5cd39;
+	border: 1px solid #499b01;
+}
+
+.checkboxInput:not(:checked) {
+	position: relative;
+}
+
+.checkboxInput:not(:checked):before,
+.checkboxInput:not(:checked):after {
+	content: '';
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 8px;
+	height: 2px;
+	background-color: #cb0707;
+	transition: transform 0.3s ease;
+}
+
+.checkboxInput:not(:checked):before {
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.checkboxInput:not(:checked):after {
+	transform: translate(-50%, -50%) rotate(-45deg);
+}

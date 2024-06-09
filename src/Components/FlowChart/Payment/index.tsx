@@ -6,8 +6,6 @@ import { useRef, useState } from 'react'
 import { MdDriveFolderUpload } from 'react-icons/md'
 import { Get } from '../../../Components/Basket/Actions'
 import Router from 'next/router'
-import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer, Zoom, toast } from 'react-toastify'
 
 const Payment: React.FC = () => {
 	const src = useRef<HTMLInputElement>(null)
@@ -44,29 +42,21 @@ const Payment: React.FC = () => {
 		result && setSending(false)
 		if (response.status === 200) {
 			Router.push('/profile')
-			toast.success('درخواست با موفقیت ثبت شد')
+			// toast.success('درخواست با موفقیت ثبت شد')
 		} else {
-			toast.error('خطا')
+			// toast.error('خطا')
 			console.log(result.message)
 		}
 	}
 	return (
 		<>
-			<ToastContainer
-				position={'top-right'}
-				newestOnTop
-				pauseOnHover
-				style={{
-					transform: 'rotate(-7deg)',
-					margin: '2vh',
-				}}
-				transition={Zoom}
-			/>
+		
 			<div
 				className={styles.pay}
-				onClick={() =>
-					toast.info('پس از وارد کردن عکس فیش دکمه ارسال نمایش داده می شود')
-				}>
+				// onClick={() =>
+				// 	toast.info('پس از وارد کردن عکس فیش دکمه ارسال نمایش داده می شود')
+				// }
+				>
 				<p>
 
 				ثبت درخواست

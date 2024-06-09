@@ -2,11 +2,11 @@
 
 import { NextApiRequest, NextApiResponse } from 'next'
 import Orders from '../../../../models/Orders'
-import Product from '../../../../models/Data/Product'
+import ProductSchema from '../../../../models/Data/Product'
 import db from '../../../../utils/index.js'
 import ClientSession from '../../../../models/Client/Session'
 import Client from '../../../../models/Client'
-import { Post } from '../../../../DTO'
+import { Product } from '../../../../DTO'
 const Shop = async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		if (req.method === 'POST') {
@@ -25,10 +25,10 @@ const Shop = async (req: NextApiRequest, res: NextApiResponse) => {
 							const productsID = products?.map((product: string) =>
 								product.split('*2%2&7(7)5%5!1@2')
 							)
-							const data: Post[] = []
+							const data: Product[] = []
 							await Promise.all(
 								productsID.map(async (id: string) => {
-									const post = await Product.findOne({ _id: id[2] })
+									const post = await ProductSchema.findOne({ _id: id[2] })
 									data.push(post)
 								})
 							)
@@ -51,7 +51,7 @@ const Shop = async (req: NextApiRequest, res: NextApiResponse) => {
 								client: session.client,
 								products: data
 									.filter((post) => post !== null)
-									.map((product: Post) => product._id),
+									.map((product: Product) => product._id),
 								totalPrice,
 								attachment,
 							}

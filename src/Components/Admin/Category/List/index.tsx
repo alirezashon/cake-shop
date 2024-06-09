@@ -39,13 +39,7 @@ const List: React.FC<Props> = ({ data, isLoading, setEditItemId }) => {
                   {/* <td>{Object.entries(category.alt).map((d) => d)}</td> */}
                   <td>
                     <td>
-                      {Object.values(category.name).map(
-                        (name, index) => (
-                          <div key={index} className={styles.colorBox}>
-                            {name}
-                          </div>
-                        )
-                      )}
+                     {category.name}
                     </td>
                   </td>
                   <td>

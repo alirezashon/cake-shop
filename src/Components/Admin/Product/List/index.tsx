@@ -32,7 +32,7 @@ const List: React.FC<Props> = ({
         <table>
           <thead>
             <tr>
-              {["title", "src", "link", "description", "Keywords"].map(
+              {["title", "src", "category", "description", "Keywords"].map(
                 (header) => (
                   <th key={header}>{header}</th>
                 )
@@ -44,14 +44,7 @@ const List: React.FC<Props> = ({
             {data &&
               data?.map((product, index) => (
                 <tr key={product._id}>
-                  <td>
-                    {product.title &&
-                      Object.values(product?.title).map((title, index) => (
-                        <div key={index} className={styles.colorBox}>
-                          {`${title}`}
-                        </div>
-                      ))}
-                  </td>
+                  <td>{product.title}</td>
 
                   <td>
                     <Image
@@ -62,30 +55,13 @@ const List: React.FC<Props> = ({
                     />
                   </td>
                   <td>
-                  {category && category.find(cat => cat._id === product.link)?.name.fa}
+                    {category &&
+                      category.find((cat) => cat._id === product.categories)
+                        ?.name}
+                  </td>
+                  <td>{product?.description}</td>
 
-                  </td>
-                  <td>
-                    {product?.description &&
-                      Object.values(product.description).map(
-                        (description, index) => (
-                          <div key={index} className={styles.colorBox}>
-                            {`${description}`}
-                          </div>
-                        )
-                      )}
-                  </td>
-
-                  <td>
-                    {product.keywords &&
-                      Object?.values(product?.keywords).map(
-                        (keyword, index) => (
-                          <div key={index} className={styles.colorBox}>
-                            {`${keyword}`}
-                          </div>
-                        )
-                      )}
-                  </td>
+                  <td>{product.keywords}</td>
                   <td>
                     <MdEditDocument
                       className={styles.actionButton}

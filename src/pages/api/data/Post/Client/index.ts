@@ -4,7 +4,6 @@ import { NextApiRequest, NextApiResponse } from "next"
 import Product from "../../../../../models/Data/Product"
 import db from "../../../../../utils/index.js"
 import Category from "../../../../../models/Data/Category"
-import Carousel from "../../../../../models/Data/Carousel"
 const FindCategory = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === "POST") {
@@ -14,10 +13,9 @@ const FindCategory = async (req: NextApiRequest, res: NextApiResponse) => {
         if (category === "@L$L%O%F#D%M^") {
           const products = await Product.find({})
           const categories = await Category.find({})
-          const carousel = await Carousel.find({})
           res
             .status(200)
-            .json({ success: true, products,categories, carousel })
+            .json({ success: true, products,categories })
         } else if (category.split("rAz")[0] === "@L$L%O%F#D%M^") {
           console.log(category.split("rAz"))
           const products = await Product.find({

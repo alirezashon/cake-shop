@@ -47,15 +47,17 @@
 .titlePrice {
   text-wrap: nowrap;
 }
-.inceriment {
+.inceriment,
+.deceriment {
+  cursor: pointer;
   font-size: 4vh;
   border-radius: 0.4vh;
+}
+.inceriment {
   color: rgb(85, 128, 24);
   padding: 0.3vh;
 }
 .deceriment {
-  font-size: 4vh;
-  border-radius: 0.4vh;
   color: rgb(255, 44, 16);
   padding: 0.3vh;
 }
@@ -69,6 +71,10 @@
   color: #ffffff;
   border: 0.4vh solid rgb(65, 208, 46);
   border-radius: 0 0 1vh 1vh;
+}
+.buy:hover {
+  cursor: pointer;
+  transform: scale(0.9);
 }
 /* end of basket */
 .menuSide {
@@ -111,7 +117,7 @@
   color: rgb(255, 123, 79);
   font-size: 4vh;
   border-radius: 7vh;
-  top: 8vh;
+  top: 20vh;
   right: 3.3vh;
 }
 .leftDirection:hover {
@@ -175,11 +181,45 @@
   width: 30%;
   justify-content: space-around;
 }
+
+.parentContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .searchIndex {
   background: linear-gradient(#d7ffaa, #cff19a);
   padding: 0.5vh 1vh;
   border-radius: 1vh;
+  cursor: pointer;
 }
+
+.optionsContainer {
+  position: absolute;
+  top: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.5vh;
+  background: #0f641a;
+  border-radius: 1vh;
+  z-index: 1;
+}
+
+.enginoption {
+  color: #ffffff;
+  text-wrap: nowrap;
+  border: .3vh ridge rgb(164, 255, 60);
+  background-color: #0f641a;
+  padding: 0.5vh 1vh;
+  border-radius: 1vh;
+  margin-top: 0.3vh;
+  width: 100%;
+  text-align: center;
+}
+
 /* product styles start from here */
 .cross {
   color: #ff6518;
@@ -209,17 +249,16 @@
   justify-self: center;
   background-color: #ddffdd;
 }
-.pricactionself{
+.pricactionself {
   width: 100%;
   display: flex;
   justify-content: space-around;
 }
-.productimagelf{
+.productimagelf {
   height: 50%;
   width: 80%;
-  
 }
-.productDescriptelf{
+.productDescriptelf {
   background-color: #c3ffcb;
 }
 .producto {
@@ -295,9 +334,6 @@
   align-items: center;
 }
 .productprice {
-}
-.increment {
-  cursor: pointer;
 }
 
 @media (max-width: 777px) {

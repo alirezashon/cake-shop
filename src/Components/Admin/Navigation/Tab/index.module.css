@@ -14,7 +14,8 @@
   );
 }
 .tab {
-  width: 10%;
+  width: fit-content;
+  padding: 1vh;
   height: 70%;
   display: flex;
   align-items: center;
@@ -22,4 +23,6 @@
   border: 0.4vh rgba(255, 248, 252, 0.9) dashed;
   border-radius: 0.6vh;
   cursor: pointer;
+  font-size: 2vh;
+  text-wrap: nowrap;
 }

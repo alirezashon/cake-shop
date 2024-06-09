@@ -1,13 +1,14 @@
 import { useRef, RefObject, useState, useEffect } from "react"
 import styles from "../Inserto.module.css"
-import "react-toastify/dist/ReactToastify.css"
-import { toast, ToastContainer, Zoom } from "react-toastify"
 import List from "./List"
 import Tago from "./Tags"
 import TagList from "./Tags/List"
 import { Tags } from "@/DTO"
+import { Toast } from "primereact/toast"
 
 const Tools: React.FC = () => {
+  const toast = useRef<Toast>(null)
+
   const refs: {
     [key: string]: RefObject<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -17,8 +18,8 @@ const Tools: React.FC = () => {
     src: useRef<HTMLInputElement>(null),
     price: useRef<HTMLInputElement>(null),
     tag: useRef<HTMLSelectElement>(null),
-    min: useRef<HTMLSelectElement>(null),
-    max: useRef<HTMLSelectElement>(null),
+    min: useRef<HTMLInputElement>(null),
+    max: useRef<HTMLInputElement>(null),
   }
   const [image, setImage] = useState<string>()
   const [action, setAction] = useState<string>("(*I&n()s*e(r&t*^%t^O&n*E(")
@@ -48,12 +49,21 @@ const Tools: React.FC = () => {
         const result = await response.json()
         setTags(result.tags)
         setLoadingTags(false)
+        toast.current?.show({
+          severity: "success",
+          summary: "Secondary",
+          detail: "موفق",
+          life: 3000,
+        })
       } else {
-        toast.error("خطا")
-        setLoadingTags(false)
+        toast.current?.show({
+          severity: "error",
+          summary: "Secondary",
+          detail: " نا موفق",
+          life: 3000,
+        })
       }
     } catch (error) {
-      toast.error("خطا")
       setLoadingTags(false)
     }
   }
@@ -93,30 +103,30 @@ const Tools: React.FC = () => {
 
       const data = await response.json()
       if (data.success) {
-        toast.success("موفق")
+        toast.current?.show({
+          severity: "success",
+          summary: "Secondary",
+          detail: "موفق",
+          life: 3000,
+        })
+        location.reload()
       } else {
-        toast.error("اوه اوه")
+        toast.current?.show({
+          severity: "error",
+          summary: "Secondary",
+          detail: " نا موفق",
+          life: 3000,
+        })
       }
       location.reload()
     } catch (error) {
       console.error("Error:", error)
-      toast.error("An error occurred. Please try again later.")
     }
   }
 
   return (
     <>
-      <ToastContainer
-        position={"top-right"}
-        newestOnTop
-        pauseOnHover
-        style={{
-          transform: "rotate(-7deg)",
-          margin: "2vh",
-        }}
-        transition={Zoom}
-      />
-
+      <Toast ref={toast} />
       <List />
       <select
         className={styles.selectList}
@@ -147,7 +157,7 @@ const Tools: React.FC = () => {
                   placeholder={refName}
                   type={refName === "src" ? "file" : "text"}
                   onChange={() => refName === "src" && setFile()}
-                  style={ { display:`${refName === "src" && image &&"none"}`  }}
+                  style={{ display: `${refName === "src" && image && "none"}` }}
                 />
               </>
             ) : (
@@ -166,7 +176,9 @@ const Tools: React.FC = () => {
             )}
           </div>
         ))}
-        <button type='submit' className={styles.submito}>تایید</button>
+        <button type='submit' className={styles.submito}>
+          تایید
+        </button>
       </form>
       <TagList data={tags} isLoading={loadingTags} />
       <Tago />

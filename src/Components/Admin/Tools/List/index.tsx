@@ -1,19 +1,10 @@
 /** @format */
 
 import React, { useEffect, useState } from "react"
-import { toast } from "react-toastify"
 import Image from "next/image"
 import { MdEditDocument } from "react-icons/md"
 import styles from "../../List.module.css" // Update with your CSS file path
-
-interface Tools {
-  _id: string
-  name: string
-  price: number
-  src: string
-  tag: string
-}
-
+import { Tools } from "@/DTO"
 const List: React.FC = () => {
   const [data, setData] = useState<{
     tools: Tools[]
@@ -35,11 +26,9 @@ const List: React.FC = () => {
         setData(result)
         setIsLoading(false)
       } else {
-        toast.error("خطا")
         setIsLoading(false)
       }
     } catch (error) {
-      toast.error("خطا")
       setIsLoading(false)
     }
   }
@@ -61,7 +50,7 @@ const List: React.FC = () => {
         <table>
           <thead>
             <tr>
-              {["Name", "Keywords", "Image", "Description"].map((header) => (
+              {["نام", "قیمت", "عکس", "تگ", "درصد مجاز"].map((header) => (
                 <th key={header}>{header}</th>
               ))}
               <th>Action</th>

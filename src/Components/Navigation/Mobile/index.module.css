@@ -1,20 +1,47 @@
 /** @format */
 .navBar {
 	width: 100%;
-	background: linear-gradient(22deg, rgb(245, 144, 50), rgb(242, 178, 29));
+	background: linear-gradient(22deg, rgb(198, 231, 99), rgb(223, 231, 129));
 	display: flex;
 	position: fixed;
+	padding:1vh;
 	z-index: 7;
 	top: 0;
 	justify-content: space-between;
 
 }
-
+.searchBar {
+	direction: rtl;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	position: relative;
+  }
+  
+  .searchInput {
+	border: 1px solid #e4f4a2;
+	outline: none;
+	border-radius: 1vh;
+	padding: 0.5rem 1rem;
+	width: 100%;
+	box-sizing: border-box;
+  }
+  .searchInput::placeholder {
+	color: #afe32c;
+  }
+  
+  .searchIcon {
+	font-size: 4vh;
+	color: #e5edce;
+	position: absolute;
+	margin-left: 7%;
+  }
 .drawer {
 	width: 40vw;
 	height: 100vh;
-	background: radial-gradient(rgba(253, 144, 27, 0.809),
-			rgba(252, 190, 6, 0.774));
+	background: radial-gradient(rgba(162, 217, 95, 0.809),
+			rgba(147, 183, 75, 0.5));
 	direction: rtl;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -25,25 +52,26 @@
 
 .searchBox {
 	width: 90%;
+	margin-right: 5%;
 }
 
 .itemBox {
-	background: radial-gradient(rgba(249, 140, 45, 0.823),
-			rgba(231, 143, 27, 0.855));
+	background: radial-gradient(rgba(204, 227, 141, 0.5),
+			rgba(86, 183, 75, 0.5));
 	cursor: pointer;
 	margin: 1vh;
 	padding: 1vh;
-	border: 0.5vh ridge rgba(245, 165, 26, 0.816);
+	border: 0.5vh ridge rgba(161, 227, 141, 0.5);
 }
 
 .itemBox:hover {
-	border: dashed 0.2vh rgba(255, 244, 236, 0.912);
+	border: dashed 0.2vh rgba(248, 255, 236, 0.912);
 }
 
 .item {
 	background: linear-gradient(244deg,
-			rgba(239, 148, 36, 0.815),
-			rgba(215, 149, 42, 0.926));
+			rgba(244, 251, 222, 0.5),
+			rgba(68, 116, 32, 0.926));
 	border: 0.2vh ridge rgba(236, 251, 255, 0.912);
 	border-radius: 0.5vh;
 	padding: 1vh;
@@ -55,8 +83,8 @@
 
 .category {
 	background: linear-gradient(44deg,
-			rgba(171, 138, 38, 0.797),
-			rgba(219, 166, 30, 0.856));
+			rgba(89, 171, 38, 0.5),
+			rgba(239, 254, 216, 0.5));
 	margin: 1vh;
 	padding: 1vh;
 	border: 0.3vh ridge rgb(255, 255, 255);
@@ -65,8 +93,8 @@
 
 .options,
 .subOptions {
-	background: radial-gradient(rgba(255, 228, 191, 0.815),
-			rgba(243, 157, 65, 0.71));
+	background: radial-gradient(rgba(234, 255, 191, 0.815),
+			rgba(151, 183, 75, 0.5));
 	padding: 1vh;
 	margin: 1vh;
 }
@@ -85,10 +113,10 @@
 }
 
 .navIcon {
-	background: radial-gradient(#eec73c, #f6f9ba);
-	color: #e27305;
-	width: 5vh;
-	height: 5vh;
+	background: radial-gradient(#adee3c, #e2f9ba);
+	color: #136e2d;
+	width: 6vh;
+	height: 6vh;
 	margin: .2vh;
 	display: flex;
 	font-weight: bold;
@@ -107,8 +135,8 @@
 .profile {
 	margin: 0 2vh;
 	font-size: 6vh;
-	color: #ecbd5f;
-	background-color: rgb(231, 190, 44);
+	color: #e5f3a3;
+	background-color: rgb(77, 149, 26);
 	border-radius: 23vh;
 	border: .3vh rgb(239, 255, 234) dashed;
 	cursor: pointer;

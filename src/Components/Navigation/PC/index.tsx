@@ -2,14 +2,13 @@
 
 import Link from "next/link"
 import styles from "./index.module.css"
-import { useEffect, useState } from "react"
+import { RefObject, useEffect, useRef, useState } from "react"
 import { items } from "../items"
 import Image from "next/image"
 import Basket from "@/Components/Basket"
-import SearchBarComponent from "../../Form/Search"
 import { FaUserCircle } from "react-icons/fa"
-import { Post } from "../../../DTO"
-import { DotLoader } from "react-spinners"
+import { Product } from "../../../DTO"
+import { BiSearch } from "react-icons/bi"
 
 interface Items {
   category: string
@@ -20,22 +19,21 @@ interface subOption {
   products: string[]
 }
 interface NavProps {
-  basket: string[][]
-  setBasketStore: (items: string[][]) => void
-  basketData: Post[]
-  totalPrice: [number, number]
+  basketData: Product[]
   isBasketOpen: boolean
   setIsBasketOpen: (value: boolean) => void
 }
 
 const PC: React.FC<NavProps> = ({
-  basket,
-  setBasketStore,
   basketData,
-  totalPrice,
   isBasketOpen,
   setIsBasketOpen,
 }) => {
+  const refs: {
+    [key: string]: RefObject<HTMLInputElement | HTMLDivElement>
+  } = {
+    search: useRef<HTMLInputElement>(null),
+  }
   const [openItemWind, setOpenItemWind] = useState<{
     th: number
     ex: number
@@ -97,14 +95,6 @@ const PC: React.FC<NavProps> = ({
       {loading && (
         <div className={"loadingSpin"}>
           <p>{loadingo[notindex]}</p>
-          <DotLoader
-            className={"loadingSpinner"}
-            color={"#499b01"}
-            loading={loading}
-            size={"7vw"}
-            aria-label='Loading Spinner'
-            data-testid='loader'
-          />
         </div>
       )}
       <nav className={styles.navBar}>
@@ -190,10 +180,7 @@ const PC: React.FC<NavProps> = ({
             <Basket
               isBasketOpen={isBasketOpen}
               setIsBasketOpen={setIsBasketOpen}
-              basket={basket}
-              setBasket={setBasketStore}
               basketData={basketData}
-              totalPrice={totalPrice}
             />
 
             <FaUserCircle
@@ -205,7 +192,15 @@ const PC: React.FC<NavProps> = ({
             />
           </div>
           <div>
-            <SearchBarComponent />
+            <form className={styles.searchBar}>
+              <input
+                ref={refs.search as RefObject<HTMLInputElement>}
+                className={styles.searchInput}
+                type='search'
+                placeholder={"جستجو ..."}
+              />
+              <BiSearch className={styles.searchIcon} />
+            </form>
           </div>
         </div>
       </nav>

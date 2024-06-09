@@ -1,6 +1,3 @@
-/** @format */
-import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer, Zoom } from 'react-toastify'
 import { useState } from 'react'
 import Image from 'next/image'
 import styles from './index.module.css'
@@ -31,16 +28,7 @@ const Login: React.FC = () => {
 
 	return (
 		<>
-			<ToastContainer
-				position={'top-right'}
-				newestOnTop
-				pauseOnHover
-				style={{
-					transform: 'rotate(-7deg)',
-					margin: '2vh',
-				}}
-				transition={Zoom}
-			/>
+		
 			<div className={styles.container}>
 				<div className={`${styles.formBox}  ${isLoading && styles.animate}`}>
 					{!isLoading && (

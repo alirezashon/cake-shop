@@ -2,22 +2,17 @@
 
 import "@/styles/globals.css"
 import type { AppProps } from "next/app"
-import Head from "next/head"
-import { BasketProvider } from "@/Context"
+import "primereact/resources/themes/saga-blue/theme.css"
+import "primereact/resources/primereact.min.css"
+import Layout from "@/Layouts"
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
-      <Head>
-        <title> roommode </title>
-        <meta name='description' content='top shop store' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='images/icon.png' />
-      </Head>
-      <BasketProvider>
+      <Layout>
         <div>
           <Component {...pageProps} />
         </div>
-      </BasketProvider>
+      </Layout>
     </>
   )
 }

@@ -2,10 +2,11 @@
 
 import { useRef, RefObject, useState } from "react"
 import styles from "../../Inserto.module.css"
-import "react-toastify/dist/ReactToastify.css"
-import { toast, ToastContainer, Zoom } from "react-toastify"
-import List from "./List"
+import { Toast } from "primereact/toast"
+
 const Tags: React.FC = () => {
+  const toast = useRef<Toast>(null)
+
   const refs: {
     [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement>
   } = {
@@ -54,28 +55,29 @@ const Tags: React.FC = () => {
 
       const data = await response.json()
       if (data.success) {
-        toast.success("موفق")
+        toast.current?.show({
+          severity: "success",
+          summary: "Secondary",
+          detail: "موفق",
+          life: 3000,
+        })
+        location.reload()
       } else {
-        toast.error("اوه اوه")
+        toast.current?.show({
+          severity: "error",
+          summary: "Secondary",
+          detail: " نا موفق",
+          life: 3000,
+        })
       }
     } catch (error) {
       console.error("Error:", error)
-      toast.error("An error occurred. Please try again later.")
     }
   }
 
   return (
     <>
-      <ToastContainer
-        position={"top-right"}
-        newestOnTop
-        pauseOnHover
-        style={{
-          transform: "rotate(-7deg)",
-          margin: "2vh",
-        }}
-        transition={Zoom}
-      />
+      <Toast ref={toast} />
       <select
         className={styles.selectList}
         onChange={(e) => setAction(e.target.value)}
@@ -116,7 +118,9 @@ const Tags: React.FC = () => {
             )}
           </div>
         ))}
-        <button type='submit' className={styles.submito} >تایید</button>
+        <button type='submit' className={styles.submito}>
+          تایید
+        </button>
       </form>
     </>
   )

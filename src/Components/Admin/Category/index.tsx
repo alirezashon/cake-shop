@@ -12,13 +12,9 @@ const CategoryManager: React.FC = () => {
   const refs: {
     [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement>
   } = {
-    nameEn: useRef<HTMLInputElement>(null),
-    nameFA: useRef<HTMLInputElement>(null),
-    nameAR: useRef<HTMLInputElement>(null),
+    name: useRef<HTMLInputElement>(null),
     src: useRef<HTMLInputElement>(null),
-    keywordsEn: useRef<HTMLInputElement>(null),
-    keywordsFA: useRef<HTMLInputElement>(null),
-    keywordsAR: useRef<HTMLInputElement>(null),
+    keywords: useRef<HTMLInputElement>(null),
   }
   const [image, setImage] = useState<string>()
   const [action, setAction] = useState<string>("(*I&n()s*e(r&t*^%t^O&n*E(")
@@ -72,29 +68,14 @@ const CategoryManager: React.FC = () => {
       setAction(")U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(")
       const itemToEdit = data.find((item) => item._id === editItemId)
       if (itemToEdit) {
-        refs.nameEn.current!.value = itemToEdit?.name?.en
-        refs.nameFA.current!.value = itemToEdit?.name?.fa
-        refs.nameAR.current!.value = itemToEdit?.name?.ar
-        refs.keywordsEn.current!.value =
-          itemToEdit?.keywords?.en?.join(",") || ""
-        refs.keywordsFA.current!.value =
-          itemToEdit?.keywords?.fa?.join(",") || ""
-        refs.keywordsAR.current!.value =
-          itemToEdit?.keywords?.ar?.join(",") || ""
+        refs.name.current!.value = itemToEdit?.name
+        refs.keywordsEn.current!.value = itemToEdit?.keywords?.join(",") || ""
+
         setImage(itemToEdit.src)
       }
     }
     !data && getData()
-  }, [
-    editItemId,
-    data,
-    refs.nameEn,
-    refs.nameFA,
-    refs.nameAR,
-    refs.keywordsEn,
-    refs.keywordsFA,
-    refs.keywordsAR,
-  ])
+  }, [editItemId, data, refs.name, refs.keywords])
   const setFile = () => {
     const reader = new FileReader()
     reader.onloadend = () => {
@@ -113,16 +94,8 @@ const CategoryManager: React.FC = () => {
         authType: "^c(a)t*E(T*t(A&g*o^x^o$s#m!",
         data: {
           src: image,
-          name: {
-            en: refs.nameEn.current?.value || "",
-            fa: refs.nameFA.current?.value || "",
-            ar: refs.nameAR.current?.value || "",
-          },
-          keywords: {
-            en: refs.keywordsEn.current?.value?.split(",") || [],
-            fa: refs.keywordsFA.current?.value?.split(",") || [],
-            ar: refs.keywordsAR.current?.value?.split(",") || [],
-          },
+          name: refs.name.current?.value || "",
+          keywords: refs.keywords.current?.value?.split(",") || [],
         },
         action: action,
       }

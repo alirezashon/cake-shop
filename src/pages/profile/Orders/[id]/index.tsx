@@ -1,10 +1,10 @@
 /** @format */
 
-import { Post } from '@/DTO'
+import { Product } from '@/DTO'
 import { GetServerSideProps, NextPage } from 'next'
 
 interface OrderProducts {
-	products: Post[]
+	products: Product[]
 	orders: Order
 }
 interface Order {
@@ -12,7 +12,7 @@ interface Order {
 	ticketID: string
 	status: string
 	client: string
-	products: [Post] | String
+	products: [Product] | String
 	totalPrice: number
 }
 

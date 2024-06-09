@@ -1,4 +1,5 @@
-import styles from "./index.module.css"
+import {data,searchEngine} from '../Components/Store/content'
+import styles from "../Components/Store/index.module.css"
 import { BiSearch } from "react-icons/bi"
 import { MdAddCircle, MdDeleteForever } from "react-icons/md"
 import { IoIosArrowForward } from "react-icons/io"
@@ -6,15 +7,12 @@ import { useRef, useState, RefObject, useEffect } from "react"
 import { Product, Category } from "@/DTO"
 import Image from "next/image"
 import { FaMinus } from "react-icons/fa"
-import { Add, Get, Remove } from "../Basket/Actions"
+import { Add, Get, Remove } from "../Components/Basket/Actions"
 import { useBasket } from "@/Context"
 import { FaBasketShopping } from "react-icons/fa6"
-import { searchEngine } from "./content"
 import { GiCrossMark } from "react-icons/gi"
-interface Props {
-  data: [Category[], Product[]]
-}
-const Store: React.FC<Props> = ({ data }) => {
+
+const Store: React.FC= () => {
   const refs: {
     [key: string]: RefObject<HTMLInputElement | HTMLDivElement>
   } = {
@@ -42,10 +40,10 @@ const Store: React.FC<Props> = ({ data }) => {
     }
 
     handleResize()
-    addEventListener("resize", handleResize)
+  addEventListener("resize", handleResize)
 
     return () => {
-      removeEventListener("resize", handleResize)
+    removeEventListener("resize", handleResize)
     }
   }, [])
 
@@ -92,12 +90,12 @@ const Store: React.FC<Props> = ({ data }) => {
           <div className={styles.basketSide}>
             <div className={styles.basketHead}>
               <div>
+                سبد خرید
                 {basket[0]?.reduce((acc, d) => {
                   const parts = d.split("*2%2&7(7)5%5!1@2")
                   const prico = parseInt(parts[3])
                   return acc + prico
                 }, 0) || 0}
-                محصول در سبد خرید
               </div>
               <MdDeleteForever className={styles.garbage} />
             </div>
@@ -144,12 +142,7 @@ const Store: React.FC<Props> = ({ data }) => {
                 </div>
               ))}
             </div>
-            <button
-              className={styles.buy}
-              onClick={() => (location.href = "/newReq/Registered")}
-            >
-              تکمیل خرید
-            </button>
+            <button className={styles.buy}>تکمیل خرید</button>
           </div>
         )}
         <div className={styles.menuSide}>
@@ -162,7 +155,8 @@ const Store: React.FC<Props> = ({ data }) => {
               data[0].map((cat, catindex) => (
                 <div key={catindex} className={styles.category}>
                   <Image
-                    src={`data:image/jpeg;base64,${cat.src}`}
+                    // src={`data:image/jpeg;base64,${obj.src}`}
+                    src={cat.src}
                     alt={cat.name}
                     width={200}
                     height={200}
@@ -188,35 +182,28 @@ const Store: React.FC<Props> = ({ data }) => {
             </form>
             <div className={styles.searchEngine}>
               {searchEngine?.map((parent, index) => (
-                <div
-                  key={index}
-                  className={styles.parentContainer}
-                  onMouseOver={() => setEnginConf([index, -1])}
-                >
+                <>
                   {parent && Array.isArray(parent) && (
-                    <div className={styles.searchIndex}>{parent[0]}</div>
+                    <div
+                      className={styles.searchIndex}
+                      onMouseOver={() => setEnginConf([index, -1])}
+                    >
+                      {parent[0]}
+                    </div>
                   )}
                   {enginConf &&
-                    enginConf[0] === index &&
+                    enginConf[0] !== -1 &&
                     parent &&
                     Array.isArray(parent) &&
-                    Array.isArray(parent[1]) && (
-                      <div
-                        className={styles.optionsContainer}
-                        onMouseOver={() => setEnginConf([index, -1])}
-                        onMouseOut={() => setEnginConf(null)}
-                      >
-                        {parent[1]?.map((option: string, subIndex) => (
-                          <div key={subIndex} className={styles.enginoption}>
-                            {option}
-                          </div>
-                        ))}
+                    Array.isArray(parent[1]) &&
+                    parent[1]?.map((option: string, subIndex) => (
+                      <div key={subIndex} className={styles.enginoption}>
+                        {option}
                       </div>
-                    )}
-                </div>
+                    ))}
+                </>
               ))}
             </div>
-
             <FaBasketShopping className={styles.basketicon} />
           </div>
           <div className={styles.producto}>
@@ -229,8 +216,9 @@ const Store: React.FC<Props> = ({ data }) => {
                   onMouseLeave={() => setProductover(null)}
                 >
                   <Image
-                    src={`data:image/jpeg;base64,${product.src}`}
+                    // src={`data:image/jpeg;base64,${obj.src}`}
                     onClick={() => setShowProducto(product)}
+                    src={product.src}
                     alt={product.title}
                     style={{ opacity: productover === productindex ? 0.2 : 1 }}
                     width={777}
@@ -282,7 +270,8 @@ const Store: React.FC<Props> = ({ data }) => {
                 />
                 <p className={styles.producTitlef}>{showProducto?.title}</p>
                 <Image
-                  src={`data:image/jpeg;base64,${showProducto?.src}`}
+                  // src={`data:image/jpeg;base64,${obj.src}`}
+                  src={showProducto?.src}
                   alt={showProducto?.title}
                   width={444}
                   height={444}

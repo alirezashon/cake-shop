@@ -1,9 +1,9 @@
 /** @format */
 
 import { NextApiRequest, NextApiResponse } from 'next'
-import Product from '../../../../../models/Data/Product'
+import ProductScheme from '../../../../../models/Data/Product'
 import db from '../../../../../utils/index.js'
-import { Post } from '@/DTO'
+import { Product } from '@/DTO'
 const Shop = async (req: NextApiRequest, res: NextApiResponse) => {
 	try { 
 		if (req.method === 'POST') {
@@ -14,10 +14,10 @@ const Shop = async (req: NextApiRequest, res: NextApiResponse) => {
 					const productsID = products?.map((product: string) =>
 						product.split('*2%2&7(7)5%5!1@2')
 					)
-					const data: Post[] = []
+					const data: Product[] = []
 					await Promise.all(
 						productsID.map(async (id: string) => {
-							const post = await Product.findOne({ _id: id[0] })
+							const post = await ProductScheme.findOne({ _id: id[0] })
 							data.push(post)
 						})
 					)

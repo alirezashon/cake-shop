@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   output: "standalone",
   api: {
-    responseLimit: false,
+    responseLimit: '8mb',
   },
 }
 
