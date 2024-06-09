@@ -49,7 +49,7 @@
 }
 
 .formBoxRow input {
-	border: 0.3vh ridge rgba(40, 206, 43, 0.9);
+	border: .1vh ridge rgba(175, 226, 55, 0.9);
 	outline: none;
 	height: 5vh;
 	text-align: center;
@@ -70,17 +70,19 @@
 }
 @media (max-width: 999px) {
 	.container {
-		flex-direction: column;
+		flex-direction: column-reverse;
 		width: 97%;
 		align-items: center;
-		color: rgb(0, 0, 51);
+		color: rgb(4, 42, 24);
 	}
 
 	.formBox {
-		grid-template-columns: repeat(auto-fit, minmax(80%, 1fr));
+		max-width: 100%;
+		grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
 	}
 
 	.mapBox {
 		width: 100vw;
-	}
+		height: 80vh;
+		}
 }

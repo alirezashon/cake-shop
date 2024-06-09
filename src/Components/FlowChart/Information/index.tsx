@@ -4,18 +4,19 @@ import { RefObject, useRef, useState } from "react"
 import styles from "./index.module.css"
 import Map from "../../Map"
 import { Register } from "./handler"
+import { Toast } from "primereact/toast"
+
 interface MapData {
   address: string
   houseNumber: number
   houseUnit: number
   zipCode: number
 }
-interface Props {
-  setRegistered: (registered: boolean) => void
-}
-const Information: React.FC<Props> = ({ setRegistered }) => {
+
+const Information: React.FC = () => {
   const [mapData, setMapData] = useState<MapData>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const toast = useRef<Toast>(null)
 
   const refs: {
     [key: string]: RefObject<HTMLInputElement>
@@ -47,23 +48,40 @@ const Information: React.FC<Props> = ({ setRegistered }) => {
             `${refs.email.current?.value}`,
             mapData.address
           )) === "S!A@k%s$e^x%f^u*l^" &&
-            // toast.success('ثبت نام با موفقیت انجام شد')
-            setRegistered(true)
+            toast.current?.show({
+              severity: "success",
+              summary: "ثبت نام با موفقیت انجام شد",
+              detail: "موفق",
+              life: 3000,
+            })
         } else {
-          // toast.warning('رمز عبور الزامیست')
+          toast.current?.show({
+            severity: "warn",
+            summary: "موفق",
+            detail: "رمز عبور الزامیست",
+            life: 3000,
+          })
         }
       } else {
-        // toast.warning('شماره تلفن الزامیست')
+        toast.current?.show({
+          severity: "warn",
+          summary: "موفق",
+          detail: "شماره تلفن الزامیست",
+          life: 3000,
+        })
       }
     } else {
-      // toast.warning('اطلاعات آدرس کامل نمی باشد')
+      toast.current?.show({
+        severity: "warn",
+        summary: "موفق",
+        detail: "اطلاعات آدرس کامل نمی باشد",
+        life: 3000,
+      })
     }
   }
   return (
     <>
-      <div onClick={register} className={styles.register}>
-        <p>ثبت نام</p>
-      </div>
+      <Toast ref={toast} />
 
       {isLoading ? (
         <div></div>
@@ -92,6 +110,9 @@ const Information: React.FC<Props> = ({ setRegistered }) => {
           </div>
         </div>
       )}
+      <div onClick={register} className={styles.register}>
+        <p>ثبت نام</p>
+      </div>
     </>
   )
 }
