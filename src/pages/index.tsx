@@ -14,8 +14,6 @@ interface Props {
 }
 
 const RootPage: NextPage<Props> = ({ product, categories }) => {
-  const [totalPrice, setTotalPrice] = useState<[number, number]>([0, 0])
-  const [basketData, setBasketData] = useState<Product[]>([])
 
   return (
     <>
@@ -47,9 +45,7 @@ const RootPage: NextPage<Props> = ({ product, categories }) => {
       />
       <Handler
         products={product}
-        totalPrice={totalPrice}
         categories={categories}
-        basketData={basketData}
       />
     </>
   )

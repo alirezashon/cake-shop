@@ -1,7 +1,6 @@
 export const searchEngine = [
   ["قیمت", ["گرانترین", "ارزان ترین"]],
   ["کالری", ["بیشترین", "کمترین"]],
-  ,
 ]
 export const data = [
   [

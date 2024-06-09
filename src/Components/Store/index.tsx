@@ -22,6 +22,7 @@ const Store: React.FC<Props> = ({ data }) => {
     categoryBoxRef: useRef<HTMLDivElement>(null),
   }
   const { basket, setBasket } = useBasket()
+  const [sortedata, setSortedata] = useState<Product[]>(data[1])
   const [showProducto, setShowProducto] = useState<Product | null>(null)
   const [productover, setProductover] = useState<number | null>(null)
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
@@ -207,7 +208,35 @@ const Store: React.FC<Props> = ({ data }) => {
                         onMouseOut={() => setEnginConf(null)}
                       >
                         {parent[1]?.map((option: string, subIndex) => (
-                          <div key={subIndex} className={styles.enginoption}>
+                          <div
+                            key={subIndex}
+                            className={styles.enginoption}
+                            onClick={() =>
+                              parent[0] === "قیمت"
+                                ? option === "گرانترین"
+                                  ? setSortedata(
+                                      [...sortedata].sort(
+                                        (a, b) => b.price - a.price
+                                      )
+                                    )
+                                  : setSortedata(
+                                      [...sortedata].sort(
+                                        (a, b) => a.price - b.price
+                                      )
+                                    )
+                                : parent[0] === "کالری" && option === "بیشترین"
+                                ? setSortedata(
+                                    [...sortedata].sort(
+                                      (a, b) => b.calories - a.calories
+                                    )
+                                  )
+                                : setSortedata(
+                                    [...sortedata].sort(
+                                      (a, b) => a.calories - b.calories
+                                    )
+                                  )
+                            }
+                          >
                             {option}
                           </div>
                         ))}
@@ -220,60 +249,59 @@ const Store: React.FC<Props> = ({ data }) => {
             <FaBasketShopping className={styles.basketicon} />
           </div>
           <div className={styles.producto}>
-            {data &&
-              data[1].map((product, productindex) => (
-                <div
-                  key={productindex}
-                  className={styles.product}
-                  onMouseOver={() => setProductover(productindex)}
-                  onMouseLeave={() => setProductover(null)}
-                >
-                  <Image
-                    src={`data:image/jpeg;base64,${product.src}`}
-                    onClick={() => setShowProducto(product)}
-                    alt={product.title}
-                    style={{ opacity: productover === productindex ? 0.2 : 1 }}
-                    width={777}
-                    height={777}
-                    className={styles.productimage}
-                  />
-                  {productover === productindex && (
-                    <div
-                      className={styles.productDescription}
-                      onClick={() => setShowProducto(product)}
-                    >
-                      {product.description}
-                    </div>
-                  )}
-                  <p
-                    className={styles.producTitle}
+            {sortedata.map((product, productindex) => (
+              <div
+                key={productindex}
+                className={styles.product}
+                onMouseOver={() => setProductover(productindex)}
+                onMouseLeave={() => setProductover(null)}
+              >
+                <Image
+                  src={`data:image/jpeg;base64,${product.src}`}
+                  onClick={() => setShowProducto(product)}
+                  alt={product.title}
+                  style={{ opacity: productover === productindex ? 0.2 : 1 }}
+                  width={777}
+                  height={777}
+                  className={styles.productimage}
+                />
+                {productover === productindex && (
+                  <div
+                    className={styles.productDescription}
                     onClick={() => setShowProducto(product)}
                   >
-                    {product.title}
-                  </p>
-                  <div className={styles.priceaction}>
-                    <p className={styles.productprice}>
-                      {product.price}
-                      {" تومان "}
-                    </p>
-                    {product && basket[1]?.includes(product._id) ? (
-                      PriceAction(
-                        `${basket[0].find((d) => {
-                          if (d.split("*2%2&7(7)5%5!1@2")[2] === product._id)
-                            return d
-                        })}`,
-                        "5vh"
-                      )
-                    ) : (
-                      <MdAddCircle
-                        className={styles.inceriment}
-                        size={"4vh"}
-                        onClick={() => increment(product._id, product.price)}
-                      />
-                    )}
+                    {product.description}
                   </div>
+                )}
+                <p
+                  className={styles.producTitle}
+                  onClick={() => setShowProducto(product)}
+                >
+                  {product.title}
+                </p>
+                <div className={styles.priceaction}>
+                  <p className={styles.productprice}>
+                    {product.price}
+                    {" تومان "}
+                  </p>
+                  {product && basket[1]?.includes(product._id) ? (
+                    PriceAction(
+                      `${basket[0].find((d) => {
+                        if (d.split("*2%2&7(7)5%5!1@2")[2] === product._id)
+                          return d
+                      })}`,
+                      "5vh"
+                    )
+                  ) : (
+                    <MdAddCircle
+                      className={styles.inceriment}
+                      size={"4vh"}
+                      onClick={() => increment(product._id, product.price)}
+                    />
+                  )}
                 </div>
-              ))}
+              </div>
+            ))}
             {showProducto && (
               <div className={styles.productself}>
                 <GiCrossMark

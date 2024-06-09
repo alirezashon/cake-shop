@@ -117,26 +117,21 @@ const Profile = () => {
                       className={styles.onput}
                       onChange={(e) => setNewmew([e.target.value, index])}
                     />
-                  // ) : data &&
-                  //   data[1][index] !== null &&
-                  //   data[1][index] !== undefined ? (
-                  //   String(data[1][index])
-                  // ) : (
-                  ):
-                    (""
+                  ) : (
+                    // ) : data &&
+                    //   data[1][index] !== null &&
+                    //   data[1][index] !== undefined ? (
+                    //   String(data[1][index])
+                    // ) : (
+                    ""
                   )}
                   {newmew && newmew[1] === index && (
-                    <>
-                      {updating && (
-                        <div className=""></div>
-                      )}
-                      <input
-                        value={"ثبت"}
-                        type='submit'
-                        onClick={meow}
-                        className={styles.submit}
-                      />
-                    </>
+                    <input
+                      value={"ثبت"}
+                      type='submit'
+                      onClick={meow}
+                      className={styles.submit}
+                    />
                   )}
                 </p>
               ))}
@@ -166,9 +161,13 @@ const Profile = () => {
         ) : state === "آدرس ها" ? (
           <Address
             address={data && data[1][4].address}
-            zipCode={parseInt(`${data && data[1][4]&& data[1][4].zipCode}`)}
-            houseUnit={parseInt(`${data && data[1][4]&& data[1][4].houseUnit}`)}
-            houseNumber={parseInt(`${data && data[1][4]&& data[1][4].houseNumber}`)}
+            zipCode={parseInt(`${data && data[1][4] && data[1][4].zipCode}`)}
+            houseUnit={parseInt(
+              `${data && data[1][4] && data[1][4].houseUnit}`
+            )}
+            houseNumber={parseInt(
+              `${data && data[1][4] && data[1][4].houseNumber}`
+            )}
           />
         ) : state === "بازدید های اخیر" ? (
           <LastSeen />

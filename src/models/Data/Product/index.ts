@@ -6,6 +6,7 @@ const productSchema = new mongoose.Schema({
   title: { type: String, required: true },
   src: { type: String, required: true },
   price: { type: Number, required: true },
+  calories: { type: Number, required: true },
   categories: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",

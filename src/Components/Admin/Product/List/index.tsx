@@ -32,7 +32,7 @@ const List: React.FC<Props> = ({
         <table>
           <thead>
             <tr>
-              {["title", "src", "category", "description", "Keywords"].map(
+              {["title", "src",'price','colories', "category", "description", "Keywords"].map(
                 (header) => (
                   <th key={header}>{header}</th>
                 )
@@ -59,6 +59,8 @@ const List: React.FC<Props> = ({
                       category.find((cat) => cat._id === product.categories)
                         ?.name}
                   </td>
+                  <td>{product?.price}</td>
+                  <td>{product?.calories}</td>
                   <td>{product?.description}</td>
 
                   <td>{product.keywords}</td>

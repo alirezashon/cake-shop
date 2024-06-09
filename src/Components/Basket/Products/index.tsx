@@ -7,20 +7,18 @@ import { MdAddCircle } from "react-icons/md"
 import React, { useEffect, useState } from "react"
 import { Add, Get, Remove } from "../Actions"
 import { Product } from "../../../DTO"
+import { useBasket } from "@/Context"
 
 interface Props {
   setLoading: boolean
-  basket: string[][]
-  setBasket: (items: string[][]) => void
   basketData: Product[]
 }
 const Products: React.FC<Props> = ({
   setLoading,
-  basket,
-  setBasket,
   basketData,
 }) => {
   const [isloading, setIsLoading] = useState<boolean>(false)
+  const { basket, setBasket } = useBasket()
 
   useEffect(() => {
     setLoading && setIsLoading(true)

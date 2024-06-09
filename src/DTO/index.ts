@@ -3,6 +3,7 @@ export interface Product {
   title: string
   src: string
   price: number
+  calories:number
   categories: string
   description: string
   keywords: string[]
