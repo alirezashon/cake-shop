@@ -22,7 +22,7 @@ export const InsertNumber = async (
       localStorage.setItem(
         "s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi",
         JSON.stringify(
-          Array.from({ length: 33 }, () =>
+          Array.from({ length: 23 }, () =>
             "ABCDEFHIJOPQVWXYZabcdefnopqrstuvwxyz0123456789".charAt(
               Math.floor(Math.random() * 62)
             )
@@ -49,7 +49,7 @@ export const UpdateAddress = async (
 
   try {
     const response = await fetch("/api/Auth/Register/UpdateAddress", {
-      method: "PUT",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -62,8 +62,19 @@ export const UpdateAddress = async (
       }),
     })
     const data = await response.json()
+    console.log(data)
     if (data.success === true && response.status === 200) {
       setIsLoading(false)
+      localStorage.setItem(
+        "s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi",
+        JSON.stringify(
+          Array.from({ length: 33 }, () =>
+            "ABCDEFHIJOPQVWXYZabcdefnopqrstuvwxyz0123456789".charAt(
+              Math.floor(Math.random() * 62)
+            )
+          ).join("").toString()
+        )
+      )
       return "S!A@k%s$e^x%f^u*l^"
     } else {
       setIsLoading(false)

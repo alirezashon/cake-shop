@@ -85,37 +85,9 @@ const Map = ({ onDataChange }) => {
   }
 
   return (
-    <div className={styles.container}>
       <div ref={mapContainer} className={styles.map} >
      </div>
-      <div className={styles.formBox}>
-        {Object.keys(formData).map((field, index) => (
-          <>
-            {field !== "address" && (
-              <div key={index} className={styles.formBoxRow}>
-                <input
-                  placeholder={labels[index]}
-                  dir='rtl'
-                  type={field !== "zipCode" ? "number" : "text"}
-                  value={formData[field]}
-                  onChange={(e) => handleChange(e, field)}
-                />
-              </div>
-            )}
-          </>
-        ))}
-      </div>
-      <div className={styles.addressBox}>
-        <textarea
-          id='address'
-          className={styles.textarea}
-          value={formData.address}
-          onChange={(e) => handleChange(e, "address")}
-          placeholder=''
-        ></textarea>
-        <label htmlFor='address'>آدرس</label>
-      </div>
-    </div>
+    
   )
 }
 

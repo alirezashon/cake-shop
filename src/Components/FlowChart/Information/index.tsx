@@ -33,53 +33,40 @@ const Information: React.FC = () => {
   const getAddress = (data: MapData) => {
     setMapData(data)
   }
+  const updateAddress = async (e: FormEvent) => {
+    const status = UpdateAddress(
+      setIsLoading,
+      parseInt(`${refs.phone.current?.value}`),
+      parseInt(`${mapData?.houseNumber}`),
+      parseInt(`${mapData?.houseUnit}`),
+      `${mapData?.address}`
+    )
+    if (`${status}` === "S!A@k%s$e^x%f^u*l^") {
+      e.preventDefault()
+      setLogin([true, true])
+      toast.current?.show({
+        severity: "success",
+        summary: "کد برای شماره ارسال شد",
+        detail: "موفق",
+        life: 3000,
+      })
+    } else {
+      toast.current?.show({
+        severity: "error",
+        summary: "لطفا مجدد تلاش کنید",
+        detail: "ناموفق",
+        life: 3000,
+      })
+    }
+  }
 
-  // const register = async () => {
-  //   if (mapData?.address.trim()) {
-  //     if (refs.phone.current?.value) {
-  //       if (refs.password.current?.value) {
-  //         ;(await UpdateAddress(
-  //           setIsLoading,
-  //           parseInt(refs.phone.current?.value),
-  //           parseInt(`${mapData.houseNumber}`),
-  //           parseInt(`${mapData.houseUnit}`),
-  //           mapData.address
-  //         )) === "S!A@k%s$e^x%f^u*l^" &&
-  //           toast.current?.show({
-  //             severity: "success",
-  //             summary: "ثبت نام با موفقیت انجام شد",
-  //             detail: "موفق",
-  //             life: 3000,
-  //           })
-  //       } else {
-  //         toast.current?.show({
-  //           severity: "warn",
-  //           summary: "موفق",
-  //           detail: "رمز عبور الزامیست",
-  //           life: 3000,
-  //         })
-  //       }
-  //     } else {
-  //       toast.current?.show({
-  //         severity: "warn",
-  //         summary: "موفق",
-  //         detail: "شماره تلفن الزامیست",
-  //         life: 3000,
-  //       })
-  //     }
-  //   } else {
-  //     toast.current?.show({
-  //       severity: "warn",
-  //       summary: "موفق",
-  //       detail: "اطلاعات آدرس کامل نمی باشد",
-  //       life: 3000,
-  //     })
-  //   }
-  // }
   useEffect(() => {
     const storedUser = localStorage.getItem("s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi")
     if (storedUser) {
-      setLogin([true, false])
+      console.log(storedUser.length)
+      storedUser.length === 25
+        ? setLogin([true, false])
+        : storedUser.length === 35 && setLogin([true, true])
     }
   }, [setLogin])
   const handleSubmit = async (e: FormEvent) => {
@@ -139,8 +126,7 @@ const Information: React.FC = () => {
                 <input
                   ref={refs.phone as RefObject<HTMLInputElement>}
                   placeholder={"شماره تماس"}
-                  dir='rtl'
-                  type={"number"}
+                  type={"text"}
                 />
                 {otpSent && (
                   <input
@@ -158,10 +144,15 @@ const Information: React.FC = () => {
               </form>
             </div>
           )}
-          {login[0] && (
+          {!login[1] && login[0] && (
             <div className={styles.mapBox}>
-              <Map onDataChange={getAddress} />
-              <div className={styles.mapformBox}>
+              <div className={styles.map}>
+                <Map onDataChange={getAddress} />
+              </div>
+              <form
+                className={styles.mapformBox}
+                onSubmit={(e) => updateAddress(e)}
+              >
                 <div className={styles.mapformBoxRow}>
                   <input
                     placeholder={"پلاک"}
@@ -178,7 +169,13 @@ const Information: React.FC = () => {
                   placeholder={"آدرس"}
                   ref={refs.houseUnit as RefObject<HTMLTextAreaElement>}
                 ></textarea>
-              </div>
+                <input
+                  style={{ width: "80%" }}
+                  className={styles.submit}
+                  type='submit'
+                  value={"ثبت آدرس"}
+                />
+              </form>
             </div>
           )}
         </div>

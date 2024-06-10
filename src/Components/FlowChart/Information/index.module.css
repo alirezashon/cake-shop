@@ -87,21 +87,26 @@
 }
 
 .mapBox {
+  position: absolute;
+  top: 10vh;
   animation: animatopenPc 1.5s;
-  background: radial-gradient(rgb(210, 237, 160), rgb(138, 227, 65));
   border: 0.7vh double rgba(216, 255, 192, 0.9);
   width: 77%;
-  height: 33%;
+  height: 77%;
 }
-
+.map{
+  height: 40vh;
+}
 .mapformBox {
   display: flex;
+  background: radial-gradient(rgb(210, 237, 160), rgb(138, 227, 65));
   flex-direction: column;
   font-size: 2vh;
-  background-color: #ffffff;
+  align-items: center;
 }
 
 .mapformBoxRow {
+  width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(22%, 0fr));
   display: flex;
   justify-content: space-around;
