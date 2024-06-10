@@ -1,7 +1,7 @@
 /** @format */
 
 import crypto from "crypto"
-import { decryptText, generateKeyAndIV, encryptText } from "../CryptoUtils"
+import { generateKeyAndIV, encryptText } from "../CryptoUtils"
 export const SignIn = async (
   setIsLoading: (arg: boolean) => void,
   user: number,

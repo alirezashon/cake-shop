@@ -1,118 +1,188 @@
 /** @format */
 
-import { RefObject, useRef, useState } from "react"
+import { FormEvent, RefObject, useEffect, useRef, useState } from "react"
 import styles from "./index.module.css"
 import Map from "../../Map"
-import { Register } from "./handler"
+import { UpdateAddress, InsertNumber } from "./handler"
 import { Toast } from "primereact/toast"
+import Image from "next/image"
 
 interface MapData {
   address: string
   houseNumber: number
   houseUnit: number
-  zipCode: number
 }
 
 const Information: React.FC = () => {
   const [mapData, setMapData] = useState<MapData>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [otpSent, setOtpSent] = useState<boolean>(false)
+  const [login, setLogin] = useState<[boolean, boolean]>([false, false]) //[number, address]
+
   const toast = useRef<Toast>(null)
 
   const refs: {
-    [key: string]: RefObject<HTMLInputElement>
+    [key: string]: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>
   } = {
     phone: useRef<HTMLInputElement>(null),
-    name: useRef<HTMLInputElement>(null),
-    password: useRef<HTMLInputElement>(null),
-    nationalCode: useRef<HTMLInputElement>(null),
-    email: useRef<HTMLInputElement>(null),
+    otp: useRef<HTMLInputElement>(null),
+    address: useRef<HTMLInputElement>(null),
+    houseNumber: useRef<HTMLInputElement>(null),
+    houseUnit: useRef<HTMLInputElement>(null),
   }
-  const labels = ["شماره تماس", "نام", "رمز عبور", "کد ملی", "ایمیل"]
   const getAddress = (data: MapData) => {
     setMapData(data)
-    console.log(mapData)
   }
-  const register = async () => {
-    if (mapData?.address.trim()) {
-      if (refs.phone.current?.value) {
-        if (refs.password.current?.value) {
-          ;(await Register(
-            setIsLoading,
-            parseInt(refs.phone.current?.value),
-            `${refs.name.current?.value}`,
-            refs.password.current?.value,
-            `${refs.nationalCode.current?.value}`,
-            parseInt(`${mapData.houseNumber}`),
-            parseInt(`${mapData.houseUnit}`),
-            parseInt(`${mapData.zipCode}`),
-            `${refs.email.current?.value}`,
-            mapData.address
-          )) === "S!A@k%s$e^x%f^u*l^" &&
-            toast.current?.show({
-              severity: "success",
-              summary: "ثبت نام با موفقیت انجام شد",
-              detail: "موفق",
-              life: 3000,
-            })
-        } else {
-          toast.current?.show({
-            severity: "warn",
-            summary: "موفق",
-            detail: "رمز عبور الزامیست",
-            life: 3000,
-          })
-        }
-      } else {
+
+  // const register = async () => {
+  //   if (mapData?.address.trim()) {
+  //     if (refs.phone.current?.value) {
+  //       if (refs.password.current?.value) {
+  //         ;(await UpdateAddress(
+  //           setIsLoading,
+  //           parseInt(refs.phone.current?.value),
+  //           parseInt(`${mapData.houseNumber}`),
+  //           parseInt(`${mapData.houseUnit}`),
+  //           mapData.address
+  //         )) === "S!A@k%s$e^x%f^u*l^" &&
+  //           toast.current?.show({
+  //             severity: "success",
+  //             summary: "ثبت نام با موفقیت انجام شد",
+  //             detail: "موفق",
+  //             life: 3000,
+  //           })
+  //       } else {
+  //         toast.current?.show({
+  //           severity: "warn",
+  //           summary: "موفق",
+  //           detail: "رمز عبور الزامیست",
+  //           life: 3000,
+  //         })
+  //       }
+  //     } else {
+  //       toast.current?.show({
+  //         severity: "warn",
+  //         summary: "موفق",
+  //         detail: "شماره تلفن الزامیست",
+  //         life: 3000,
+  //       })
+  //     }
+  //   } else {
+  //     toast.current?.show({
+  //       severity: "warn",
+  //       summary: "موفق",
+  //       detail: "اطلاعات آدرس کامل نمی باشد",
+  //       life: 3000,
+  //     })
+  //   }
+  // }
+  useEffect(() => {
+    const storedUser = localStorage.getItem("s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi")
+    if (storedUser) {
+      setLogin([true, false])
+    }
+  }, [setLogin])
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    if (!otpSent) {
+      const phoneNumber = refs.phone.current?.value || ""
+      if (phoneNumber.toString()?.length < 10) {
         toast.current?.show({
-          severity: "warn",
-          summary: "موفق",
-          detail: "شماره تلفن الزامیست",
+          severity: "error",
+          summary: "شماره تماس اشتباه است",
+          detail: "ناموفق",
+          life: 3000,
+        })
+      } else {
+        setOtpSent(true)
+        toast.current?.show({
+          severity: "success",
+          summary: "کد برای شماره ارسال شد",
+          detail: "موفق",
           life: 3000,
         })
       }
     } else {
-      toast.current?.show({
-        severity: "warn",
-        summary: "موفق",
-        detail: "اطلاعات آدرس کامل نمی باشد",
-        life: 3000,
-      })
+      const status = await InsertNumber(
+        setIsLoading,
+        parseInt(`${refs.phone.current?.value}`),
+        parseInt(`${refs.otp.current?.value}`)
+      )
+      if (status === "S!A@k%s$e^x%f^u*l^") {
+        setLogin([true, false])
+        toast.current?.show({
+          severity: "success",
+          summary: "ثبت نام با موفقیت انجام شد",
+          detail: "موفق",
+          life: 3000,
+        })
+      }
     }
   }
   return (
     <>
       <Toast ref={toast} />
-
       {isLoading ? (
         <div></div>
       ) : (
         <div className={styles.container}>
-          <div className={styles.formBox}>
-            {Object.keys(refs).map((refName, index) => (
-              <div key={index} className={styles.formBoxRow}>
+          {!login[0] && (
+            <div className={styles.formBox}>
+              <Image
+                alt=''
+                className={styles.image}
+                src={"/images/icon.png"}
+                width={777}
+                height={777}
+              />
+              <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
                 <input
-                  ref={refs[refName] as RefObject<HTMLInputElement>}
-                  placeholder={labels[index]}
+                  ref={refs.phone as RefObject<HTMLInputElement>}
+                  placeholder={"شماره تماس"}
                   dir='rtl'
-                  type={
-                    refName === "phone"
-                      ? "number"
-                      : refName === "password"
-                      ? "password"
-                      : "text"
-                  }
+                  type={"number"}
                 />
+                {otpSent && (
+                  <input
+                    ref={refs.otp as RefObject<HTMLInputElement>}
+                    placeholder={"کد ارسال شده"}
+                    dir='rtl'
+                    type={"number"}
+                  />
+                )}
+                <input
+                  className={styles.submit}
+                  type='submit'
+                  value={!otpSent ? "ارسال کد" : "ثبت نام"}
+                />
+              </form>
+            </div>
+          )}
+          {login[0] && (
+            <div className={styles.mapBox}>
+              <Map onDataChange={getAddress} />
+              <div className={styles.mapformBox}>
+                <div className={styles.mapformBoxRow}>
+                  <input
+                    placeholder={"پلاک"}
+                    type={"number"}
+                    ref={refs.houseNumber as RefObject<HTMLInputElement>}
+                  />
+                  <input
+                    placeholder={"واحد"}
+                    type={"number"}
+                    ref={refs.houseUnit as RefObject<HTMLInputElement>}
+                  />
+                </div>
+                <textarea
+                  placeholder={"آدرس"}
+                  ref={refs.houseUnit as RefObject<HTMLTextAreaElement>}
+                ></textarea>
               </div>
-            ))}
-          </div>
-          <div className={styles.mapBox}>
-            <Map onDataChange={getAddress} />
-          </div>
+            </div>
+          )}
         </div>
       )}
-      <div onClick={register} className={styles.register}>
-        <p>ثبت نام</p>
-      </div>
     </>
   )
 }

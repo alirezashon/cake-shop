@@ -16,6 +16,7 @@ const Map = ({ onDataChange }) => {
   const map = useRef(null)
   const [lng, setLng] = useState(51.4067)
   const [lat, setLat] = useState(35.7514)
+  const marker = useRef(null) // Add a ref to hold the marker
 
   const getAddress = async (lat, lng) => {
     const response = await fetch(
@@ -60,7 +61,17 @@ const Map = ({ onDataChange }) => {
       const lat = e.lngLat.lat.toFixed(4)
       const lng = e.lngLat.lng.toFixed(4)
 
+      // Call the getAddress function
       getAddress(lat, lng)
+
+      // Set the marker on the map
+      if (marker.current) {
+        marker.current.setLngLat([lng, lat])
+      } else {
+        marker.current = new mapboxgl.Marker()
+          .setLngLat([lng, lat])
+          .addTo(map.current)
+      }
     })
   }, [formData, lng, lat, onDataChange])
 
@@ -75,7 +86,8 @@ const Map = ({ onDataChange }) => {
 
   return (
     <div className={styles.container}>
-      <div ref={mapContainer} className={styles.map} />
+      <div ref={mapContainer} className={styles.map} >
+     </div>
       <div className={styles.formBox}>
         {Object.keys(formData).map((field, index) => (
           <>

@@ -1,4 +1,3 @@
-/** @format */
 
 export const Add = async (id: string, price: number) => {
   const basket: string[] = JSON.parse(
