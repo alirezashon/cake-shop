@@ -1,3 +1,6 @@
+import { Toast } from "primereact/toast"
+import React, { RefObject } from "react"
+
 export const InsertNumber = async (
   setIsLoading: (arg: boolean) => void,
   phone: number,
@@ -26,7 +29,9 @@ export const InsertNumber = async (
             "ABCDEFHIJOPQVWXYZabcdefnopqrstuvwxyz0123456789".charAt(
               Math.floor(Math.random() * 62)
             )
-          ).join("").toString()
+          )
+            .join("")
+            .toString()
         )
       )
       return "S!A@k%s$e^x%f^u*l^"
@@ -43,7 +48,8 @@ export const UpdateAddress = async (
   phone: number,
   houseNumber: number,
   houseUnit: number,
-  address: string
+  address: string,
+  toast: RefObject<Toast>
 ) => {
   setIsLoading(true)
 
@@ -62,8 +68,8 @@ export const UpdateAddress = async (
       }),
     })
     const data = await response.json()
-    console.log(data)
-    if (data.success === true && response.status === 200) {
+    console.log(response)
+    if (response.status === 200) {
       setIsLoading(false)
       localStorage.setItem(
         "s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi",
@@ -72,14 +78,34 @@ export const UpdateAddress = async (
             "ABCDEFHIJOPQVWXYZabcdefnopqrstuvwxyz0123456789".charAt(
               Math.floor(Math.random() * 62)
             )
-          ).join("").toString()
+          )
+            .join("")
+            .toString()
         )
       )
-      return "S!A@k%s$e^x%f^u*l^"
+      return toast.current?.show({
+        severity: "success",
+        summary: "کد برای شماره ارسال شد",
+        detail: "موفق",
+        life: 3000,
+      })
     } else {
       setIsLoading(false)
+      localStorage.removeItem("s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi")
+      location.reload()
+      return toast.current?.show({
+        severity: "error",
+        summary: "لطفا مجدد تلاش کنید",
+        detail: "ناموفق",
+        life: 3000,
+      })
     }
   } catch (error) {
-    console.log(error)
+    return {
+      severity: "error",
+      summary: "خطای سرور ، لطفا مجدد تلاش کنید",
+      detail: "ناموفق",
+      life: 3000,
+    }
   }
 }

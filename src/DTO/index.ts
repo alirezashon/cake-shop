@@ -43,3 +43,10 @@ export interface Tags {
   name: string
   src: string
 }
+export interface Order {
+  ticketID: string
+  status: string
+  products: [Product]
+  totalPrice: number
+  attachment: string
+}

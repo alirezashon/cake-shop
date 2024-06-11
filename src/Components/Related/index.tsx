@@ -1,5 +1,3 @@
-/** @format */
-
 import { useEffect, useState } from 'react'
 import styles from './index.module.css'
 import Image from 'next/image'
@@ -8,6 +6,8 @@ import { useRouter } from 'next/router'
 import { Get, Add, Remove } from '../../Components/Basket/Actions'
 import { MdAddCircle } from 'react-icons/md'
 import { FaMinus } from 'react-icons/fa'
+import { useBasket } from "@/Context"
+
 interface Data {
 	_id: string
 	title: string
@@ -28,7 +28,7 @@ interface Props {
 const Related: React.FC<Props> = ({ searchString }) => {
 	const router = useRouter()
 	const [data, setData] = useState<Data[]>([])
-	const [basketStore, setBasketStore] = useState<string[][]>([])
+	const { basket, setBasket } = useBasket()
 	const [isloading, setIsLoading] = useState<boolean>(true)
 
 	const fetchAll = async () => {
@@ -46,7 +46,7 @@ const Related: React.FC<Props> = ({ searchString }) => {
 		setIsLoading(false)
 	}
 	useEffect(() => {
-		setBasketStore(Get())
+		setBasket(Get())
 		;(async () => {
 			const response = await fetch('/api/data/Post/Client/productsByCategory', {
 				method: 'POST',
@@ -68,12 +68,12 @@ const Related: React.FC<Props> = ({ searchString }) => {
 
 	const increment = (id: string, price: number) => {
 		Add(id, price)
-		setBasketStore(Get())
+		setBasket(Get())
 	}
 
 	const decrement = (id: string) => {
 		Remove(id)
-		setBasketStore(Get())
+		setBasket(Get())
 	}
 
 	return (
@@ -105,15 +105,15 @@ const Related: React.FC<Props> = ({ searchString }) => {
 								/>
 							</div>
 							<div className={styles.priceAction}>
-								{basketStore[1] && basketStore[1].includes(detail._id) ? (
+								{basket[1] && basket[1].includes(detail._id) ? (
 									<div className={styles.productDetails}>
 										<div className={styles.details}>
 											<div className={styles.priceBox}>
 												<p>
 													{detail.price *
 														parseInt(
-															basketStore[0][
-																basketStore[1].indexOf(detail._id)
+															basket[0][
+																basket[1].indexOf(detail._id)
 															].split('*2%2&7(7)5%5!1@2')[1]
 														)}
 												</p>
@@ -124,8 +124,8 @@ const Related: React.FC<Props> = ({ searchString }) => {
 													style={{
 														opacity:
 															parseInt(
-																basketStore[0][
-																	basketStore[1].indexOf(detail._id)
+																basket[0][
+																	basket[1].indexOf(detail._id)
 																].split('*2%2&7(7)5%5!1@2')[2]
 															) >= detail.quantity
 																? 0.1
@@ -134,8 +134,8 @@ const Related: React.FC<Props> = ({ searchString }) => {
 													size={'4vh'}
 													onClick={() =>
 														parseInt(
-															basketStore[0][
-																basketStore[1].indexOf(detail._id)
+															basket[0][
+																basket[1].indexOf(detail._id)
 															].split('*2%2&7(7)5%5!1@2')[2]
 														) < detail.quantity &&
 														increment(detail._id, detail.price)
@@ -143,8 +143,8 @@ const Related: React.FC<Props> = ({ searchString }) => {
 												/>
 												<p className={styles.count}>
 													{parseInt(
-														basketStore[0][
-															basketStore[1].indexOf(detail._id)
+														basket[0][
+															basket[1].indexOf(detail._id)
 														].split('*2%2&7(7)5%5!1@2')[2]
 													)}
 												</p>

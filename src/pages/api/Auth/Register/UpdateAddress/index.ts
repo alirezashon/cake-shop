@@ -70,7 +70,6 @@ const Register = async (req: NextApiRequest, res: NextApiResponse) => {
     const updatedUser = await Client.findOneAndUpdate(
       { _id: userSchema._id },
       updateData,
-      { new: true }
     )
 
     if (!updatedUser) {

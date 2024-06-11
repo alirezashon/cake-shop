@@ -5,19 +5,13 @@ import Address from "./Address/index"
 import Chat from "./Chat/index"
 import Notification from "./Notifications/index"
 import styles from "./index.module.css"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Orders from "./Orders/index"
 import Favorites from "./Favorites/index"
 import LastSeen from "./LastSeen/index"
-import { Product } from "@/DTO"
+import { Order } from "@/DTO"
+import { BiEdit } from "react-icons/bi"
 
-interface Order {
-  ticketID: string
-  status: string
-  products: [Product]
-  totalPrice: number
-  attachment: string
-}
 interface Information {
   address: string
   houseNumber: number
@@ -32,6 +26,8 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [newmew, setNewmew] = useState<[string, number] | null>(null)
   const [updating, setUpdating] = useState<boolean>(false)
+  const profileBoxRef = useRef<HTMLDivElement>(null)
+
   const items = [
     "سفارشات",
     "مورد علاقه",
@@ -82,12 +78,30 @@ const Profile = () => {
     if (!data) {
       fetchData()
     }
-  }, [setData])
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        newmew&&
+        profileBoxRef.current &&
+        !profileBoxRef.current.contains(event.target as Node)
+      ) {
+        setNewmew(null)
+      }
+    }
+
+    if (newmew) {
+      document.addEventListener("click", handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside)
+    }
+  }, [newmew, setData])
+
   return (
     <>
       <div className={styles.container}>
         <div className={styles.profItems}>
-          <div className={styles.profileBox}>
+        <div className={styles.profileBox} >
             <Image
               alt=''
               className={styles.image}
@@ -95,7 +109,7 @@ const Profile = () => {
               width={111}
               height={111}
             />
-            <div className={styles.profiletail}>
+            <div className={styles.profiletail} ref={profileBoxRef}>
               {prodetail.map((protail, index) => (
                 <p
                   key={index}
@@ -111,27 +125,24 @@ const Profile = () => {
                   }
                 >
                   {protail}
-                  {newmew && newmew[1] === index ? (
-                    <input
-                      value={newmew[0]}
-                      className={styles.onput}
-                      onChange={(e) => setNewmew([e.target.value, index])}
-                    />
-                  ) : (
-                    // ) : data &&
-                    //   data[1][index] !== null &&
-                    //   data[1][index] !== undefined ? (
-                    //   String(data[1][index])
-                    // ) : (
-                    ""
-                  )}
+                  {index !== parseInt(`${newmew && newmew[1]}`) && <BiEdit />}
                   {newmew && newmew[1] === index && (
-                    <input
-                      value={"ثبت"}
-                      type='submit'
-                      onClick={meow}
-                      className={styles.submit}
-                    />
+                    <div className={styles.editRow}>
+                      <input
+                        value={newmew[0]}
+                        placeholder={prodetail[index]}
+                        className={styles.onput}
+                        onChange={(e) => setNewmew([e.target.value, index])}
+                      />
+                      {newmew && newmew[1] === index && (
+                        <input
+                          value={"ثبت"}
+                          type='submit'
+                          onClick={meow}
+                          className={styles.submit}
+                        />
+                      )}
+                    </div>
                   )}
                 </p>
               ))}

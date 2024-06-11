@@ -13,11 +13,11 @@ const Navbar: React.FC<NavProps> = ({ basketData }) => {
   const [isBasketOpen, setIsBasketOpen] = useState<boolean>(false)
 
   useEffect(() => {
-    if (window.innerWidth < 777) {
+    if (window.innerWidth < 954) {
       setIsMobile(true)
     }
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 777)
+      setIsMobile(window.innerWidth <= 954)
     }
 
     handleResize()

@@ -27,13 +27,6 @@ const orderSchema = new mongoose.Schema({
 			required: true,
 		},
 	],
-	services: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Service',
-			required: true,
-		},
-	],
 
 	totalPrice: {
 		type: Number,
