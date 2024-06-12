@@ -9,24 +9,39 @@ import { useState, useEffect, useRef } from "react"
 import Orders from "./Orders/index"
 import Favorites from "./Favorites/index"
 import LastSeen from "./LastSeen/index"
-import { Order } from "@/DTO"
+import { ClientInterface, Order } from "@/DTO"
 import { BiEdit } from "react-icons/bi"
+import { GiCrossMark } from "react-icons/gi"
 
-interface Information {
+interface Info {
+  email: string
+  name: string
+  nationalCode: string
+  phone: number
+}
+
+interface Address {
   address: string
   houseNumber: number
   houseUnit: number
   zipCode: number
+  lat: string
+  long: string
 }
+
+interface Information {
+  info: Info
+  addr: Address[]
+}
+
 const Profile = () => {
   const [state, setState] = useState("سفارشات")
-  const [data, setData] = useState<
-    [Order[], [string, string, string, number, Information]] | null
-  >(null)
+  const [data, setData] = useState<[Order[], Information] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [newmew, setNewmew] = useState<[string, number] | null>(null)
+  const [newmew, setNewmew] = useState<[string | number, number] | null>(null)
   const [updating, setUpdating] = useState<boolean>(false)
-  const profileBoxRef = useRef<HTMLDivElement>(null)
+
+  const refs = useRef<{ [key: string]: HTMLInputElement | null }>({})
 
   const items = [
     "سفارشات",
@@ -36,7 +51,16 @@ const Profile = () => {
     "بازدید های اخیر",
     "پیغام ها",
   ]
-  const prodetail = ["ایمیل : ", "نام : ", "کد ملی : ", "شماره : "]
+
+  const prodetail = ["ایمیل", "نام", "کد ملی", "شماره تلفن"]
+
+  const keyTranslations: { [key: string]: string } = {
+    email: "ایمیل",
+    name: "نام",
+    nationalCode: "کد ملی",
+    phone: "شماره تلفن",
+  }
+
   const fetchData = async () => {
     try {
       const response = await fetch("/api/data/Post/Client/orders", {
@@ -53,6 +77,7 @@ const Profile = () => {
       console.error("Error fetching data:", error)
     }
   }
+
   const meow = async () => {
     setUpdating(true)
     try {
@@ -74,95 +99,82 @@ const Profile = () => {
     }
     setUpdating(false)
   }
+
   useEffect(() => {
     if (!data) {
       fetchData()
     }
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        newmew&&
-        profileBoxRef.current &&
-        !profileBoxRef.current.contains(event.target as Node)
-      ) {
-        setNewmew(null)
-      }
-    }
-
-    if (newmew) {
-      document.addEventListener("click", handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside)
-    }
-  }, [newmew, setData])
+  }, [setData])
 
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.profItems}>
-        <div className={styles.profileBox} >
-            <Image
-              alt=''
-              className={styles.image}
-              src={"/images/icon.png"}
-              width={111}
-              height={111}
-            />
-            <div className={styles.profiletail} ref={profileBoxRef}>
-              {prodetail.map((protail, index) => (
-                <p
+        <div className={styles.profileBox}>
+          <Image
+            alt=''
+            className={styles.image}
+            src={"/images/icon.png"}
+            width={111}
+            height={111}
+          />
+          <div className={styles.profiletail}>
+            {data &&
+              Object.entries(data[1].info).map(([key, value], index) => (
+                <div
+                  className={styles.detailRow}
                   key={index}
-                  onClick={() =>
-                    setNewmew([
-                      data &&
-                      data[1][index] !== null &&
-                      data[1][index] !== undefined
-                        ? String(data[1][index])
-                        : "",
-                      index,
-                    ])
-                  }
+                  onClick={() => value && setNewmew([String(value), index])}
                 >
-                  {protail}
-                  {index !== parseInt(`${newmew && newmew[1]}`) && <BiEdit />}
+                  <span>{keyTranslations[key]}</span>
+                  {index !== (newmew ? newmew[1] : -1) && (
+                    <>
+                      <span>{value}</span>
+                      <BiEdit className={styles.editIcon} />
+                    </>
+                  )}
                   {newmew && newmew[1] === index && (
                     <div className={styles.editRow}>
                       <input
-                        value={newmew[0]}
-                        placeholder={prodetail[index]}
+                        ref={(el) => {
+                          refs.current[key] = el
+                        }}
+                        defaultValue={newmew[0] as string}
+                        placeholder={String(value)}
                         className={styles.onput}
                         onChange={(e) => setNewmew([e.target.value, index])}
                       />
-                      {newmew && newmew[1] === index && (
-                        <input
-                          value={"ثبت"}
-                          type='submit'
-                          onClick={meow}
-                          className={styles.submit}
-                        />
-                      )}
+                      <input
+                        value='ثبت'
+                        type='submit'
+                        onClick={async () => {
+                          await meow()
+                        }}
+                        className={styles.submit}
+                      />
+                      <GiCrossMark
+                        onClick={() => setNewmew(null)}
+                        className={styles.close}
+                      />
                     </div>
                   )}
-                </p>
+                </div>
               ))}
-            </div>
-            <div className={styles.itemsBox}>
-              {items.map((item) => (
-                <>
-                  <div
-                    className={`${
-                      item === state ? styles.selected : styles.item
-                    } `}
-                    onClick={() => setState(item)}
-                  >
-                    {item}
-                  </div>
-                </>
-              ))}
-            </div>
+          </div>
+          <div className={styles.itemsBox}>
+            {items.map((item, idx) => (
+              <div
+                key={idx}
+                className={`${
+                  item === state ? styles.selected : styles.item
+                } `}
+                onClick={() => setState(item)}
+              >
+                {item}
+              </div>
+            ))}
           </div>
         </div>
+
         {state === "سفارشات" ? (
           <Orders orders={data && data[0]} loading={isLoading} />
         ) : state === "مورد علاقه" ? (
@@ -170,16 +182,7 @@ const Profile = () => {
         ) : state === "گفتگو" ? (
           <Chat />
         ) : state === "آدرس ها" ? (
-          <Address
-            address={data && data[1][4].address}
-            zipCode={parseInt(`${data && data[1][4] && data[1][4].zipCode}`)}
-            houseUnit={parseInt(
-              `${data && data[1][4] && data[1][4].houseUnit}`
-            )}
-            houseNumber={parseInt(
-              `${data && data[1][4] && data[1][4].houseNumber}`
-            )}
-          />
+          data && <Address addresses={data[1]?.addr} />
         ) : state === "بازدید های اخیر" ? (
           <LastSeen />
         ) : (
@@ -189,4 +192,5 @@ const Profile = () => {
     </>
   )
 }
+
 export default Profile

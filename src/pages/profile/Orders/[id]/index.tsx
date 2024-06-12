@@ -2,6 +2,7 @@
 
 import { Product } from '@/DTO'
 import { GetServerSideProps, NextPage } from 'next'
+import styles from './index.module.css'
 
 interface OrderProducts {
 	products: Product[]
@@ -20,6 +21,7 @@ interface Order {
 const OrderUI: NextPage<OrderProducts> = (orderData) => {
 	return (
 		<>
+		<div className={styles.container}></div>
 			<div>{orderData.orders.ticketID}</div>
 			<div>{orderData.orders.status}</div>
 			<div>{orderData.orders.totalPrice}</div>

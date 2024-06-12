@@ -7,12 +7,14 @@ const clientSchema = new mongoose.Schema({
 	nationalCode: String,
 	phone: { type: Number, required: true, unique: true },
 	password: { type: String, required: true },
-	information: {
+	information: [{
 		address: String,
 		houseNumber: Number,
 		houseUnit: Number,
 		zipCode: Number,
-	},
+		lat:String,
+		long:String
+	}],
 	time: { type: Date, default: new Date() },
 	keyV: { type: String, required: true },
 })

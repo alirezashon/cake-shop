@@ -4,22 +4,8 @@ import ClientSession from "../../../../../../models/Client/Session"
 import Client from "../../../../../../models/Client"
 import Product from "../../../../../../models/Data/Product"
 import db from "../../../../../../utils/index.js"
+import { ClientInterface } from "@/DTO"
 const orderero = async (req: NextApiRequest, res: NextApiResponse) => {
-  interface ClientInterface {
-    email: string
-    name: string
-    nationalCode: string
-    phone: number
-    password: string
-    information: {
-      address: string
-      houseNumber: number
-      houseUnit: number
-      zipCode: number
-    }
-    time: string
-    keyV: string
-  }
   try {
     if (req.method === "POST") {
       const { authType } = req.body
@@ -36,13 +22,22 @@ const orderero = async (req: NextApiRequest, res: NextApiResponse) => {
             _id: session.client,
           })
           if (clientSchema) {
-            const clientDatashow = [
-              clientSchema.email,
-              clientSchema.name,
-              clientSchema.nationalCode,
-              clientSchema.phone,
-              clientSchema.information,
-            ]
+            const clientDatashow = {
+              info: {
+                email: clientSchema.email || "",
+                name: clientSchema.name || "",
+                nationalCode: clientSchema.nationalCode || "",
+                phone: clientSchema.phone || -1,
+              },
+              addr: clientSchema.information.map((client) => {
+                return { 
+                  address: client.address || "",
+                  zipCode: client.zipCode || -1,
+                  houseUnit: client.houseUnit || -1,
+                  houseNumber: client.houseNumber || -1,
+                }
+              }),
+            }
             const orders =
               clientSchema &&
               (await Orders.find(

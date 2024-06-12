@@ -1,23 +1,27 @@
 import { BiSolidMessageSquareEdit } from "react-icons/bi"
 import styles from "./index.module.css"
-import { useState } from "react"
+import { useState, useRef } from "react"
 
-interface Props {
-  address: string | undefined | null
+interface AddressProps {
+  address: string
   houseNumber: number
   houseUnit: number
   zipCode: number
+  lat: string
+  long: string
 }
-const Address: React.FC<Props> = ({
-  address,
-  zipCode,
-  houseNumber,
-  houseUnit,
-}) => {
-  const [newmew, setNewmew] = useState<[string, number] | null>(null)
+
+interface Props {
+  addresses: AddressProps[]
+}
+
+const Address: React.FC<Props> = ({ addresses }) => {
+  const [newmew, setNewmew] = useState<[string, number, number] | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
-  const labels = ["آدرس  ", "کد پستی  ", "پلاک", "واحد"]
-  const meow = async () => {
+  const labels = ["آدرس", "کد پستی", "پلاک", "واحد"]
+  const inputRef = useRef<HTMLInputElement>(null)
+  console.log(addresses)
+  const meow = async (index: number) => {
     setLoading(true)
     try {
       const response = await fetch("/api/data/Post/Client/userinfo", {
@@ -25,10 +29,22 @@ const Address: React.FC<Props> = ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           authType: "C%L&i&E^ne^D%A$UtR",
-          address: newmew && newmew[1] === 0 ? newmew[0] : "",
-          zipCode: newmew && newmew[1] === 1 ? newmew[0] : "",
-          houseNumber: newmew && newmew[1] === 2 ? newmew[0] : "",
-          houseUnit: newmew && newmew[1] === 3 ? newmew[0] : "",
+          address:
+            newmew && newmew[1] === 0 && newmew[2] === index
+              ? newmew[0]
+              : addresses[index].address,
+          zipCode:
+            newmew && newmew[1] === 1 && newmew[2] === index
+              ? newmew[0]
+              : addresses[index].zipCode,
+          houseNumber:
+            newmew && newmew[1] === 2 && newmew[2] === index
+              ? newmew[0]
+              : addresses[index].houseNumber,
+          houseUnit:
+            newmew && newmew[1] === 3 && newmew[2] === index
+              ? newmew[0]
+              : addresses[index].houseUnit,
         }),
       })
       await response.json()
@@ -41,75 +57,65 @@ const Address: React.FC<Props> = ({
 
   return (
     <>
-      <div className={styles.detailBox}>
-        {labels.map((label, index) => (
-          <div key={index} className={styles.detailRow}>
-            <BiSolidMessageSquareEdit
-              className={styles.iconedit}
-              onClick={() => setNewmew((mew) => [mew ? mew[0] : "", index])}
-            />
-            <div
-              className={styles.innerRow}
-              onClick={() => setNewmew((mew) => [mew ? mew[0] : "", index])}
-            >
-              <label>{label}</label>
-              <p>
-                {newmew && newmew[1] === index ? (
+      {addresses.map((address, idx) => (
+        <div key={idx} className={styles.detailBox}>
+          <div className={styles.addressHeader}>آدرس شماره {idx + 1}</div>
+          {labels.map((label, index) => (
+            <div key={index} className={styles.detailRow}>
+              <BiSolidMessageSquareEdit
+                className={styles.iconedit}
+                onClick={() => setNewmew([newmew ? newmew[0] : "", index, idx])}
+              />
+              <div
+                className={styles.innerRow}
+                onClick={() => setNewmew([newmew ? newmew[0] : "", index, idx])}
+              >
+                <label>{label}:</label>
+                <p>
+                  {newmew && newmew[1] === index && newmew[2] === idx ? (
+                    <input
+                      ref={inputRef}
+                      value={newmew[0]}
+                      placeholder={`${
+                        index === 0
+                          ? address.address
+                          : index === 1
+                          ? address.zipCode
+                          : index === 2
+                          ? address.houseNumber
+                          : address.houseUnit
+                      }`}
+                      className={styles.onput}
+                      onChange={(e) => setNewmew([e.target.value, index, idx])}
+                    />
+                  ) : index === 0 ? (
+                    address.address
+                  ) : index === 1 ? (
+                    address.zipCode
+                  ) : index === 2 ? (
+                    address.houseNumber
+                  ) : (
+                    address.houseUnit
+                  )}
+                </p>
+              </div>
+              {newmew && newmew[1] === index && newmew[2] === idx && (
+                <>
+                  {loading && <div className={styles.loading}></div>}
                   <input
-                    placeholder={`${
-                      index === 0
-                        ? address
-                        : index === 1
-                        ? zipCode
-                        : index === 2
-                        ? houseNumber
-                        : index === 2 && houseUnit
-                    }`}
-                    className={styles.onput}
-                    onChange={(e) => setNewmew([e.target.value, index])}
+                    value='ثبت'
+                    type='submit'
+                    onClick={() => meow(idx)}
+                    className={styles.submit}
                   />
-                ) : index === 0 ? (
-                  typeof address !== "string" ? (
-                    ""
-                  ) : (
-                    address
-                  )
-                ) : index === 1 ? (
-                  isNaN(zipCode) ? (
-                    ""
-                  ) : (
-                    zipCode
-                  )
-                ) : index === 2 ? (
-                  isNaN(houseNumber) ? (
-                    ""
-                  ) : (
-                    houseNumber
-                  )
-                ) : isNaN(houseUnit) ? (
-                  ""
-                ) : (
-                  houseUnit
-                )}
-              </p>
+                </>
+              )}
             </div>
-            {newmew && newmew[1] === index && (
-              <>
-                {loading && (
-                  <div className=""></div>
-                )}
-                <input
-                  value={"ثبت"}
-                  type='submit'
-                  onClick={meow}
-                  className={styles.submit}
-                />
-              </>
-            )}
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ))}
     </>
   )
 }
+
 export default Address

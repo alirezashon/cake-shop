@@ -11,7 +11,6 @@ const userinfo = async (req: NextApiRequest, res: NextApiResponse) => {
       const {
         phone,
         name,
-        password,
         authType,
         nationalCode,
         houseNumber,
@@ -35,7 +34,6 @@ const userinfo = async (req: NextApiRequest, res: NextApiResponse) => {
               ...(email && { email }),
               ...(name && { name }),
               ...(nationalCode && { nationalCode }),
-              ...(password && { password }),
               information: {
                 ...userSchema.information,
                 ...(address && { address }),

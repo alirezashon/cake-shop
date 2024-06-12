@@ -50,9 +50,11 @@ const Information: React.FC = () => {
     const storedUser = localStorage.getItem("s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi")
     if (storedUser) {
       console.log(storedUser.length)
-      storedUser.length === 25
-        ? setLogin([true, false])
-        : storedUser.length === 35 && setLogin([true, true])
+      if (storedUser.length === 25) {
+        setLogin([true, false])
+      } else if (storedUser.length === 35) {
+        setLogin([true, true])
+      }
     }
   }, [setLogin])
   const handleSubmit = async (e: FormEvent) => {
