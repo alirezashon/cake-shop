@@ -1,5 +1,5 @@
 import { Toast } from "primereact/toast"
-import React, { RefObject } from "react"
+import { RefObject } from "react"
 
 export const InsertNumber = async (
   setIsLoading: (arg: boolean) => void,
@@ -7,7 +7,6 @@ export const InsertNumber = async (
   otp: number
 ) => {
   setIsLoading(true)
-  console.log(otp)
   try {
     const response = await fetch("/api/Auth/Register/InsertNumber", {
       method: "POST",
@@ -21,19 +20,15 @@ export const InsertNumber = async (
     })
     const data = await response.json()
     if (data.success === true && response.status === 200) {
+      const kalim = [...Array(23)]
+        .map(() => Math.floor(Math.random() * 16).toString(16))
+        .join("")
       setIsLoading(false)
-      localStorage.setItem(
-        "s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi",
-        JSON.stringify(
-          Array.from({ length: 23 }, () =>
-            "ABCDEFHIJOPQVWXYZabcdefnopqrstuvwxyz0123456789".charAt(
-              Math.floor(Math.random() * 62)
-            )
-          )
-            .join("")
-            .toString()
+      kalim &&
+        localStorage.setItem(
+          "s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi",
+          JSON.stringify(kalim)
         )
-      )
       return "S!A@k%s$e^x%f^u*l^"
     } else {
       setIsLoading(false)
@@ -68,21 +63,16 @@ export const UpdateAddress = async (
       }),
     })
     const data = await response.json()
-    console.log(response)
     if (response.status === 200) {
+      const randomString = [...Array(33)]
+        .map(() => Math.floor(Math.random() * 16).toString(16))
+        .join("")
       setIsLoading(false)
-      localStorage.setItem(
-        "s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi",
-        JSON.stringify(
-          Array.from({ length: 33 }, () =>
-            "ABCDEFHIJOPQVWXYZabcdefnopqrstuvwxyz0123456789".charAt(
-              Math.floor(Math.random() * 62)
-            )
-          )
-            .join("")
-            .toString()
+      randomString &&
+        localStorage.setItem(
+          "s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi",
+          JSON.stringify(randomString)
         )
-      )
       return toast.current?.show({
         severity: "success",
         summary: "کد برای شماره ارسال شد",

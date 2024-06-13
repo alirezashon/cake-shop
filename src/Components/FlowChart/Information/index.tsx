@@ -47,18 +47,26 @@ const Information: React.FC = () => {
   }
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi")
+    const storedUser = JSON.parse(
+      localStorage.getItem("s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi") || ""
+    )
     if (storedUser) {
       console.log(storedUser.length)
-      if (storedUser.length === 25) {
+      if (storedUser.length === 23) {
         setLogin([true, false])
-      } else if (storedUser.length === 35) {
+      } else if (storedUser.length === 33) {
         setLogin([true, true])
       }
     }
   }, [setLogin])
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    toast.current?.show({
+      severity: "info",
+      summary: "در حال اجرا",
+      detail: "سرور در حال پردازش",
+      life: 3000,
+    })
     if (!otpSent) {
       const phoneNumber = refs.phone.current?.value || ""
       if (phoneNumber.toString()?.length < 10) {
@@ -97,79 +105,73 @@ const Information: React.FC = () => {
   return (
     <>
       <Toast ref={toast} />
-      {isLoading ? (
-        <div></div>
-      ) : (
-        !login && (
-          <div className={styles.container}>
-            {!login[0] && (
-              <div className={styles.formBox}>
-                <Image
-                  alt=''
-                  className={styles.image}
-                  src={"/images/icon.png"}
-                  width={777}
-                  height={777}
+      <div className={styles.container}>
+        {!login[0] && (
+          <div className={styles.formBox}>
+            <Image
+              alt=''
+              className={styles.image}
+              src={"/images/icon.png"}
+              width={777}
+              height={777}
+            />
+            <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
+              <input
+                ref={refs.phone as RefObject<HTMLInputElement>}
+                placeholder={"شماره تماس"}
+                type={"text"}
+              />
+              {otpSent && (
+                <input
+                  ref={refs.otp as RefObject<HTMLInputElement>}
+                  placeholder={"کد ارسال شده"}
+                  dir='rtl'
+                  type={"number"}
                 />
-                <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
-                  <input
-                    ref={refs.phone as RefObject<HTMLInputElement>}
-                    placeholder={"شماره تماس"}
-                    type={"text"}
-                  />
-                  {otpSent && (
-                    <input
-                      ref={refs.otp as RefObject<HTMLInputElement>}
-                      placeholder={"کد ارسال شده"}
-                      dir='rtl'
-                      type={"number"}
-                    />
-                  )}
-                  <input
-                    className={styles.submit}
-                    type='submit'
-                    value={!otpSent ? "ارسال کد" : "ثبت نام"}
-                  />
-                </form>
-              </div>
-            )}
-            {!login[1] && login[0] && (
-              <div className={styles.mapBox}>
-                <div className={styles.map}>
-                  <Map onDataChange={getAddress} />
-                </div>
-                <form
-                  className={styles.mapformBox}
-                  onSubmit={(e) => updateAddress(e)}
-                >
-                  <div className={styles.mapformBoxRow}>
-                    <input
-                      placeholder={"پلاک"}
-                      type={"number"}
-                      ref={refs.houseNumber as RefObject<HTMLInputElement>}
-                    />
-                    <input
-                      placeholder={"واحد"}
-                      type={"number"}
-                      ref={refs.houseUnit as RefObject<HTMLInputElement>}
-                    />
-                  </div>
-                  <textarea
-                    placeholder={"آدرس"}
-                    ref={refs.houseUnit as RefObject<HTMLTextAreaElement>}
-                  ></textarea>
-                  <input
-                    style={{ width: "80%" }}
-                    className={styles.submit}
-                    type='submit'
-                    value={"ثبت آدرس"}
-                  />
-                </form>
-              </div>
-            )}
+              )}
+              <input
+                className={styles.submit}
+                type='submit'
+                value={!otpSent ? "ارسال کد" : "ثبت نام"}
+              />
+            </form>
           </div>
-        )
-      )}
+        )}
+        {!login[1] && login[0] && (
+          <div className={styles.mapBox}>
+            <div className={styles.map}>
+              <Map onDataChange={getAddress} />
+            </div>
+            <form
+              className={styles.mapformBox}
+              onSubmit={(e) => updateAddress(e)}
+            >
+              <div className={styles.mapformBoxRow}>
+                <input
+                  placeholder={"پلاک"}
+                  type={"number"}
+                  ref={refs.houseNumber as RefObject<HTMLInputElement>}
+                />
+                <input
+                  placeholder={"واحد"}
+                  type={"number"}
+                  ref={refs.houseUnit as RefObject<HTMLInputElement>}
+                />
+              </div>
+              <textarea
+                placeholder={"آدرس"}
+                ref={refs.houseUnit as RefObject<HTMLTextAreaElement>}
+              ></textarea>
+              <input
+                style={{ width: "80%" }}
+                className={styles.submit}
+                type='submit'
+                value={"ثبت آدرس"}
+              />
+            </form>
+          </div>
+        )}
+      </div>
     </>
   )
 }
