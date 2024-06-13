@@ -3,6 +3,37 @@
     width: 0;
   }
 }
+.container {
+  border: 0.3vh dashed rgb(241, 241, 132);
+  width: 77%;
+  margin: 1vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1vh;
+  justify-content: space-around;
+}
+.addBox {
+  display: flex;
+  justify-content: center;
+  border: 0.3vh dashed rgb(159, 249, 42);
+  border-radius: 1vh;
+}
+.addBox p {
+  cursor: pointer;
+  background-color: #ff9500f4;
+  color: #ffffff;
+  border: 0.2vh dashed rgb(255, 242, 64);
+  border-radius: 7vh;
+  width: 7vh;
+  height: 7vh;
+  display: flex;
+  justify-content: center;
+  font-size: 4vh;
+  align-items: center;
+}
+.addBox p:hover {
+  transform: rotate(222deg) scale(1.1);
+}
 .detailBox {
   width: 80%;
   background: linear-gradient(
@@ -77,16 +108,16 @@
 }
 .submit {
   background: linear-gradient(rgb(84, 216, 28), rgb(45, 145, 17));
-  border: .2vh ridge rgb(198, 252, 232);
+  border: 0.2vh ridge rgb(198, 252, 232);
   color: white;
-  border-radius: .5vh;
+  border-radius: 0.5vh;
   height: fit-content;
-  align-self: center  ;
+  align-self: center;
 }
-.submit:hover{
-  transform: scale(1.05,1.21);
+.submit:hover {
+  transform: scale(1.05, 1.21);
   cursor: pointer;
-  border: .2vh ridge rgb(8, 135, 89);
+  border: 0.2vh ridge rgb(8, 135, 89);
   background: linear-gradient(rgb(153, 218, 126), rgb(46, 152, 17));
 }
 @media (max-width: 999px) {

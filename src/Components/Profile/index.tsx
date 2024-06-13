@@ -4,12 +4,12 @@ import Image from 'next/image'
 import Address from './Address'
 import Chat from './Chat'
 import Notification from './Notifications'
-import styles from '..module.css'
+import styles from './index.module.css'
 import { useState, useEffect, useRef } from 'react'
 import Orders from './Orders'
 import Favorites from './Favorites'
 import LastSeen from './LastSeen'
-import { ClientInterface, Order } from '@/Interfaces'
+import { Information, Order } from '@/Interfaces'
 import { BiEdit } from 'react-icons/bi'
 import { GiCrossMark } from 'react-icons/gi'
 
@@ -20,23 +20,27 @@ interface Info {
   phone: number
 }
 
-interface Address {
-  address: string
-  houseNumber: number
-  houseUnit: number
-  zipCode: number
-  lat: string
-  long: string
+interface Data {
+  info: Info
+  addr: Information[]
 }
 
-interface Information {
-  info: Info
-  addr: Address[]
+const keyTranslations: { [key: string]: string } = {
+  email: 'ایمیل',
+  name: 'نام',
+  nationalCode: 'کد ملی',
+  phone: 'شماره تلفن',
+  address: 'آدرس',
+  houseNumber: 'شماره خانه',
+  houseUnit: 'واحد خانه',
+  zipCode: 'کد پستی',
+  lat: 'عرض جغرافیایی',
+  long: 'طول جغرافیایی',
 }
 
 const Profile = () => {
   const [state, setState] = useState('سفارشات')
-  const [data, setData] = useState<[Order[], Information] | null>(null)
+  const [data, setData] = useState<[Order[], Data] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [newmew, setNewmew] = useState<[string | number, number] | null>(null)
   const [updating, setUpdating] = useState<boolean>(false)
@@ -51,15 +55,6 @@ const Profile = () => {
     'بازدید های اخیر',
     'پیغام ها',
   ]
-
-  const prodetail = ['ایمیل', 'نام', 'کد ملی', 'شماره تلفن']
-
-  const keyTranslations: { [key: string]: string } = {
-    email: 'ایمیل',
-    name: 'نام',
-    nationalCode: 'کد ملی',
-    phone: 'شماره تلفن',
-  }
 
   const fetchData = async () => {
     try {
@@ -120,43 +115,45 @@ const Profile = () => {
           <div className={styles.profiletail}>
             {data &&
               Object.entries(data[1].info).map(([key, value], index) => (
-                <div
-                  className={styles.detailRow}
-                  key={index}
-                  onClick={() => value && setNewmew([String(value), index])}
-                >
-                  <span>{keyTranslations[key]}</span>
-                  {index !== (newmew ? newmew[1] : -1) && (
-                    <>
-                      <span>{value}</span>
-                      <BiEdit className={styles.editIcon} />
-                    </>
-                  )}
-                  {newmew && newmew[1] === index && (
-                    <div className={styles.editRow}>
-                      <input
-                        ref={(el) => {
-                          refs.current[key] = el
-                        }}
-                        defaultValue={newmew[0] as string}
-                        placeholder={String(value)}
-                        className={styles.onput}
-                        onChange={(e) => setNewmew([e.target.value, index])}
-                      />
-                      <input
-                        value='ثبت'
-                        type='submit'
-                        onClick={async () => {
-                          await meow()
-                        }}
-                        className={styles.submit}
-                      />
-                      <GiCrossMark
-                        onClick={() => setNewmew(null)}
-                        className={styles.close}
-                      />
-                    </div>
-                  )}
+                <div key={index}>
+                  <div
+                    className={styles.detailRow}
+                    key={index}
+                    onClick={() => value && setNewmew([String(value), index])}
+                  >
+                    <span>{keyTranslations[key]}</span>
+                    {index !== (newmew ? newmew[1] : -1) && (
+                      <>
+                        <span>{value}</span>
+                        <BiEdit className={styles.editIcon} />
+                      </>
+                    )}
+                    {newmew && newmew[1] === index && (
+                      <div className={styles.editRow}>
+                        <input
+                          ref={(el) => {
+                            refs.current[key] = el
+                          }}
+                          defaultValue={newmew[0] as string}
+                          placeholder={String(value)}
+                          className={styles.onput}
+                          onChange={(e) => setNewmew([e.target.value, index])}
+                        />
+                        <input
+                          value='ثبت'
+                          type='submit'
+                          onClick={async () => {
+                            await meow()
+                          }}
+                          className={styles.submit}
+                        />
+                        <GiCrossMark
+                          onClick={() => setNewmew(null)}
+                          className={styles.close}
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
           </div>

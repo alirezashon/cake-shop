@@ -1,7 +1,7 @@
 // components/MapComponent.jsx
 import React from 'react'
 import dynamic from 'next/dynamic'
-
+import Profile from '@/Components/Profile'
 const Map = dynamic(() => import('./jest'), {
   ssr: false, // This line is crucial to prevent SSR issues
 })
@@ -11,12 +11,10 @@ const Home = () => {
     <div
       style={{
         height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        marginTop: '11vh',
       }}
     >
-      <Map />
+      <Profile />
     </div>
   )
 }

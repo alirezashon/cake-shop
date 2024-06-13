@@ -1,19 +1,20 @@
-import { NextApiRequest, NextApiResponse } from "next"
-import Orders from "../../../../../../models/Orders"
-import ClientSession from "../../../../../../models/Client/Session"
-import Client from "../../../../../../models/Client"
-import Product from "../../../../../../models/Data/Product"
-import db from "../../../../../../utils/index.js"
-import { ClientInterface } from "@/Interfaces"
+import { NextApiRequest, NextApiResponse } from 'next'
+import Orders from '../../../../../../models/Orders'
+import ClientSession from '../../../../../../models/Client/Session'
+import Client from '../../../../../../models/Client'
+import Product from '../../../../../../models/Data/Product'
+import db from '../../../../../../utils/index.js'
+import { ClientInterface, ClientProfile } from '@/Interfaces'
+import Profile from '@/models/Client/Profile'
 const orderero = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    if (req.method === "POST") {
+    if (req.method === 'POST') {
       const { authType } = req.body
-      const token = req.cookies["CTFlEoiSHkeNnToMBLiShoOekn3kN2y@k"]
+      const token = req.cookies['CTFlEoiSHkeNnToMBLiShoOekn3kN2y@k']
 
-      if (authType === "(k*i)o&R^D&e$r#o@l!A$n%S*o(7)") {
+      if (authType === '(k*i)o&R^D&e$r#o@l!A$n%S*o(7)') {
         await db.connectToShop()
-        const kalim = token && token.split("#")[1].replace(/"$/, "")
+        const kalim = token && token.split('#')[1].replace(/"$/, '')
         const session = await ClientSession.findOne({
           key: kalim,
         })
@@ -22,21 +23,20 @@ const orderero = async (req: NextApiRequest, res: NextApiResponse) => {
             _id: session.client,
           })
           if (clientSchema) {
+            const profile: ClientProfile | null = await Profile.findOne({
+              _id: clientSchema._id,
+            })
+
             const clientDatashow = {
               info: {
-                email: clientSchema.email || "",
-                name: clientSchema.name || "",
-                nationalCode: clientSchema.nationalCode || "",
-                phone: clientSchema.phone || -1,
+                email: profile?.email || '',
+                name: profile?.name || '',
+                nationalCode: profile?.nationalCode || '',
+                phone: clientSchema?.phone || -1,
               },
-              addr: clientSchema.information.map((client) => {
-                return { 
-                  address: client.address || "",
-                  zipCode: client.zipCode || -1,
-                  houseUnit: client.houseUnit || -1,
-                  houseNumber: client.houseNumber || -1,
-                }
-              }),
+              addr: {
+                information: profile?.information,
+              },
             }
             const orders =
               clientSchema &&
@@ -52,7 +52,7 @@ const orderero = async (req: NextApiRequest, res: NextApiResponse) => {
                   attachment: 1,
                 }
               ).catch((error) =>
-                console.error("Error fetching orders:", error)
+                console.error('Error fetching orders:', error)
               ))
             if (orders)
               for (const order of orders) {
@@ -67,13 +67,13 @@ const orderero = async (req: NextApiRequest, res: NextApiResponse) => {
         } else {
           res
             .status(207)
-            .json({ success: false, message: "session is expired" })
+            .json({ success: false, message: 'session is expired' })
         }
       } else {
-        res.status(407).json({ success: false, message: "Invalid Auth Type" })
+        res.status(407).json({ success: false, message: 'Invalid Auth Type' })
       }
     } else {
-      res.status(409).json({ success: false, message: "Invalid Request Type" })
+      res.status(409).json({ success: false, message: 'Invalid Request Type' })
     }
   } catch (err) {
     res.status(500).json({ success: false, message: `Server Error => ${err}` })

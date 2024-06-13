@@ -56,8 +56,8 @@ export interface Information {
   houseNumber: number
   houseUnit: number
   zipCode: number
-  lat: string
-  long: string
+  lat: number
+  long: number
 }
 export interface ClientProfile {
   _id: string
@@ -65,6 +65,8 @@ export interface ClientProfile {
   name: string
   nationalCode: string
   information: Information[]
+  favorites: string
+  seens: string[]
   time: string
 }
 export interface ClientInterface {
