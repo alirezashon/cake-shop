@@ -58,6 +58,7 @@ export interface Information {
   zipCode: number
   lat: number
   long: number
+  _id?: string
 }
 export interface ClientProfile {
   _id: string

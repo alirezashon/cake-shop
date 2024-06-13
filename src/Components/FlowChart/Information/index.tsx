@@ -1,11 +1,11 @@
 /** @format */
 
-import { FormEvent, RefObject, useEffect, useRef, useState } from "react"
-import styles from "./index.module.css"
-import Map from "../../Map"
-import { UpdateAddress, InsertNumber } from "./handler"
-import { Toast } from "primereact/toast"
-import Image from "next/image"
+import { FormEvent, RefObject, useEffect, useRef, useState } from 'react'
+import styles from './index.module.css'
+import Map from '../../Map'
+import { UpdateAddress, InsertNumber } from './handler'
+import { Toast } from 'primereact/toast'
+import Image from 'next/image'
 
 interface MapData {
   address: string
@@ -47,11 +47,20 @@ const Information: React.FC = () => {
   }
 
   useEffect(() => {
-    const storedUser = JSON.parse(
-      localStorage.getItem("s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi")||''
+    const storedUserString = localStorage.getItem(
+      's(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi'
     )
+
+    let storedUser = null
+    if (storedUserString) {
+      try {
+        storedUser = JSON.parse(storedUserString)
+      } catch (error) {
+        localStorage.removeItem('s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi')
+      }
+    }
+
     if (storedUser) {
-      console.log(storedUser.length)
       if (storedUser.length === 23) {
         setLogin([true, false])
       } else if (storedUser.length === 33) {
@@ -59,29 +68,30 @@ const Information: React.FC = () => {
       }
     }
   }, [setLogin])
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     toast.current?.show({
-      severity: "info",
-      summary: "در حال اجرا",
-      detail: "سرور در حال پردازش",
+      severity: 'info',
+      summary: 'در حال اجرا',
+      detail: 'سرور در حال پردازش',
       life: 3000,
     })
     if (!otpSent) {
-      const phoneNumber = refs.phone.current?.value || ""
+      const phoneNumber = refs.phone.current?.value || ''
       if (phoneNumber.toString()?.length < 10) {
         toast.current?.show({
-          severity: "error",
-          summary: "شماره تماس اشتباه است",
-          detail: "ناموفق",
+          severity: 'error',
+          summary: 'شماره تماس اشتباه است',
+          detail: 'ناموفق',
           life: 3000,
         })
       } else {
         setOtpSent(true)
         toast.current?.show({
-          severity: "success",
-          summary: "کد برای شماره ارسال شد",
-          detail: "موفق",
+          severity: 'success',
+          summary: 'کد برای شماره ارسال شد',
+          detail: 'موفق',
           life: 3000,
         })
       }
@@ -91,12 +101,12 @@ const Information: React.FC = () => {
         parseInt(`${refs.phone.current?.value}`),
         parseInt(`${refs.otp.current?.value}`)
       )
-      if (status === "S!A@k%s$e^x%f^u*l^") {
+      if (status === 'S!A@k%s$e^x%f^u*l^') {
         setLogin([true, false])
         toast.current?.show({
-          severity: "success",
-          summary: "ثبت نام با موفقیت انجام شد",
-          detail: "موفق",
+          severity: 'success',
+          summary: 'ثبت نام با موفقیت انجام شد',
+          detail: 'موفق',
           life: 3000,
         })
       }
@@ -111,28 +121,28 @@ const Information: React.FC = () => {
             <Image
               alt=''
               className={styles.image}
-              src={"/images/icon.png"}
+              src={'/images/icon.png'}
               width={777}
               height={777}
             />
             <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
               <input
                 ref={refs.phone as RefObject<HTMLInputElement>}
-                placeholder={"شماره تماس"}
-                type={"text"}
+                placeholder={'شماره تماس'}
+                type={'text'}
               />
               {otpSent && (
                 <input
                   ref={refs.otp as RefObject<HTMLInputElement>}
-                  placeholder={"کد ارسال شده"}
+                  placeholder={'کد ارسال شده'}
                   dir='rtl'
-                  type={"number"}
+                  type={'number'}
                 />
               )}
               <input
                 className={styles.submit}
                 type='submit'
-                value={!otpSent ? "ارسال کد" : "ثبت نام"}
+                value={!otpSent ? 'ارسال کد' : 'ثبت نام'}
               />
             </form>
           </div>
@@ -148,25 +158,25 @@ const Information: React.FC = () => {
             >
               <div className={styles.mapformBoxRow}>
                 <input
-                  placeholder={"پلاک"}
-                  type={"number"}
+                  placeholder={'پلاک'}
+                  type={'number'}
                   ref={refs.houseNumber as RefObject<HTMLInputElement>}
                 />
                 <input
-                  placeholder={"واحد"}
-                  type={"number"}
+                  placeholder={'واحد'}
+                  type={'number'}
                   ref={refs.houseUnit as RefObject<HTMLInputElement>}
                 />
               </div>
               <textarea
-                placeholder={"آدرس"}
+                placeholder={'آدرس'}
                 ref={refs.houseUnit as RefObject<HTMLTextAreaElement>}
               ></textarea>
               <input
-                style={{ width: "80%" }}
+                style={{ width: '80%' }}
                 className={styles.submit}
                 type='submit'
-                value={"ثبت آدرس"}
+                value={'ثبت آدرس'}
               />
             </form>
           </div>

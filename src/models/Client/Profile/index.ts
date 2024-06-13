@@ -21,8 +21,8 @@ const profileSchema = new mongoose.Schema({
       houseNumber: Number,
       houseUnit: Number,
       zipCode: Number,
-      lat: String,
-      long: String,
+      lat: Number,
+      long: Number,
     },
   ],
   favorites: [

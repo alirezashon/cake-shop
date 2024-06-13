@@ -24,7 +24,7 @@ const orderero = async (req: NextApiRequest, res: NextApiResponse) => {
           })
           if (clientSchema) {
             const profile: ClientProfile | null = await Profile.findOne({
-              _id: clientSchema._id,
+              client: clientSchema._id,
             })
 
             const clientDatashow = {

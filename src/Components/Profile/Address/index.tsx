@@ -39,13 +39,11 @@ const Address: React.FC<Props> = ({ addresses }) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const toast = useRef<Toast>(null)
 
-  // Ensure addresses is an array
   useEffect(() => {
-    if (!Array.isArray(addresses)) {
-      console.error('addresses is not an array', addresses)
-    }
+    console.error(addresses)
   }, [addresses])
-  const addit = async (e:FormEvent) => {
+
+  const addit = async (e: FormEvent) => {
     e.preventDefault()
     const information = {
       address: addressRef.address.current?.value || '',
@@ -57,6 +55,7 @@ const Address: React.FC<Props> = ({ addresses }) => {
     }
     addAddress(toast, information)
   }
+
   return (
     <>
       <div className={styles.container}>
@@ -139,15 +138,14 @@ const Address: React.FC<Props> = ({ addresses }) => {
           </div>
         ) : (
           <>
-            <form className={styles.addBox} onSubmit={(e)=>addit(e)}>
+            <form className={styles.addBox} onSubmit={(e) => addit(e)}>
               {Object.keys(addressRef).map((refName, index) => (
                 <div key={index} className={styles.productBoxRow}>
                   <label>{refName}</label>
-
                   <input
                     ref={addressRef[refName] as RefObject<HTMLInputElement>}
                     placeholder={refName}
-                    type={'text'}
+                    type='text'
                   />
                 </div>
               ))}
