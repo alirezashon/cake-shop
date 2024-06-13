@@ -28,8 +28,7 @@ const profileSchema = new mongoose.Schema({
   favorites: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Client',
-      required: true,
+      ref: 'Product',
     },
   ],
   seens: [

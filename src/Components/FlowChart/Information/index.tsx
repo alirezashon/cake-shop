@@ -48,7 +48,7 @@ const Information: React.FC = () => {
 
   useEffect(() => {
     const storedUser = JSON.parse(
-      localStorage.getItem("s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi") || ""
+      localStorage.getItem("s(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi")||''
     )
     if (storedUser) {
       console.log(storedUser.length)

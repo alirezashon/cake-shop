@@ -1,9 +1,10 @@
 import { BiSolidMessageSquareEdit } from 'react-icons/bi'
 import styles from './index.module.css'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, RefObject, FormEvent } from 'react'
 import { Information } from '@/Interfaces'
 import dynamic from 'next/dynamic'
-import { MdAdd } from 'react-icons/md'
+import { addAddress } from '../handler'
+import { Toast } from 'primereact/toast'
 
 const Map = dynamic(() => import('./map'), {
   ssr: false,
@@ -16,6 +17,7 @@ interface Props {
 const Address: React.FC<Props> = ({ addresses }) => {
   const [newmew, setNewmew] = useState<[string, number, number] | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
+  const [isAdding, setIsAdding] = useState<boolean>(false)
   const labels = [
     'آدرس',
     'کد پستی',
@@ -24,7 +26,18 @@ const Address: React.FC<Props> = ({ addresses }) => {
     'عرض جغرافیایی',
     'طول جغرافیایی',
   ]
+  const addressRef: {
+    [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement>
+  } = {
+    address: useRef<HTMLInputElement>(null),
+    houseNumber: useRef<HTMLInputElement>(null),
+    houseUnit: useRef<HTMLInputElement>(null),
+    zipCode: useRef<HTMLInputElement>(null),
+    lat: useRef<HTMLInputElement>(null),
+    long: useRef<HTMLInputElement>(null),
+  }
   const inputRef = useRef<HTMLInputElement>(null)
+  const toast = useRef<Toast>(null)
 
   // Ensure addresses is an array
   useEffect(() => {
@@ -32,7 +45,18 @@ const Address: React.FC<Props> = ({ addresses }) => {
       console.error('addresses is not an array', addresses)
     }
   }, [addresses])
-
+  const addit = async (e:FormEvent) => {
+    e.preventDefault()
+    const information = {
+      address: addressRef.address.current?.value || '',
+      houseNumber: parseInt(`${addressRef.houseNumber.current?.value}`) || 0,
+      houseUnit: parseInt(`${addressRef.houseUnit.current?.value}`) || 0,
+      zipCode: parseInt(`${addressRef.zipCode.current?.value}`) || 0,
+      lat: parseInt(`${addressRef.lat.current?.value}`) || 0,
+      long: parseInt(`${addressRef.long.current?.value}`) || 0,
+    }
+    addAddress(toast, information)
+  }
   return (
     <>
       <div className={styles.container}>
@@ -109,9 +133,28 @@ const Address: React.FC<Props> = ({ addresses }) => {
               ))}
             </div>
           ))}
-        <div className={styles.addBox}>
-          <p onClick={()=>''}>+</p>
-        </div>
+        {!isAdding ? (
+          <div className={styles.addBox}>
+            <p onClick={() => setIsAdding(true)}>+</p>
+          </div>
+        ) : (
+          <>
+            <form className={styles.addBox} onSubmit={(e)=>addit(e)}>
+              {Object.keys(addressRef).map((refName, index) => (
+                <div key={index} className={styles.productBoxRow}>
+                  <label>{refName}</label>
+
+                  <input
+                    ref={addressRef[refName] as RefObject<HTMLInputElement>}
+                    placeholder={refName}
+                    type={'text'}
+                  />
+                </div>
+              ))}
+              <input className={styles.submit} type='submit' />
+            </form>
+          </>
+        )}
       </div>
     </>
   )
