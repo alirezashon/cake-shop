@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Orders from '../../Showrder'
-import { Product } from '@/DTO'
+import { Product } from '@/Interfaces'
 
 interface Order {
 	ticketID: string

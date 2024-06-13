@@ -6,7 +6,7 @@ import { FaMinus } from "react-icons/fa"
 import { MdAddCircle } from "react-icons/md"
 import React, { useEffect, useState } from "react"
 import { Add, Get, Remove } from "../../../Basket/Actions"
-import { Product } from "@/DTO"
+import { Product } from "@/Interfaces"
 import { useBasket } from "@/Context"
 
 interface Props {

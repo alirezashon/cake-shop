@@ -1,7 +1,7 @@
 import { NextSeo } from "next-seo"
 import { useState } from "react"
 import { GetServerSideProps, NextPage } from "next"
-import { Product, Category } from "../DTO"
+import { Product, Category } from "../Interfaces"
 import dynamic from "next/dynamic"
 
 const Handler = dynamic(() => import("../Handler"), {

@@ -4,7 +4,7 @@ import { useRef, RefObject, useState, useEffect } from "react"
 import styles from "../Inserto.module.css"
 import List from "./List"
 import { Toast } from "primereact/toast"
-import { Category } from "@/DTO"
+import { Category } from "@/Interfaces"
 import Image from "next/image"
 const CategoryManager: React.FC = () => {
   const toast = useRef<Toast>(null)

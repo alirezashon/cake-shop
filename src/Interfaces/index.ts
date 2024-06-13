@@ -51,21 +51,26 @@ export interface Order {
   totalPrice: number
   attachment: string
 }
-export interface ClientInterface {
+export interface Information {
+  address: string
+  houseNumber: number
+  houseUnit: number
+  zipCode: number
+  lat: string
+  long: string
+}
+export interface ClientProfile {
   _id: string
   email: string
   name: string
   nationalCode: string
+  information: Information[]
+  time: string
+}
+export interface ClientInterface {
+  _id: string
   phone: number
   password: string
-  information: {
-    address: string
-    houseNumber: number
-    houseUnit: number
-    zipCode: number
-    lat: string
-    long: string
-  }[]
   time: string
   keyV: string
 }

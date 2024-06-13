@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import styles from "./index.module.css" // Update with your CSS file path
-import { Tools, Tags } from "../../DTO"
+import { Tools, Tags } from "../../Interfaces"
 import { FaBirthdayCake, FaCheck, FaEdit } from "react-icons/fa"
 import { GiCrossMark, GiReturnArrow } from "react-icons/gi"
 import { FaAnglesDown } from "react-icons/fa6"

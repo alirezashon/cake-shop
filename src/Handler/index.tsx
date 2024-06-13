@@ -1,4 +1,4 @@
-import { Category, Product } from "../DTO"
+import { Category, Product } from "../Interfaces"
 import dynamic from "next/dynamic"
 import styles from "./index.module.css"
 

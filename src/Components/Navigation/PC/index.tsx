@@ -7,7 +7,7 @@ import { items } from "../items"
 import Image from "next/image"
 import Basket from "@/Components/Basket"
 import { FaUserCircle } from "react-icons/fa"
-import { Product } from "../../../DTO"
+import { Product } from "../../../Interfaces"
 import { BiSearch } from "react-icons/bi"
 
 interface Items {

@@ -3,7 +3,7 @@ import Head from "next/head"
 import { BasketProvider } from "@/Context"
 import styles from "./index.module.css"
 import { useEffect, useState } from "react"
-import { Product } from "@/DTO"
+import { Product } from "@/Interfaces"
 import { Get } from "@/Components/Basket/Actions"
 
 const Layout = ({ children }: any) => {

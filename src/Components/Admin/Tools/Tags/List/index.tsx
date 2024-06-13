@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { MdEditDocument } from "react-icons/md"
 import styles from "../../../List.module.css"
-import { Tags } from "@/DTO"
+import { Tags } from "@/Interfaces"
 interface Props {
   data: Tags[] | null
   isLoading: boolean

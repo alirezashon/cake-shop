@@ -4,7 +4,7 @@ import { useRef, RefObject, useState, useEffect } from "react"
 import styles from "../Inserto.module.css"
 import List from "./List"
 import { Toast } from "primereact/toast"
-import { Category, Product } from "@/DTO"
+import { Category, Product } from "@/Interfaces"
 import Image from "next/image"
 const ProductManager: React.FC = () => {
   const toast = useRef<Toast>(null)

@@ -1,17 +1,17 @@
 /** @format */
 
-import Image from "next/image"
-import Address from "./Address/index"
-import Chat from "./Chat/index"
-import Notification from "./Notifications/index"
-import styles from "./index.module.css"
-import { useState, useEffect, useRef } from "react"
-import Orders from "./Orders/index"
-import Favorites from "./Favorites/index"
-import LastSeen from "./LastSeen/index"
-import { ClientInterface, Order } from "@/Interfaces"
-import { BiEdit } from "react-icons/bi"
-import { GiCrossMark } from "react-icons/gi"
+import Image from 'next/image'
+import Address from './Address'
+import Chat from './Chat'
+import Notification from './Notifications'
+import styles from '..module.css'
+import { useState, useEffect, useRef } from 'react'
+import Orders from './Orders'
+import Favorites from './Favorites'
+import LastSeen from './LastSeen'
+import { ClientInterface, Order } from '@/Interfaces'
+import { BiEdit } from 'react-icons/bi'
+import { GiCrossMark } from 'react-icons/gi'
 
 interface Info {
   email: string
@@ -35,7 +35,7 @@ interface Information {
 }
 
 const Profile = () => {
-  const [state, setState] = useState("سفارشات")
+  const [state, setState] = useState('سفارشات')
   const [data, setData] = useState<[Order[], Information] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [newmew, setNewmew] = useState<[string | number, number] | null>(null)
@@ -44,58 +44,58 @@ const Profile = () => {
   const refs = useRef<{ [key: string]: HTMLInputElement | null }>({})
 
   const items = [
-    "سفارشات",
-    "مورد علاقه",
-    "گفتگو",
-    "آدرس ها",
-    "بازدید های اخیر",
-    "پیغام ها",
+    'سفارشات',
+    'مورد علاقه',
+    'گفتگو',
+    'آدرس ها',
+    'بازدید های اخیر',
+    'پیغام ها',
   ]
 
-  const prodetail = ["ایمیل", "نام", "کد ملی", "شماره تلفن"]
+  const prodetail = ['ایمیل', 'نام', 'کد ملی', 'شماره تلفن']
 
   const keyTranslations: { [key: string]: string } = {
-    email: "ایمیل",
-    name: "نام",
-    nationalCode: "کد ملی",
-    phone: "شماره تلفن",
+    email: 'ایمیل',
+    name: 'نام',
+    nationalCode: 'کد ملی',
+    phone: 'شماره تلفن',
   }
 
   const fetchData = async () => {
     try {
-      const response = await fetch("/api/data/Post/Client/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/data/Post/Client/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          authType: "(k*i)o&R^D&e$r#o@l!A$n%S*o(7)",
+          authType: '(k*i)o&R^D&e$r#o@l!A$n%S*o(7)',
         }),
       })
       const responseData = await response.json()
       setData([responseData.orders, responseData.clientDatashow])
       setIsLoading(false)
     } catch (error) {
-      console.error("Error fetching data:", error)
+      console.error('Error fetching data:', error)
     }
   }
 
   const meow = async () => {
     setUpdating(true)
     try {
-      const response = await fetch("/api/data/Post/Client/userinfo", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/data/Post/Client/userinfo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          authType: "C%L&i&E^ne^D%A$UtR",
-          email: newmew && newmew[1] === 0 ? newmew[0] : "",
-          name: newmew && newmew[1] === 1 ? newmew[0] : "",
-          nationalCode: newmew && newmew[1] === 2 ? newmew[0] : "",
-          phone: newmew && newmew[1] === 3 ? newmew[0] : "",
+          authType: 'C%L&i&E^ne^D%A$UtR',
+          email: newmew && newmew[1] === 0 ? newmew[0] : '',
+          name: newmew && newmew[1] === 1 ? newmew[0] : '',
+          nationalCode: newmew && newmew[1] === 2 ? newmew[0] : '',
+          phone: newmew && newmew[1] === 3 ? newmew[0] : '',
         }),
       })
       await response.json()
       location.reload()
     } catch (error) {
-      console.error("Error fetching data:", error)
+      console.error('Error fetching data:', error)
     }
     setUpdating(false)
   }
@@ -113,7 +113,7 @@ const Profile = () => {
           <Image
             alt=''
             className={styles.image}
-            src={"/images/icon.png"}
+            src={'/images/icon.png'}
             width={111}
             height={111}
           />
@@ -164,9 +164,7 @@ const Profile = () => {
             {items.map((item, idx) => (
               <div
                 key={idx}
-                className={`${
-                  item === state ? styles.selected : styles.item
-                } `}
+                className={`${item === state ? styles.selected : styles.item} `}
                 onClick={() => setState(item)}
               >
                 {item}
@@ -175,18 +173,18 @@ const Profile = () => {
           </div>
         </div>
 
-        {state === "سفارشات" ? (
+        {state === 'سفارشات' ? (
           <Orders orders={data && data[0]} loading={isLoading} />
-        ) : state === "مورد علاقه" ? (
+        ) : state === 'مورد علاقه' ? (
           <Favorites />
-        ) : state === "گفتگو" ? (
+        ) : state === 'گفتگو' ? (
           <Chat />
-        ) : state === "آدرس ها" ? (
+        ) : state === 'آدرس ها' ? (
           data && <Address addresses={data[1]?.addr} />
-        ) : state === "بازدید های اخیر" ? (
+        ) : state === 'بازدید های اخیر' ? (
           <LastSeen />
         ) : (
-          state === "پیغام ها" && <Notification />
+          state === 'پیغام ها' && <Notification />
         )}
       </div>
     </>

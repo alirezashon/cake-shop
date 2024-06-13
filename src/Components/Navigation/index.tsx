@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Mobile from "./Mobile"
 import DesktopNav from "./PC"
-import { Product } from "@/DTO"
+import { Product } from "@/Interfaces"
 
 interface NavProps {
   basketData: Product[]

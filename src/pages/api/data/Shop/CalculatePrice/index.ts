@@ -3,7 +3,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import ProductScheme from '../../../../../models/Data/Product'
 import db from '../../../../../utils/index.js'
-import { Product } from '@/DTO'
+import { Product } from '@/Interfaces'
 const Shop = async (req: NextApiRequest, res: NextApiResponse) => {
 	try { 
 		if (req.method === 'POST') {

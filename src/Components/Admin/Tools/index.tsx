@@ -3,7 +3,7 @@ import styles from "../Inserto.module.css"
 import List from "./List"
 import Tago from "./Tags"
 import TagList from "./Tags/List"
-import { Tags } from "@/DTO"
+import { Tags } from "@/Interfaces"
 import { Toast } from "primereact/toast"
 
 const Tools: React.FC = () => {

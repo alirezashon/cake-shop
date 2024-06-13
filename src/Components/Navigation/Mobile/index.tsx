@@ -6,7 +6,7 @@ import { RefObject, useEffect, useRef, useState } from "react"
 import { items } from "../items"
 import { FaUserCircle } from "react-icons/fa"
 import Basket from "../../Basket"
-import { Product } from "../../../DTO"
+import { Product } from "../../../Interfaces"
 import { BiSearch } from "react-icons/bi"
 
 interface Items {

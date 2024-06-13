@@ -5,7 +5,7 @@ import styles from "./index.module.css"
 import { AiOutlineShoppingCart } from "react-icons/ai"
 import { GiCrossMark } from "react-icons/gi"
 import Products from "./Products"
-import { Product } from "@/DTO"
+import { Product } from "@/Interfaces"
 import { useBasket } from "@/Context"
 
 interface BasketProps {

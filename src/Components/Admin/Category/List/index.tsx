@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { MdEditDocument } from "react-icons/md"
 import styles from "../../List.module.css" // Update with your CSS file path
-import { Category } from "@/DTO"
+import { Category } from "@/Interfaces"
 
 interface Props {
   data: Category[] | null

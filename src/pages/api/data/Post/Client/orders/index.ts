@@ -4,7 +4,7 @@ import ClientSession from "../../../../../../models/Client/Session"
 import Client from "../../../../../../models/Client"
 import Product from "../../../../../../models/Data/Product"
 import db from "../../../../../../utils/index.js"
-import { ClientInterface } from "@/DTO"
+import { ClientInterface } from "@/Interfaces"
 const orderero = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === "POST") {
