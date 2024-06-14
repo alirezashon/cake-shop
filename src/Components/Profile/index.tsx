@@ -114,7 +114,7 @@ const Profile = () => {
           />
           <div className={styles.profiletail}>
             {data &&
-              Object.entries(data[1].info).map(([key, value], index) => (
+              Object.entries(data[1]?.info).map(([key, value], index) => (
                 <div key={index}>
                   <div
                     className={styles.detailRow}
@@ -177,7 +177,7 @@ const Profile = () => {
         ) : state === 'گفتگو' ? (
           <Chat />
         ) : state === 'آدرس ها' ? (
-          data && <Address addresses={data[1]?.addr} />
+          <Address addresses={data && data[1]?.addr} />
         ) : state === 'بازدید های اخیر' ? (
           <LastSeen />
         ) : (

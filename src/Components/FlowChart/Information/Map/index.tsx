@@ -4,12 +4,13 @@ import {
   TileLayer,
   Marker,
   Popup,
+  useMapEvents,
 } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import iconUrl from '/node_modules/leaflet/dist/images/marker-icon.png'
 import shadowUrl from '/node_modules/leaflet/dist/images/marker-shadow.png'
-  
+
 const defaultIcon = new L.Icon({
   iconUrl: iconUrl.src, // Use .src to get the URL
   iconRetinaUrl: iconUrl.src, // Use .src to get the URL
@@ -20,20 +21,45 @@ const defaultIcon = new L.Icon({
   shadowSize: [41, 41],
 })
 
-interface Props{
-  data:[number, number]
+interface Props {
+  coord: [number, number]
+  setCoord: (data: [number, number]) => void
+  setAddress: (data: string) => void
 }
-const Map: React.FC<Props> = ({data}) => {
-
+const Map: React.FC<Props> = ({ coord, setCoord, setAddress }) => {
+  const getAddress = async (coord: [number, number]) => {
+    const response = await fetch(
+      `https://api.neshan.org/v2/reverse?lat=${coord[0]}&lng=${coord[1]}`,
+      {
+        method: 'GET',
+        headers: {
+          'Api-Key': 'service.406fb49d15be4a65bf05a950e7ef5baa',
+        },
+      }
+    )
+    const result = await response.json()
+    setAddress(`${result.formatted_address}`)
+  }
+  const LocationMarker: React.FC<{
+    setCoord: (coord: [number, number]) => void
+  }> = ({ setCoord }) => {
+    useMapEvents({
+      click(e) {
+        setCoord([e.latlng.lat, e.latlng.lng])
+        getAddress([e.latlng.lat, e.latlng.lng])
+      },
+    })
+    return null
+  }
   return (
     <div>
       <MapContainer
         style={{
           height: '40vh',
-          width: '99.81',
-          zIndex:1
+          width: '99.81%',
+          zIndex: 1,
         }}
-        center={data}
+        center={coord}
         zoom={13}
         scrollWheelZoom={true}
         attributionControl={false} // Disable the default attribution control
@@ -43,29 +69,18 @@ const Map: React.FC<Props> = ({data}) => {
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
 
-        <Marker icon={defaultIcon} position={data}>
+        <Marker icon={defaultIcon} position={coord}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker>
+        <LocationMarker setCoord={setCoord} />
       </MapContainer>
     </div>
   )
 }
 
 export default Map
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useState } from 'react'
 // import {

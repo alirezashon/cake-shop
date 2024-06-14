@@ -153,9 +153,9 @@
   .profiletail {
     display: grid;
     width: 80%;
-    padding: 2vh;
     background: none;
     grid-template-columns: repeat(auto-fit, minmax(44%, 1fr));
+    margin-bottom: 12vh;
     height: 100%;
   }
   .profiletail p,
@@ -166,8 +166,10 @@
   }
 
   .itemsBox {
-    width: 100%;
-    position: absolute;
+    background-color: #ffffff;
+    width: 98%;
+    position: fixed;
+    z-index: 33;
     bottom: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15%, 1fr));

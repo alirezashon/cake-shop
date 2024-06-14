@@ -20,7 +20,6 @@ const Layout = ({ children }: any) => {
         }),
       })
       const result = await response.json()
-      console.log(result)
       setBasketData(result.products)
     } catch (error) {
       console.error("Error fetching data:", error)

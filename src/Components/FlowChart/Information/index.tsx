@@ -1,20 +1,16 @@
-/** @format */
-
 import { FormEvent, RefObject, useEffect, useRef, useState } from 'react'
 import styles from './index.module.css'
-import Map from '../../Map'
 import { UpdateAddress, InsertNumber } from './handler'
 import { Toast } from 'primereact/toast'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 
-interface MapData {
-  address: string
-  houseNumber: number
-  houseUnit: number
-}
-
+const Map = dynamic(() => import('./Map'), {
+  ssr: false,
+})
 const Information: React.FC = () => {
-  const [mapData, setMapData] = useState<MapData>()
+  const [mapData, setMapData] = useState<[number, number]>([35.7269, 51.52484])
+  const [address, setAddress] = useState<string>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [otpSent, setOtpSent] = useState<boolean>(false)
   const [login, setLogin] = useState<[boolean, boolean]>([false, false]) //[number, address]
@@ -30,16 +26,14 @@ const Information: React.FC = () => {
     houseNumber: useRef<HTMLInputElement>(null),
     houseUnit: useRef<HTMLInputElement>(null),
   }
-  const getAddress = (data: MapData) => {
-    setMapData(data)
-  }
+
   const updateAddress = async (e: FormEvent) => {
     const status = UpdateAddress(
       setIsLoading,
       parseInt(`${refs.phone.current?.value}`),
-      parseInt(`${mapData?.houseNumber}`),
-      parseInt(`${mapData?.houseUnit}`),
-      `${mapData?.address}`,
+      parseInt(`${refs?.houseNumber.current?.value}`),
+      parseInt(`${refs?.houseUnit.current?.value}`),
+      `${address ? address : refs?.address.current?.value}`,
       toast
     )
     e.preventDefault()
@@ -47,6 +41,7 @@ const Information: React.FC = () => {
   }
 
   useEffect(() => {
+    refs.address.current!.value = address || ''
     const storedUserString = localStorage.getItem(
       's(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi'
     )
@@ -150,7 +145,11 @@ const Information: React.FC = () => {
         {!login[1] && login[0] && (
           <div className={styles.mapBox}>
             <div className={styles.map}>
-              <Map onDataChange={getAddress} />
+              <Map
+                coord={mapData}
+                setCoord={setMapData}
+                setAddress={setAddress}
+              />
             </div>
             <form
               className={styles.mapformBox}

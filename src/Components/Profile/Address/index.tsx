@@ -1,43 +1,44 @@
-import { BiSolidMessageSquareEdit } from 'react-icons/bi';
-import styles from './index.module.css';
-import { useState, useRef, useEffect, RefObject, FormEvent } from 'react';
-import { Information } from '@/Interfaces';
-import dynamic from 'next/dynamic';
-import { addAddress } from '../handler';
-import { Toast } from 'primereact/toast';
+import { BiSolidMessageSquareEdit } from 'react-icons/bi'
+import styles from './index.module.css'
+import { useState, useRef, useEffect, RefObject, FormEvent } from 'react'
+import { Information } from '@/Interfaces'
+import dynamic from 'next/dynamic'
+import { addAddress, removeAddress, updateAddress } from './handler'
+import { Toast } from 'primereact/toast'
+import { MdDeleteSweep } from 'react-icons/md'
 
 const Map = dynamic(() => import('./map'), {
   ssr: false,
-});
+})
 
 interface Props {
-  addresses: Information[] | null;
+  addresses: Information[] | null
 }
 
 const Address: React.FC<Props> = ({ addresses }) => {
-  const [newmew, setNewmew] = useState<[string, number, number] | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [isAdding, setIsAdding] = useState<boolean>(false);
-  const labels = ['آدرس', 'کد پستی', 'پلاک', 'واحد'];
+  const [newmew, setNewmew] = useState<[string, number, number] | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [isAdding, setIsAdding] = useState<boolean>(false)
+  const labels = ['آدرس', 'کد پستی', 'پلاک', 'واحد']
   const addressRef: {
-    [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement>;
+    [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement>
   } = {
     address: useRef<HTMLInputElement>(null),
     houseNumber: useRef<HTMLInputElement>(null),
     houseUnit: useRef<HTMLInputElement>(null),
     zipCode: useRef<HTMLInputElement>(null),
-  };
-  const latRef = useRef<HTMLInputElement>(null);
-  const longRef = useRef<HTMLInputElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const toast = useRef<Toast>(null);
+  }
+  const latRef = useRef<HTMLInputElement>(null)
+  const longRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const toast = useRef<Toast>(null)
 
   useEffect(() => {
-    console.table(addresses);
-  }, [addresses]);
+    console.table(addresses)
+  }, [addresses])
 
   const addit = async (e: FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     const information = {
       address: addressRef.address.current?.value || '',
       houseNumber: parseInt(`${addressRef.houseNumber.current?.value}`) || 0,
@@ -45,16 +46,21 @@ const Address: React.FC<Props> = ({ addresses }) => {
       zipCode: parseInt(`${addressRef.zipCode.current?.value}`) || 0,
       lat: parseInt(`${latRef.current?.value}`) || 0,
       long: parseInt(`${longRef.current?.value}`) || 0,
-    };
-    addAddress(toast, information);
-  };
-
-  return (
-    <>
-      <div className={styles.container}>
+    }
+    addAddress(toast, information)
+  }
+  const addresside = () => {
+    return (
+      <>
         {addresses?.map((address, idx) => (
-          <div key={idx} className={styles.detailBox}>
-            <div className={styles.addressHeader}>آدرس شماره {idx + 1}</div>
+          <div key={idx} className={styles.addresside}>
+            <div className={styles.addressHeader}>
+              آدرس شماره {idx + 1}
+              <MdDeleteSweep
+                className={styles.delete}
+                onClick={async () => removeAddress(toast, `${address._id}`)}
+              />
+            </div>
             <Map data={[address.lat, address.long]} />
             {labels.map((label, index) => (
               <div key={index} className={styles.detailRow}>
@@ -115,50 +121,51 @@ const Address: React.FC<Props> = ({ addresses }) => {
             ))}
           </div>
         ))}
-        {!isAdding ? (
-          <div className={styles.addBox}>
-            <p onClick={() => setIsAdding(true)}>+</p>
-          </div>
-        ) : (
-          <>
-            <form className={styles.addBox} onSubmit={(e) => addit(e)}>
-              {Object.keys(addressRef).map((refName, index) => (
-                <div key={index} className={styles.productBoxRow}>
-                  <label>{refName}</label>
-                  <input
-                    ref={addressRef[refName] as RefObject<HTMLInputElement>}
-                    placeholder={refName}
-                    type='text'
-                  />
+      </>
+    )
+  }
+  return (
+    <>
+      <Toast ref={toast} />
+      <div className={styles.container}>
+        <>
+          {addresside()}
+          {!isAdding ? (
+            <div className={styles.addBox}>
+              <p onClick={() => setIsAdding(true)}>+</p>
+            </div>
+          ) : (
+            <>
+              <form className={styles.mapformBox} onSubmit={(e) => addit(e)}>
+                {Object.keys(addressRef).map((refName, index) => (
+                  <div key={index}className={styles.mapformBoxRow}>
+                    <label>{refName}</label>
+                    <input
+                      ref={addressRef[refName] as RefObject<HTMLInputElement>}
+                      placeholder={refName}
+                      type='text'
+                    />
+                  </div>
+                ))}
+                <div className={styles.productBoxRow}>
+                  <label>lat</label>
+                  <input ref={latRef} placeholder='lat' type='text' />
                 </div>
-              ))}
-              <div className={styles.productBoxRow}>
-                <label>lat</label>
-                <input
-                  ref={latRef}
-                  placeholder="lat"
-                  type='text'
-                />
-              </div>
-              <div className={styles.productBoxRow}>
-                <label>long</label>
-                <input
-                  ref={longRef}
-                  placeholder="long"
-                  type='text'
-                />
-              </div>
-              <input className={styles.submit} type='submit' />
-            </form>
-          </>
-        )}
+                <div className={styles.productBoxRow}>
+                  <label>long</label>
+                  <input ref={longRef} placeholder='long' type='text' />
+                </div>
+                <input className={styles.submit} type='submit' />
+              </form>
+            </>
+          )}
+        </>
       </div>
     </>
-  );
+  )
 }
 
-export default Address;
-
+export default Address
 
 // import { BiSolidMessageSquareEdit } from 'react-icons/bi'
 // import styles from './index.module.css'
