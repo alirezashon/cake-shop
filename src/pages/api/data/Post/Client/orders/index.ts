@@ -34,10 +34,9 @@ const orderero = async (req: NextApiRequest, res: NextApiResponse) => {
                 nationalCode: profile?.nationalCode || '',
                 phone: clientSchema?.phone || -1,
               },
-              addr: {
-                information: profile?.information,
-              },
+              addr: profile?.information,
             }
+
             const orders =
               clientSchema &&
               (await Orders.find(

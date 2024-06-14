@@ -31,6 +31,7 @@ const Map: React.FC<Props> = ({data}) => {
         style={{
           height: '40vh',
           width: '50vw',
+          zIndex:1
         }}
         center={data}
         zoom={13}
