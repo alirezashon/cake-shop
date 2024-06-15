@@ -1,31 +1,28 @@
 /** @format */
 
-import React, { useState } from "react"
-import Image from "next/image"
-import styles from "./index.module.css"
-import { Product } from "@/Interfaces"
+import React, { useRef, useState } from 'react'
+import Image from 'next/image'
+import styles from './index.module.css'
+import { Product, Order } from '@/Interfaces'
+import { Toast } from 'primereact/toast'
+import { statusaction } from './handler'
 
 interface OrderProducts {
   orders: Order[] | null
   loading: boolean
 }
-interface Order {
-  ticketID: string
-  status: string
-  products: [Product]
-  totalPrice: number
-  attachment: string
-}
 
 const Orders: React.FC<OrderProducts> = ({ orders, loading }) => {
   const [state, setState] = useState<number>(0)
-  const orderStatus = [
-    ["جاری", "تحویل", "مرجوع"],
-    ["InProgress", "Done", "Rejected"],
-  ]
+  const toast = useRef<Toast>(null)
 
+  const orderStatus = [
+    ['جاری', 'تحویل', 'مرجوع'],
+    ['InProgress', 'Done', 'Rejected'],
+  ]
   return (
     <>
+      <Toast ref={toast} />
       <div className={styles.container}>
         <div className={styles.toolBox}>
           <h4>سفارش های من</h4>
@@ -35,10 +32,10 @@ const Orders: React.FC<OrderProducts> = ({ orders, loading }) => {
               style={{
                 background: `${
                   state === index
-                    ? " radial-gradient(rgb(147, 245, 27), rgb(11, 91, 11))"
-                    : "white"
+                    ? ' radial-gradient(rgb(147, 245, 27), rgb(11, 91, 11))'
+                    : 'white'
                 }`,
-                color: `${state === index ? "white" : "rgba(0,39,0)"}`,
+                color: `${state === index ? 'white' : 'rgba(0,39,0)'}`,
               }}
               onClick={() => setState(index)}
             >
@@ -57,61 +54,85 @@ const Orders: React.FC<OrderProducts> = ({ orders, loading }) => {
             : orders?.map(
                 (order: Order) =>
                   order.status === orderStatus[1][state] && (
-                    <div
-                      className={styles.order}
-                      key={order.ticketID}
-                      onClick={() =>
-                        (window.location.href = `/profile/Orders/${order.ticketID}`)
-                      }
-                    >
-                      <div className={styles.orderDetail}>
-                        {order.products.map((product) => (
-                          <Image
-                            alt='attach'
-                            src={`data:image/jpeg;base64,${product.src}`}
-                            width={111}
-                            height={111}
-                          />
-                        ))}
-                      </div>
-                      <div className={styles.orderDetail}>
-						فیش ارسالی
-                        {order.attachment && (
-                          <Image
-                            alt='attach'
-                            src={`data:image/jpeg;base64,${order.attachment}`}
-                            width={111}
-                            height={111}
-                          />
+                    <div className={styles.orderout}>
+                      <div className={styles.actionorder}>
+                        {orderStatus[0].map(
+                          (status, index) =>
+                            orderStatus[1][index] !== order.status && (
+                              <p
+                                onClick={async () =>
+                                  statusaction(
+                                    toast,
+                                    orderStatus[1][index],
+                                    order.ticketID
+                                  )
+                                }
+                              >
+                                {status}
+                              </p>
+                            )
                         )}
                       </div>
-                      <div className={styles.orderDetail}>
-                        <div className={styles.orderDetailRow}>شماره تیکت</div>
-                        <div className={styles.orderDetailRow}>
-                          {order.ticketID}
+                      <div
+                        className={styles.order}
+                        key={order.ticketID}
+                        onClick={() =>
+                          (location.href = `/profile/Orders/${order.ticketID}`)
+                        }
+                      >
+                        <div className={styles.orderDetail}>
+                          {order.products.map((product) => (
+                            <Image
+                              alt='attach'
+                              src={`data:image/jpeg;base64,${product.src}`}
+                              width={111}
+                              height={111}
+                            />
+                          ))}
                         </div>
-                      </div>
-                      <div className={styles.orderDetail}>
-                        <div className={styles.orderDetailRow}>تاریخ </div>
-                        <div className={styles.orderDetailRow}>
-                          {order.ticketID
-                            .split("-")[1]
-                            .slice(0, 6)
-                            .replace(/(..)(..)/, "$1/$2/")}
+                        <div className={styles.orderDetail}>
+                          فیش ارسالی
+                          {order.attachment && (
+                            <Image
+                              alt='attach'
+                              src={`data:image/jpeg;base64,${order.attachment}`}
+                              width={111}
+                              height={111}
+                            />
+                          )}
                         </div>
-                      </div>
-                      {order.products.map((product) => (
                         <div className={styles.orderDetail}>
                           <div className={styles.orderDetailRow}>
-                            {product.title}
+                            شماره تیکت
+                          </div>
+                          <div className={styles.orderDetailRow}>
+                            {order.ticketID}
                           </div>
                         </div>
-                      ))}
+                        <div className={styles.orderDetail}>
+                          <div className={styles.orderDetailRow}>تاریخ </div>
+                          <div className={styles.orderDetailRow}>
+                            {order.ticketID
+                              .split('-')[1]
+                              .slice(0, 6)
+                              .replace(/(..)(..)/, '$1/$2/')}
+                          </div>
+                        </div>
+                        {order.products.map((product) => (
+                          <div className={styles.orderDetail}>
+                            <div className={styles.orderDetailRow}>
+                              {product.title}
+                            </div>
+                          </div>
+                        ))}
 
-                      <div className={styles.orderDetail}>
-                        <div className={styles.orderDetailRow}>مجموع قیمت</div>
-                        <div className={styles.orderDetailRow}>
-                          {order.totalPrice}
+                        <div className={styles.orderDetail}>
+                          <div className={styles.orderDetailRow}>
+                            مجموع قیمت
+                          </div>
+                          <div className={styles.orderDetailRow}>
+                            {order.totalPrice}
+                          </div>
                         </div>
                       </div>
                     </div>

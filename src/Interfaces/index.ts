@@ -46,6 +46,7 @@ export interface Tags {
 export interface Order {
   _id: string
   ticketID: string
+  client:string
   status: string
   products: [Product]
   totalPrice: number
