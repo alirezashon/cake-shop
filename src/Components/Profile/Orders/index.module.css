@@ -1,106 +1,123 @@
 /** @format */
 @keyframes loading {
-	0% {
-		background: linear-gradient(0deg, rgb(218, 226, 202), rgb(253, 255, 252));
-	}
+  0% {
+    background: linear-gradient(0deg, rgb(218, 226, 202), rgb(253, 255, 252));
+  }
 
-	30% {
-		background: linear-gradient(66deg, rgb(197, 233, 193), rgb(253, 255, 252));
-	}
+  30% {
+    background: linear-gradient(66deg, rgb(197, 233, 193), rgb(253, 255, 252));
+  }
 
-	60% {
-		background: linear-gradient(96deg, rgb(216, 226, 202), rgb(200, 234, 174));
-	}
+  60% {
+    background: linear-gradient(96deg, rgb(216, 226, 202), rgb(200, 234, 174));
+  }
 
-	100% {
-		background: linear-gradient(236deg, rgb(221, 240, 202), rgb(236, 250, 217));
-	}
+  100% {
+    background: linear-gradient(236deg, rgb(221, 240, 202), rgb(236, 250, 217));
+  }
 }
 
 .loading {
-	background: radial-gradient(rgb(235, 247, 213), rgb(200, 216, 171));
-	width: 100%;
-	height: 20vh;
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
+  background: radial-gradient(rgb(235, 247, 213), rgb(200, 216, 171));
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .loadingRect {
-	width: 22%;
+  width: 22%;
 }
 
 .loadingRect,
 .loadingSquare {
-	height: 80%;
-	border-radius: 1vh;
-	animation: loading 0.7s infinite alternate-reverse;
+  height: 80%;
+  border-radius: 1vh;
+  animation: loading 0.7s infinite alternate-reverse;
 }
 
 .loadingSquare {
-	width: 70%;
+  width: 70%;
 }
 .container {
-	width: 100%;
+  width: 100%;
 }
 .toolBox {
-	background: linear-gradient(
-		22deg,
-		rgb(135, 239, 70),
-		rgba(19, 83, 15, 0.9)
-	);
-	height: fit-content;
-	padding: 1vh;
-	text-align: center;
+  background: linear-gradient(22deg, rgb(135, 239, 70), rgba(19, 83, 15, 0.9));
+  height: fit-content;
+  padding: 1vh;
+  text-align: center;
 }
 .toolBox h4 {
-	background-color: rgb(233, 237, 156);
-	border: dashed 0.2vh rgba(30, 116, 3, 0.9);
-	border-radius: 1vh;
+  background-color: rgb(233, 237, 156);
+  border: dashed 0.2vh rgba(30, 116, 3, 0.9);
+  border-radius: 1vh;
 }
 .toolBox div {
-	display: inline-block;
-	margin: 1vh 1vh;
-	background: rgb(247, 249, 227);
-	padding: 0.3vh 1vh;
-	border-radius: 1vh;
-	border-left: 0.4vh solid rgb(66, 159, 20);
-	cursor: pointer;
+  display: inline-block;
+  margin: 1vh 1vh;
+  background: rgb(247, 249, 227);
+  padding: 0.3vh 1vh;
+  border-radius: 1vh;
+  border-left: 0.4vh solid rgb(66, 159, 20);
+  cursor: pointer;
 }
 
 .orderBox {
-	padding: 1vh;
-	border: 0.4vh ridge rgba(147, 218, 40, 0.9);
+  padding: 1vh;
+  border: 0.4vh double rgba(147, 218, 40, 0.9);
 }
 .order {
-	margin: 1vh 0;
-	border-radius: 0.5vh;
-	border: 0.4vh rgba(66, 132, 12, 0.9) ridge;
-	display: grid;
-	gap: 1vh;
-	grid-template-columns: repeat(auto-fit, minmax(29%, 0fr));
-	justify-content: space-between;
-	width: 100%;
-	padding: 1vh;
+  margin: 1vh 0;
+  border-radius: 0.5vh;
+  border: 0.4vh rgba(66, 132, 12, 0.9) ridge;
+  display: grid;
+  gap: 1vh;
+  grid-template-columns: repeat(auto-fit, minmax(29%, 0fr));
+  justify-content: space-between;
+  width: 100%;
+  padding: 1vh;
 }
 .orderDetail {
-	direction: rtl;
-	display: flex;
-	justify-content: space-around;
-	border-radius: 0.5vh;
-	border: 0.5vh double rgb(75, 244, 103);
-	color: rgb(4, 41, 17);
-	background: linear-gradient(2deg, rgb(145, 217, 62), rgba(196, 219, 67, 0.9));
-	height: fit-content;
+  direction: rtl;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 0.5vh;
+  border: 0.5vh double rgb(75, 244, 103);
+  color: rgb(4, 41, 17);
+  background: linear-gradient(2deg, rgb(145, 217, 62), rgba(196, 219, 67, 0.9));
+  height: fit-content;
 }
 .orderDetail:hover,
 .toolBox div:hover {
-	transform: scale(1.05);
-	cursor: pointer;
-	color: #ffffff;
-	background: radial-gradient(rgb(147, 245, 27), rgb(0, 48, 0));
+  transform: scale(1.05);
+  cursor: pointer;
+  color: #ffffff;
+  background: radial-gradient(rgb(147, 245, 27), rgb(0, 48, 0));
 }
 
 .orderDetailRow {
-	margin: 0.4vh 2vh;
+  margin: 0.4vh 2vh;
+}
+.gotorder {
+  width: 100%;
+  height: 67vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gotorder p {
+  background: linear-gradient(2deg, rgb(145, 217, 62), rgba(196, 219, 67, 0.9));
+  color: #0f4013;
+  border: 0.3vh ridge rgba(147, 218, 40, 0.9);
+  padding: 1vh 4vh;
+  border-radius: 1vh;
+}
+
+.gotorder p:hover {
+  color: #3ea146;
+  cursor: pointer;
+  border: 0.4vh ridge rgba(249, 255, 141, 0.9);
+  transform: scale(1.1) rotate(-11deg);
 }

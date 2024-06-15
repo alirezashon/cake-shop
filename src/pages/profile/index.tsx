@@ -5,9 +5,9 @@ import Profile from '@/Components/Profile'
 const Home = () => {
   return (
     <div
-      style={{
+      style={{ 
         height: '100vh',
-        marginTop: '11vh',
+        marginTop: '9vh',
       }}
     >
       <Profile />

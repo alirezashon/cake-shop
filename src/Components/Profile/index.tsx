@@ -12,6 +12,7 @@ import LastSeen from './LastSeen'
 import { Information, Order } from '@/Interfaces'
 import { BiEdit } from 'react-icons/bi'
 import { GiCrossMark } from 'react-icons/gi'
+import { Toast } from 'primereact/toast'
 
 interface Info {
   email: string
@@ -44,8 +45,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [newmew, setNewmew] = useState<[string | number, number] | null>(null)
   const [updating, setUpdating] = useState<boolean>(false)
-
-  const refs = useRef<{ [key: string]: HTMLInputElement | null }>({})
+  const toast = useRef<Toast>(null)
 
   const items = [
     'سفارشات',
@@ -81,10 +81,9 @@ const Profile = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           authType: 'C%L&i&E^ne^D%A$UtR',
-          email: newmew && newmew[1] === 0 ? newmew[0] : '',
-          name: newmew && newmew[1] === 1 ? newmew[0] : '',
-          nationalCode: newmew && newmew[1] === 2 ? newmew[0] : '',
-          phone: newmew && newmew[1] === 3 ? newmew[0] : '',
+          email: newmew && newmew[1] === 0 && newmew[0],
+          name: newmew && newmew[1] === 1 && newmew[0],
+          nationalCode: newmew && newmew[1] === 2 && newmew[0],
         }),
       })
       await response.json()
@@ -103,6 +102,7 @@ const Profile = () => {
 
   return (
     <>
+      <Toast ref={toast} />
       <div className={styles.container}>
         <div className={styles.profileBox}>
           <Image
@@ -114,28 +114,21 @@ const Profile = () => {
           />
           <div className={styles.profiletail}>
             {data &&
-              Object.entries(data[1]?.info).map(([key, value], index) => (
-                <div key={index}>
+              Object.entries(data[1]?.info).map(
+                (sub: [string, string], index) => (
                   <div
                     className={styles.detailRow}
                     key={index}
-                    onClick={() => value && setNewmew([String(value), index])}
+                    onClick={() => setNewmew([sub[1], index])}
                   >
-                    <span>{keyTranslations[key]}</span>
-                    {index !== (newmew ? newmew[1] : -1) && (
-                      <>
-                        <span>{value}</span>
-                        <BiEdit className={styles.editIcon} />
-                      </>
-                    )}
-                    {newmew && newmew[1] === index && (
+                    <span>{keyTranslations[sub[0]]}</span>
+
+                    {newmew && newmew[1] === index ? (
                       <div className={styles.editRow}>
                         <input
-                          ref={(el) => {
-                            refs.current[key] = el
-                          }}
+                          value={newmew[0]}
                           defaultValue={newmew[0] as string}
-                          placeholder={String(value)}
+                          placeholder={String(sub[1])}
                           className={styles.onput}
                           onChange={(e) => setNewmew([e.target.value, index])}
                         />
@@ -152,10 +145,15 @@ const Profile = () => {
                           className={styles.close}
                         />
                       </div>
+                    ) : (
+                      <>
+                        <span>{sub[1]}</span>
+                        <BiEdit className={styles.editIcon} />
+                      </>
                     )}
                   </div>
-                </div>
-              ))}
+                )
+              )}
           </div>
           <div className={styles.itemsBox}>
             {items.map((item, idx) => (
@@ -169,20 +167,21 @@ const Profile = () => {
             ))}
           </div>
         </div>
-
-        {state === 'سفارشات' ? (
-          <Orders orders={data && data[0]} loading={isLoading} />
-        ) : state === 'مورد علاقه' ? (
-          <Favorites />
-        ) : state === 'گفتگو' ? (
-          <Chat />
-        ) : state === 'آدرس ها' ? (
-          <Address addresses={data && data[1]?.addr} />
-        ) : state === 'بازدید های اخیر' ? (
-          <LastSeen />
-        ) : (
-          state === 'پیغام ها' && <Notification />
-        )}
+        <div className={styles.contentBox}>
+          {state === 'سفارشات' ? (
+            <Orders orders={data && data[0]} loading={isLoading} />
+          ) : state === 'مورد علاقه' ? (
+            <Favorites />
+          ) : state === 'گفتگو' ? (
+            <Chat />
+          ) : state === 'آدرس ها' ? (
+            <Address addresses={data && data[1]?.addr} />
+          ) : state === 'بازدید های اخیر' ? (
+            <LastSeen />
+          ) : (
+            state === 'پیغام ها' && <Notification />
+          )}
+        </div>
       </div>
     </>
   )

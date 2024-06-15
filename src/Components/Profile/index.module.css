@@ -8,6 +8,10 @@
   direction: rtl;
   width: 100%;
 }
+.contentBox{
+  border: 0.4vh double rgba(147, 218, 40, 0.9);
+  width: 77%;
+}
 .profItems {
   width: 23%;
   display: flex;

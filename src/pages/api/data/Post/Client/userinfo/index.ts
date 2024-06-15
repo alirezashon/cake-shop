@@ -4,22 +4,12 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import Client from '../../../../../../models/Client'
 import db from '../../../../../../utils'
 import ClientSession from '@/models/Client/Session'
-import { ClientInterface } from '@/Interfaces'
+import Profile from '@/models/Client/Profile'
 
 const userinfo = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === 'POST') {
-      const {
-        phone,
-        name,
-        authType,
-        nationalCode,
-        houseNumber,
-        houseUnit,
-        zipCode,
-        email,
-        address,
-      } = req.body
+      const { authType, email, name, nationalCode } = req.body
       const token = req.cookies['CTFlEoiSHkeNnToMBLiShoOekn3kN2y@k']
       if (authType === 'C%L&i&E^ne^D%A$UtR') {
         await db.connectToShop()
@@ -28,27 +18,22 @@ const userinfo = async (req: NextApiRequest, res: NextApiResponse) => {
           key: kalim,
         })
         if (session && session.key === kalim) {
-          const userSchema = await Client.findOne({ _id: session.client })
+          const userSchema = await Profile.findOne({ client: session.client })
+          console.log(session)
 
           if (userSchema) {
             const updateData = {
-              ...(email && { email }),
-              ...(name && { name }),
-              ...(nationalCode && { nationalCode }),
-              information: {
-                ...userSchema.information,
-                ...(address && { address }),
-                ...(houseNumber && { houseNumber }),
-                ...(houseUnit && { houseUnit }),
-                ...(zipCode && { zipCode }),
-              },
+              ...(email ? { email } : userSchema.email),
+              ...(name ? { name } : userSchema.name),
+              ...(nationalCode ? { nationalCode } : userSchema.nationalCode),
             }
-            if (!address && !houseNumber && !houseUnit && !zipCode) {
+            if (!email && !name && !nationalCode) {
               delete updateData.information
             }
+            console.log(userSchema)
 
             // Update user in the database
-            const updatedUser = await Client.findByIdAndUpdate(
+            const updatedUser = await Profile.findByIdAndUpdate(
               userSchema._id,
               { $set: updateData },
               { new: true }
@@ -56,6 +41,7 @@ const userinfo = async (req: NextApiRequest, res: NextApiResponse) => {
 
             res.status(200).json({
               message: 'با موفقیت انجام شد',
+
               success: true,
               updatedUser,
             })
