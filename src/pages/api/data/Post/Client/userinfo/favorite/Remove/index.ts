@@ -6,19 +6,21 @@ import db from '../../../../../../../../utils'
 import Profile from '@/models/Client/Profile'
 import { Information } from '@/Interfaces'
 
-const removeAddress = async (req: NextApiRequest, res: NextApiResponse) => {
+const removeFromeFavorite= async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    if (req.method === 'PUT') {
+    if (req.method === 'DELETE') {
       const { authType, id } = req.body
 
       if (authType === 'C%a&d&u*P(A)d*t$e#w%o^p&ama*7137^r@i#R') {
         const token = req.cookies['CTFlEoiSHkeNnToMBLiShoOekn3kN2y@k']
 
         if (!token) {
-          res.status(401).json({
-            message: 'Unauthorized: No token provided',
-            success: false,
-          })
+          res
+            .status(401)
+            .json({
+              message: 'Unauthorized: No token provided',
+              success: false,
+            })
           return
         }
 
@@ -36,7 +38,7 @@ const removeAddress = async (req: NextApiRequest, res: NextApiResponse) => {
           res.status(402).json({ success: false })
           return
         }
-        console.table(clientProfile.information[2])
+console.table(clientProfile.information[2])
         const updatedInformation = clientProfile.information.filter(
           (addr: Information) => addr?._id?.toString() !== id
         )
@@ -77,4 +79,4 @@ const removeAddress = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default removeAddress
+export default removeFromeFavorite
