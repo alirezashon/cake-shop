@@ -5,8 +5,6 @@ import mongoose from 'mongoose'
 const messageSchema = new mongoose.Schema({
 	client: {
 		type: String,
-		// type: mongoose.Schema.Types.ObjectId || String,
-		// ref: 'Client',
 	},
 	content: { type: String, required: true },
 	sender: { type: String, required: true },

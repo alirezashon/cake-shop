@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import styles from './index.module.css'
 import { Product } from '@/Interfaces'
+import Link from 'next/link'
 
 interface OrderProducts {
   orders: Order[] | null
@@ -110,7 +111,9 @@ const Orders: React.FC<OrderProducts> = ({ orders, loading }) => {
           ) : (
             <>
               <div className={styles.gotorder}>
-                <p onClick={() => (location.href = '/')}>ایجاد سفارش</p>
+                <p onClick={() => (location.href = '/')}>
+                  <Link href='/'>ایجاد سفارش</Link>
+                </p>
               </div>
             </>
           )}

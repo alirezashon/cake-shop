@@ -1,0 +1,36 @@
+.notification {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .notification:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .title {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+  }
+  
+  .content {
+    margin-bottom: 8px;
+  }
+  
+  .time {
+    display: block;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  
+  .code {
+    display: inline-block;
+    background: #007bff;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  

@@ -77,3 +77,10 @@ export interface ClientInterface {
   time: string
   keyV: string
 }
+export interface Notification {
+  _id: string
+  title: string
+  content: string
+  code: string
+  time: string
+}

@@ -3,7 +3,6 @@
  const Chat = ({ children }: any) => {
      return (
          <>
-Chat
          </>
      )
  }

@@ -142,6 +142,8 @@
   .container {
     display: block;
   }
+  .contentBox{width: 99%;
+  margin: .5%;}
   .profItems {
     width: 100%;
   }
