@@ -27,7 +27,7 @@ const Register = async (req: NextApiRequest, res: NextApiResponse) => {
                   success: false,
                 })
               } else {
-                NextResponse.redirect(new URL('/address/add', req.url))
+                NextResponse.redirect(new URL('/address', req.url))
                 res.status(210).json({
                   success: false,
                 })

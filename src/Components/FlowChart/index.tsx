@@ -2,7 +2,7 @@
 import styles from "./index.module.css"
 import Payment from "./Payment"
 import React, { useState } from "react"
-import Information from "./Information"
+import Information from "./address"
 import ProductShow from "./ProductShow"
 
 interface Props {

@@ -1,91 +1,100 @@
-import { useState } from 'react'
-import Image from 'next/image'
-import styles from './index.module.css'
-import Switch from '../Form/Switch'
 import { SignUp, SignIn } from '../Auth'
+import { FormEvent, RefObject,  useRef, useState } from 'react'
+import styles from './index.module.css'
+import { UpdateAddress, InsertNumber } from '../FlowChart/address/handler'
+import { Toast } from 'primereact/toast'
+import Image from 'next/image'
 
 const Login: React.FC = () => {
-	const [phone, setPhone] = useState<number>(-1)
-	const [password, setPassword] = useState('')
-	const [isLoading, setIsLoading] = useState(false)
-	const [state, setState] = useState<string>('&L^a^g@y&N*')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [otpSent, setOtpSent] = useState<boolean>(false)
 
-	const submiter = async () => {
-		if (state === '*R(e&d%i^s$T#e@r$') {
-			const result = await SignUp(setIsLoading, phone, password)
-			if (result === 'S!A@k%s$e^x%f^u*l^e@x^R%e$j*i3e%R&') {
-				location.href = '/profile'
-				console.log(result)
-				window.location.href = '/profile'
-			}
-		} else if (state === '&L^a^g@y&N*') {
-			const result = await SignIn(setIsLoading, phone, password)
-			if (result === 'S!A@k%s$e^x%f^u*l^') {
-				location.href = '/profile'
-			}
-		}
-	}
+  const toast = useRef<Toast>(null)
 
-	return (
-		<>
-		
-			<div className={styles.container}>
-				<div className={`${styles.formBox}  ${isLoading && styles.animate}`}>
-					{!isLoading && (
-						<>
-							<Image
-								className={styles.logo}
-								src={'/images/icon.png'}
-								width={1111}
-								height={1111}
-								alt='Kalimogo'
-							/>
-							<div className={styles.formShadow}>
-								<form
-									className={styles.formInnerBox}
-									onSubmit={submiter}>
-									<Switch
-										handleState={() =>
-											setState(
-												state === '*R(e&d%i^s$T#e@r$'
-													? '&L^a^g@y&N*'
-													: '*R(e&d%i^s$T#e@r$'
-											)
-										}
-									/>
-									<div className={styles.formRow}>
-										<label> شماره موبایل</label>
-										<input
-											onChange={(e) => setPhone(parseInt(e.target.value))}
-											type='input'
-											placeholder='نام کاربری ...'
-											required
-										/>
-									</div>
-									<div className={styles.formRow}>
-										<label>رمز عبور </label>
-										<input
-											value={password}
-											onChange={(e) => setPassword(e.target.value)}
-											type='password'
-											placeholder='رمز عبور ...'
-											required
-										/>
-									</div>
-									<div className={styles.buttonBox}>
-										<input
-											type='submit'
-											value={'ورود'}
-											className={styles.submit}
-										/>
-									</div>
-								</form>
-							</div>
-						</>
-					)}
-				</div>
-			</div>
-		</>
-	)
+  const refs: {
+    [key: string]: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>
+  } = {
+    phone: useRef<HTMLInputElement>(null),
+    otp: useRef<HTMLInputElement>(null),
+  }
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    toast.current?.show({
+      severity: 'info',
+      summary: 'در حال اجرا',
+      detail: 'سرور در حال پردازش',
+      life: 3000,
+    })
+    if (!otpSent) {
+      const phoneNumber = refs.phone.current?.value || ''
+      if (phoneNumber.toString()?.length !== 11) {
+        toast.current?.show({
+          severity: 'error',
+          summary: 'شماره تماس اشتباه است',
+          detail: 'ناموفق',
+          life: 3000,
+        })
+      } else {
+        setOtpSent(true)
+        toast.current?.show({
+          severity: 'success',
+          summary: 'کد برای شماره ارسال شد',
+          detail: 'موفق',
+          life: 3000,
+        })
+      }
+    } else {
+      const status = await InsertNumber(
+        setIsLoading,
+        parseInt(`${refs.phone.current?.value}`),
+        parseInt(`${refs.otp.current?.value}`)
+      )
+      if (status === 'S!A@k%s$e^x%f^u*l^') {
+        toast.current?.show({
+          severity: 'success',
+          summary: 'ثبت نام با موفقیت انجام شد',
+          detail: 'موفق',
+          life: 3000,
+        })
+      }
+    }
+  }
+  return (
+    <>
+	<Toast ref={toast}/>
+      <div className={styles.container}>
+        <div className={styles.formBox}>
+          <Image
+            alt=''
+            className={styles.image}
+            src={'/images/icon.png'}
+            width={777}
+            height={777}
+          />
+          <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
+            <input
+              ref={refs.phone as RefObject<HTMLInputElement>}
+              placeholder={'شماره تماس'}
+              type={'text'}
+            />
+            {otpSent && (
+              <input
+                ref={refs.otp as RefObject<HTMLInputElement>}
+                placeholder={'کد ارسال شده'}
+                dir='rtl'
+                type={'number'}
+              />
+            )}
+            <input
+              className={styles.submit}
+              type='submit'
+              value={!otpSent ? 'ارسال کد' : 'ثبت نام'}
+            />
+          </form>
+        </div>
+      </div>
+    </>
+  )
 }
 export default Login
