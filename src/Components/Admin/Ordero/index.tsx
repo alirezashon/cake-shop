@@ -2,15 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Orders from '../../Showrder'
-import { Product } from '@/Interfaces'
-
-interface Order {
-	ticketID: string
-	status: string
-	products: [Product]
-	totalPrice: number
-	attachment: string
-}
+import { Order } from '@/Interfaces'
 
 const Ordero = () => {
 	const [loading, setLoading] = useState<boolean>(true)

@@ -1,22 +1,13 @@
-// components/MapComponent.jsx
 import React from 'react'
-import dynamic from 'next/dynamic'
-import Chat from '@/Components/Chat'
-const Map = dynamic(() => import('./jest'), {
-  ssr: false, // This line is crucial to prevent SSR issues
-})
+import { useRouter } from 'next/router'
 
-const Home = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        marginTop: '11vh',
-      }}
-    >
-      <Chat />
-    </div>
-  )
+const CustomComponent2 = () => {
+  const router = useRouter()
+  React.useEffect(() => {
+    router.push('/address/add')
+  }, [])
+
+  return <div>Redirecting to /address/add...</div>
 }
 
-export default Home
+export default CustomComponent2

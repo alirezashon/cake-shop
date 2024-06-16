@@ -44,7 +44,7 @@ const Information: React.FC = () => {
     refs.address.current!.value = address || ''
     const storedUserString = localStorage.getItem(
       's(T*a&r)i^o*m#a#b%a*l(F)a)z)l%aBi'
-    )
+    ) || ''
 
     let storedUser = null
     if (storedUserString) {

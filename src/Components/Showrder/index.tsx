@@ -3,7 +3,7 @@
 import React, { useRef, useState } from 'react'
 import Image from 'next/image'
 import styles from './index.module.css'
-import { Product, Order } from '@/Interfaces'
+import { Order } from '@/Interfaces'
 import { Toast } from 'primereact/toast'
 import { statusaction } from './handler'
 
@@ -14,6 +14,7 @@ interface OrderProducts {
 
 const Orders: React.FC<OrderProducts> = ({ orders, loading }) => {
   const [state, setState] = useState<number>(0)
+  const [openOrder, setOpenOrder] = useState<string | null>(null)
   const toast = useRef<Toast>(null)
 
   const orderStatus = [
@@ -68,7 +69,7 @@ const Orders: React.FC<OrderProducts> = ({ orders, loading }) => {
                                   )
                                 }
                               >
-                                {status}
+                                {` برو به وضعیت ` + status}
                               </p>
                             )
                         )}
@@ -76,9 +77,7 @@ const Orders: React.FC<OrderProducts> = ({ orders, loading }) => {
                       <div
                         className={styles.order}
                         key={order.ticketID}
-                        onClick={() =>
-                          (location.href = `/profile/Orders/${order.ticketID}`)
-                        }
+                        onClick={() => setOpenOrder(order.ticketID)}
                       >
                         <div className={styles.orderDetail}>
                           {order.products.map((product) => (
@@ -135,6 +134,11 @@ const Orders: React.FC<OrderProducts> = ({ orders, loading }) => {
                           </div>
                         </div>
                       </div>
+                      {openOrder === order.ticketID && (
+                        <div className={styles.openOrder}>
+                         {order.ticketID} 
+                        </div>
+                      )}
                     </div>
                   )
               )}
