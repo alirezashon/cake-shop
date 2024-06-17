@@ -98,7 +98,6 @@ export const removeAddress = async (toast: RefObject<Toast>, id: string) => {
     const data = await response.json()
     console.log(data)
     if (data.success === true && response.status === 200) {
-      location.reload()
       return toast.current?.show({
         severity: 'success',
         summary: 'با موفقیت حذف شد',

@@ -3,7 +3,7 @@ import styles from './index.module.css'
 import { useState, useRef, useEffect, RefObject, FormEvent } from 'react'
 import { Information } from '@/Interfaces'
 import dynamic from 'next/dynamic'
-import { addAddress, removeAddress, updateAddress } from './handler'
+import {removeAddress} from './handler'
 import { Toast } from 'primereact/toast'
 import { MdDeleteSweep } from 'react-icons/md'
 import Add from './add'
@@ -29,27 +29,11 @@ const Address: React.FC<Props> = ({ addresses }) => {
     houseUnit: useRef<HTMLInputElement>(null),
     zipCode: useRef<HTMLInputElement>(null),
   }
-  const latRef = useRef<HTMLInputElement>(null)
-  const longRef = useRef<HTMLInputElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const toast = useRef<Toast>(null)
 
-  useEffect(() => {
-    console.table(addresses)
-  }, [addresses])
 
-  const addit = async (e: FormEvent) => {
-    e.preventDefault()
-    const information = {
-      address: addressRef.address.current?.value || '',
-      houseNumber: parseInt(`${addressRef.houseNumber.current?.value}`) || 0,
-      houseUnit: parseInt(`${addressRef.houseUnit.current?.value}`) || 0,
-      zipCode: parseInt(`${addressRef.zipCode.current?.value}`) || 0,
-      lat: parseInt(`${latRef.current?.value}`) || 0,
-      long: parseInt(`${longRef.current?.value}`) || 0,
-    }
-    addAddress(toast, information)
-  }
+  
   const addresside = () => {
     return (
       <>

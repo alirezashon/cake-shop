@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { FaRocketchat } from 'react-icons/fa'
 import styles from './index.module.css'
 import { GiCrossMark } from 'react-icons/gi'
+import Image from 'next/image'
 
 interface Message {
   id: string
@@ -22,18 +23,19 @@ const ChatUI = () => {
   const dummyChatHistory: Message[] = [
     {
       id: '2',
-      client:'',
+      client: '',
       content: 'الکی مثلا یه مشکلی داشتم قبلا اینجا پیاماش مونده بوده باشه',
       sender: '*u&$e#',
     },
     {
       id: '1',
-      client:'',
-      content: 'سلام در خدمت که خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که ممنون سپاسگذارتیم',
+      client: '',
+      content:
+        'سلام در خدمت که خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که م خب آها باشه ردیفه مرسی که ممنون سپاسگذارتیم',
       sender: '&a(D^m$n@',
     },
   ]
-  
+
   const fetchChatHistory = async () => {
     const response = await fetch('/api/chat/GET', {
       headers: { 'Content-Type': 'application/json' },
@@ -43,7 +45,7 @@ const ChatUI = () => {
     const data = await response.json()
     data.messages && setMessages(data.messages)
   }
-  
+
   useEffect(() => {
     setMessages(dummyChatHistory)
     // const name = JSON.parse(localStorage.getItem("user") || "")
@@ -87,6 +89,13 @@ const ChatUI = () => {
               onClick={() => setShowChat(false)}
             />
           </div>
+            {/* <Image
+              className={styles.chatBG}
+              src={'/images/chat.jpg'}
+              alt=''
+              width={999}
+              height={999}
+            /> */}
           <div className={styles.messages}>
             {messages?.map((message) => (
               <div
