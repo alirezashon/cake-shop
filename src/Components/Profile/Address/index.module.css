@@ -204,7 +204,7 @@ padding: 1vh;
 
 @media (max-width: 999px) {
   .container {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   .addresside {
     margin-bottom: 22vh;

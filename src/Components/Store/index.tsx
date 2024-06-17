@@ -11,6 +11,8 @@ import { useBasket } from "@/Context"
 import { FaBasketShopping } from "react-icons/fa6"
 import { searchEngine } from "./content"
 import { GiCrossMark } from "react-icons/gi"
+import { goToBuy } from "./handler"
+import { Toast } from "primereact/toast"
 interface Props {
   data: [Category[], Product[]]
 }
@@ -27,7 +29,7 @@ const Store: React.FC<Props> = ({ data }) => {
   const [productover, setProductover] = useState<number | null>(null)
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
   const [isMobile, setIsMobile] = useState(false)
-
+  const toast = useRef<Toast>(null)
   const scrollLeft = () => {
     if (refs.categoryBoxRef.current) {
       refs.categoryBoxRef.current.scrollBy({ left: -100, behavior: "smooth" })
@@ -88,6 +90,7 @@ const Store: React.FC<Props> = ({ data }) => {
   }
   return (
     <>
+    <Toast/>
       <div className={styles.container}>
         {!isMobile && (
           <div className={styles.basketSide}>
@@ -147,7 +150,7 @@ const Store: React.FC<Props> = ({ data }) => {
             </div>
             <button
               className={styles.buy}
-              onClick={() => (location.href = "/newReq/Registered")}
+              onClick={() => goToBuy(toast)}
             >
               تکمیل خرید
             </button>

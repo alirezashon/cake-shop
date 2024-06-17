@@ -1,13 +1,8 @@
-import React from 'react'
-import { useRouter } from 'next/router'
+import Address from '@/Components/FlowChart'
 
 const CustomComponent2 = () => {
-  const router = useRouter()
-  React.useEffect(() => {
-    router.push('/address/add')
-  }, [])
 
-  return <div>Redirecting to /address/add...</div>
+  return <div><Address/></div>
 }
 
 export default CustomComponent2

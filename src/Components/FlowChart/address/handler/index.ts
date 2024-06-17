@@ -40,7 +40,6 @@ export const InsertNumber = async (
 
 export const UpdateAddress = async (
   setIsLoading: (arg: boolean) => void,
-  phone: number,
   houseNumber: number,
   houseUnit: number,
   address: string,
@@ -55,14 +54,13 @@ export const UpdateAddress = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        phone,
         authType: "C%L&i*c(h&a*k^a&d%d^r@i#R",
         houseNumber,
         houseUnit,
         address,
       }),
     })
-    const data = await response.json()
+   await response.json()
     if (response.status === 200) {
       const randomString = [...Array(33)]
         .map(() => Math.floor(Math.random() * 16).toString(16))
@@ -99,3 +97,5 @@ export const UpdateAddress = async (
     }
   }
 }
+
+

@@ -1,17 +1,16 @@
+import React, { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { MdEditDocument } from "react-icons/md"
 import styles from "../../List.module.css" // Update with your CSS file path
-import { Category } from "@/Interfaces"
+import { ClientInterface} from "@/Interfaces"
 
-interface Props {
-  data: Category[] | null
-  isLoading: boolean
-  setEditItemId: (id: string) => void
-}
-const List: React.FC<Props> = ({ data, isLoading, setEditItemId }) => {
+
+const List: React.FC = ({
+
+}) => {
   return (
     <div className={styles.tableContainer}>
-      <div className={styles.header}>لیست عکس های کتگوری</div>
+      <div className={styles.header}>لیست محصولات</div>
       {isLoading ? (
         Array.apply(0, Array(7)).map((x, i) => (
           <div key={i} className={styles.loading}>
@@ -23,41 +22,42 @@ const List: React.FC<Props> = ({ data, isLoading, setEditItemId }) => {
         <table>
           <thead>
             <tr>
-              {["Name", "Image", "Keywords"].map((header) => (
-                <th key={header}>{header}</th>
-              ))}
+              {["title", "src",'price','colories', "category", "description", "Keywords"].map(
+                (header) => (
+                  <th key={header}>{header}</th>
+                )
+              )}
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {data &&
-              data?.map((category) => (
-                <tr key={category._id}>
-                  {/* <td>{Object.entries(category.alt).map((d) => d)}</td> */}
-                  <td>
-                    <td>
-                     {category.name}
-                    </td>
-                  </td>
+              data?.map((product, index) => (
+                <tr key={product._id}>
+                  <td>{product.title}</td>
+
                   <td>
                     <Image
-                      src={`data:image/jpeg;base64,${category.src}`}
+                      src={`data:image/jpeg;base64,${product.src}`}
                       alt={``}
                       width={77}
                       height={77}
                     />
                   </td>
                   <td>
-                    {Object.values(category.keywords).map((keyword, index) => (
-                      <div key={index} className={styles.colorBox}>
-                        {keyword}
-                      </div>
-                    ))}
+                    {category &&
+                      category.find((cat) => cat._id === product.categories)
+                        ?.name}
                   </td>
+                  <td>{product?.price}</td>
+                  <td>{product?.calories}</td>
+                  <td>{product?.description}</td>
+
+                  <td>{product.keywords}</td>
                   <td>
                     <MdEditDocument
                       className={styles.actionButton}
-                      onClick={() => setEditItemId(category._id)}
+                      onClick={() => setEditItemId(product._id)}
                     />
                   </td>
                 </tr>

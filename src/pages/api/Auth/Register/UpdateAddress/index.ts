@@ -6,12 +6,6 @@ import { decryptText } from "../../../../../Components/CryptoUtils"
 
 const Register = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    if (req.method !== "POST") {
-      return res
-        .status(405)
-        .json({ message: "Method not allowed", success: false })
-    }
-
     const token = req.cookies["CTFlEoiSHkeNnToMBLiShoOekn3kN2y@k"]
     const { authType, houseNumber, houseUnit, address } = req.body
     await db.connect2DB()
@@ -57,14 +51,12 @@ const Register = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const updateData = {
-      phone: userSchema.phone,
       information: {
         address,
         houseNumber,
         houseUnit,
         zipCode: 7,
       },
-      keyV: userSchema.keyV,
     }
 
     const updatedUser = await Client.findOneAndUpdate(

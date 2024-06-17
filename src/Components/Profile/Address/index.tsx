@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import { addAddress, removeAddress, updateAddress } from './handler'
 import { Toast } from 'primereact/toast'
 import { MdDeleteSweep } from 'react-icons/md'
+import Add from './add'
 
 const Map = dynamic(() => import('./map'), {
   ssr: false,
@@ -136,27 +137,7 @@ const Address: React.FC<Props> = ({ addresses }) => {
             </div>
           ) : (
             <>
-              <form className={styles.mapformBox} onSubmit={(e) => addit(e)}>
-                {Object.keys(addressRef).map((refName, index) => (
-                  <div key={index}className={styles.mapformBoxRow}>
-                    <label>{refName}</label>
-                    <input
-                      ref={addressRef[refName] as RefObject<HTMLInputElement>}
-                      placeholder={refName}
-                      type='text'
-                    />
-                  </div>
-                ))}
-                <div className={styles.productBoxRow}>
-                  <label>lat</label>
-                  <input ref={latRef} placeholder='lat' type='text' />
-                </div>
-                <div className={styles.productBoxRow}>
-                  <label>long</label>
-                  <input ref={longRef} placeholder='long' type='text' />
-                </div>
-                <input className={styles.submit} type='submit' />
-              </form>
+              <Add />
             </>
           )}
         </>

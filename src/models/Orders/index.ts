@@ -15,6 +15,7 @@ const orderSchema = new mongoose.Schema({
 			)}${alirezaman.getHours()}${alirezaman.getMinutes()}${alirezaman.getSeconds()}`,
 	},
 	status: { type: String, required: true },
+	address: { type: String, required: true },
 	client: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Client',

@@ -1,5 +1,2 @@
-import Address from "@/Components/FlowChart/address"
-const Register = () => {
-  return <Address/>
-}
-export default Register
+import Address from '@/Components/FlowChart/Address/add'
+export default Address

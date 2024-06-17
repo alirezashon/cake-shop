@@ -1,7 +1,7 @@
 import { SignUp, SignIn } from '../Auth'
 import { FormEvent, RefObject,  useRef, useState } from 'react'
 import styles from './index.module.css'
-import { UpdateAddress, InsertNumber } from '../FlowChart/address/handler'
+import { UpdateAddress, InsertNumber } from '../FlowChart/Address/handler'
 import { Toast } from 'primereact/toast'
 import Image from 'next/image'
 

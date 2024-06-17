@@ -1,3 +1,3 @@
 /** @format */
-import FlowChart from '@/Components/FlowChart'
+import FlowChart from '@/Components/FlowChart/'
 export default FlowChart
