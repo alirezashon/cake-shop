@@ -48,7 +48,7 @@ export interface Order {
   ticketID: string
   status: string
   address: string
-  client:string
+  client: string
   products: [Product]
   totalPrice: number
   attachment: string
@@ -85,4 +85,11 @@ export interface Notification {
   content: string
   code: string
   time: string
+}
+
+export interface Message {
+  id: string
+  client: string
+  content: string
+  sender: '*u&$e#' | '&a(D^m$n@'
 }

@@ -6,20 +6,13 @@ import { useEffect, useState } from 'react'
 import { FaRocketchat } from 'react-icons/fa'
 import styles from './index.module.css'
 import { GiCrossMark } from 'react-icons/gi'
-import Image from 'next/image'
-
-interface Message {
-  id: string
-  client: string
-  content: string
-  sender: '*u&$e#' | '&a(D^m$n@'
-}
+import { Message } from '@/Interfaces'
+import { getHistory, sendMessage } from './handler'
 
 const ChatUI = () => {
   const [showChat, setShowChat] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
   const [newMessage, setNewMessage] = useState('')
-  const [client, setClient] = useState<string>('')
   const dummyChatHistory: Message[] = [
     {
       id: '2',
@@ -36,43 +29,16 @@ const ChatUI = () => {
     },
   ]
 
-  const fetchChatHistory = async () => {
-    const response = await fetch('/api/chat/GET', {
-      headers: { 'Content-Type': 'application/json' },
-      method: 'POST',
-      body: JSON.stringify({ authType: '&n)E(w*o&n$e^w#q@', client }),
-    })
-    const data = await response.json()
-    data.messages && setMessages(data.messages)
-  }
 
   useEffect(() => {
-    setMessages(dummyChatHistory)
-    // const name = JSON.parse(localStorage.getItem("user") || "")
-    const name = `custom user ${Date}`
-    !client && setClient(name)
-    // fetchChatHistory()
+ !messages&&getHistory()
   }, [])
 
   const toggleChat = () => {
     setShowChat((prev) => !prev)
   }
 
-  const sendMessage = async () => {
-    console.log('messagooo')
-    const response = await fetch('/api/chat', {
-      headers: { 'Content-Type': 'application/json' },
-      method: 'POST',
-      body: JSON.stringify({
-        authType: '&M%e$A#g$e#I%n&Z*',
-        message: newMessage,
-        client: `${client}`,
-      }),
-    })
-    console.log(await response.json())
-    console.log(response.status)
-  }
-
+ 
   return (
     <div className={styles.chatContainer}>
       {!showChat && (
@@ -89,13 +55,6 @@ const ChatUI = () => {
               onClick={() => setShowChat(false)}
             />
           </div>
-            {/* <Image
-              className={styles.chatBG}
-              src={'/images/chat.jpg'}
-              alt=''
-              width={999}
-              height={999}
-            /> */}
           <div className={styles.messages}>
             {messages?.map((message) => (
               <div
@@ -111,14 +70,18 @@ const ChatUI = () => {
             ))}
           </div>
           <div className={styles.inputContainer}>
-            <button onClick={sendMessage} className={styles.sendButton}>
+            <button onClick={()=> sendMessage(newMessage,messages[0]?.client?messages[0]?.client:JSON.parse(
+    localStorage.getItem("#B!@%$&K&E^T*O(s&") || "[]"
+  ))} className={styles.sendButton}>
               ارسال
             </button>
             <input
               type='text'
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+              onKeyDown={(e) => e.key === 'Enter' &&()=> sendMessage(newMessage,messages[0]?.client?messages[0]?.client:JSON.parse(
+    localStorage.getItem("#B!@%$&K&E^T*O(s&") || "[]"
+  ))} 
               placeholder='...ارسال پیام'
               className={styles.input}
             />
