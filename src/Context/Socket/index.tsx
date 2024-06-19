@@ -1,3 +1,5 @@
+// src/Context/Socket/index.tsx
+
 import React, {
   createContext,
   useContext,
@@ -30,15 +32,16 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const socketIo: Socket = io(
-      `http://localhost:${process.env.PRODUCTION_PORT}`,
+      `ws://localhost:${process.env.PRODUCTION_PORT}`,
+
       {
-        path: '/api/chat',
+        path: '/api/socket',
       }
     )
 
     setSocket(socketIo)
 
-    const cleanup = () => {
+    function cleanup() {
       socketIo.disconnect()
     }
 

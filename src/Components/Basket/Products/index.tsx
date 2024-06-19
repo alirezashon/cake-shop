@@ -7,7 +7,7 @@ import { MdAddCircle } from "react-icons/md"
 import React, { useEffect, useState } from "react"
 import { Add, Get, Remove } from "../Actions"
 import { Product } from "../../../Interfaces"
-import { useBasket } from "@/Context"
+import { useBasket } from "@/Context/Basket"
 
 interface Props {
   setLoading: boolean
