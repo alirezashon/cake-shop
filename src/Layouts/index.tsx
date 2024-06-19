@@ -1,7 +1,6 @@
 import Navigation from "../Components/Navigation"
 import Head from "next/head"
-import { BasketProvider } from "@/Context"
-import styles from "./index.module.css"
+import { BasketProvider } from "@/Context/Basket"
 import { useEffect, useState } from "react"
 import { Product } from "@/Interfaces"
 import { Get } from "@/Components/Basket/Actions"

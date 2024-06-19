@@ -9,7 +9,7 @@ export const sendMessage = async (newMessage: string, client: string) => {
     }),
   })
   console.log(await response.json())
-  console.log(response.status)
+  console.log(client)
 }
 export const getHistory = async () => {
   try {
@@ -19,11 +19,16 @@ export const getHistory = async () => {
       body: JSON.stringify({ authType: '!C#o$N%e^C&t*O$C#h$t%' }),
     })
     const data = await response.json()
+    console.log(data)
     if (response.status === 200) {
       return data.message
     }
     if (response.status === 207) {
-      localStorage.setItem('#B!@%$&K&E^T*O(s&', JSON.stringify(data.user))
+        // if(JSON.parse(
+        //     localStorage.getItem('#B!@%$&K&E^T*O(s&') || '[]'
+        //   ))
+        return ''
+      localStorage.setItem('*c(h)o&m%a^c$H#a#p@', JSON.stringify(data.user))
     }
   } catch (err) {
     console.log(err)

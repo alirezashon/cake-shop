@@ -6,7 +6,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai"
 import { GiCrossMark } from "react-icons/gi"
 import Products from "./Products"
 import { Product } from "@/Interfaces"
-import { useBasket } from "@/Context"
+import { useBasket } from "@/Context/Basket"
 
 interface BasketProps {
   basketData: Product[]

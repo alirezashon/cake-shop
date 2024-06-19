@@ -86,10 +86,14 @@ export interface Notification {
   code: string
   time: string
 }
-
-export interface Message {
-  id: string
-  client: string
+export interface Chat {
   content: string
   sender: '*u&$e#' | '&a(D^m$n@'
+  time: string
+}
+
+export interface MessageInterface {
+  id: string
+  client: string
+  chats: Chat[]
 }

@@ -2,15 +2,16 @@
 
 import mongoose from 'mongoose'
 
-const messageSchema = new mongoose.Schema({
-  client: {
-    type: String,
-  },
-  content: { type: String, required: true },
-  sender: '*u&$e#' || '&a(D^m$n@',
-  time: { type: Date, default: new Date() },
+const chatSchema = new mongoose.Schema({
+  client: String,
+  chats: [
+    {
+      content: { type: String, required: true },
+      sender: { type: String, required: true },
+      time: { type: Date, default: new Date() },
+    },
+  ],
 })
-const Message =
-  mongoose.models.Message || mongoose.model('Message', messageSchema)
+const Chat = mongoose.models.Chat || mongoose.model('Chat', chatSchema)
 
-export default Message
+export default Chat

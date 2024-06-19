@@ -4,7 +4,7 @@ import ClientSession from '@/models/Client/Session'
 const getit = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === 'POST') {
-      const { authType } = req.body
+      const { authType, client } = req.body
       const token = req.cookies['CTFlEoiSHkeNnToMBLiShoOekn3kN2y@k']
 
       if (authType === '!C#o$N%e^C&t*O$C#h$t%') {
@@ -13,16 +13,23 @@ const getit = async (req: NextApiRequest, res: NextApiResponse) => {
           key: kalim,
         })
         if (session && session.key === kalim) {
-          const messages = await Chat.find({
+          const messages = await Chat.findOne({
             client: session.client,
-            time: -1,
           })
 
           res.status(200).json({ messages })
         } else {
-          res
-            .status(207)
-            .json({ success: false, user: `custom user ${new Date()}` })
+          if (client) {
+            console.log(req.body)
+            const messages = await Chat.findOne({
+              client,
+            })
+            res.status(200).json({ success: false, messages })
+          } else {
+            res
+              .status(207)
+              .json({ success: false, user: `custom user ${new Date()}` })
+          }
         }
       } else {
         res.status(407).json({ message: 'Invalid auth type', success: false })

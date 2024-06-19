@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { Get, Add, Remove } from '../../Components/Basket/Actions'
 import { MdAddCircle } from 'react-icons/md'
 import { FaMinus } from 'react-icons/fa'
-import { useBasket } from "@/Context"
+import { useBasket } from "@/Context/Basket"
 
 interface Data {
 	_id: string
