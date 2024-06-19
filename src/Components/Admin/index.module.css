@@ -1,4 +1,10 @@
-.block{
-    border-top: ridge .5vh rgba(81, 205, 83, 0.9);
-margin-bottom: 12vh;
+.block {
+  border-top: ridge 0.5vh rgba(81, 205, 83, 0.9);
+  margin-bottom: 12vh;
+  margin-left: 3%;
+}
+@media (max-width: 999px) {
+  .block {
+    margin-left: 6%;
+  }
 }

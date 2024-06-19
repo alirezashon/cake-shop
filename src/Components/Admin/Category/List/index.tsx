@@ -1,7 +1,7 @@
-import Image from "next/image"
-import { MdEditDocument } from "react-icons/md"
-import styles from "../../List.module.css" // Update with your CSS file path
-import { Category } from "@/Interfaces"
+import Image from 'next/image'
+import { MdEditDocument } from 'react-icons/md'
+import styles from '../../List.module.css' // Update with your CSS file path
+import { Category } from '@/Interfaces'
 
 interface Props {
   data: Category[] | null
@@ -23,7 +23,7 @@ const List: React.FC<Props> = ({ data, isLoading, setEditItemId }) => {
         <table>
           <thead>
             <tr>
-              {["Name", "Image", "Keywords"].map((header) => (
+              {['اسم', 'تصویر', 'کلمات کلیدی'].map((header) => (
                 <th key={header}>{header}</th>
               ))}
               <th>Action</th>
@@ -33,12 +33,7 @@ const List: React.FC<Props> = ({ data, isLoading, setEditItemId }) => {
             {data &&
               data?.map((category) => (
                 <tr key={category._id}>
-                  {/* <td>{Object.entries(category.alt).map((d) => d)}</td> */}
-                  <td>
-                    <td>
-                     {category.name}
-                    </td>
-                  </td>
+                  <td>{category.name}</td>
                   <td>
                     <Image
                       src={`data:image/jpeg;base64,${category.src}`}

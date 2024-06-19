@@ -1,7 +1,7 @@
-import Image from "next/image"
-import { MdEditDocument } from "react-icons/md"
-import styles from "../../List.module.css" // Update with your CSS file path
-import { Category, Product } from "@/Interfaces"
+import Image from 'next/image'
+import { MdEditDocument } from 'react-icons/md'
+import styles from '../../List.module.css' // Update with your CSS file path
+import { Category, Product } from '@/Interfaces'
 
 interface Props {
   data: Product[] | null
@@ -29,18 +29,24 @@ const List: React.FC<Props> = ({
         <table>
           <thead>
             <tr>
-              {["title", "src",'price','colories', "category", "description", "Keywords"].map(
-                (header) => (
-                  <th key={header}>{header}</th>
-                )
-              )}
+              {[
+                'سرتیتر',
+                'تصویر',
+                'قیمت',
+                'دسته بندی',
+                'کالری',
+                'توضیحات',
+                'کلمات کلیدی',
+              ].map((header) => (
+                <th key={header}>{header}</th>
+              ))}
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {data &&
               data?.map((product, index) => (
-                <tr key={product._id}>
+                <tr key={index}>
                   <td>{product.title}</td>
 
                   <td>
@@ -51,12 +57,12 @@ const List: React.FC<Props> = ({
                       height={77}
                     />
                   </td>
+                  <td>{product?.price}</td>
                   <td>
                     {category &&
                       category.find((cat) => cat._id === product.categories)
                         ?.name}
                   </td>
-                  <td>{product?.price}</td>
                   <td>{product?.calories}</td>
                   <td>{product?.description}</td>
 

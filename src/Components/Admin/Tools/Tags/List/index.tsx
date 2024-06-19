@@ -21,7 +21,7 @@ const TagList: React.FC<Props> = ({ data, isLoading }) => {
         <table>
           <thead>
             <tr>
-              {["Name", "Image"].map((header) => (
+              {["نام", "تصویر"].map((header) => (
                 <th key={header}>{header}</th>
               ))}
               <th>Action</th>

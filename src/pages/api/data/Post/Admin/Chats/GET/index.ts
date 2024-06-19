@@ -1,17 +1,17 @@
 /** @format */
 
-import { NextApiRequest, NextApiResponse } from "next"
-import Tools from "../../../../../../../models/Tools"
-import db from "../../../../../../../utils"
+import { NextApiRequest, NextApiResponse } from 'next'
+import Chat from '../../../../../../../models/Chat'
+import db from '../../../../../../../utils'
 
 const cateBrand = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    if (req.method === "POST") {
+    if (req.method === 'POST') {
       const { authType } = req.body
-      if (authType === "^c(a)ta*sEa0c(Tzol&i^*o%l#sA!") {
-        await db.connectToShop()
-        const tools = await Tools.find({})
-        res.status(200).json({ tools })
+      if (authType === '&c*h^A%t$m^a#t%o$k@a!l&i^') {
+        await db.connect2DB()
+        const chats = await Chat.find({})
+        res.status(200).json({ chats })
       } else {
         res.status(407).json({ success: false })
       }
