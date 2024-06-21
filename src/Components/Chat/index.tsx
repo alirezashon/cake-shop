@@ -169,11 +169,10 @@
 // }
 
 // export default ChatUI
-
-// components/ChatUI.tsx
+// components/Chat.tsx
 
 import { useEffect, useState } from 'react'
-import io, { Socket } from 'socket.io-client'
+import { io, Socket } from 'socket.io-client'
 import { FaRocketchat } from 'react-icons/fa'
 import { GiCrossMark } from 'react-icons/gi'
 import styles from './index.module.css'
@@ -186,7 +185,7 @@ const ChatUI = () => {
   const [socket, setSocket] = useState<Socket | null>(null)
 
   useEffect(() => {
-    const socketIo: Socket = io(`http://localhost:${process.env.PRODUCTION_PORT}`, {
+    const socketIo: Socket = io({
       path: '/api/socket',
     })
 
@@ -258,7 +257,6 @@ const ChatUI = () => {
 
   return (
     <div className={styles.chatContainer}>
-      {newMessage}
       {!showChat && (
         <div
           className={styles.chatIcon}

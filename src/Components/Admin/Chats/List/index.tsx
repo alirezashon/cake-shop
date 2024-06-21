@@ -1,12 +1,12 @@
-import styles from '../../List.module.css' 
+import styles from '../../List.module.css'
 import { MessageInterface } from '@/Interfaces'
 
 interface Props {
   data: MessageInterface[] | null
   isLoading: boolean
-  setEditItemId: (id: string) => void
+  setClient: (id: string) => void
 }
-const List: React.FC<Props> = ({ data, isLoading, setEditItemId }) => {
+const List: React.FC<Props> = ({ data, isLoading, setClient }) => {
   return (
     <div className={styles.tableContainer}>
       <div className={styles.header}>فهرست پیام ها</div>
@@ -29,7 +29,7 @@ const List: React.FC<Props> = ({ data, isLoading, setEditItemId }) => {
           <tbody>
             {data &&
               data?.map((chat) => (
-                <tr key={chat.client}>
+                <tr key={chat.client} onClick={() => setClient(chat.client)}>
                   <td>{chat.client}</td>
                   <td>{chat.chats.length}</td>
                 </tr>

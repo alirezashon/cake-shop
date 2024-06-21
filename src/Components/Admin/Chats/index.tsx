@@ -1,54 +1,82 @@
-/** @format */
-
-import { useRef, RefObject, useState, useEffect } from 'react'
-import styles from '../Inserto.module.css'
+import { useRef, useState, useEffect } from 'react'
+import styles from './index.module.css'
 import List from './List'
 import { Toast } from 'primereact/toast'
-import { MessageInterface } from '@/Interfaces'
-import Image from 'next/image'
+import { Chat, MessageInterface } from '@/Interfaces'
+import { io, Socket } from 'socket.io-client'
+import { GiCrossMark } from 'react-icons/gi'
+
 const ChatsManager: React.FC = () => {
   const toast = useRef<Toast>(null)
 
-  const refs: {
-    [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement>
-  } = {
-    name: useRef<HTMLInputElement>(null),
-    src: useRef<HTMLInputElement>(null),
-    keywords: useRef<HTMLInputElement>(null),
-  }
-  const [image, setImage] = useState<string>()
-  const [action, setAction] = useState<string>('(*I&n()s*e(r&t*^%t^O&n*E(')
-  const [data, setData] = useState<MessageInterface[] | null>(null)
+  const [chats, setChats] = useState<MessageInterface[] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [editItemId, setEditItemId] = useState<string | null>(null)
+  const [newMessage, setNewMessage] = useState<string>('')
+  const [socket, setSocket] = useState<Socket | null>(null)
+  const [client, setClient] = useState<string | null>(null)
 
-  const keys = [
-    [
-      '(*I&n()s*e(r&t*^%t^O&n*E(',
-      ')U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(',
-      '&d*E%e#t&*^%s^waf#$^e$o%f@',
-    ],
-    ['ایجاد', 'به روزرسانی', 'حذف'],
-  ]
+  useEffect(() => {
+    const socketIo: Socket = io({
+      path: '/api/socket',
+    })
+    setSocket(socketIo)
+
+    socketIo.on('connect', () => {
+      console.log('Admin connected to the socket for chat')
+    })
+
+    socketIo.on('message', (data: { client: string; newMessage: Chat }) => {
+      setChats((prevChats) =>
+        prevChats
+          ? prevChats.map((chat) =>
+              chat.client === data.client
+                ? { ...chat, chats: [...chat.chats, data.newMessage] }
+                : chat
+            )
+          : null
+      )
+    })
+
+    socketIo.on('disconnect', () => {
+      console.log('Disconnected from Socket.IO server')
+    })
+
+    return () => {
+      socketIo.disconnect()
+    }
+  }, [])
+
+  const send = () => {
+    if (socket && client) {
+      socket.emit('sendMessage', {
+        authType: '^a&M&d(i*n^a$t%0#l$N(b)i*',
+        message: newMessage,
+        client,
+      })
+
+      setNewMessage('')
+    }
+  }
+
   const getData = async () => {
     try {
       const response = await fetch('/api/data/Post/Admin/Chats/GET', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          authType:'&c*h^A%t$m^a#t%o$k@a!l&i^',
+          authType: '&c*h^A%t$m^a#t%o$k@a!l&i^',
         }),
       })
 
       if (response.ok) {
         const result = await response.json()
-        setData(result.chats)
+        setChats(result.chats)
         setIsLoading(false)
       } else {
         toast.current?.show({
           severity: 'error',
           summary: 'Secondary',
-          detail: ' نا موفق',
+          detail: 'نا موفق',
           life: 3000,
         })
         setIsLoading(false)
@@ -57,130 +85,216 @@ const ChatsManager: React.FC = () => {
       toast.current?.show({
         severity: 'error',
         summary: 'Secondary',
-        detail: ' نا موفق',
+        detail: 'نا موفق',
         life: 3000,
       })
       setIsLoading(false)
     }
   }
+
   useEffect(() => {
-   
-    !data && getData()
-  }, [editItemId, data, refs.name, refs.keywords])
-  const setFile = () => {
-    const reader = new FileReader()
-    reader.onloadend = () => {
-      const imageData = reader.result?.toString().split(',')[1]
-      setImage(imageData)
+    if (!chats) {
+      getData()
     }
-    const imageFile =
-      refs.src.current instanceof HTMLInputElement && refs.src.current.files
-        ? refs.src.current.files[0]
-        : null
-    imageFile && reader.readAsDataURL(imageFile)
-  }
-  const inserToDB = async () => {
-    try {
-      const dataToSend = {
-        authType: '^c(a)t*E(T*t(A&g*o^x^o$s#m!',
-        data: {
-          src: image,
-          name: refs.name.current?.value || '',
-          keywords: refs.keywords.current?.value?.split(',') || [],
-        },
-        action: action,
-      }
-
-      const url =
-        action === '(*I&n()s*e(r&t*^%t^O&n*E('
-          ? `/api/data/Post/Admin/Chats`
-          : `/api/data/Post/Admin/Chats?aydi=${editItemId}`
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dataToSend),
-      })
-
-      const data = await response.json()
-      if (data.success) {
-        toast.current?.show({
-          severity: 'success',
-          summary: 'Secondary',
-          detail: 'موفق',
-          life: 3000,
-        })
-        location.reload()
-      } else {
-        toast.current?.show({
-          severity: 'error',
-          summary: 'Secondary',
-          detail: ' نا موفق',
-          life: 3000,
-        })
-      }
-    } catch (error) {
-      toast.current?.show({
-        severity: 'warn',
-        summary: 'Secondary',
-        detail: 'خطا',
-        life: 3000,
-      })
-    }
-  }
+  }, [chats])
 
   return (
     <>
       <Toast ref={toast} />
-      <List data={data} isLoading={isLoading} setEditItemId={setEditItemId} />
-      <div className={styles.radioBox}>
-        {keys[1].map((act, index) => (
-          <div key={index}>
-            <label htmlFor={act}>{act}</label>
-            <input
-              id={act}
-              className={styles.checkboxInput}
-              checked={action === keys[0][index]}
-              onChange={() => setAction(keys[0][index])}
-              type='radio'
-              key={index}
-              value={action}
-            />
-          </div>
-        ))}
-      </div>
-
-      <form
-        className={styles.productBox}
-        onSubmit={(e) => {
-          e.preventDefault()
-          inserToDB()
-        }}
-      >
-        {Object.keys(refs).map((refName, index) => (
-          <div key={index} className={styles.productBoxRow}>
-            <label>{refName}</label>
-            {refName === 'src' && image && (
-              <Image
-                src={`data:image/jpeg;base64,${image}`}
-                alt={``}
-                width={77}
-                height={77}
+      <div className={styles.container}>
+        <List data={chats} isLoading={isLoading} setClient={setClient} />
+        {client && (
+          <div className={styles.chatBox}>
+            <div className={styles.header}>
+              <GiCrossMark
+                className={styles.cross}
+                size={'5vh'}
+                onClick={() => setClient(null)}
               />
-            )}
-            <input
-              ref={refs[refName] as RefObject<HTMLInputElement>}
-              placeholder={refName}
-              type={refName === 'src' ? 'file' : 'text'}
-              onChange={() => refName === 'src' && setFile()}
-            />
+            </div>
+            <div className={styles.messages}>
+              {chats &&
+                chats
+                  .find((d) => d.client === client)
+                  ?.chats?.map((message, index) => (
+                    <div
+                      key={index}
+                      className={`${styles.message} ${
+                        message.sender === '*u&$e#'
+                          ? styles.userMessage
+                          : styles.otherMessage
+                      }`}
+                    >
+                      {message.content}
+                    </div>
+                  ))}
+            </div>
+            <div className={styles.inputContainer}>
+              <button onClick={send} className={styles.sendButton}>
+                ارسال
+              </button>
+              <input
+                type='text'
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && send()}
+                placeholder='...ارسال پیام'
+                className={styles.input}
+              />
+            </div>
           </div>
-        ))}
-        <button type='submit' className={styles.submito}>
-          تایید
-        </button>
-      </form>
+        )}
+      </div>
     </>
   )
 }
 
 export default ChatsManager
+
+// import { useRef, useState, useEffect } from 'react'
+// import styles from './index.module.css'
+// import List from './List'
+// import { Toast } from 'primereact/toast'
+// import { Chat, MessageInterface } from '@/Interfaces'
+// import io, { Socket } from 'socket.io-client'
+// import { GiCrossMark } from 'react-icons/gi'
+// const ChatsManager: React.FC = () => {
+//   const toast = useRef<Toast>(null)
+
+//   const [chats, setChats] = useState<MessageInterface[] | null>(null)
+//   const [isLoading, setIsLoading] = useState<boolean>(true)
+//   const [newMessage, setNewMessage] = useState<string>('')
+//   const [socket, setSocket] = useState<Socket | null>(null)
+//   const [client, setClient] = useState<string | null>(null)
+//   useEffect(() => {
+//     const socketIo: Socket = io(
+//       `http://localhost:${process.env.PRODUCTION_PORT}`,
+//       {
+//         path: '/api/data/Post/Admin/Chat',
+//       }
+//     )
+//     setSocket(socketIo)
+//     socketIo.on('connect', () => {
+//       console.log('admin connected to the socket for chat')
+//     })
+
+//     socketIo.on('message', (data: { client: string; newMessage: Chat }) => {
+//       setChats((prevChats) =>
+//         prevChats
+//           ? prevChats.map((chat) =>
+//               chat.client === data.client
+//                 ? { ...chat, chats: [...chat.chats, data.newMessage] }
+//                 : chat
+//             )
+//           : null
+//       )
+//     })
+
+//     socketIo.on('disconnect', () => {
+//       console.log('Disconnected from Socket.IO server')
+//     })
+
+//     return () => {
+//       socketIo.disconnect()
+//     }
+//   }, [])
+
+//   const send = () => {
+//     if (socket) {
+//       socket.emit('sendResponse', {
+//         authType: '&M&d(i*n^a$t%0#l$N(b)i*',
+//         message: newMessage,
+//         client,
+//       })
+//       setNewMessage('')
+//     }
+//   }
+//   const getData = async () => {
+//     try {
+//       const response = await fetch('/api/data/Post/Admin/Chats/GET', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//           authType: '&c*h^A%t$m^a#t%o$k@a!l&i^',
+//         }),
+//       })
+
+//       if (response.ok) {
+//         const result = await response.json()
+//         setChats(result.chats)
+//         setIsLoading(false)
+//       } else {
+//         toast.current?.show({
+//           severity: 'error',
+//           summary: 'Secondary',
+//           detail: ' نا موفق',
+//           life: 3000,
+//         })
+//         setIsLoading(false)
+//       }
+//     } catch (error) {
+//       toast.current?.show({
+//         severity: 'error',
+//         summary: 'Secondary',
+//         detail: ' نا موفق',
+//         life: 3000,
+//       })
+//       setIsLoading(false)
+//     }
+//   }
+//   useEffect(() => {
+//     !chats && getData()
+//   }, [chats])
+
+//   return (
+//     <>
+//       <Toast ref={toast} />
+//       <div className={styles.container}>
+//         <List data={chats} isLoading={isLoading} setClient={setClient} />
+//         {client && (
+//           <div className={styles.chatBox}>
+//             <div className={styles.header}>
+//               <GiCrossMark
+//                 className={styles.cross}
+//                 size={'5vh'}
+//                 onClick={() => setClient(null)}
+//               />
+//             </div>
+//             <div className={styles.messages}>
+//               {chats &&
+//                 chats[chats.findIndex((d) => d.client === client)]?.chats?.map(
+//                   (message, index) => (
+//                     <div
+//                       key={index}
+//                       className={`${styles.message} ${
+//                         message.sender === '*u&$e#'
+//                           ? styles.userMessage
+//                           : styles.otherMessage
+//                       }`}
+//                     >
+//                       {message.content}
+//                     </div>
+//                   )
+//                 )}
+//             </div>
+//             <div className={styles.inputContainer}>
+//               <button onClick={send} className={styles.sendButton}>
+//                 ارسال
+//               </button>
+//               <input
+//                 type='text'
+//                 value={newMessage}
+//                 onChange={(e) => setNewMessage(e.target.value)}
+//                 onKeyDown={(e) => e.key === 'Enter' && send()}
+//                 placeholder='...ارسال پیام'
+//                 className={styles.input}
+//               />
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </>
+//   )
+// }
+
+// export default ChatsManager
