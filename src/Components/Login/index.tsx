@@ -1,5 +1,5 @@
 import { SignUp, SignIn } from '../Auth'
-import { FormEvent, RefObject,  useRef, useState } from 'react'
+import { FormEvent, RefObject, useRef, useState } from 'react'
 import styles from './index.module.css'
 import { UpdateAddress, InsertNumber } from '../FlowChart/Address/handler'
 import { Toast } from 'primereact/toast'
@@ -36,6 +36,16 @@ const Login: React.FC = () => {
           life: 3000,
         })
       } else {
+        const response = await fetch('/api/Auth/otp', {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // body: JSON.stringify({
+          //   userPass: user + "&" + password,
+          //   authType: "&^ClieNt%LOgIn^&B*y^P$h#o@N#E",
+          // }),
+        })
         setOtpSent(true)
         toast.current?.show({
           severity: 'success',
@@ -62,7 +72,7 @@ const Login: React.FC = () => {
   }
   return (
     <>
-	<Toast ref={toast}/>
+      <Toast ref={toast} />
       <div className={styles.container}>
         <div className={styles.formBox}>
           <Image
