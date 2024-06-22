@@ -5,7 +5,7 @@ import { MdAddCircle } from 'react-icons/md'
 import { useEffect, useState } from 'react'
 import { Add, Get, Remove } from '../../Basket/Actions'
 import { Product } from '@/Interfaces'
-import { useBasket } from '@/Context'
+import { useBasket } from '@/Context/Basket'
 
 const Products: React.FC = () => {
   const [posts, setPosts] = useState<Product[]>([])

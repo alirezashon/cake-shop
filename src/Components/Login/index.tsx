@@ -1,7 +1,6 @@
-import { SignUp, SignIn } from '../Auth'
 import { FormEvent, RefObject, useRef, useState } from 'react'
 import styles from './index.module.css'
-import { UpdateAddress, InsertNumber } from '../FlowChart/Address/handler'
+import { InsertNumber, sendOTP } from './handler'
 import { Toast } from 'primereact/toast'
 import Image from 'next/image'
 
@@ -20,54 +19,15 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    toast.current?.show({
-      severity: 'info',
-      summary: 'در حال اجرا',
-      detail: 'سرور در حال پردازش',
-      life: 3000,
-    })
     if (!otpSent) {
-      const phoneNumber = refs.phone.current?.value || ''
-      if (phoneNumber.toString()?.length !== 11) {
-        toast.current?.show({
-          severity: 'error',
-          summary: 'شماره تماس اشتباه است',
-          detail: 'ناموفق',
-          life: 3000,
-        })
-      } else {
-        const response = await fetch('/api/Auth/otp', {
-          method: 'GET',
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // body: JSON.stringify({
-          //   userPass: user + "&" + password,
-          //   authType: "&^ClieNt%LOgIn^&B*y^P$h#o@N#E",
-          // }),
-        })
-        setOtpSent(true)
-        toast.current?.show({
-          severity: 'success',
-          summary: 'کد برای شماره ارسال شد',
-          detail: 'موفق',
-          life: 3000,
-        })
-      }
+      sendOTP(`${refs.phone.current?.value}`, toast,setOtpSent)
     } else {
-      const status = await InsertNumber(
+      await InsertNumber(
         setIsLoading,
-        parseInt(`${refs.phone.current?.value}`),
-        parseInt(`${refs.otp.current?.value}`)
+      `${refs.phone.current?.value}`,
+       `${refs.otp.current?.value}`,
+        toast
       )
-      if (status === 'S!A@k%s$e^x%f^u*l^') {
-        toast.current?.show({
-          severity: 'success',
-          summary: 'ثبت نام با موفقیت انجام شد',
-          detail: 'موفق',
-          life: 3000,
-        })
-      }
     }
   }
   return (
@@ -89,12 +49,15 @@ const Login: React.FC = () => {
               type={'text'}
             />
             {otpSent && (
-              <input
-                ref={refs.otp as RefObject<HTMLInputElement>}
-                placeholder={'کد ارسال شده'}
-                dir='rtl'
-                type={'number'}
-              />
+              <>
+                <input
+                  ref={refs.otp as RefObject<HTMLInputElement>}
+                  placeholder={'کد ارسال شده'}
+                  dir='rtl'
+                  type={'number'}
+                />
+                <div className={styles.sendAgain}>ارسال مجدد</div>
+              </>
             )}
             <input
               className={styles.submit}

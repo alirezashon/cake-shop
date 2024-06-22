@@ -13,6 +13,7 @@ import { Information, Order } from '@/Interfaces'
 import { BiEdit } from 'react-icons/bi'
 import { GiCrossMark } from 'react-icons/gi'
 import { Toast } from 'primereact/toast'
+import Layout from '@/Layouts'
 
 interface Info {
   email: string
@@ -102,87 +103,91 @@ const Profile = () => {
 
   return (
     <>
-      <Toast ref={toast} />
-      <div className={styles.container}>
-        <div className={styles.profileBox}>
-          <Image
-            alt=''
-            className={styles.image}
-            src={'/images/icon.png'}
-            width={111}
-            height={111}
-          />
-          <div className={styles.profiletail}>
-            {data &&
-              Object.entries(data[1]?.info).map(
-                (sub: [string, string], index) => (
-                  <div
-                    className={styles.detailRow}
-                    key={index}
-                    onClick={() => setNewmew([sub[1], index])}
-                  >
-                    <span>{keyTranslations[sub[0]]}</span>
+      <Layout>
+        <Toast ref={toast} />
+        <div className={styles.container}>
+          <div className={styles.profileBox}>
+            <Image
+              alt=''
+              className={styles.image}
+              src={'/images/icon.png'}
+              width={111}
+              height={111}
+            />
+            <div className={styles.profiletail}>
+              {data &&
+                Object.entries(data[1]?.info).map(
+                  (sub: [string, string], index) => (
+                    <div
+                      className={styles.detailRow}
+                      key={index}
+                      onClick={() => setNewmew([sub[1], index])}
+                    >
+                      <span>{keyTranslations[sub[0]]}</span>
 
-                    {newmew && newmew[1] === index ? (
-                      <div className={styles.editRow}>
-                        <input
-                          value={newmew[0]}
-                          defaultValue={newmew[0] as string}
-                          placeholder={String(sub[1])}
-                          className={styles.onput}
-                          onChange={(e) => setNewmew([e.target.value, index])}
-                        />
-                        <input
-                          value='ثبت'
-                          type='submit'
-                          onClick={async () => {
-                            await meow()
-                          }}
-                          className={styles.submit}
-                        />
-                        <GiCrossMark
-                          onClick={() => setNewmew(null)}
-                          className={styles.close}
-                        />
-                      </div>
-                    ) : (
-                      <>
-                        <span>{sub[1]}</span>
-                        <BiEdit className={styles.editIcon} />
-                      </>
-                    )}
-                  </div>
-                )
-              )}
+                      {newmew && newmew[1] === index ? (
+                        <div className={styles.editRow}>
+                          <input
+                            value={newmew[0]}
+                            defaultValue={newmew[0] as string}
+                            placeholder={String(sub[1])}
+                            className={styles.onput}
+                            onChange={(e) => setNewmew([e.target.value, index])}
+                          />
+                          <input
+                            value='ثبت'
+                            type='submit'
+                            onClick={async () => {
+                              await meow()
+                            }}
+                            className={styles.submit}
+                          />
+                          <GiCrossMark
+                            onClick={() => setNewmew(null)}
+                            className={styles.close}
+                          />
+                        </div>
+                      ) : (
+                        <>
+                          <span>{sub[1]}</span>
+                          <BiEdit className={styles.editIcon} />
+                        </>
+                      )}
+                    </div>
+                  )
+                )}
+            </div>
+            <div className={styles.itemsBox}>
+              {items.map((item, idx) => (
+                <div
+                  key={idx}
+                  className={`${
+                    item === state ? styles.selected : styles.item
+                  } `}
+                  onClick={() => setState(item)}
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
-          <div className={styles.itemsBox}>
-            {items.map((item, idx) => (
-              <div
-                key={idx}
-                className={`${item === state ? styles.selected : styles.item} `}
-                onClick={() => setState(item)}
-              >
-                {item}
-              </div>
-            ))}
+          <div className={styles.contentBox}>
+            {state === 'سفارشات' ? (
+              <Orders orders={data && data[0]} loading={isLoading} />
+            ) : state === 'مورد علاقه' ? (
+              <Favorites />
+            ) : state === 'گفتگو' ? (
+              <Chat />
+            ) : state === 'آدرس ها' ? (
+              <Address addresses={data && data[1]?.addr} />
+            ) : state === 'بازدید های اخیر' ? (
+              <LastSeen />
+            ) : (
+              state === 'پیغام ها' && <Notification />
+            )}
           </div>
         </div>
-        <div className={styles.contentBox}>
-          {state === 'سفارشات' ? (
-            <Orders orders={data && data[0]} loading={isLoading} />
-          ) : state === 'مورد علاقه' ? (
-            <Favorites />
-          ) : state === 'گفتگو' ? (
-            <Chat />
-          ) : state === 'آدرس ها' ? (
-            <Address addresses={data && data[1]?.addr} />
-          ) : state === 'بازدید های اخیر' ? (
-            <LastSeen />
-          ) : (
-            state === 'پیغام ها' && <Notification />
-          )}
-        </div>
-      </div>
+      </Layout>
     </>
   )
 }

@@ -3,7 +3,7 @@ import ClientSession from '../../../../../models/Client/Session'
 import db from '../../../../../utils'
 import Profile from '@/models/Client/Profile'
 
-const InsertNumber = async (req: NextApiRequest, res: NextApiResponse) => {
+const InsertAddress = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method !== 'POST') {
       return res
@@ -56,4 +56,4 @@ const InsertNumber = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default InsertNumber
+export default InsertAddress
