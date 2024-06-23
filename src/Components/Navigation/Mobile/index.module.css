@@ -1,154 +1,165 @@
 /** @format */
 .navBar {
-	width: 100%;
-	background: linear-gradient(22deg, rgb(198, 231, 99), rgb(223, 231, 129));
-	display: flex;
-	position: fixed;
-	padding:1vh;
-	z-index: 7;
-	top: 0;
-	justify-content: space-between;
-
+  width: 100%;
+  background: linear-gradient(
+    25deg,
+    rgb(215, 232, 168),
+    rgb(238, 249, 196),
+    rgb(216, 249, 163)
+  );
+  display: flex;
+  position: fixed;
+  padding: 1vh;
+  z-index: 7;
+  top: 0;
+  justify-content: space-between;
 }
 .searchBar {
-	direction: rtl;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	position: relative;
-  }
-  
-  .searchInput {
-	border: 1px solid #e4f4a2;
-	outline: none;
-	border-radius: 1vh;
-	padding: 0.5rem 1rem;
-	width: 100%;
-	box-sizing: border-box;
-  }
-  .searchInput::placeholder {
-	color: #afe32c;
-  }
-  
-  .searchIcon {
-	font-size: 4vh;
-	color: #e5edce;
-	position: absolute;
-	margin-left: 7%;
-  }
+  direction: rtl;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.searchInput {
+  border: 1px solid #e4f4a2;
+  outline: none;
+  border-radius: 1vh;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.searchInput::placeholder {
+  color: #afe32c;
+}
+
+.searchIcon {
+  font-size: 4vh;
+  color: #e5edce;
+  position: absolute;
+  margin-left: 7%;
+}
 .drawer {
-	width: 40vw;
-	height: 100vh;
-	background: radial-gradient(rgba(162, 217, 95, 0.809),
-			rgba(147, 183, 75, 0.5));
-	direction: rtl;
-	overflow-y: auto;
-	overflow-x: hidden;
-	position: fixed;
-	top: 0;
-	z-index: 22;
+  width: 40vw;
+  height: 100vh;
+  background: radial-gradient(
+    rgba(162, 217, 95, 0.809),
+    rgba(147, 183, 75, 0.5)
+  );
+  direction: rtl;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  top: 0;
+  z-index: 22;
 }
 
 .searchBox {
-	width: 90%;
-	margin-right: 5%;
+  width: 90%;
+  margin-right: 5%;
 }
 
 .itemBox {
-	background: radial-gradient(rgba(204, 227, 141, 0.5),
-			rgba(86, 183, 75, 0.5));
-	cursor: pointer;
-	margin: 1vh;
-	padding: 1vh;
-	border: 0.5vh ridge rgba(161, 227, 141, 0.5);
+  background: radial-gradient(rgba(204, 227, 141, 0.5), rgba(86, 183, 75, 0.5));
+  cursor: pointer;
+  margin: 1vh;
+  padding: 1vh;
+  border: 0.5vh ridge rgba(161, 227, 141, 0.5);
 }
 
 .itemBox:hover {
-	border: dashed 0.2vh rgba(248, 255, 236, 0.912);
+  border: dashed 0.2vh rgba(248, 255, 236, 0.912);
 }
 
 .item {
-	background: linear-gradient(244deg,
-			rgba(244, 251, 222, 0.5),
-			rgba(68, 116, 32, 0.926));
-	border: 0.2vh ridge rgba(236, 251, 255, 0.912);
-	border-radius: 0.5vh;
-	padding: 1vh;
+  background: linear-gradient(
+    244deg,
+    rgba(244, 251, 222, 0.5),
+    rgba(68, 116, 32, 0.926)
+  );
+  border: 0.2vh ridge rgba(236, 251, 255, 0.912);
+  border-radius: 0.5vh;
+  padding: 1vh;
 }
 
 .item:hover {
-	transform: translate(1vh);
+  transform: translate(1vh);
 }
 
 .category {
-	background: linear-gradient(44deg,
-			rgba(89, 171, 38, 0.5),
-			rgba(239, 254, 216, 0.5));
-	margin: 1vh;
-	padding: 1vh;
-	border: 0.3vh ridge rgb(255, 255, 255);
-	border-radius: 0.4vh;
+  background: linear-gradient(
+    44deg,
+    rgba(89, 171, 38, 0.5),
+    rgba(239, 254, 216, 0.5)
+  );
+  margin: 1vh;
+  padding: 1vh;
+  border: 0.3vh ridge rgb(255, 255, 255);
+  border-radius: 0.4vh;
 }
 
 .options,
 .subOptions {
-	background: radial-gradient(rgba(234, 255, 191, 0.815),
-			rgba(151, 183, 75, 0.5));
-	padding: 1vh;
-	margin: 1vh;
+  background: radial-gradient(
+    rgba(234, 255, 191, 0.815),
+    rgba(151, 183, 75, 0.5)
+  );
+  padding: 1vh;
+  margin: 1vh;
 }
 
 .subOptions:hover,
 .category:hover,
 .options:hover {
-	transform: scale(1.04);
-	font-weight: bold;
-	color: #f8feff;
+  transform: scale(1.04);
+  font-weight: bold;
+  color: #f8feff;
 }
 
 .image {
-	width: 5vh;
-	height: 5vh;
+  width: 5vh;
+  height: 5vh;
 }
 
 .navIcon {
-	background: radial-gradient(#adee3c, #e2f9ba);
-	color: #136e2d;
-	width: 6vh;
-	height: 6vh;
-	margin: .2vh;
-	display: flex;
-	font-weight: bold;
-	align-items: center;
-	justify-content: center;
-	border-radius: 22vh;
-	cursor: pointer;
+  background-color: rgb(133, 226, 169);
+  color: #ffffff;
+  width: 7vh;
+  height: 7vh;
+  margin: 0.2vh;
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22vh;
+  cursor: pointer;
 }
 
 .iconBox {
-	display: flex;
-	justify-content: flex-end;
-	min-width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 50%;
 }
 
 .profile {
-	margin: 0 2vh;
-	font-size: 6vh;
-	color: #e5f3a3;
-	background-color: rgb(77, 149, 26);
-	border-radius: 23vh;
-	border: .3vh rgb(239, 255, 234) dashed;
-	cursor: pointer;
+  margin: 0 2vh;
+  font-size: 6vh;
+  color: #e5f3a3;
+  background-color: rgb(102, 201, 140);
+  border-radius: 23vh;
+  border: 0.3vh rgb(239, 255, 234) dashed;
+  cursor: pointer;
 }
 
 .profile:hover {
-	transform: rotate(360deg);
-	transition: transform 3s;
+  transform: rotate(360deg);
+  transition: transform 3s;
 }
 
 @media (max-width: 777px) {
-	.drawer {
-		width: 60%;
-	}
+  .drawer {
+    width: 60%;
+  }
 }

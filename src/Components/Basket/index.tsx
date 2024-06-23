@@ -59,7 +59,7 @@ const Basket: React.FC<BasketProps> = ({
             />
             <div className={styles.calculateBox}>
               <p>مجموع هزینه ها : </p>
-              <p>{basket[3] && basket[3]} تومان </p>
+              <p>{basket[3] && basket[2]*basket[3]} تومان </p>
             </div>
           </div>
           <div className={styles.basketBase}>

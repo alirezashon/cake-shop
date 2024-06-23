@@ -1,18 +1,20 @@
-import styles from "./index.module.css"
-import { BiSearch } from "react-icons/bi"
-import { MdAddCircle, MdDeleteForever } from "react-icons/md"
-import { IoIosArrowForward } from "react-icons/io"
-import { useRef, useState, RefObject, useEffect } from "react"
-import { Product, Category } from "@/Interfaces"
-import Image from "next/image"
-import { FaMinus } from "react-icons/fa"
-import { Add, Get, Remove } from "../Basket/Actions"
-import { useBasket } from "@/Context/Basket"
-import { FaBasketShopping } from "react-icons/fa6"
-import { searchEngine } from "./content"
-import { GiCrossMark } from "react-icons/gi"
-import { goToBuy } from "./handler"
-import { Toast } from "primereact/toast"
+import styles from './index.module.css'
+import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs'
+import { MdAddCircle, MdDeleteForever } from 'react-icons/md'
+import { IoIosArrowForward } from 'react-icons/io'
+import { useRef, useState, RefObject, useEffect } from 'react'
+import { Product, Category } from '@/Interfaces'
+import Image from 'next/image'
+import { FaMinus } from 'react-icons/fa'
+import { Add, Get, Remove } from '../Basket/Actions'
+import { useBasket } from '@/Context/Basket'
+import { FaBasketShopping, FaHeartPulse } from 'react-icons/fa6'
+import { searchEngine } from './content'
+import { GiCrossMark } from 'react-icons/gi'
+import {goToBuy} from './handler'
+import { Toast } from 'primereact/toast'
+import { BiSearch } from 'react-icons/bi'
+import { GetFave ,AddFave,RemoveFave} from './Favorites'
 interface Props {
   data: [Category[], Product[]]
 }
@@ -29,13 +31,15 @@ const Store: React.FC<Props> = ({ data }) => {
   const [productover, setProductover] = useState<number | null>(null)
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
   const [isMobile, setIsMobile] = useState(false)
+  const [favorites, setFavorites] = useState<string[]>([])
   const toast = useRef<Toast>(null)
   const scrollLeft = () => {
     if (refs.categoryBoxRef.current) {
-      refs.categoryBoxRef.current.scrollBy({ left: -100, behavior: "smooth" })
+      refs.categoryBoxRef.current.scrollBy({ left: -100, behavior: 'smooth' })
     }
   }
   useEffect(() => {
+    setFavorites(GetFave())
     setBasket(Get())
     if (innerWidth < 777) {
       setIsMobile(true)
@@ -45,16 +49,16 @@ const Store: React.FC<Props> = ({ data }) => {
     }
 
     handleResize()
-    addEventListener("resize", handleResize)
+    addEventListener('resize', handleResize)
 
     return () => {
-      removeEventListener("resize", handleResize)
+      removeEventListener('resize', handleResize)
     }
   }, [])
 
   const scrollRight = () => {
     if (refs.categoryBoxRef.current) {
-      refs.categoryBoxRef.current.scrollBy({ left: 100, behavior: "smooth" })
+      refs.categoryBoxRef.current.scrollBy({ left: 100, behavior: 'smooth' })
     }
   }
   const increment = (id: string, price: number) => {
@@ -66,6 +70,15 @@ const Store: React.FC<Props> = ({ data }) => {
     Remove(id)
     setBasket(Get())
   }
+  const addfave = (id: string) => {
+    AddFave(id)
+    setFavorites(GetFave())
+  }
+
+  const removefave = (id: string) => {
+    RemoveFave(id)
+    setFavorites(GetFave())
+  }
   const PriceAction = (product: string, fontSize: string) => {
     return (
       <div className={styles.priceAction}>
@@ -74,30 +87,30 @@ const Store: React.FC<Props> = ({ data }) => {
           size={fontSize}
           onClick={() =>
             increment(
-              product.split("*2%2&7(7)5%5!1@2")[2],
-              parseInt(product?.split("*2%2&7(7)5%5!1@2")[1])
+              product.split('*2%2&7(7)5%5!1@2')[2],
+              parseInt(product?.split('*2%2&7(7)5%5!1@2')[1])
             )
           }
         />
-        <p className={styles.total}>{product.split("*2%2&7(7)5%5!1@2")[3]}</p>
+        <p className={styles.total}>{product.split('*2%2&7(7)5%5!1@2')[3]}</p>
         <FaMinus
           className={styles.deceriment}
           size={fontSize}
-          onClick={() => decrement(product.split("*2%2&7(7)5%5!1@2")[2])}
+          onClick={() => decrement(product.split('*2%2&7(7)5%5!1@2')[2])}
         />
       </div>
     )
   }
   return (
     <>
-    <Toast/>
+      <Toast />
       <div className={styles.container}>
         {!isMobile && (
           <div className={styles.basketSide}>
             <div className={styles.basketHead}>
               <div>
                 {basket[0]?.reduce((acc, d) => {
-                  const parts = d.split("*2%2&7(7)5%5!1@2")
+                  const parts = d.split('*2%2&7(7)5%5!1@2')
                   const prico = parseInt(parts[3])
                   return acc + prico
                 }, 0) || 0}
@@ -110,7 +123,7 @@ const Store: React.FC<Props> = ({ data }) => {
 
               {`${
                 basket[0]?.reduce((acc, d) => {
-                  const parts = d.split("*2%2&7(7)5%5!1@2")
+                  const parts = d.split('*2%2&7(7)5%5!1@2')
                   const prico = parseInt(parts[3]) * parseInt(parts[1])
                   return acc + prico
                 }, 0) || 0
@@ -126,7 +139,7 @@ const Store: React.FC<Props> = ({ data }) => {
                         data[1][
                           data[1].findIndex(
                             (pro) =>
-                              pro._id === product.split("*2%2&7(7)5%5!1@2")[2]
+                              pro._id === product.split('*2%2&7(7)5%5!1@2')[2]
                           )
                         ]?.title
                       }`}
@@ -137,21 +150,18 @@ const Store: React.FC<Props> = ({ data }) => {
                         data[1][
                           data[1].findIndex(
                             (pro) =>
-                              pro._id === product.split("*2%2&7(7)5%5!1@2")[2]
+                              pro._id === product.split('*2%2&7(7)5%5!1@2')[2]
                           )
                         ]?.price
-                      }`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      }`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                       تومان
                     </p>
                   </div>
-                  {PriceAction(product, "3vh")}
+                  {PriceAction(product, '3vh')}
                 </div>
               ))}
             </div>
-            <button
-              className={styles.buy}
-              onClick={() => goToBuy(toast)}
-            >
+            <button className={styles.buy} onClick={() => goToBuy(toast)}>
               تکمیل خرید
             </button>
           </div>
@@ -186,7 +196,7 @@ const Store: React.FC<Props> = ({ data }) => {
                 ref={refs.search as RefObject<HTMLInputElement>}
                 className={styles.searchInput}
                 type='search'
-                placeholder={"جستجو ..."}
+                placeholder={'جستجو ...'}
               />
               <BiSearch className={styles.searchIcon} />
             </form>
@@ -215,8 +225,8 @@ const Store: React.FC<Props> = ({ data }) => {
                             key={subIndex}
                             className={styles.enginoption}
                             onClick={() =>
-                              parent[0] === "قیمت"
-                                ? option === "گرانترین"
+                              parent[0] === 'قیمت'
+                                ? option === 'گرانترین'
                                   ? setSortedata(
                                       [...sortedata].sort(
                                         (a, b) => b.price - a.price
@@ -227,7 +237,7 @@ const Store: React.FC<Props> = ({ data }) => {
                                         (a, b) => a.price - b.price
                                       )
                                     )
-                                : parent[0] === "کالری" && option === "بیشترین"
+                                : parent[0] === 'کالری' && option === 'بیشترین'
                                 ? setSortedata(
                                     [...sortedata].sort(
                                       (a, b) => b.calories - a.calories
@@ -285,20 +295,31 @@ const Store: React.FC<Props> = ({ data }) => {
                 <div className={styles.priceaction}>
                   <p className={styles.productprice}>
                     {product.price}
-                    {" تومان "}
+                    {' تومان '}
                   </p>
+                  {favorites.includes(product._id) ? (
+                    <BsSuitHeartFill
+                      className={styles.heartIcon}
+                      onClick={() => removefave(product._id)}
+                    />
+                  ) : (
+                    <BsSuitHeart
+                      onClick={() => addfave(product._id)}
+                      className={styles.heartIcon}
+                    />
+                  )}
                   {product && basket[1]?.includes(product._id) ? (
                     PriceAction(
                       `${basket[0].find((d) => {
-                        if (d.split("*2%2&7(7)5%5!1@2")[2] === product._id)
+                        if (d.split('*2%2&7(7)5%5!1@2')[2] === product._id)
                           return d
                       })}`,
-                      "5vh"
+                      '5vh'
                     )
                   ) : (
                     <MdAddCircle
                       className={styles.inceriment}
-                      size={"4vh"}
+                      size={'4vh'}
                       onClick={() => increment(product._id, product.price)}
                     />
                   )}
@@ -320,22 +341,22 @@ const Store: React.FC<Props> = ({ data }) => {
                   className={styles.productimagelf}
                 />
                 <p className={styles.productprice}>
-                  {showProducto?.price}
+                  {showProducto?.price + 'تومان'}
                   <div className={styles.pricactionself}>
                     {showProducto && basket[1]?.includes(showProducto._id) ? (
                       PriceAction(
                         `${basket[0].find((d) => {
                           if (
-                            d.split("*2%2&7(7)5%5!1@2")[2] === showProducto._id
+                            d.split('*2%2&7(7)5%5!1@2')[2] === showProducto._id
                           )
                             return d
                         })}`,
-                        "5vh"
+                        '5vh'
                       )
                     ) : (
                       <MdAddCircle
                         className={styles.inceriment}
-                        size={"4vh"}
+                        size={'4vh'}
                         onClick={() =>
                           increment(showProducto._id, showProducto.price)
                         }

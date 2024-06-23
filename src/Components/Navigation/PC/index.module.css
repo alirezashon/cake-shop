@@ -13,9 +13,9 @@
 .navBar {
   background: linear-gradient(
     25deg,
-    rgb(204, 255, 65),
+    rgb(215, 232, 168),
     rgb(238, 249, 196),
-    rgb(190, 255, 86)
+    rgb(216, 249, 163)
   );
   color: rgb(49, 183, 32);
   position: fixed;
@@ -203,7 +203,7 @@
 .profile {
   font-size: 6vh;
   color: #fbffe8;
-  background-color: rgb(180, 226, 52);
+  background-color: rgb(133, 226, 169);
   border-radius: 23vh;
   border: 0.3vh rgb(239, 255, 234) dashed;
   cursor: pointer;

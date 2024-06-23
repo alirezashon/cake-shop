@@ -64,7 +64,7 @@
 }
 .inceriment:hover,
 .deceriment:hover {
-  transform: scale(1.1)rotate(180deg);
+  transform: scale(1.1) rotate(180deg);
 }
 .buy {
   position: absolute;
@@ -208,7 +208,6 @@
   flex-direction: column;
   align-items: center;
   margin-top: 0.5vh;
-  background: #0f641a;
   border-radius: 1vh;
   z-index: 1;
 }
@@ -216,11 +215,11 @@
 .enginoption {
   color: #ffffff;
   text-wrap: nowrap;
-  border: 0.3vh ridge rgb(164, 255, 60);
-  background-color: #0f641a;
+  border: 0.3vh ridge rgb(71, 192, 99);
+  background-color: rgb(92, 196, 132);
   padding: 0.5vh 1vh;
   border-radius: 1vh;
-  margin-top: 0.3vh;
+  margin-top: 0.7vh;
   width: 100%;
   text-align: center;
 }
@@ -244,11 +243,12 @@
   position: fixed;
   width: 40%;
   height: 80%;
-  transform: translate(0, -25%);
+  transform: translate(0, -35%);
   background-color: #ffffff;
   border: 3vh ridge;
   border-color: #eded66 #80d890 #e6fe6f #6bea6d;
   border-radius: 3vh;
+  z-index: 12;
 }
 .producTitlef {
   justify-self: center;
@@ -257,6 +257,7 @@
 .pricactionself {
   width: 100%;
   display: flex;
+  background-color: #6bea6d;
   justify-content: space-around;
 }
 .productimagelf {
@@ -330,7 +331,10 @@
   border-radius: 0 0 2vh 2vh;
   border: 0.1vh solid #8fcf27;
 }
-
+.heartIcon {
+  font-size: 4vh;
+  color: #f9500e;
+}
 .controlBox {
   display: flex;
   justify-content: space-around;

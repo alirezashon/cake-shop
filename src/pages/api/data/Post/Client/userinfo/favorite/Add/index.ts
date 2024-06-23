@@ -47,7 +47,7 @@ const updateAddress = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     ;(await Profile.findOneAndUpdate(
-      { _id: clientProfile._id },
+      { client: clientProfile._id },
       {
         favorites: [...clientProfile.favorites, favorites],
       }
