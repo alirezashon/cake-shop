@@ -67,12 +67,12 @@
   transform: scale(1.1) rotate(180deg);
 }
 .buy {
-  position: absolute;
   top: 67vh;
   padding: 1vh;
-  width: 27%;
+  width: 100%;
+  margin-top: 5vh;
   background-color: rgb(53, 163, 26);
-  left: 1.5%;
+  left: 2%;
   color: #ffffff;
   border: 0.4vh solid rgb(65, 208, 46);
   border-radius: 0 0 1vh 1vh;
@@ -222,6 +222,10 @@
   margin-top: 0.7vh;
   width: 100%;
   text-align: center;
+  cursor: pointer;
+}
+.enginoption:hover {
+  transform: scale(1.1);
 }
 
 /* product styles start from here */

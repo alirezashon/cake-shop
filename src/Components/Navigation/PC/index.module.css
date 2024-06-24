@@ -11,13 +11,8 @@
 }
 
 .navBar {
-  background: linear-gradient(
-    25deg,
-    rgb(215, 232, 168),
-    rgb(238, 249, 196),
-    rgb(216, 249, 163)
-  );
-  color: rgb(49, 183, 32);
+  background: rgb(252, 255, 243);
+  color: rgb(53, 163, 26);
   position: fixed;
   top: 0;
   z-index: 44;
@@ -28,7 +23,7 @@
   height: 9vh;
   width: 100vw;
   padding: 0.2vh 7vh;
-  border-bottom: 0.4vh rgba(190, 214, 124, 0.9) ridge;
+  border-bottom: 0.4vh rgba(190, 214, 124, 0.9) double;
 }
 .searchBar {
   direction: rtl;
@@ -203,7 +198,7 @@
 .profile {
   font-size: 6vh;
   color: #fbffe8;
-  background-color: rgb(133, 226, 169);
+  background-color:   rgb(53, 163, 26);
   border-radius: 23vh;
   border: 0.3vh rgb(239, 255, 234) dashed;
   cursor: pointer;

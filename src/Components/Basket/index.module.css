@@ -1,200 +1,203 @@
 /** @format */
 
 @keyframes loading {
-	0% {
-		background: linear-gradient(0deg, rgb(216, 226, 202), rgb(254, 255, 252));
-	}
+  0% {
+    background: linear-gradient(0deg, rgb(216, 226, 202), rgb(254, 255, 252));
+  }
 
-	20% {
-		background: linear-gradient(36deg, rgb(216, 226, 202), rgb(254, 255, 252));
-	}
+  20% {
+    background: linear-gradient(36deg, rgb(216, 226, 202), rgb(254, 255, 252));
+  }
 
-	40% {
-		background: linear-gradient(66deg, rgb(216, 226, 202), rgb(254, 255, 252));
-	}
+  40% {
+    background: linear-gradient(66deg, rgb(216, 226, 202), rgb(254, 255, 252));
+  }
 
-	60% {
-		background: linear-gradient(96deg, rgb(216, 226, 202), rgb(254, 255, 252));
-	}
+  60% {
+    background: linear-gradient(96deg, rgb(216, 226, 202), rgb(254, 255, 252));
+  }
 
-	80% {
-		background: linear-gradient(136deg, rgb(216, 226, 202), rgb(254, 255, 252));
-	}
+  80% {
+    background: linear-gradient(136deg, rgb(216, 226, 202), rgb(254, 255, 252));
+  }
 
-	100% {
-		background: linear-gradient(236deg, rgb(216, 226, 202), rgb(254, 255, 252));
-	}
+  100% {
+    background: linear-gradient(236deg, rgb(216, 226, 202), rgb(254, 255, 252));
+  }
 }
 
 @keyframes basketOpen {
-	0% {
-		transform: translateX(-20vw);
-	}
+  0% {
+    transform: translateX(-20vw);
+  }
 }
 
 @keyframes rotateBall {
-	50% {
-		transform: rotate(360deg);
-		border: 0.2vh rgb(195, 252, 38);
-	}
+  50% {
+    transform: rotate(360deg);
+    border: 0.2vh rgb(195, 252, 38);
+  }
 
-	100% {
-		transform: rotate(0deg);
-		border: rgb(212, 221, 49) 0.2vh ridge;
-	}
+  100% {
+    transform: rotate(0deg);
+    border: rgb(212, 221, 49) 0.2vh ridge;
+  }
 }
 .loading {
-	background: radial-gradient(rgb(229, 213, 247), rgb(189, 171, 216));
-	width: 100%;
-	height: 20vh;
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
+  background: radial-gradient(rgb(229, 213, 247), rgb(189, 171, 216));
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .loadingRect {
-	width: 22%;
+  width: 22%;
 }
 
 .loadingRect,
 .loadingSquare {
-	height: 80%;
-	border-radius: 1vh;
-	animation: loading 0.7s infinite alternate-reverse;
+  height: 80%;
+  border-radius: 1vh;
+  animation: loading 0.7s infinite alternate-reverse;
 }
 
 .loadingSquare {
-	width: 70%;
+  width: 70%;
 }
 .loadingContainer {
-	animation: 2s rotateBall infinite;
-	top: 47vh;
-	left: 36vw;
-	background: radial-gradient(rgb(186, 222, 54), rgb(119, 178, 9));
-	border: dashed 0.4vh #ffffff;
-	display: flex;
-	border-radius: 44vh;
-	justify-content: center;
+  animation: 2s rotateBall infinite;
+  top: 47vh;
+  left: 36vw;
+  background: radial-gradient(rgb(186, 222, 54), rgb(119, 178, 9));
+  border: dashed 0.4vh #ffffff;
+  display: flex;
+  border-radius: 44vh;
+  justify-content: center;
 }
 
 .basketBall {
-	background-color:rgb(133, 226, 169);
-	border: dashed 0.4vh #ffffff;
-	width: fit-content;
-	margin-top: 1vh;
-	text-align: center;
-	padding: 1vh;
-	border-radius: 11vh;
-	cursor: pointer;
-	z-index: 33;
+  background-color: rgb(53, 163, 26);
+  border: dashed 0.4vh #ffffff;
+  width: fit-content;
+  margin-top: 1vh;
+  text-align: center;
+  padding: 1vh;
+  border-radius: 11vh;
+  cursor: pointer;
+  z-index: 33;
 }
 
 .basketBall:hover {
-	animation: rotateBall infinite 2s;
+  animation: rotateBall infinite 2s;
 }
 
 .productCount {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: rgb(246, 183, 48);
-	border-radius: 22vh;
-	width: 3vh;
-	height: 3vh;
-	font-size: 2vh;
-	border: 0.2vh ridge rgb(255, 236, 230);
-	color: #ffffff;
-	margin-top: -3vh;
-	padding: 1.7vh;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(248, 177, 23);
+  border-radius: 22vh;
+  width: 3vh;
+  height: 3vh;
+  font-size: 2vh;
+  border: 0.2vh ridge rgb(255, 236, 230);
+  color: #ffffff;
+  margin-top: -2.7vh;
+  padding: 1.7vh;
 }
 
 .basketDrawer {
-	top: 0;
-	left: 0;
-	animation: basketOpen 1s;
-	width: 38vw;
-	border-radius: 0 4vh 0 0;
-	height: 100vh;
-	background-color: rgba(208, 239, 82, 0.9);
-	border-right: ridge 2.2vh rgba(129, 185, 17, 0.843);
-	position: fixed;
-	z-index: 33;
+  top: 0;
+  left: 0;
+  animation: basketOpen 1s;
+  width: 38vw;
+  border-radius: 0 4vh 0 0;
+  height: 100vh;
+  background-color: rgba(208, 239, 82, 0.9);
+  border-right: ridge 2.2vh rgba(129, 185, 17, 0.843);
+  position: fixed;
+  z-index: 33;
 }
 
 .basketHeader {
-	width: 100%;
-	border-radius: 0vh 2vh 0vh 0vh;
-	color: rgba(39, 28, 1, 0.9);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	text-align: center;
-	background: radial-gradient(rgb(186, 222, 54), rgb(119, 178, 9));
+  width: 100%;
+  border-radius: 0vh 2vh 0vh 0vh;
+  color: rgba(39, 28, 1, 0.9);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  background: radial-gradient(rgb(186, 222, 54), rgb(119, 178, 9));
 }
 
 .calculateBox {
-	display: flex;
-	justify-content: space-around;
-	min-width: 60%;
-	background: linear-gradient(22deg, rgba(18, 109, 0, 0.9), rgb(169, 212, 24));
-	border-radius: 0 4vh 4vh 0;
-	border-right: .2vh ridge rgb(255, 251, 236);
-	color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  min-width: 60%;
+  background: linear-gradient(22deg, rgba(18, 109, 0, 0.9), rgb(169, 212, 24));
+  border-radius: 0 4vh 4vh 0;
+  border-right: 0.2vh ridge rgb(255, 251, 236);
+  color: #ffffff;
 }
 
 .basketBase {
-	margin-top: 3vh;
-	animation: basketOpen 1s;
-	width: 99%;
-	height: inherit;
-	background-color: rgba(255, 255, 255, 0.99);
-	border: double 0.5vh rgba(218, 136, 5, 0.9);
-	border-left: none;
-	border-radius: 0vh 1vh 1vh 0vh;
-	overflow-y: scroll;
+  margin-top: 3vh;
+  animation: basketOpen 1s;
+  width: 99%;
+  height: inherit;
+  background-color: rgba(255, 255, 255, 0.99);
+  border: double 0.5vh rgba(218, 136, 5, 0.9);
+  border-left: none;
+  border-radius: 0vh 1vh 1vh 0vh;
+  overflow-y: scroll;
 }
 
 .confirm {
-	background: radial-gradient(rgb(10, 148, 10), rgb(105, 151, 19));
-	color: #ffffff;
-	border: 0.4vh rgb(30, 198, 75) ridge;
-	bottom: 0.5vh;
-	position: absolute;
-	width: 90%;
-	left: 5%;
-	border-radius: 0.5vh;
-	height: 4vh;
-	text-align: center;
-	cursor: pointer;
+  background: radial-gradient(rgb(10, 148, 10), rgb(105, 151, 19));
+  color: #ffffff;
+  border: 0.4vh rgb(30, 198, 75) ridge;
+  bottom: 0.5vh;
+  position: absolute;
+  width: 90%;
+  left: 5%;
+  border-radius: 0.5vh;
+  height: 4vh;
+  text-align: center;
+  cursor: pointer;
 }
 
 .confirm:hover {
-	transform: scale(1.05);
-	border: 0.2vh ridge rgb(250, 222, 255);
+  transform: scale(1.05);
+  border: 0.2vh ridge rgb(250, 222, 255);
 }
 
 .cross {
-	transition: transform 0.7s;
-	color: rgb(244, 94, 0);
-	background-color: #ffffffc8;
-	border-radius: 7vh;
-	padding: 0.3vh;
-	border: 0.1vh dashed rgb(245, 151, 27);
+  transition: transform 0.7s;
+  color: rgb(244, 94, 0);
+  background-color: #ffffffc8;
+  border-radius: 7vh;
+  padding: 0.3vh;
+  border: 0.1vh dashed rgb(245, 151, 27);
 }
 
 .cross:hover {
-	cursor: grabbing;
-	color: rgba(252, 107, 3, 0.9);
-	transform: rotate(90deg);
+  cursor: grabbing;
+  color: rgba(252, 107, 3, 0.9);
+  transform: rotate(90deg);
 }
 
 @media (max-width: 787px) {
-	.basketDrawer {
-		width: 100%;
-	}
-	.basketBall{margin: 0;}
-	.basketHeader {
-		width: 96%;
-	}
+  .basketDrawer {
+    width: 100%;
+  }
+  .basketBall {
+    margin: 0;
+  }
+  .basketHeader {
+    width: 96%;
+  }
+  .productCount{margin-top: -3.7vh;}
 }
