@@ -1,0 +1,99 @@
+/* components/Main.module.css */
+.mainContainer {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: fadeIn 2s;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .header h1 {
+    font-size: 3em;
+    margin: 0;
+    color: #ff4081;
+  }
+  
+  .header p {
+    font-size: 1.2em;
+    color: #555;
+  }
+  
+  .productsSection {
+    text-align: center;
+  }
+  
+  .productsSection h2 {
+    font-size: 2.5em;
+    color: #ff4081;
+    margin-bottom: 20px;
+  }
+  
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .product {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .product:hover {
+    transform: scale(1.05);
+  }
+  
+  .product img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .product h3 {
+    font-size: 1.5em;
+    margin: 10px 0;
+  }
+  
+  .product p {
+    color: #555;
+  }
+  
+  .basketSection {
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  .basketSection h2 {
+    font-size: 2.5em;
+    color: #ff4081;
+  }
+  
+  .basketSection p {
+    font-size: 1.2em;
+    color: #555;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .product {
+      width: 90%;
+    }
+  }
+  

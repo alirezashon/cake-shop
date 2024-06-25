@@ -2,7 +2,7 @@ import Image from 'next/image'
 import styles from './index.module.css'
 import { useRef, useState } from 'react'
 import { MdDriveFolderUpload } from 'react-icons/md'
-import { Get } from '../../../Components/Basket/Actions'
+import { Get } from '../Basket/Actions'
 import Router from 'next/router'
 
 const Payment: React.FC = () => {

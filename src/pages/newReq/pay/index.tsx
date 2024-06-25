@@ -1,3 +1,6 @@
 /** @format */
-import FlowChart from '@/Components/FlowChart/'
-export default FlowChart
+import Payment from '@/Components/Payment'
+const Pay = () => {
+  return <Payment />
+}
+export default Pay

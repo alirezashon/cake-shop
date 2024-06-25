@@ -6,6 +6,7 @@ import styles from './index.module.css'
 import Tools from './Tools'
 import ProductManager from './Product'
 import CategoryManager from './Category'
+import ClientManager from './Client'
 import Tab from './Navigation/Tab'
 import Drawer from './Navigation/Drawer'
 import ChatsManager from './Chats'
@@ -19,6 +20,7 @@ const Admin: React.FC = () => {
     <Ordero />,
     <Tools />,
     <ChatsManager/>,
+    <ClientManager/>
   ]
 
   return (

@@ -6,6 +6,7 @@ import {
   FcSettings,
   FcShipped,
   FcSalesPerformance,
+  FcContacts,
 } from 'react-icons/fc'
 import externalStyles from './index.module.css'
 interface Style {
@@ -25,10 +26,10 @@ const Drawer: React.FC<Props> = ({ setDrawerOpen, setContentId }) => {
   const icons = [
     {
       tag: <FcCustomerSupport />,
-      name: 'ایجاد پست',
+      name:'گفتگو',
     },
     {
-      tag: <FcSettings />,
+      tag: <FcContacts />,
       name: 'برند و کتگوری',
     },
     {

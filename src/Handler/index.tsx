@@ -1,11 +1,14 @@
-import { Category, Product } from "../Interfaces"
-import dynamic from "next/dynamic"
-import styles from "./index.module.css"
+import { Category, Product } from '../Interfaces'
+import dynamic from 'next/dynamic'
+import styles from './index.module.css'
 
-const ChatUI = dynamic(() => import("../Components/Chat"), {
+const ChatUI = dynamic(() => import('../Components/Chat'), {
   loading: () => <div className={styles.loadingChat}></div>,
 })
-const Store = dynamic(() => import("../Components/Store"), {
+const Store = dynamic(() => import('../Components/Store'), {
+  loading: () => <div className={styles.loadingChat}></div>,
+})
+const Main = dynamic(() => import('../Components/Main'), {
   loading: () => <div className={styles.loadingChat}></div>,
 })
 
@@ -17,8 +20,9 @@ const Handler: React.FC<Props> = ({ products, categories }) => {
   return (
     <>
       {products && (
-        <div style={{ display: "grid", gap: "1vh" }}>
+        <div style={{ display: 'grid', gap: '1vh' }}>
           <Store data={[categories, products]} />
+          <Main />
           <div>
             <ChatUI />
           </div>

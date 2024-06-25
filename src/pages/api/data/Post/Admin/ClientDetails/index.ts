@@ -1,7 +1,7 @@
-
 import { NextApiRequest, NextApiResponse } from 'next'
-import Client from '../../../../../../../models/Client'
-import db from '../../../../../../../utils'
+import Client from '../../../../../../models/Client'
+import Profile from '../../../../../../models/Client/Profile'
+import db from '../../../../../../utils'
 
 const clients = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -10,7 +10,8 @@ const clients = async (req: NextApiRequest, res: NextApiResponse) => {
       if (authType === '^c&L(i*e$N&t#o(x&a^') {
         await db.connect2DB()
         const clients = await Client.find({})
-        res.status(200).json({ clients })
+        const profiles = await Profile.find({})
+        res.status(200).json({ clients, profiles })
       } else {
         res.status(407).json({ success: false })
       }

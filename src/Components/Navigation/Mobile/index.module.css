@@ -13,6 +13,7 @@
   z-index: 7;
   top: 0;
   justify-content: space-between;
+  align-items: center;
 }
 .searchBar {
   direction: rtl;
@@ -124,11 +125,10 @@
 }
 
 .navIcon {
-  background-color: rgb(133, 226, 169);
+  background-color: rgb(53, 163, 26);
   color: #ffffff;
-  width: 7vh;
-  height: 7vh;
-  margin: 0.2vh;
+  width: 5vh;
+  height: 5vh;
   display: flex;
   font-weight: bold;
   align-items: center;
@@ -145,9 +145,9 @@
 
 .profile {
   margin: 0 2vh;
-  font-size: 6vh;
+  font-size: 5vh;
   color: #e5f3a3;
-  background-color: rgb(102, 201, 140);
+  background-color: rgb(53, 163, 26);
   border-radius: 23vh;
   border: 0.3vh rgb(239, 255, 234) dashed;
   cursor: pointer;

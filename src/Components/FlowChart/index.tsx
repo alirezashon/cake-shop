@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
 import styles from './index.module.css'
-import Payment from './Payment'
+import Payment from '../Payment'
 import ProductShow from './ProductShow'
 import { Information } from '@/Interfaces'
 
-interface Props {
-  registered: boolean
-}
 
-const FlowChart: React.FC<Props> = () => {
+
+const FlowChart: React.FC= () => {
   const [addresses, setAddresses] = useState<Information[]>()
   const [selectedAddresses, setSelectedAddresses] = useState<string>()
 

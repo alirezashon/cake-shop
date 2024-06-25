@@ -1,5 +1,5 @@
 import { useRef, RefObject, useState, useEffect } from 'react'
-import styles from '../Inserto.module.css'
+import styles from '../List.module.css'
 import { Toast } from 'primereact/toast'
 import { MdEditDocument } from 'react-icons/md'
 import { ClientInterface } from '@/Interfaces'
@@ -18,10 +18,10 @@ const ClientManager: React.FC = () => {
           authType: '^c&L(i*e$N&t#o(x&a^',
         }),
       })
-
       if (response.ok) {
         const result = await response.json()
-        setData(result.client)
+        console.log(result)
+        setData(result.clients)
         setIsLoading(false)
         console.log(result)
       } else {
@@ -50,7 +50,6 @@ const ClientManager: React.FC = () => {
   return (
     <>
       <Toast ref={toast} />
-      return (
       <div className={styles.tableContainer}>
         <div className={styles.header}>لیست محصولات</div>
         {isLoading ? (
@@ -80,7 +79,6 @@ const ClientManager: React.FC = () => {
           </table>
         )}
       </div>
-      )
     </>
   )
 }
