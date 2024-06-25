@@ -26,11 +26,11 @@ const Drawer: React.FC<Props> = ({ setDrawerOpen, setContentId }) => {
   const icons = [
     {
       tag: <FcCustomerSupport />,
-      name:'گفتگو',
+      name: 'گفتگو',
     },
     {
       tag: <FcContacts />,
-      name: 'برند و کتگوری',
+      name: 'کاربرها',
     },
     {
       tag: <FcDoughnutChart />,
@@ -60,12 +60,12 @@ const Drawer: React.FC<Props> = ({ setDrawerOpen, setContentId }) => {
 
     if (isMouseOverDrawer) {
       interval = setInterval(() => {
-        setDrawerWidth((prev) => Math.min(prev + 1, 20))
+        setDrawerWidth((prev) => Math.min(prev + 1, innerWidth > 999 ? 20 : 44))
       }, 10)
     } else {
       // Decrease width gradually to 5% over 1 second
       interval = setInterval(() => {
-        setDrawerWidth((prev) => Math.max(prev - 1, innerWidth > 999 ? 3 : 6))
+        setDrawerWidth((prev) => Math.max(prev - 1, innerWidth > 999 ? 3 : 10))
       }, 10)
     }
 
@@ -89,11 +89,9 @@ const Drawer: React.FC<Props> = ({ setDrawerOpen, setContentId }) => {
       justifyContent: `${drawerWidth < 7 ? 'center' : 'space-around'}`,
       padding: '0vh',
       borderBottom: 'dashed .4vh rgba(22,22,22,.80)',
-      backgroundColor: 'white',
     },
     iconName: {
       display: `${drawerWidth > 13 ? 'block' : 'none'}`,
-      fontSize: '2vh',
     },
   }
 
@@ -107,13 +105,15 @@ const Drawer: React.FC<Props> = ({ setDrawerOpen, setContentId }) => {
       <div style={styles.item} className={externalStyles.item}>
         {icons.map((icon, index) => (
           <div
-            onClick={() => setContentId(index+4)}
+            onClick={() => setContentId(index + 4)}
             className={externalStyles.icon}
             style={styles.icon}
             key={index}
           >
             <div className={externalStyles.icon}>{icon.tag}</div>
-            <div style={styles.iconName}>{icon.name}</div>
+            <div style={styles.iconName} className={externalStyles.iconName}>
+              {icon.name}
+            </div>
           </div>
         ))}
       </div>

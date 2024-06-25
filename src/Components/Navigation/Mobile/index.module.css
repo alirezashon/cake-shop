@@ -125,10 +125,11 @@
 }
 
 .navIcon {
-  background-color: rgb(53, 163, 26);
-  color: #ffffff;
+  background: rgb(252, 255, 243);
+  color: rgb(53, 163, 26);
   width: 5vh;
   height: 5vh;
+  font-size: 3vh;
   display: flex;
   font-weight: bold;
   align-items: center;
@@ -136,7 +137,6 @@
   border-radius: 22vh;
   cursor: pointer;
 }
-
 .iconBox {
   display: flex;
   justify-content: flex-end;

@@ -40,7 +40,7 @@ const Basket: React.FC<BasketProps> = ({
 
   const getBuy = () => {
     setIsLoading(true)
-    window.location.href = "/newReq/Registered"
+    window.location.href = "/newReq/Pay"
   }
   return (
     <>
@@ -78,7 +78,6 @@ const Basket: React.FC<BasketProps> = ({
           <AiOutlineShoppingCart
             className={styles.basketBall}
             color={"white"}
-            size={"5vh"}
             onClick={() => setIsBasketOpen(true)}
           />
           {basket[3] > 0 && (

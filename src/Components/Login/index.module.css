@@ -65,3 +65,9 @@
   background: linear-gradient(2deg, rgb(255, 236, 28), rgb(222, 158, 39));
   cursor: pointer;
 }
+@media (max-width:786px) {
+  .formBox{
+    width: 70%;
+    height: 50vh;
+  }
+}

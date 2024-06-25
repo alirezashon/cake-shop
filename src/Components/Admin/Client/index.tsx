@@ -1,29 +1,29 @@
 import { useRef, RefObject, useState, useEffect } from 'react'
 import styles from '../List.module.css'
 import { Toast } from 'primereact/toast'
-import { MdEditDocument } from 'react-icons/md'
-import { ClientInterface } from '@/Interfaces'
-import Image from 'next/image'
+import { ClientInterface, ClientProfile } from '@/Interfaces'
+import Detail from './Details'
 const ClientManager: React.FC = () => {
   const toast = useRef<Toast>(null)
-  const [data, setData] = useState<ClientInterface[] | null>(null)
+  const [data, setData] = useState<[ClientInterface[], ClientProfile[]] | null>(
+    null
+  )
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [showDetail, setShowDetail] = useState<string | null>(null)
+  const [showProfile, setShowProfile] = useState<ClientProfile | null>(null)
   const getData = async () => {
     try {
-      const response = await fetch('/api/data/Post/Admin/Client/GET', {
+      const response = await fetch('/api/data/Post/Admin/ClientDetails', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           authType: '^c&L(i*e$N&t#o(x&a^',
         }),
       })
-      if (response.ok) {
+      if (response.status === 200) {
         const result = await response.json()
-        console.log(result)
-        setData(result.clients)
+        setData([result.clients, result.profiles])
         setIsLoading(false)
-        console.log(result)
       } else {
         toast.current?.show({
           severity: 'error',
@@ -51,7 +51,7 @@ const ClientManager: React.FC = () => {
     <>
       <Toast ref={toast} />
       <div className={styles.tableContainer}>
-        <div className={styles.header}>لیست محصولات</div>
+        <div className={styles.header}>لیست کاربر ها</div>
         {isLoading ? (
           Array.apply(0, Array(7)).map((x, i) => (
             <div key={i} className={styles.loading}>
@@ -60,23 +60,47 @@ const ClientManager: React.FC = () => {
             </div>
           ))
         ) : (
-          <table>
-            <thead>
-              <tr>
-                {['phone'].map((header) => (
-                  <th key={header}>{header}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data &&
-                data?.map((client, index) => (
-                  <tr key={client._id}>
-                    <td>{client.phone}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+          <div className={styles.container}>
+            <table>
+              <thead>
+                <th>phone</th>
+              </thead>
+              <tbody>
+                {data &&
+                  data[0]?.map((client, index) => (
+                    <tr key={index}>
+                      <td
+                        onClick={() =>
+                          data[1] &&
+                          setShowProfile(
+                            data[1][
+                              data[1]?.findIndex((d) => d.client === client._id)
+                            ]
+                          )
+                        }
+                      >
+                        {client.phone}
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+            {showProfile && (
+              <div className='profileBox'>
+                <Detail
+                  data={showProfile}
+                  phone={parseInt(
+                    `${
+                      data &&
+                      data[0][
+                        data[0]?.findIndex((d) => d._id === showProfile?.client)
+                      ].phone
+                    }`
+                  )}
+                />
+              </div>
+            )}
+          </div>
         )}
       </div>
     </>

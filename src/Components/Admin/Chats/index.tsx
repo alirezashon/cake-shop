@@ -21,10 +21,6 @@ const ChatsManager: React.FC = () => {
     })
     setSocket(socketIo)
 
-    socketIo.on('connect', () => {
-      console.log('Admin connected to the socket for chat')
-    })
-
     socketIo.on('message', (data: { client: string; newMessage: Chat }) => {
       setChats((prevChats) =>
         prevChats

@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { FaMinus } from 'react-icons/fa'
 import { Add, Get, Remove } from '../Basket/Actions'
 import { useBasket } from '@/Context/Basket'
-import { FaBasketShopping, FaHeartPulse } from 'react-icons/fa6'
+import { FaBasketShopping} from 'react-icons/fa6'
 import { searchEngine } from './content'
 import { GiCrossMark } from 'react-icons/gi'
 import {goToBuy} from './handler'
@@ -30,7 +30,7 @@ const Store: React.FC<Props> = ({ data }) => {
   const [showProducto, setShowProducto] = useState<Product | null>(null)
   const [productover, setProductover] = useState<number | null>(null)
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(true)
   const [favorites, setFavorites] = useState<string[]>([])
   const toast = useRef<Toast>(null)
   const scrollLeft = () => {

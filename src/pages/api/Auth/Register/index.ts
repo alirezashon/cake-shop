@@ -10,7 +10,6 @@ const Register = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
       const { authType } = req.body
       const token = req.cookies['CTFlEoiSHkeNnToMBLiShoOekn3kN2y@k']
-
       if (authType === '*v(a&l^8$b#y@t%o*l(x*k)p') {
         if (token) {
           await db.connectToShop()

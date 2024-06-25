@@ -64,11 +64,13 @@ export interface Information {
 }
 export interface ClientProfile {
   _id: string
+  client:string
   email: string
+  chat:string
   name: string
   nationalCode: string
   information: Information[]
-  favorites: string
+  favorites: string[]
   seens: string[]
   time: string
 }

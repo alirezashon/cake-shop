@@ -7,7 +7,6 @@
     background: linear-gradient(66deg, rgb(216, 226, 202), rgb(254, 255, 252));
   }
 
-  
   80% {
     background: linear-gradient(136deg, rgb(198, 240, 139), rgb(254, 255, 252));
   }
@@ -76,9 +75,10 @@
 }
 .image {
   border-radius: 22vh;
-  width:  8vh;
+  width: 8vh;
   height: 8vh;
-}.subImage {
+}
+.subImage {
   border-radius: 22vh;
   cursor: no-drop;
 }
@@ -144,7 +144,7 @@
   direction: rtl;
 }
 
-.productBox input[type="submit"] {
+.productBox input[type='submit'] {
   background: linear-gradient(
     22deg,
     rgba(99, 121, 211, 0.9),
@@ -165,22 +165,25 @@
 .tableContainer table {
   width: 100%;
   text-wrap: nowrap;
-
+  cursor: pointer;
 }
 
-
 .tableContainer table td {
-  padding:1vh;
-  border: .2vh solid #4ebe12;
-  background-color: #f7fbb6 ;
+  padding: 1vh;
+  color: #449402;
+  border: 0.2vh solid #f0c907;
+  background-color: #f7fbb6;
   text-align: center;
+}
+.tableContainer table td:hover {
+  transform: scale(.9);
 }
 
 .tableContainer table th {
   color: #03351f;
   padding: 1vh;
   direction: rtl;
-  border: .2vh solid #4ebe12;
+  border: 0.2vh solid #4ebe12;
   text-align: center;
   background-color: #deea31;
 }

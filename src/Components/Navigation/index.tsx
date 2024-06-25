@@ -9,7 +9,7 @@ interface NavProps {
   basketData: Product[]
 }
 const Navbar: React.FC<NavProps> = ({ basketData }) => {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(true)
   const [isBasketOpen, setIsBasketOpen] = useState<boolean>(false)
 
   useEffect(() => {

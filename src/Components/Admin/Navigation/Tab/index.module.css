@@ -5,6 +5,7 @@
   justify-content: space-around;
   align-items: center;
   position: fixed;
+  z-index: 4;
   bottom: 0;
   background: linear-gradient(
     110deg,
@@ -25,4 +26,14 @@
   cursor: pointer;
   font-size: 2vh;
   text-wrap: nowrap;
+}
+
+@media (max-width: 878px) {
+  .tabBar {
+    overflow-x: auto;
+  }
+  .tab {
+    height: fit-content;
+    font-size: 1.2vh;
+  }
 }

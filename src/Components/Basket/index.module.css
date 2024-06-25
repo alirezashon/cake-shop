@@ -78,8 +78,9 @@
 }
 
 .basketBall {
-  font-size: 5vh;
+  font-size: 6vh;
   background-color: rgb(53, 163, 26);
+  border: .3vh dashed rgb(186, 222, 54);
   width: fit-content;
   margin-top: 1vh;
   text-align: center;
@@ -194,6 +195,7 @@
     width: 100%;
   }
   .basketBall {
+    font-size: 5vh;
    margin: 0;
   }
   .basketHeader {

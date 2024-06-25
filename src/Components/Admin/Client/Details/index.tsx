@@ -1,55 +1,54 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from '../../List.module.css' // Update with your CSS file path
-import { ClientInterface } from '@/Interfaces'
+import { ClientProfile } from '@/Interfaces'
 
 interface Props {
-  isLoading: boolean
-  data: ClientInterface[]
+  data: ClientProfile
+  phone: number
 }
 
-const List: React.FC<Props> = ({ isLoading, data }) => {
+const Detail: React.FC<Props> = ({ data, phone }) => {
   return (
     <div className={styles.tableContainer}>
-      <div className={styles.header}>لیست محصولات</div>
-      {isLoading ? (
-        Array.apply(0, Array(7)).map((x, i) => (
-          <div key={i} className={styles.loading}>
-            <div className={styles.loadingRect}></div>
-            <div className={styles.loadingSquare}></div>
-          </div>
-        ))
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              {[
-                'title',
-                'src',
-                'price',
-                'colories',
-                'category',
-                'description',
-                'Keywords',
-              ].map((header) => (
-                <th key={header}>{header}</th>
-              ))}
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data &&
-              data?.map((product, index) => (
-                <tr key={product._id}>
-                  <td>
-                   
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      )}
+      <div className={styles.header}>{phone}</div>
+
+      <table>
+        <thead>
+          <tr>
+            {[
+              'address',
+              'houseNumber',
+              'houseUnit',
+              'zipCode',
+              'email',
+              'name',
+              'nationalCode',
+              'favorites',
+              'seens',
+              'time',
+            ].map((header) => (
+              <th key={header}>{header}</th>
+            ))}
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{data.information[0]?.address}</td>
+            <td>{data.information[0]?.houseNumber}</td>
+            <td>{data.information[0]?.houseUnit}</td>
+            <td>{data.information[0]?.zipCode}</td>
+            <td>{data.email}</td>
+            <td>{data.name}</td>
+            <td>{data.nationalCode}</td>
+            <td>{data.favorites.length}</td>
+            <td>{data.seens.length}</td>
+            <td>{data.time.split('T')[0]}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }
 
-export default List
+export default Detail
