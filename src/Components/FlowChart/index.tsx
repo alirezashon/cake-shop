@@ -4,9 +4,7 @@ import Payment from '../Payment'
 import ProductShow from './ProductShow'
 import { Information } from '@/Interfaces'
 
-
-
-const FlowChart: React.FC= () => {
+const FlowChart: React.FC = () => {
   const [addresses, setAddresses] = useState<Information[]>()
   const [selectedAddresses, setSelectedAddresses] = useState<string>()
 
@@ -31,8 +29,7 @@ const FlowChart: React.FC= () => {
     <>
       <div style={Container} className={styles.container}>
         <div className={styles.header}>
-          <select                     className={styles.selectList}
-          >
+          <select className={styles.selectList}>
             {addresses?.map((addr) => (
               <option>{addr.address}</option>
             ))}

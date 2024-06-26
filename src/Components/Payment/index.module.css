@@ -1,8 +1,76 @@
-.container {
+.addressBox {
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(55deg, #f5fff0, #def4b7, rgb(237, 255, 228));
+}
+.addAddressBox {
+  text-align: center;
+  background: linear-gradient(55deg, #a3e260, #a8ea92, rgb(185, 241, 107));
+}
+.cross{
+  background-color: #ffffff;
+  font-size: 4vh;
+  border-radius: 4vh;
+  padding: .2vh;
+  color: #ff4d07;
+}
+.addAddressBox p{
+  border-bottom: ridge 1.3vh rgb(205, 254, 179);
+  background-color: #39d54e;
+}
+.addrAddBtn {
+  height: fit-content;
+  background: linear-gradient(55deg, #39d54e, #7cce60, rgb(50, 194, 50));
+  color: #00300b;
+  border-radius: 4vh;
+  padding: 1vh 2vh;
+  border: 0.3vh dashed rgb(203, 237, 185);
+  cursor: pointer;
+}
+.addrAddBtn:hover,
+.selectAddressBox p:hover {
+  border-color: #36a41a;
+  transform: scale(0.9);
+}
+.selectAddressBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.selectAddressBox p {
+ color: #1f963b;
+}
+.selectList {
+  outline: none;
+  background: linear-gradient(55deg, #5fc835, #2da254, rgb(87, 176, 39));
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  border: double 0.5vh #d1fffd;
+  border-radius: 0.5vh;
+}
+
+.selectList:hover {
+  border: dashed 0.2vh #d1fffd;
+  background: linear-gradient(95deg, #a3e723, #469a18);
+  transform: scale(1.01);
+}
+
+.selectList option {
+  background-color: #dcfd37;
+  color: #001e03;
+}
+
+.selectList option:nth-child(odd) {
+  color: #ffffff;
+  background-color: rgba(31, 135, 13, 0.756);
+  border-end-end-radius: 22vh;
+}
+
+.cardBox {
   display: flex;
   width: 100%;
 }
-
 .descriptions {
   direction: rtl;
   background: linear-gradient(
@@ -40,9 +108,9 @@
 }
 
 .cardDetails {
-  top: 42vh;
-  position:absolute;
-  width: 22%;
+  position: absolute;
+  text-align: center;
+  margin-top: 7vh;
   display: flex;
   flex-direction: column;
 }
@@ -50,10 +118,11 @@
 .cardNumber,
 .cardName {
   cursor: copy;
-  background-color: rgb(248, 255, 255, 0.6);
+  background-color: rgb(248, 255, 255, 0.3);
   text-wrap: nowrap;
   color: rgb(201, 0, 0);
   border-radius: 1vh;
+  padding: 0 4vh;
 }
 
 .cardImage:hover {
@@ -111,7 +180,7 @@
 .send p {
   padding: 0 7vh;
   border-radius: 1vh;
-  color: #f3fff6  ;
+  color: #f3fff6;
   border: 0.4vh solid rgb(236, 255, 255);
   background: linear-gradient(to right, #0b5e1f, #89cd0b, #347117);
   width: fit-content;
@@ -124,13 +193,23 @@
 }
 
 @media (max-width: 877px) {
-  .container {
+  .addressBox {
+    flex-direction: column;
+    align-items: center;
+  }
+  .addrAddBtn {
+    width: fit-content;
+  }
+  .selectList {
+    width: 100%;
+  }
+  .cardBox {
     flex-direction: column;
   }
   .cardImage {
     width: 90vw;
   }
-  .cardDetails{
-	width: fit-content;
+  .cardDetails {
+    width: fit-content;
   }
 }

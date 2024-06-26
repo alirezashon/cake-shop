@@ -10,7 +10,6 @@ const Address: React.FC = () => {
   return (
     <>
       <Toast ref={toast} />
-        hie
       <div className={styles.container}>
         <Add />
       </div>

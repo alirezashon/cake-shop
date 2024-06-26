@@ -1,132 +1,146 @@
 /** @format */
 
 @font-face {
-	font-family: Tanha;
-	src: url('../../public/font/IRANSansWeb\(FaNum\).ttf');
+  font-family: Tanha;
+  src: url('../../public/font/IRANSansWeb\(FaNum\).ttf');
 }
 
 * {
-	transition: all 0.4s;
-	box-sizing: border-box;
-	font-family: Tanha;
+  transition: all 0.4s;
+  box-sizing: border-box;
+  font-family: Tanha;
 }
 
 body {
-	overflow-x: hidden;
-	padding: 0;
-	margin: 0;
-	scroll-behavior: smooth;
-	max-width: 100vw;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  max-width: 100vw;
 }
 
 a {
-	color: inherit;
-	text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 @keyframes loading {
-	0% {
-		background: linear-gradient(0deg, rgb(200, 221, 171), rgb(230, 245, 198));
-	}
+  0% {
+    background: linear-gradient(0deg, rgb(200, 221, 171), rgb(230, 245, 198));
+  }
 
-	20% {
-		background: linear-gradient(36deg, rgb(215, 241, 178), rgb(229, 246, 194));
-	}
+  20% {
+    background: linear-gradient(36deg, rgb(215, 241, 178), rgb(229, 246, 194));
+  }
 
-	40% {
-		background: linear-gradient(66deg, rgb(212, 235, 179), rgb(210, 231, 168));
-	}
+  40% {
+    background: linear-gradient(66deg, rgb(212, 235, 179), rgb(210, 231, 168));
+  }
 
-	60% {
-		background: linear-gradient(96deg, rgb(210, 233, 177), rgb(213, 231, 176));
-	}
+  60% {
+    background: linear-gradient(96deg, rgb(210, 233, 177), rgb(213, 231, 176));
+  }
 
-	80% {
-		background: linear-gradient(136deg, rgb(197, 225, 159), rgb(217, 234, 182));
-	}
+  80% {
+    background: linear-gradient(136deg, rgb(197, 225, 159), rgb(217, 234, 182));
+  }
 
-	100% {
-		background: linear-gradient(236deg, rgb(210, 240, 167), rgb(213, 235, 168));
-	}
+  100% {
+    background: linear-gradient(236deg, rgb(210, 240, 167), rgb(213, 235, 168));
+  }
 }
 @keyframes rotateBall {
-	0% {
-		transform: rotate(360deg);
-	}
+  0% {
+    transform: rotate(360deg);
+  }
 
-	100% {
-		transform: rotate(-360deg);
-	}
+  100% {
+    transform: rotate(-360deg);
+  }
 }
 
 .loading {
-	border: 0.1vh rgb(192, 192, 192) dashed;
-	border-bottom: none;
-	width: 50vw;
-	height: 20vh;
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
+  border: 0.1vh rgb(192, 192, 192) dashed;
+  border-bottom: none;
+  width: 50vw;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .loadingRect {
-	width: 22%;
+  width: 22%;
 }
 
 .loadingRect,
 .loadingSquare {
-	height: 80%;
-	border-radius: 1vh;
-	animation: loading 0.7s infinite alternate-reverse;
+  height: 80%;
+  border-radius: 1vh;
+  animation: loading 0.7s infinite alternate-reverse;
 }
 .loadingSpin {
-	width: 100vw;
-	height: 100vh;
-	position: absolute;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .loadingSpin p {
-	position: absolute;
+  position: absolute;
 }
 .loadingSpinner {
- 	z-index: 55;
-	content: 'ali';
-	animation: 2s rotateBall infinite alternate-reverse;
-	background: radial-gradient(
-		rgba(243, 145, 18, 0.689),
-		rgba(249, 109, 2, 0.735)
-	);
-	border: dashed 0.4vh #ffffff;
-	border-radius: 44vh;
-	padding: 12vh;
+  z-index: 55;
+  content: 'ali';
+  animation: 2s rotateBall infinite alternate-reverse;
+  background: radial-gradient(
+    rgba(243, 145, 18, 0.689),
+    rgba(249, 109, 2, 0.735)
+  );
+  border: dashed 0.4vh #ffffff;
+  border-radius: 44vh;
+  padding: 12vh;
 }
 .loadingSquare {
-	width: 70%;
+  width: 70%;
+}
+.cross {
+  transition: transform 0.7s;
+  color: rgb(244, 94, 0);
+  background-color: #ffffffc8;
+  border-radius: 7vh;
+  padding: 0.3vh;
+  border: 0.1vh dashed rgb(245, 151, 27);
+}
+
+.cross:hover {
+  cursor: grabbing;
+  color: rgba(252, 107, 3, 0.9);
+  transform: rotate(90deg);
 }
 
 ::-webkit-scrollbar {
-	width: 8px;
-	height: 4px;
+  width: 8px;
+  height: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-	box-shadow: inset 0 0 5px rgb(192, 192, 192);
-	border-radius:  9vh  ;
+  box-shadow: inset 0 0 5px rgb(192, 192, 192);
+  border-radius: 9vh;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #fbe32b;
-	border: ridge 0.7vh #fc7c04;
-	box-shadow: 0px 0px 1px 1px #f88d14 inset, 1px 1px 2px 1px #fbfaf9;
-	border-radius: 9px;
+  background: #fbe32b;
+  border: ridge 0.7vh #fc7c04;
+  box-shadow: 0px 0px 1px 1px #f88d14 inset, 1px 1px 2px 1px #fbfaf9;
+  border-radius: 9px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: rgb(248, 166, 14);
-	box-shadow: 0px 0px 1px 1px #0d0705, 1px 1px 1px 1px #fbf9f9 inset;
+  background: rgb(248, 166, 14);
+  box-shadow: 0px 0px 1px 1px #0d0705, 1px 1px 1px 1px #fbf9f9 inset;
 }

@@ -4,7 +4,7 @@ import { Toast } from 'primereact/toast'
 import dynamic from 'next/dynamic'
 import { addAddress } from '@/Components/Profile/Address/handler'
 
-const Map = dynamic(() => import('../../../FlowChart/Address/Map'), {
+const Map = dynamic(() => import('../../../Address/Map'), {
   ssr: false,
 })
 const Add: React.FC = () => {

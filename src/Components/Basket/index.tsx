@@ -1,12 +1,12 @@
 /** @format */
 
-import { useEffect, useState } from "react"
-import styles from "./index.module.css"
-import { AiOutlineShoppingCart } from "react-icons/ai"
-import { GiCrossMark } from "react-icons/gi"
-import Products from "./Products"
-import { Product } from "@/Interfaces"
-import { useBasket } from "@/Context/Basket"
+import { useEffect, useState } from 'react'
+import styles from './index.module.css'
+import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { GiCrossMark } from 'react-icons/gi'
+import Products from './Products'
+import { Product } from '@/Interfaces'
+import { useBasket } from '@/Context/Basket'
 
 interface BasketProps {
   basketData: Product[]
@@ -24,7 +24,7 @@ const Basket: React.FC<BasketProps> = ({
   const closeNav = (event: MouseEvent) => {
     if (
       isBasketOpen &&
-      parseInt(`${document.getElementById("openBox")?.offsetWidth}`) <
+      parseInt(`${document.getElementById('openBox')?.offsetWidth}`) <
         event.clientX
     ) {
       setIsBasketOpen(false)
@@ -32,42 +32,35 @@ const Basket: React.FC<BasketProps> = ({
   }
 
   useEffect(() => {
-    window.addEventListener("click", closeNav)
+    window.addEventListener('click', closeNav)
     return () => {
-      window.removeEventListener("click", closeNav)
+      window.removeEventListener('click', closeNav)
     }
   }, [])
 
   const getBuy = () => {
     setIsLoading(true)
-    window.location.href = "/newReq/Pay"
+    location.href = '/newReq/pay'
   }
   return (
     <>
-      {isLoading && (
-        <div>
-        
-        </div>
-      )}
+      {isLoading && <div></div>}
       {isBasketOpen ? (
         <div className={`${styles.basketDrawer}  `} id='openBox'>
           <div className={styles.basketHeader}>
             <GiCrossMark
-              className={styles.cross}
-              size={"5vh"}
+              className={'cross'}
+              size={'5vh'}
               onClick={() => setIsBasketOpen(false)}
             />
             <div className={styles.calculateBox}>
               <p>مجموع هزینه ها : </p>
-              <p>{basket[3] && basket[2]*basket[3]} تومان </p>
+              <p>{basket[3] && basket[2] * basket[3]} تومان </p>
             </div>
           </div>
           <div className={styles.basketBase}>
             {/* {isloading ? <div className={styles.loading}></div> :} */}
-            <Products
-              setLoading={isLoading}
-              basketData={basketData}
-            />
+            <Products setLoading={isLoading} basketData={basketData} />
             <div className={styles.confirm} onClick={getBuy}>
               ثبت سفارش
             </div>
@@ -77,7 +70,7 @@ const Basket: React.FC<BasketProps> = ({
         <div>
           <AiOutlineShoppingCart
             className={styles.basketBall}
-            color={"white"}
+            color={'white'}
             onClick={() => setIsBasketOpen(true)}
           />
           {basket[3] > 0 && (

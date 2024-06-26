@@ -2,15 +2,17 @@ import { FormEvent, RefObject, useRef, useState } from 'react'
 import styles from '../index.module.css'
 import { Toast } from 'primereact/toast'
 import dynamic from 'next/dynamic'
-import { addAddress } from '@/Components/Profile/Address/handler'
+import { addAddress, searchAddress } from '@/Components/Profile/Address/handler'
+import { BiSearch } from 'react-icons/bi'
 
 const Map = dynamic(() => import('../Map/index'), {
   ssr: false,
 })
 const Add: React.FC = () => {
-  const [mapData, setMapData] = useState<[number, number]>([35.7269, 51.52484])
+  const [mapData, setMapData] = useState<[number, number]>([
+    35.72249924640049, 51.335191350784214,
+  ])
   const [address, setAddress] = useState<string>('')
-  const [login, setLogin] = useState<[boolean, boolean]>([false, false]) //[number, address]
 
   const toast = useRef<Toast>(null)
 
@@ -18,6 +20,7 @@ const Add: React.FC = () => {
     [key: string]: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>
   } = {
     houseNumber: useRef<HTMLInputElement>(null),
+    search: useRef<HTMLInputElement>(null),
     zipCode: useRef<HTMLInputElement>(null),
     houseUnit: useRef<HTMLInputElement>(null),
   }
@@ -33,15 +36,27 @@ const Add: React.FC = () => {
       lat: mapData[0],
       long: mapData[1],
     }
-    console.log(information)
     addAddress(toast, information)
-    setLogin([true, true])
   }
 
   return (
     <>
       <Toast ref={toast} />
-      <div className={styles.container}>
+        <div className={styles.container}>
+      <form className={styles.searchBar}>
+        <input
+          ref={refs.search as RefObject<HTMLInputElement>}
+          className={styles.searchInput}
+          type='search'
+          placeholder={'جستجو ...'}
+          onChange={() =>
+            searchAddress(`${refs.search.current?.value}`, setMapData)
+          }
+        />
+        <BiSearch className={styles.searchIcon} />
+      </form>
+      <div className={styles.addressContainer}>
+
         <div className={styles.mapBox}>
           <div className={styles.map}>
             <Map
@@ -65,7 +80,6 @@ const Add: React.FC = () => {
                 type={'number'}
                 ref={refs.houseUnit as RefObject<HTMLInputElement>}
               />
-              
             </div>
             <textarea
               placeholder={'آدرس'}
@@ -79,6 +93,7 @@ const Add: React.FC = () => {
               value={'ثبت آدرس'}
             />
           </form>
+        </div>
         </div>
       </div>
     </>

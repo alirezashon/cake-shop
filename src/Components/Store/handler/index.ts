@@ -35,19 +35,19 @@ export const addToFavorite = async (
   //   )
   //   const data = await response.json()
   //   if (data.success === true && response.status === 200) {
-  //     return toast.current?.show({
-  //       severity: 'success',
-  //       summary: 'با موفقیت ویرایش شد',
-  //       detail: 'موفق',
-  //       life: 3000,
-  //     })
+      // return toast.current?.show({
+      //   severity: 'success',
+      //   summary: 'با موفقیت ویرایش شد',
+      //   detail: 'موفق',
+      //   life: 3000,
+      // })
   //   } else {
-  //     return toast.current?.show({
-  //       severity: 'error',
-  //       summary: 'لطفا مجدد تلاش کنید',
-  //       detail: 'ناموفق',
-  //       life: 3000,
-  //     })
+      // return toast.current?.show({
+      //   severity: 'error',
+      //   summary: 'لطفا مجدد تلاش کنید',
+      //   detail: 'ناموفق',
+      //   life: 3000,
+      // })
   //   }
   // } catch (error) {
   //   console.log(error)

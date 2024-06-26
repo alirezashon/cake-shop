@@ -3,9 +3,9 @@
   width: 100%;
   background: linear-gradient(
     25deg,
-    rgb(215, 232, 168),
+    rgb(245, 253, 223),
     rgb(238, 249, 196),
-    rgb(216, 249, 163)
+    rgb(243, 255, 225)
   );
   display: flex;
   position: fixed;

@@ -1,11 +1,38 @@
 import { Information } from '@/Interfaces'
 import { Toast } from 'primereact/toast'
 import { RefObject } from 'react'
+export const searchAddress = async (
+  value: string,
+  setMapData: (value: [number, number]) => void
+) => {
+  try {
+    const response = await fetch(
+      `https://api.neshan.org/v4/geocoding?address=${value}`,
+      {
+        method: 'GET',
+        headers: {
+          'Api-Key': 'service.406fb49d15be4a65bf05a950e7ef5baa',
+        },
+      }
+    )
+    const data = await response.json()
+    if (response.status === 200 && data.location) {
+      setMapData([data.location.y, data.location.x])
+    }
+  } catch (error) {}
+}
+
 export const addAddress = async (
   toast: RefObject<Toast>,
   information: Information
 ) => {
   try {
+    toast.current?.show({
+      severity: 'info',
+      summary: 'در حال ثبت',
+      detail: 'موفق',
+      life: 3000,
+    })
     const response = await fetch('/api/Auth/Register/InsertAddress', {
       method: 'POST',
       headers: {
@@ -17,25 +44,22 @@ export const addAddress = async (
       }),
     })
     const data = await response.json()
-    console.log(data)
     if (data.success === true && response.status === 200) {
-      return toast.current?.show({
+      toast.current?.show({
         severity: 'success',
-        summary: 'با موفقیت ویرایش شد',
+        summary: 'با موفقیت افزوده شد',
         detail: 'موفق',
         life: 3000,
       })
     } else {
-      return toast.current?.show({
+      toast.current?.show({
         severity: 'error',
         summary: 'لطفا مجدد تلاش کنید',
         detail: 'ناموفق',
         life: 3000,
       })
     }
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 }
 
 export const updateAddress = async (
@@ -59,7 +83,6 @@ export const updateAddress = async (
       }
     )
     const data = await response.json()
-    console.log(data)
     if (data.success === true && response.status === 200) {
       return toast.current?.show({
         severity: 'success',
@@ -75,9 +98,7 @@ export const updateAddress = async (
         life: 3000,
       })
     }
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 }
 
 export const removeAddress = async (toast: RefObject<Toast>, id: string) => {
@@ -96,7 +117,6 @@ export const removeAddress = async (toast: RefObject<Toast>, id: string) => {
       }
     )
     const data = await response.json()
-    console.log(data)
     if (data.success === true && response.status === 200) {
       return toast.current?.show({
         severity: 'success',
@@ -112,7 +132,5 @@ export const removeAddress = async (toast: RefObject<Toast>, id: string) => {
         life: 3000,
       })
     }
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 }

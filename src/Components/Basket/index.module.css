@@ -175,20 +175,7 @@
   border: 0.2vh ridge rgb(250, 222, 255);
 }
 
-.cross {
-  transition: transform 0.7s;
-  color: rgb(244, 94, 0);
-  background-color: #ffffffc8;
-  border-radius: 7vh;
-  padding: 0.3vh;
-  border: 0.1vh dashed rgb(245, 151, 27);
-}
 
-.cross:hover {
-  cursor: grabbing;
-  color: rgba(252, 107, 3, 0.9);
-  transform: rotate(90deg);
-}
 
 @media (max-width: 787px) {
   .basketDrawer {

@@ -2,8 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import ClientSession from '../../../../../../../../models/Client/Session'
 import db from '../../../../../../../../utils'
 import Profile from '@/models/Client/Profile'
-import { Information } from '@/Interfaces'
-import { NextResponse } from 'next/server'
 
 const updateAddress = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -26,7 +24,6 @@ const updateAddress = async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await ClientSession.findOne({ key: kalim })
 
     if (!session || session.key !== kalim) {
-      NextResponse.redirect(new URL('/Login', req.url))
       return res.status(401).json({ success: false })
     }
 

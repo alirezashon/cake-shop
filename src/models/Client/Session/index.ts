@@ -10,7 +10,7 @@ const clientSessionSchema = new mongoose.Schema({
 	},
 	clientSessionToken: { type: String, required: true, unique: true },
 	key: { type: String, required: true },
-	createdAt: { type: Date, default: Date.now, expires: 259200 },
+	createdAt: { type: Date, default: Date.now, expires: 604800 },
 })
 clientSessionSchema.index({ createdAt: 1 }, { expireAfterSeconds: 0 })
 const ClientSession =

@@ -1,2 +1,2 @@
-import Address from '@/Components/FlowChart/Address/add'
+import Address from '@/Components/Address/add'
 export default Address
