@@ -26,7 +26,7 @@ const Handler: React.FC<Props> = ({ products, categories }) => {
         <div style={{ display: 'grid', gap: '1vh' }}>
           <Main />
           <Store data={[categories, products]} />
-<BackeCake/>
+          <BackeCake />
           <div>
             <ChatUI />
           </div>

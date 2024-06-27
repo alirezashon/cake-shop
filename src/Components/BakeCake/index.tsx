@@ -38,7 +38,6 @@ const BackeCake: React.FC = () => {
         const result = await response.json()
         setData([result.tools, result.tags])
         setIsLoading(false)
-        console.table(result)
       } else {
         setIsLoading(false)
       }
@@ -149,14 +148,14 @@ const BackeCake: React.FC = () => {
           }}
         >
           <div className={styles.cakeStatePrice}>
-            قیمت نهایی
             <GiCrossMark
               className={styles.closeIcon}
               onClick={() =>
                 setCakosition((prv) => ({ ...prv, isCakopen: false }))
               }
             />
-            <p>
+            <div className={styles.headerText}>قیمت نهایی</div>
+            <div className={styles.headerText}>
               {data && data[0].length > 0
                 ? cakeState.reduce(
                     (sum, item) =>
@@ -165,7 +164,7 @@ const BackeCake: React.FC = () => {
                   )
                 : 0}
               تومان
-            </p>
+            </div>
           </div>
           <div className={styles.cakheader}>
             <p>

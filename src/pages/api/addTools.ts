@@ -3,7 +3,6 @@ import db from "@/utils"
 import { NextApiRequest, NextApiResponse } from "next"
 const Shop = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    console.log(req.cookies["CTFlEoiSHkeNnToMBLiShoOekn3kN2y@k"])
     await db.connect2DB()
     const data = [
       {

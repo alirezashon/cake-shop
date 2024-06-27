@@ -8,13 +8,16 @@ import Image from 'next/image'
 import { FaMinus } from 'react-icons/fa'
 import { Add, Get, Remove } from '../Basket/Actions'
 import { useBasket } from '@/Context/Basket'
-import { FaBasketShopping} from 'react-icons/fa6'
+import { FaBasketShopping } from 'react-icons/fa6'
 import { searchEngine } from './content'
 import { GiCrossMark } from 'react-icons/gi'
-import {goToBuy} from './handler'
+import { goToBuy } from './handler'
 import { Toast } from 'primereact/toast'
 import { BiSearch } from 'react-icons/bi'
-import { GetFave ,AddFave,RemoveFave} from './Favorites'
+import { GetFave, AddFave, RemoveFave } from './Favorites'
+import { NextSeo } from 'next-seo'
+import { generateSEO } from './SEO'
+
 interface Props {
   data: [Category[], Product[]]
 }
@@ -103,6 +106,7 @@ const Store: React.FC<Props> = ({ data }) => {
   }
   return (
     <>
+      <NextSeo {...generateSEO(showProducto)} />
       <Toast />
       <div className={styles.container}>
         {!isMobile && (
@@ -181,6 +185,7 @@ const Store: React.FC<Props> = ({ data }) => {
                     width={200}
                     height={200}
                     className={styles.categorimage}
+                    loading='lazy'
                   />
                   <div className={styles.categoryName}>{cat.name}</div>
                 </div>
@@ -276,6 +281,7 @@ const Store: React.FC<Props> = ({ data }) => {
                   style={{ opacity: productover === productindex ? 0.2 : 1 }}
                   width={777}
                   height={777}
+                  loading='lazy'
                   className={styles.productimage}
                 />
                 {productover === productindex && (
@@ -338,6 +344,7 @@ const Store: React.FC<Props> = ({ data }) => {
                   alt={showProducto?.title}
                   width={444}
                   height={444}
+                  loading='lazy'
                   className={styles.productimagelf}
                 />
                 <p className={styles.productprice}>

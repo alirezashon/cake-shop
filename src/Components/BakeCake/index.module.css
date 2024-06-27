@@ -1,9 +1,9 @@
-.container{
+.container {
   display: flex;
-  background-image: repeating-linear-gradient(22deg, #d9ff5d, #fde675);
+  justify-content: center;
+  background-image: repeating-linear-gradient(22deg, #d9ff5d, #f6ebb6);
   width: 100%;
   height: 90vh;
-
 }
 .tags {
   display: flex;
@@ -22,11 +22,11 @@
   align-items: center;
   cursor: pointer;
   border-bottom: 1vh ridge rgb(255, 132, 0);
-  border-inline: .2vh dashed rgb(255, 132, 0);
+  border-inline: 0.2vh dashed rgb(255, 132, 0);
   background-image: repeating-linear-gradient(22deg, #fff45d, #fbe242);
 }
 .image {
-  border-block: 1vh ridge rgb(255, 132, 0);
+  border-block: 1vh ridge rgb(255, 234, 95);
   cursor: pointer;
   width: 12vh;
   height: 12vh;
@@ -41,6 +41,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 0.3vh solid rgb(255, 252, 204);
   background-image: repeating-linear-gradient(22deg, #b8d393, #f7ffee);
   padding: 2vh;
   height: fit-content;
@@ -52,14 +53,22 @@
   transform: rotate(23deg);
 }
 
-.toolName {
-  background-image: repeating-linear-gradient(22deg, #7ecb3b, #76a93c);
+.toolName,
+.toolPrice {
+  background-image: repeating-linear-gradient(22deg, #fcff2f, #fff157f9);
+  text-wrap: nowrap;
+  font-size: 1.5vh;
+  border-radius: 2vh;
+  padding: 0 2vh;
+  margin: 1vh;
+  color: #3e0f00;
+  font-weight: bold;
 }
 .toolPrice {
-  background-image: repeating-linear-gradient(22deg, #bfec80, #9ce34a);
+  background-image: repeating-linear-gradient(22deg, #ffa411, #ff9915);
 }
 .cakolate {
-  background-image: repeating-linear-gradient(22deg, #eded01, #fa8108);
+  background-image: repeating-linear-gradient(22deg, #fabb0d, #fc9c3d);
   border: 0.3vh dashed rgb(255, 252, 204);
   color: rgb(255, 252, 204);
   font-size: 5vh;
@@ -84,24 +93,26 @@
   position: absolute;
   align-self: flex-end;
   border-radius: 1vh;
-  border: 1vh double rgb(255, 132, 0);
+  border: 0.7vh double rgb(255, 208, 0);
   text-wrap: nowrap;
 }
 .cakheader {
   display: flex;
   height: 18%;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 1vh;
   color: #e3f5ff;
   align-items: center;
   border-bottom: 0.3vh dashed rgb(255, 252, 204);
-  background-image: repeating-linear-gradient(222deg, #2c1a00ec, #935518);
+  background-image: repeating-linear-gradient(222deg, #815322ec, #8a5623);
 }
-.cakeStatePrice{
+.cakeStatePrice {
   direction: rtl;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  color: #663e1a;
+  padding: 1vh;
 }
 .showimgicon {
   left: 0;
@@ -122,15 +133,23 @@
   padding: 0.3vh;
   background-color: rgb(255, 252, 204);
   border-radius: 22vh;
-  cursor: pointer;
   font-size: 5vh;
   width: 5vh;
   height: 5vh;
   color: #ff6600;
 }
-.closeIcon:hover {
-  color: #ff4d00;
+.closeIcon:hover,
+.checko:hover,
+.returnarrow:hover {
+  cursor: pointer;
   transform: scale(1.1) rotate(180deg);
+}
+.inputiconos {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.4vh;
+  border-block: 0.3vh ridge rgb(255, 106, 0);
 }
 .checko {
   background-color: #fef8b5;
@@ -139,6 +158,16 @@
   border-radius: 4vh;
   padding: 0.2vh;
   border: 0.2vh dashed rgb(255, 132, 0);
+}
+.returnarrow {
+  border: 0.2vh dashed rgb(255, 132, 0);
+  padding: 0.3vh;
+  background-color: rgb(255, 252, 204);
+  border-radius: 22vh;
+  cursor: pointer;
+  width: 3vh;
+  height: 3vh;
+  color: #ff6600;
 }
 .cakedetails {
   overflow-y: auto;
@@ -183,6 +212,7 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   text-align: center;
 }
 .cakedetail:hover {
@@ -198,6 +228,7 @@
   background-color: rgb(255, 252, 204);
 }
 .range {
-  color: red;
-  background: #eba50e;
+  border: .3vh dashed rgb(255, 106, 0);
+  color: #049913;
+  background: #f5d849;
 }

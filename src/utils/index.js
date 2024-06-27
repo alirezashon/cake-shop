@@ -3,7 +3,6 @@ import mongoose from 'mongoose'
 const connectToShop = async () => {
 	try {
 		await mongoose.connect(process.env.SHOP_DATA_MANAGEMENT_ENV, {
-			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		})
 	} catch (error) {
@@ -13,7 +12,6 @@ const connectToShop = async () => {
 const connect2DB = async () => {
 	try {
 		await mongoose.connect(process.env.HUB_DATA_USER_MANAGE_ENV, {
-			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		})
 	} catch (error) {
