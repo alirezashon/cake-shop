@@ -1,8 +1,13 @@
-.tags {
+.container{
   display: flex;
-  background-image: repeating-linear-gradient(22deg, #f4ff5d, #ff6a00);
+  background-image: repeating-linear-gradient(22deg, #d9ff5d, #fde675);
   width: 100%;
   height: 90vh;
+
+}
+.tags {
+  display: flex;
+  width: 100%;
   overflow: auto;
   justify-content: space-around;
 }
@@ -16,9 +21,12 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  background-image: repeating-linear-gradient(22deg, #faaf2d, #fbe242);
+  border-bottom: 1vh ridge rgb(255, 132, 0);
+  border-inline: .2vh dashed rgb(255, 132, 0);
+  background-image: repeating-linear-gradient(22deg, #fff45d, #fbe242);
 }
 .image {
+  border-block: 1vh ridge rgb(255, 132, 0);
   cursor: pointer;
   width: 12vh;
   height: 12vh;
@@ -40,8 +48,8 @@
   border-radius: 111%;
   margin: 1vh;
 }
-.tools:hover{
-transform: rotate(23deg);
+.tools:hover {
+  transform: rotate(23deg);
 }
 
 .toolName {
@@ -89,6 +97,12 @@ transform: rotate(23deg);
   border-bottom: 0.3vh dashed rgb(255, 252, 204);
   background-image: repeating-linear-gradient(222deg, #2c1a00ec, #935518);
 }
+.cakeStatePrice{
+  direction: rtl;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 .showimgicon {
   left: 0;
   position: absolute;
@@ -96,8 +110,8 @@ transform: rotate(23deg);
   background-color: #eba50e;
   font-size: 4vh;
   border-radius: 4vh;
-  padding: .5vh;
-  border: .3vh dashed rgb(255, 221, 0);
+  padding: 0.5vh;
+  border: 0.3vh dashed rgb(255, 221, 0);
   cursor: pointer;
 }
 .showimgicon:hover {
@@ -118,13 +132,13 @@ transform: rotate(23deg);
   color: #ff4d00;
   transform: scale(1.1) rotate(180deg);
 }
-.checko{
+.checko {
   background-color: #fef8b5;
   color: #049913;
   font-size: 3vh;
-  border-radius: 4vh; 
-  padding: .2vh;
-  border: .2vh dashed rgb(255, 132, 0);
+  border-radius: 4vh;
+  padding: 0.2vh;
+  border: 0.2vh dashed rgb(255, 132, 0);
 }
 .cakedetails {
   overflow-y: auto;
@@ -156,7 +170,7 @@ transform: rotate(23deg);
   font-size: 22vh;
 }
 
-.editicon:hover{
+.editicon:hover {
   padding: 1vh;
   font-size: 4vh;
   transform: rotate(180deg);
@@ -178,12 +192,12 @@ transform: rotate(23deg);
   transform: scale(0.94);
 }
 
-.cakedetailoption{
+.cakedetailoption {
   position: absolute;
   left: 100%;
   background-color: rgb(255, 252, 204);
 }
-.range{
+.range {
   color: red;
   background: #eba50e;
 }

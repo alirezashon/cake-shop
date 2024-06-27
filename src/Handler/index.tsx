@@ -11,6 +11,9 @@ const Store = dynamic(() => import('../Components/Store'), {
 const Main = dynamic(() => import('../Components/Main'), {
   loading: () => <div className={styles.loadingChat}></div>,
 })
+const BackeCake = dynamic(() => import('../Components/BakeCake'), {
+  loading: () => <div className={styles.loadingChat}></div>,
+})
 
 interface Props {
   products: Product[]
@@ -21,8 +24,9 @@ const Handler: React.FC<Props> = ({ products, categories }) => {
     <>
       {products && (
         <div style={{ display: 'grid', gap: '1vh' }}>
-          <Store data={[categories, products]} />
           <Main />
+          <Store data={[categories, products]} />
+<BackeCake/>
           <div>
             <ChatUI />
           </div>

@@ -1,14 +1,15 @@
 /** @format */
 
-import Link from "next/link"
-import styles from "./index.module.css"
-import { RefObject, useEffect, useRef, useState } from "react"
-import { items } from "../items"
-import Image from "next/image"
-import Basket from "@/Components/Basket"
-import { FaUserCircle } from "react-icons/fa"
-import { Product } from "../../../Interfaces"
-import { BiSearch } from "react-icons/bi"
+import Link from 'next/link'
+import styles from './index.module.css'
+import { RefObject, useEffect, useRef, useState } from 'react'
+import { items } from '../items'
+import Image from 'next/image'
+import Basket from '@/Components/Basket'
+import { FaUserCircle } from 'react-icons/fa'
+import { Product } from '../../../Interfaces'
+import { BiSearch } from 'react-icons/bi'
+import { ProgressSpinner } from 'primereact/progressspinner'
 
 interface Items {
   category: string
@@ -41,24 +42,18 @@ const PC: React.FC<NavProps> = ({
   const [loading, setLoading] = useState<boolean>(false)
   const [notindex, setNotindex] = useState<number>(0)
 
-  const loadingo = [
-    "در حال بارگیری",
-    ". در حال بارگیری",
-    ". . در حال بارگیری",
-    ". . . در حال بارگیری",
-  ]
   const openItemBox = (th: number, ex: number) => {
     setOpenItemWind({ th: th, ex: ex })
   }
 
   const closeNav = (event: MouseEvent) => {
-    const t = document.getElementById("openBox")
+    const t = document.getElementById('openBox')
     if (openItemWind && !t?.contains(event.target as Node)) {
       setOpenItemWind(null)
     }
   }
   const closeNavOver = (event: MouseEvent) => {
-    const t = document.getElementById("openBox")
+    const t = document.getElementById('openBox')
     if (
       openItemWind &&
       window.innerHeight / 1.8 < event.clientY &&
@@ -81,25 +76,27 @@ const PC: React.FC<NavProps> = ({
 
       return () => clearInterval(interval)
     }
-    window.addEventListener("click", closeNav)
-    window.addEventListener("mouseover", closeNavOver)
+    window.addEventListener('click', closeNav)
+    window.addEventListener('mouseover', closeNavOver)
 
     return () => {
-      window.removeEventListener("click", closeNav)
-      window.removeEventListener("mouseover", closeNavOver)
+      window.removeEventListener('click', closeNav)
+      window.removeEventListener('mouseover', closeNavOver)
     }
   }, [openItemWind, setOpenItemWind])
 
   return (
     <>
       {loading && (
-        <div className={"loadingSpin"}>
-          <p>{loadingo[notindex]}</p>
-        </div>
+        <ProgressSpinner
+          style={{ width: '5vh', height: '5vh' ,position:'absolute',top:'45vh',left:'45vw'}}
+          strokeWidth='2'
+          animationDuration='.5s'
+        />
       )}
       <nav className={styles.navBar}>
         <div className={styles.itemsBox}>
-          <Image src={"/images/icon.png"} width={55} height={55} alt='' />
+          <Image src={'/images/icon.png'} width={55} height={55} alt='' />
           {items &&
             items.map((item: Items, itemIndex) => (
               <Link
@@ -108,7 +105,7 @@ const PC: React.FC<NavProps> = ({
                 className={styles.item}
                 onMouseOver={() =>
                   openItemBox(
-                    typeof item.brands[0] === "object"
+                    typeof item.brands[0] === 'object'
                       ? (window.innerWidth * 13) / 100 +
                           ((window.innerWidth * 13) / 100) * item.brands.length
                       : (window.innerWidth * 22) / 100,
@@ -131,14 +128,14 @@ const PC: React.FC<NavProps> = ({
                       width: `${openItemWind.th}px`,
                       right: `${index * 12}vw`,
                       display: `${
-                        typeof item.brands[0] === "object" ? "flex" : "block"
+                        typeof item.brands[0] === 'object' ? 'flex' : 'block'
                       }`,
                     }}
                     key={index}
                   >
                     {item.brands.map((option, optionIndex) => (
                       <div key={optionIndex}>
-                        {typeof option === "string" ? (
+                        {typeof option === 'string' ? (
                           <div className={styles.productBox}>
                             <Link
                               href={`${item.category}/${option}`}
@@ -187,7 +184,7 @@ const PC: React.FC<NavProps> = ({
               className={styles.profile}
               onClick={() => {
                 setLoading(true)
-                window.location.href = "/profile"
+                window.location.href = '/profile'
               }}
             />
           </div>
@@ -197,7 +194,7 @@ const PC: React.FC<NavProps> = ({
                 ref={refs.search as RefObject<HTMLInputElement>}
                 className={styles.searchInput}
                 type='search'
-                placeholder={"جستجو ..."}
+                placeholder={'جستجو ...'}
               />
               <BiSearch className={styles.searchIcon} />
             </form>

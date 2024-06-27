@@ -41,7 +41,7 @@ const Payment: React.FC = () => {
     <>
       <Toast />
       <div className={styles.container}>
-        <div
+        <div  
           className={styles.addressBox}
           style={{ display: `${addingAddress ? 'block' : 'flex'}` }}
         >
