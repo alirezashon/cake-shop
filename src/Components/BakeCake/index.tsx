@@ -1,5 +1,3 @@
-/** @format */
-
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import styles from './index.module.css'
@@ -73,11 +71,11 @@ const BackeCake: React.FC = () => {
         ;[0, 1].includes(tagIndex)
           ? setCakosition((prevState) => ({
               ...prevState,
-              x: (window.innerWidth * 66) / 100,
+              x: (innerWidth > 878 ? innerWidth * 66 : innerWidth * 44) / 100,
             }))
           : setCakosition((prevState) => ({
               ...prevState,
-              x: (window.innerWidth * 4) / 100,
+              x: (innerWidth * 4) / 100,
             }))
       }
     }

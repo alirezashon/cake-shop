@@ -1,6 +1,6 @@
 import { NextSeo } from 'next-seo'
 import { GetServerSideProps, NextPage } from 'next'
-import { Product, Category } from '../Interfaces'
+import { Category, Product } from '../Interfaces'
 import dynamic from 'next/dynamic'
 import Layout from '@/Layouts'
 
@@ -9,11 +9,16 @@ const Handler = dynamic(() => import('../Handler'), {
 })
 
 interface Props {
-  product: Product[]
   categories: Category[]
+  initialProducts: Product[]
+  initialTotal: number
 }
 
-const RootPage: NextPage<Props> = ({ product, categories }) => {
+const RootPage: NextPage<Props> = ({
+  categories,
+  initialProducts,
+  initialTotal,
+}) => {
   return (
     <>
       <Layout>
@@ -43,7 +48,11 @@ const RootPage: NextPage<Props> = ({ product, categories }) => {
             ],
           }}
         />
-        <Handler products={product} categories={categories} />
+        <Handler
+          initialProducts={initialProducts}
+          initialTotal={initialTotal}
+          categories={categories}
+        />
       </Layout>
     </>
   )
@@ -51,32 +60,55 @@ const RootPage: NextPage<Props> = ({ product, categories }) => {
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   try {
-    const res = await fetch(
-      `http://localhost:${process.env.PRODUCTION_PORT}/api/data/Post/Client`,
+    const categoriesRes = await fetch(
+      `http://localhost:${process.env.PRODUCTION_PORT}/api/GET/categories`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          category: '@L$L%O%F#D%M^',
           authType: 'G&E!T*P^R$O#D$U^C@T*S',
         }),
       }
     )
-    const result = await res.json()
+    const categoriesResult = await categoriesRes.json()
+    const categories = categoriesResult.categories || []
 
-    const product = result.products || []
-    const categories = result.categories || []
+    const productsRes = await fetch(
+      `http://localhost:${process.env.PRODUCTION_PORT}/api/GET/products`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          authType: 'G&E!T*P^R$O#D$U^C@T*S',
+          page: 1,
+          limit: 15,
+        }),
+      }
+    )
+
+    if (!productsRes.ok) {
+      throw new Error('Failed to fetch initial products')
+    }
+
+    const { products, totalProducts } = await productsRes.json()
 
     return {
       props: {
-        product,
+        initialProducts: products,
+        initialTotal: totalProducts,
         categories,
       },
     }
   } catch (error) {
     console.error('Error fetching initial props:', error)
-    return { props: { product: [], categories: [] } }
+    return { props: { initialProducts: [], initialTotal: 0, categories: [] } }
   }
 }
-
+export const config = {
+  api: {
+    responseLimit: '128mb',
+  },
+}
 export default RootPage

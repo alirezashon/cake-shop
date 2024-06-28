@@ -228,7 +228,15 @@
   background-color: rgb(255, 252, 204);
 }
 .range {
-  border: .3vh dashed rgb(255, 106, 0);
+  border: 0.3vh dashed rgb(255, 106, 0);
   color: #049913;
   background: #f5d849;
+}
+
+@media (max-width: 878px) {
+  .tagBox{width: 20%;
+  margin: 0 15%;}
+  .cake {
+    width: 48vw;
+  }
 }

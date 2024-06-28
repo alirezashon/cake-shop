@@ -15,13 +15,11 @@ import { goToBuy } from './handler'
 import { Toast } from 'primereact/toast'
 import { BiSearch } from 'react-icons/bi'
 import { GetFave, AddFave, RemoveFave } from './Favorites'
-import { NextSeo } from 'next-seo'
-import { generateSEO } from './SEO'
-
 interface Props {
   data: [Category[], Product[]]
+  total: number
 }
-const Store: React.FC<Props> = ({ data }) => {
+const Store: React.FC<Props> = ({ data, total }) => {
   const refs: {
     [key: string]: RefObject<HTMLInputElement | HTMLDivElement>
   } = {
@@ -35,7 +33,53 @@ const Store: React.FC<Props> = ({ data }) => {
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
   const [isMobile, setIsMobile] = useState(true)
   const [favorites, setFavorites] = useState<string[]>([])
+  const [page, setPage] = useState(2)
+
   const toast = useRef<Toast>(null)
+  const totalPages = Math.ceil(total / 15)
+
+  const fetchMoreProducts = async (page: number) => {
+    try {
+      const res = await fetch('/api/GET/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          authType: 'G&E!T*P^R$O#D$U^C@T*S',
+          page,
+          limit: 15,
+        }),
+      })
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch more products')
+      }
+
+      const result = await res.json()
+      if (result.success) {
+        setSortedata((prevProducts) => [...prevProducts, ...result.products])
+        if (result.products.length < 15) {
+          setPage(0) // All products are fetched, stop pagination
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching more products:', error)
+    }
+  }
+
+  useEffect(() => {
+    const fetchRemainingProducts = async () => {
+      for (let i = 2; i <= totalPages; i++) {
+        await fetchMoreProducts(i)
+        await new Promise((resolve) => setTimeout(resolve, 100)) // Delay between requests
+      }
+    }
+
+    fetchRemainingProducts()
+  }, [totalPages])
+
+
   const scrollLeft = () => {
     if (refs.categoryBoxRef.current) {
       refs.categoryBoxRef.current.scrollBy({ left: -100, behavior: 'smooth' })
@@ -106,7 +150,7 @@ const Store: React.FC<Props> = ({ data }) => {
   }
   return (
     <>
-      <NextSeo {...generateSEO(showProducto)} />
+      {sortedata.length}
       <Toast />
       <div className={styles.container}>
         {!isMobile && (
@@ -185,7 +229,6 @@ const Store: React.FC<Props> = ({ data }) => {
                     width={200}
                     height={200}
                     className={styles.categorimage}
-                    loading='lazy'
                   />
                   <div className={styles.categoryName}>{cat.name}</div>
                 </div>
@@ -267,7 +310,7 @@ const Store: React.FC<Props> = ({ data }) => {
             <FaBasketShopping className={styles.basketicon} />
           </div>
           <div className={styles.producto}>
-            {sortedata.map((product, productindex) => (
+            {sortedata?.map((product, productindex) => (
               <div
                 key={productindex}
                 className={styles.product}
@@ -281,7 +324,6 @@ const Store: React.FC<Props> = ({ data }) => {
                   style={{ opacity: productover === productindex ? 0.2 : 1 }}
                   width={777}
                   height={777}
-                  loading='lazy'
                   className={styles.productimage}
                 />
                 {productover === productindex && (
@@ -344,7 +386,6 @@ const Store: React.FC<Props> = ({ data }) => {
                   alt={showProducto?.title}
                   width={444}
                   height={444}
-                  loading='lazy'
                   className={styles.productimagelf}
                 />
                 <p className={styles.productprice}>

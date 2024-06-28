@@ -16,23 +16,26 @@ const BackeCake = dynamic(() => import('../Components/BakeCake'), {
 })
 
 interface Props {
-  products: Product[]
+  initialProducts: Product[]
+  initialTotal: number
   categories: Category[]
 }
-const Handler: React.FC<Props> = ({ products, categories }) => {
+
+const Handler: React.FC<Props> = ({
+  initialProducts,
+  initialTotal,
+  categories,
+}) => {
   return (
-    <>
-      {products && (
-        <div style={{ display: 'grid', gap: '1vh' }}>
-          <Main />
-          <Store data={[categories, products]} />
-          <BackeCake />
-          <div>
-            <ChatUI />
-          </div>
-        </div>
-      )}
-    </>
+    <div style={{ display: 'grid', gap: '1vh' }}>
+      <Main />
+      <Store data={[categories, initialProducts]} total={initialTotal} />
+      <BackeCake />
+      <div>
+        <ChatUI />
+      </div>
+    </div>
   )
 }
+
 export default Handler
