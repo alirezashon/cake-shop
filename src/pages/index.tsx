@@ -23,7 +23,7 @@ const RootPage: NextPage<Props> = ({
     <>
       <Layout>
         <NextSeo
-          title='RoomMode'
+          title='کیک خونه'
           description='...'
           canonical='https://www.roommode.ir/'
           openGraph={{

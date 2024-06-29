@@ -18,7 +18,7 @@
 
 .chatIcon:hover {
   transform: rotate(360deg);
-  background: radial-gradient(#ff7b00, #b98942);
+  background: radial-gradient(#eb3131, #d74949);
 }
 
 .chatBox {
@@ -28,9 +28,9 @@
   width: 28vw;
   height: 80vh;
   background-color: #f4f4f4;
-  border: 0.5vh double #9df16c;
+  border: 0.5vh double #f16c6c;
   overflow-y: auto;
-  box-shadow: 1px 1px 0.1vh 1px rgb(143, 205, 43) inset;
+  box-shadow: 1px 1px 0.1vh 1px rgb(205, 43, 43) inset;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,8 @@
   align-items: center;
   padding: 0.2vh 1vh;
   text-align: center;
-  background: radial-gradient(rgba(88, 178, 32, 0.9), rgba(73, 142, 19, 0.901));
+  background: radial-gradient(rgba(178, 32, 32, 0.9), rgba(208, 36, 36, 0.901));
+  border-bottom: .3vh solid #ffffff;
 }
 
 .cross {
@@ -91,16 +92,18 @@
 
 .userMessage {
   float: right;
-  background: radial-gradient(#39af4b, #42b964);
+  background: radial-gradient(#e95b5b, #b12e2e);
   color: white;
 }
 
 .otherMessage {
-  color: #097108;
+  color: #a00101;
   background-color: #e2f0b0;
 }
 
 .inputContainer {
+  border-top: .4vh ridge rgb(205, 43, 43);
+  background-color: #ffdada;
   display: flex;
   padding: 10px;
 }
@@ -108,18 +111,22 @@
 .input {
   flex: 1;
   padding: 1vh;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
+  border: 1px solid #ffbaba;
+  border-left: none;
+  direction: rtl;
+  border-radius:0 1vh 1vh 0;
   outline: none;
 }
-
+.input::placeholder{
+  color: #ba0c0c;
+}
 .sendButton {
   padding: 1vh 2vh;
   border: none;
-  background: radial-gradient(#167c33, #097108);
+  background: radial-gradient(#7c1616, #ba0c0c);
   color: white;
   outline: none;
-  border-radius: 1vh;
+  border-radius:1vh 0 0 1vh ;
   cursor: pointer;
 }
 

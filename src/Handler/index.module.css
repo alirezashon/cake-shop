@@ -49,3 +49,11 @@
 	background: radial-gradient(#ff6600, #b97f42);
 	border-radius: 50%;
 }
+
+.bottomImage {
+	left: 0;
+	bottom: 0;
+	z-index: -1;
+	height: 80vh;
+	width: 100vw;
+  }

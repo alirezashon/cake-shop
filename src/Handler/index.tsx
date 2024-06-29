@@ -11,7 +11,7 @@ const Store = dynamic(() => import('../Components/Store'), {
 const Main = dynamic(() => import('../Components/Main'), {
   loading: () => <div className={styles.loadingChat}></div>,
 })
-const BackeCake = dynamic(() => import('../Components/BakeCake'), {
+const Footer = dynamic(() => import('../Components/Footer'), {
   loading: () => <div className={styles.loadingChat}></div>,
 })
 
@@ -30,7 +30,7 @@ const Handler: React.FC<Props> = ({
     <div style={{ display: 'grid' }}>
       <Main />
       <Store data={[categories, initialProducts]} total={initialTotal} />
-      <BackeCake />
+      <Footer />
       <div>
         <ChatUI />
       </div>

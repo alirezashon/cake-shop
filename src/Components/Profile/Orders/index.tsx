@@ -36,7 +36,7 @@ const Orders: React.FC<OrderProducts> = ({ orders, loading }) => {
               style={{
                 background: `${
                   state === index
-                    ? ' radial-gradient(rgb(147, 245, 27), rgb(11, 91, 11))'
+                    ? '#e44343'
                     : 'white'
                 }`,
                 color: `${state === index ? 'white' : 'rgba(0,39,0)'}`,
@@ -50,9 +50,9 @@ const Orders: React.FC<OrderProducts> = ({ orders, loading }) => {
         <div className={styles.orderBox}>
           {loading ? (
             Array.apply(0, Array(7)).map((x, i) => (
-              <div key={i} className={styles.loading}>
-                <div className={styles.loadingRect}></div>
-                <div className={styles.loadingSquare}></div>
+              <div key={i} className={'loading'}>
+                <div className={'loadingRect'}></div>
+                <div className={'loadingSquare'}></div>
               </div>
             ))
           ) : orders && orders?.length > 0 ? (

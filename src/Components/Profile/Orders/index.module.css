@@ -1,77 +1,36 @@
-/** @format */
-@keyframes loading {
-  0% {
-    background: linear-gradient(0deg, rgb(218, 226, 202), rgb(253, 255, 252));
-  }
-
-  30% {
-    background: linear-gradient(66deg, rgb(197, 233, 193), rgb(253, 255, 252));
-  }
-
-  60% {
-    background: linear-gradient(96deg, rgb(216, 226, 202), rgb(200, 234, 174));
-  }
-
-  100% {
-    background: linear-gradient(236deg, rgb(221, 240, 202), rgb(236, 250, 217));
-  }
-}
-
-.loading {
-  background: radial-gradient(rgb(235, 247, 213), rgb(200, 216, 171));
-  width: 100%;
-  height: 20vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.loadingRect {
-  width: 22%;
-}
-
-.loadingRect,
-.loadingSquare {
-  height: 80%;
-  border-radius: 1vh;
-  animation: loading 0.7s infinite alternate-reverse;
-}
-
-.loadingSquare {
-  width: 70%;
-}
 .container {
   width: 100%;
 }
 .toolBox {
-  background: linear-gradient(22deg, rgb(135, 239, 70), rgba(19, 83, 15, 0.9));
+  background: linear-gradient(22deg, rgb(255, 173, 173), rgba(255, 152, 152, 0.9));
   height: fit-content;
   padding: 1vh;
   text-align: center;
 }
 .toolBox h4 {
-  background-color: rgb(233, 237, 156);
-  border: dashed 0.2vh rgba(30, 116, 3, 0.9);
-  border-radius: 1vh;
+  background-color: rgb(255, 255, 255);
+  color: #9e0b0b;
+  border: dashed 0.2vh rgba(190, 10, 10, 0.9);
+  border-radius: .7vh;
 }
 .toolBox div {
   display: inline-block;
   margin: 1vh 1vh;
-  background: rgb(247, 249, 227);
+  background: rgb(249, 227, 227);
   padding: 0.3vh 1vh;
   border-radius: 1vh;
-  border-left: 0.4vh solid rgb(66, 159, 20);
+  border-left: 0.4vh solid rgb(253, 124, 19);
   cursor: pointer;
 }
 
 .orderBox {
   padding: 1vh;
-  border: 0.4vh double rgba(147, 218, 40, 0.9);
+  border: 0.4vh double rgba(218, 40, 40, 0.9);
 }
 .order {
   margin: 1vh 0;
   border-radius: 0.5vh;
-  border: 0.4vh rgba(66, 132, 12, 0.9) ridge;
+  border: 0.4vh rgba(132, 12, 12, 0.9) ridge;
   display: grid;
   gap: 1vh;
   grid-template-columns: repeat(auto-fit, minmax(29%, 0fr));
@@ -84,9 +43,9 @@
   display: flex;
   justify-content: space-around;
   border-radius: 0.5vh;
-  border: 0.5vh double rgb(75, 244, 103);
-  color: rgb(4, 41, 17);
-  background: linear-gradient(2deg, rgb(145, 217, 62), rgba(196, 219, 67, 0.9));
+  border: 0.5vh double rgb(244, 75, 75);
+  color: rgb(80, 9, 9);
+  background: linear-gradient(2deg, rgb(233, 101, 101), rgba(240, 37, 37, 0.9));
   height: fit-content;
 }
 .orderDetail:hover,
@@ -94,7 +53,7 @@
   transform: scale(1.05);
   cursor: pointer;
   color: #ffffff;
-  background: radial-gradient(rgb(147, 245, 27), rgb(0, 48, 0));
+  background: radial-gradient(rgb(245, 27, 27), rgb(255, 77, 77));
 }
 
 .orderDetailRow {
@@ -108,16 +67,16 @@
   align-items: center;
 }
 .gotorder p {
-  background: linear-gradient(2deg, rgb(145, 217, 62), rgba(196, 219, 67, 0.9));
-  color: #0f4013;
-  border: 0.3vh ridge rgba(147, 218, 40, 0.9);
+  background: linear-gradient(2deg, rgb(243, 99, 99), rgba(242, 48, 48, 0.9));
+  color: #ffffff;
+  border: 0.3vh ridge rgba(216, 0, 0, 0.9);
   padding: 1vh 4vh;
   border-radius: 1vh;
 }
 
 .gotorder p:hover {
-  color: #3ea146;
+  color: #e44343;
   cursor: pointer;
-  border: 0.4vh ridge rgba(249, 255, 141, 0.9);
+  border: 0.4vh ridge rgba(255, 141, 141, 0.9);
   transform: scale(1.1) rotate(-11deg);
 }

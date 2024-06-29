@@ -42,6 +42,7 @@ const ChatUI = () => {
   }, [])
 
   const send = () => {
+    
     if (socket) {
       socket.emit('sendMessage', {
         authType: '&M%e$A#g$e#I%n&Z*',
@@ -124,7 +125,7 @@ const ChatUI = () => {
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && send()}
-              placeholder='...ارسال پیام'
+              placeholder={'ارسال پیام . . .'}
               className={styles.input}
             />
           </div>

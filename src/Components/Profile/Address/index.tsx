@@ -1,6 +1,6 @@
 import { BiSolidMessageSquareEdit } from 'react-icons/bi'
 import styles from './index.module.css'
-import { useState, useRef, useEffect, RefObject, FormEvent } from 'react'
+import { useState, useRef, RefObject } from 'react'
 import { Information } from '@/Interfaces'
 import dynamic from 'next/dynamic'
 import {removeAddress} from './handler'

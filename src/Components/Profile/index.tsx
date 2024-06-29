@@ -115,8 +115,8 @@ const Profile = () => {
               height={111}
             />
             <div className={styles.profiletail}>
-              {data &&
-                Object.entries(data[1]?.info).map(
+              {data && data[1] &&
+                Object?.entries(data[1]?.info).map(
                   (sub: [string, string], index) => (
                     <div
                       className={styles.detailRow}

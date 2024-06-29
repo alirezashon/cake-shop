@@ -11,7 +11,6 @@ import { useBasket } from '@/Context/Basket'
 import { FaBasketShopping } from 'react-icons/fa6'
 import { searchEngine } from './content'
 import { GiCrossMark } from 'react-icons/gi'
-import { goToBuy } from './handler'
 import { Toast } from 'primereact/toast'
 import { BiSearch } from 'react-icons/bi'
 import { GetFave, AddFave, RemoveFave } from './Favorites'
@@ -33,51 +32,46 @@ const Store: React.FC<Props> = ({ data, total }) => {
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
   const [isMobile, setIsMobile] = useState(true)
   const [favorites, setFavorites] = useState<string[]>([])
-  const [page, setPage] = useState(2)
 
   const toast = useRef<Toast>(null)
   const totalPages = Math.ceil(total / 15)
 
-  const fetchMoreProducts = async (page: number) => {
+  const fetchAllProducts = async () => {
     try {
-      const res = await fetch('/api/GET/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          authType: 'G&E!T*P^R$O#D$U^C@T*S',
-          page,
-          limit: 15,
-        }),
-      })
+      const allProducts = []
+      for (let i = 1; i <= totalPages; i++) {
+        const res = await fetch('/api/GET/products', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            authType: 'G&E!T*P^R$O#D$U^C@T*S',
+            page: i,
+            limit: 15,
+          }),
+        })
 
-      if (!res.ok) {
-        throw new Error('Failed to fetch more products')
-      }
+        if (!res.ok) {
+          throw new Error('Failed to fetch more products')
+        }
 
-      const result = await res.json()
-      if (result.success) {
-        setSortedata((prevProducts) => [...prevProducts, ...result.products])
-        if (result.products.length < 15) {
-          setPage(0) // All products are fetched, stop pagination
+        const result = await res.json()
+        if (result.success) {
+          allProducts.push(...result.products)
         }
       }
+      setSortedata(allProducts)
     } catch (error) {
-      console.error('Error fetching more products:', error)
+      console.error('Error fetching all products:', error)
     }
   }
 
   useEffect(() => {
-    const fetchRemainingProducts = async () => {
-      // total < sortedata.length && 
-      for (let i = 2; i <= totalPages; i++) {
-        await fetchMoreProducts(i)
-        await new Promise((resolve) => setTimeout(resolve, 100)) // Delay between requests
-      }
+    if (sortedata.length !== total) {
+      fetchAllProducts()
     }
-    fetchRemainingProducts()
-  }, [totalPages])
+  }, [total])
 
   const scrollLeft = () => {
     if (refs.categoryBoxRef.current) {
@@ -149,7 +143,6 @@ const Store: React.FC<Props> = ({ data, total }) => {
   }
   return (
     <>
-      {sortedata.length}
       <Toast />
       <div className={styles.container}>
         {!isMobile && (
@@ -208,7 +201,10 @@ const Store: React.FC<Props> = ({ data, total }) => {
                 </div>
               ))}
             </div>
-            <button className={styles.buy} onClick={() => goToBuy(toast)}>
+            <button
+              className={styles.buy}
+              onClick={() => (location.href = '/newReq/pay')}
+            >
               تکمیل خرید
             </button>
           </div>
@@ -377,7 +373,8 @@ const Store: React.FC<Props> = ({ data, total }) => {
               <div className={styles.productself}>
                 <GiCrossMark
                   onClick={() => setShowProducto(null)}
-                  className={styles.cross}
+                  size={'4vh'}
+                  className={'cross'}
                 />
                 <p className={styles.producTitlef}>{showProducto?.title}</p>
                 <Image
@@ -388,7 +385,7 @@ const Store: React.FC<Props> = ({ data, total }) => {
                   className={styles.productimagelf}
                 />
                 <p className={styles.productprice}>
-                  {showProducto?.price + 'تومان'}
+                  قیمت {showProducto?.price + ' تومان '}
                   <div className={styles.pricactionself}>
                     {showProducto && basket[1]?.includes(showProducto._id) ? (
                       PriceAction(

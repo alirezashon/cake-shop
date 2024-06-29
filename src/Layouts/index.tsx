@@ -34,7 +34,7 @@ const Layout = ({ children }: any) => {
         <title> کیک خونه </title>
         <meta name='description' content='top shop store' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='images/icon.png' />
+        <link rel='icon' href='../../public/images/icon.png' />
       </Head>
       <BasketProvider>
         <div>

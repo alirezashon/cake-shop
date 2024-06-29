@@ -35,7 +35,7 @@ const Payment: React.FC = () => {
     }
   }
   useEffect(() => {
-    !addresses && getAddress(setAddresses, setLoading)
+    !addresses && getAddress(setAddresses, setLoading).then(()=>!addresses && setAddingAddress(true))
   }, [])
   return (
     <>

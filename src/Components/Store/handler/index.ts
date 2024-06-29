@@ -65,36 +65,5 @@ export const removeFavorite = async (
   localStorage.setItem(')f*o&7(R^t%i$o^m#', JSON.stringify(removed))
 }
 
-export const goToBuy = async (toast: RefObject<Toast>) => {
-  try {
-    toast.current?.show({
-      severity: 'info',
-      summary: 'بررسی اطلاعات',
-      detail: 'در حال برقراری ارتباط با سرور',
-      life: 3000,
-    })
-    const response = await fetch('/api/Auth/Register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        authType: '*v(a&l^8$b#y@t%o*l(x*k)p',
-      }),
-    })
-    const data = await response.json()
-    data.Location && Router.replace(`${data.Location}`)
-    data.information &&
-      localStorage.setItem(
-        '$i%F^n&o^r%m$e&y*t%n#',
-        JSON.stringify(data.information)
-      )
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-
-
 
 

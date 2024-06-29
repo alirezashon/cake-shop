@@ -11,7 +11,7 @@
 }
 
 .navBar {
-  background:repeating-radial-gradient(rgb(255, 241, 241),rgb(255, 239, 239),rgb(245, 226, 226));
+  background-color: #ffffff;
   color: rgb(195, 11, 23);
   position: fixed;
   top: 0;
@@ -76,8 +76,8 @@
   animation: openItems 1s;
   background-color: #fdf3f3;
   box-shadow: 0px 0px 2px 0px rgb(246, 200, 200);
-  border-bottom: 1vh ridge rgb(255, 179, 179);
-  border-right: 1vh ridge rgb(238, 155, 155);
+  border-bottom: .7vh ridge rgb(255, 179, 179);
+  border-right: .7vh ridge rgb(238, 155, 155);
   width: 100px;
   border-radius: 0 0 11vh 1vh;
   position: absolute;
@@ -88,14 +88,13 @@
 .productBox {
   width: 90%;
   margin-right: 8%;
-  border-bottom: 0.1vh dashed rgb(241, 10, 10);
-  border-left: 0.7vh ridge rgb(255, 146, 146);
-  border-radius: 0 0 11vh 1vh;
-  background-color: rgb(254, 183, 183);
+  border-bottom: 0.1vh solid rgb(255, 222, 222);
+  border-radius: 1vh;
+  background-color: rgb(255, 255, 255);
 }
 .productBox:hover {
   transform: scale(1.01);
-  background-color: rgb(255, 251, 200);
+  background-color: rgb(255, 244, 244);
 }
 .products {
   border-radius: 0 0 11vh 1vh;
