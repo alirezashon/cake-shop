@@ -35,7 +35,6 @@
 @keyframes rotateBall {
   50% {
     transform: rotate(360deg);
-    border: 0.2vh rgb(195, 252, 38);
   }
 
   100% {
@@ -79,8 +78,8 @@
 
 .basketBall {
   font-size: 6vh;
-  background-color: rgb(53, 163, 26);
-  border: .3vh dashed rgb(186, 222, 54);
+  background-color: rgb(246, 108, 108);
+  border: 0.3vh rgb(239, 255, 234) dashed;
   width: fit-content;
   margin-top: 1vh;
   text-align: center;
@@ -117,8 +116,8 @@
   width: 38vw;
   border-radius: 0 4vh 0 0;
   height: 100vh;
-  background-color: rgba(208, 239, 82, 0.9);
-  border-right: ridge 2.2vh rgba(129, 185, 17, 0.843);
+  background-color: rgba(239, 82, 82, 0.9);
+  border-right: ridge 2.2vh rgba(222, 72, 72, 0.926);
   position: fixed;
   z-index: 33;
 }
@@ -131,16 +130,16 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  background: radial-gradient(rgb(186, 222, 54), rgb(119, 178, 9));
+  background: radial-gradient(rgb(222, 54, 54), rgb(249, 117, 117));
 }
 
 .calculateBox {
   display: flex;
   justify-content: space-around;
   min-width: 60%;
-  background: linear-gradient(22deg, rgba(18, 109, 0, 0.9), rgb(169, 212, 24));
+  background: linear-gradient(22deg, rgba(109, 0, 0, 0.9), rgb(212, 24, 24));
   border-radius: 0 4vh 4vh 0;
-  border-right: 0.2vh ridge rgb(255, 251, 236);
+  border-right: 1vh ridge rgb(252, 199, 199);
   color: #ffffff;
 }
 
@@ -157,13 +156,12 @@
 }
 
 .confirm {
-  background: radial-gradient(rgb(10, 148, 10), rgb(105, 151, 19));
+  background-color: rgb(163, 26, 26);
   color: #ffffff;
-  border: 0.4vh rgb(30, 198, 75) ridge;
+  border: 0.4vh solid rgb(224, 72, 72);
   bottom: 0.5vh;
   position: absolute;
-  width: 90%;
-  left: 5%;
+  width: 97%;
   border-radius: 0.5vh;
   height: 4vh;
   text-align: center;
@@ -175,18 +173,19 @@
   border: 0.2vh ridge rgb(250, 222, 255);
 }
 
-
-
 @media (max-width: 787px) {
   .basketDrawer {
     width: 100%;
   }
   .basketBall {
     font-size: 5vh;
-   margin: 0;
+    margin: 0;
   }
   .basketHeader {
+    flex-direction: row-reverse;
     width: 96%;
   }
-  .productCount{margin-top: -3.7vh;}
+  .productCount {
+    margin-top: -3.7vh;
+  }
 }

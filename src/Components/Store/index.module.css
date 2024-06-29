@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-around;
   font-size: 2vh;
-  color: #0f641a;
+  color: #af0b0b;
 }
 .basketSide {
   direction: rtl;
@@ -11,7 +11,7 @@
   height: 67vh;
   overflow-y: auto;
   background-color: white;
-  border: 0.1vh solid rgb(208, 237, 145);
+  border: 0.1vh solid rgb(237, 147, 145);
   border-radius: 1vh 1vh 0 0;
 }
 .basketHead {
@@ -26,7 +26,7 @@
   font-size: 3vh;
 }
 .basketDetail {
-  border-block: 0.1vh #e9fe81 solid;
+  border-block: 0.1vh #fe8181 solid;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -34,7 +34,7 @@
 .basketController {
   display: flex;
   justify-content: space-between;
-  border-bottom: 0.1vh solid rgb(164, 255, 60);
+  border-bottom: 0.1vh solid rgb(255, 60, 60);
   align-items: center;
   padding: 0.4vh 3vh;
   height: 33%;
@@ -55,7 +55,7 @@
   border-radius: 0.4vh;
 }
 .inceriment {
-  color: rgb(85, 128, 24);
+  color: rgb(24, 93, 128);
   padding: 0.3vh;
 }
 .deceriment {
@@ -71,10 +71,10 @@
   padding: 1vh;
   width: 100%;
   margin-top: 5vh;
-  background-color: rgb(53, 163, 26);
+  background-color: rgb(163, 26, 26);
   left: 2%;
   color: #ffffff;
-  border: 0.4vh solid rgb(65, 208, 46);
+  border: 0.4vh solid rgb(224, 72, 72);
   border-radius: 0 0 1vh 1vh;
 }
 .buy:hover {
@@ -91,7 +91,7 @@
   height: 22vh;
   padding: 0.5vh 4vh;
   overflow-x: hidden;
-  border: 0.1vh solid rgb(214, 240, 183);
+  border: 0.1vh solid rgb(240, 183, 183);
 }
 
 .category {
@@ -99,16 +99,20 @@
   width: fit-content;
   padding: 0 0.7vh;
   text-wrap: nowrap;
-  background-color: rgb(190, 238, 135);
+  background-color: rgb(249, 200, 197);
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
+}
+.category:hover {
+  transform: scale(0.9);
 }
 .categorimage {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(251, 142, 64);
+  background: rgb(255, 127, 127);
   margin: 3vh;
   width: fit-content;
   height: 6vh;
@@ -118,12 +122,13 @@
 .rightDirection {
   cursor: pointer;
   position: absolute;
-  background-color: aliceblue;
-  color: rgb(255, 123, 79);
+  background-color: rgb(255, 240, 240);
+  color: rgb(255, 79, 79);
   font-size: 4vh;
   border-radius: 7vh;
-  top: 20vh;
   right: 3.3vh;
+  margin-right:1%;
+  margin-top: 9vh;
 }
 .leftDirection:hover {
   transform: scale(1.2) rotate(170deg);
@@ -150,7 +155,7 @@
   align-items: center;
   justify-content: space-between;
   direction: rtl;
-  border-inline: #e0f7b8 0.2vh ridge;
+  border-inline: #f7b8b8 0.2vh ridge;
   padding: 1vh;
 }
 .searchBar {
@@ -163,7 +168,7 @@
 }
 
 .searchInput {
-  border: 1px solid #e4f4a2;
+  border: 1px solid #f4cccc;
   outline: none;
   border-radius: 1vh;
   padding: 0.5rem 1rem;
@@ -171,18 +176,18 @@
   box-sizing: border-box;
 }
 .searchInput::placeholder {
-  color: #afe32c;
+  color: #e32c2c;
 }
 
 .searchIcon {
   font-size: 4vh;
-  color: #e5edce;
+  color: #edcece;
   position: absolute;
   margin-left: 7%;
 }
 .searchEngine {
   display: flex;
-  border: solid 0.3vh #addf81;
+  border: solid 0.2vh #df8181;
   width: 30%;
   justify-content: space-around;
 }
@@ -195,13 +200,17 @@
 }
 
 .searchIndex {
-  background: linear-gradient(#d7ffaa, #cff19a);
+  border: solid 0.1vh #df8181;
+  background: linear-gradient(#ffaaaa, #ffe4e4);
   padding: 0.5vh 1vh;
   border-radius: 1vh;
   cursor: pointer;
 }
 
 .optionsContainer {
+  border-block: solid 0.2vh #df8181;
+  background-color: #ffffff;
+  padding: 1vh 0;
   position: absolute;
   top: 100%;
   display: flex;
@@ -215,8 +224,8 @@
 .enginoption {
   color: #ffffff;
   text-wrap: nowrap;
-  border: 0.3vh ridge rgb(71, 192, 99);
-  background-color: rgb(92, 196, 132);
+  border: 0.3vh ridge rgb(192, 71, 71);
+  background-color: rgb(203, 71, 71);
   padding: 0.5vh 1vh;
   border-radius: 1vh;
   margin-top: 0.7vh;
@@ -250,7 +259,7 @@
   transform: translate(0, -35%);
   background-color: #ffffff;
   border: 3vh ridge;
-  border-color: #eded66 #80d890 #e6fe6f #6bea6d;
+  border-color: #ed6666 #d8a380 #fe6f6f #ea7c6b;
   border-radius: 3vh;
   z-index: 12;
 }
@@ -261,7 +270,7 @@
 .pricactionself {
   width: 100%;
   display: flex;
-  background-color: #6bea6d;
+  background-color: #ea6b6b;
   justify-content: space-around;
 }
 .productimagelf {
@@ -279,17 +288,17 @@
   width: 100%;
   text-align: center;
   gap: 1vh;
-  border: 0.1vh solid #b9ff91;
+  border: 0.1vh solid #ff9191;
 }
 .product {
-  border: 0.1vh solid #a9ea48;
+  border: 0.1vh solid #ea4848;
   position: relative;
   display: flex;
   flex-direction: column;
-  height:48vh;
+  height: 48vh;
   justify-content: space-between;
   direction: rtl;
-  border-radius:0 0 2vh 2vh;
+  border-radius: 0 0 2vh 2vh;
 }
 
 .productimage {
@@ -301,8 +310,9 @@
 
 .productDescription {
   position: absolute;
-  border: 0.2vh ridge #afe32c;
-  background-color: #cbe8b2;
+  border: 0.2vh ridge #e2938f;
+  background-color: #e8b7b2;
+  padding: 0.5vh;
   top: 33%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -322,7 +332,7 @@
 
 .producTitle {
   width: 100%;
-  background-color: #ade46e;
+  background-color: #dfbebb;
   justify-content: flex-start;
 }
 
@@ -331,8 +341,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-radius: 0 0 2vh 2vh;
-  border: 0.1vh solid #8fcf27;
+  border-top: 0.1vh solid #e47c75;
 }
 .heartIcon {
   font-size: 4vh;
@@ -360,6 +369,9 @@
   }
   .menuSide {
     width: 100%;
+  }
+  .leftDirection {
+    left: 1%;
   }
   .categoryBox {
     width: 100%;

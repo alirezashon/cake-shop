@@ -1,36 +1,39 @@
 // components/Main.tsx
 import React from 'react'
 import styles from './index.module.css'
+import Image from 'next/image'
 
 const Main: React.FC = () => {
   return (
     <div className={styles.mainContainer}>
-      <header className={styles.header}>
-        <h1>فروشگاه کیک آنلاین</h1>
-        <p>بهترین کیک‌ها برای شما</p>
-      </header>
+      <Image
+        className={styles.topImage}
+        src={'/images/top.png'}
+        width={1515}
+        height={1212}
+        alt=''
+      />
+      {/* <Image className={styles.bottImage} src={'/images/bottom.jpg'} width={1515}height={1212} alt=''/> */}
 
       <section className={styles.productsSection}>
-        <h2>محصولات ما</h2>
+        <h2>سفارش انواع کیک و شیرینی</h2>
         <div className={styles.products}>
           <div className={styles.product}>
-            <img src='/images/cako.png' alt='Cake 1' />
-            <h3>کیک شکلاتی</h3>
-            <p>خوشمزه‌ترین کیک شکلاتی که تا به حال خورده‌اید!</p>
+            <Image src='/images/icon.png' width={1515} height={1212} alt='' className={styles.mainCakeImage} />
+            <h3>کیک سفارشی</h3>
+            <p>چاپ تصویر همراه با انتخاب اشکال گوناگون کیک</p>
           </div>
           <div className={styles.product}>
-            <img src='/images/cako.png' alt='Cake 2' />
-            <h3>کیک وانیلی</h3>
-            <p>لطیف‌ترین کیک وانیلی برای جشن‌های شما!</p>
+            <Image src='/images/icon.png' width={1515} height={1212} alt='' className={styles.mainCakeImage} />
+            <h3>کافی شاپی</h3>
+            <p>سفارش انبوه کیک های بسته بندی با بهترین کیفیت</p>
           </div>
-          {/* Add more products as needed */}
+          <div className={styles.product}>
+            <Image src='/images/icon.png' width={1515} height={1212} alt='' className={styles.mainCakeImage} />
+            <h3>شیرینی</h3>
+            <p>فروش انواع شیرینی با بهترین قیمت و کیفیت </p>
+          </div>
         </div>
-      </section>
-
-      <section className={styles.basketSection}>
-        <h2>سبد خرید</h2>
-        <p>سبد خرید شما خالی است.</p>
-        {/* Add basket functionality here */}
       </section>
     </div>
   )

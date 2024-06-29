@@ -1,9 +1,9 @@
 /** @format */
 
-import { useState, useEffect } from "react"
-import Mobile from "./Mobile"
-import DesktopNav from "./PC"
-import { Product } from "@/Interfaces"
+import { useState, useEffect } from 'react'
+import Mobile from './Mobile'
+import DesktopNav from './PC'
+import { Product } from '@/Interfaces'
 
 interface NavProps {
   basketData: Product[]
@@ -21,15 +21,15 @@ const Navbar: React.FC<NavProps> = ({ basketData }) => {
     }
 
     handleResize()
-    window.addEventListener("resize", handleResize)
+    window.addEventListener('resize', handleResize)
 
     return () => {
-      window.removeEventListener("resize", handleResize)
+      window.removeEventListener('resize', handleResize)
     }
   }, [])
 
   return (
-    <nav style={{ marginBottom: `${isMobile ? "7vh" : "8vh"}`, zIndex: 44 }}>
+    <nav style={{ marginBottom: `${isMobile ? '5  vh' : '6vh'}`, zIndex: 44 }}>
       {isMobile ? (
         <Mobile
           basketData={basketData}

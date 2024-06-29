@@ -39,7 +39,7 @@ const Layout = ({ children }: any) => {
       <BasketProvider>
         <div>
           <Navigation basketData={basketData} />
-          <main style={{ marginTop: "9vh" }}>{children}</main>
+          <main >{children}</main>
         </div>
       </BasketProvider>
     </>

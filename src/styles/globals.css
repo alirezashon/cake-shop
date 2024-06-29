@@ -90,18 +90,6 @@ a {
 .loadingSpin p {
   position: absolute;
 }
-.loadingSpinner {
-  z-index: 55;
-  content: 'ali';
-  animation: 2s rotateBall infinite alternate-reverse;
-  background: radial-gradient(
-    rgba(243, 145, 18, 0.689),
-    rgba(249, 109, 2, 0.735)
-  );
-  border: dashed 0.4vh #ffffff;
-  border-radius: 44vh;
-  padding: 12vh;
-}
 .loadingSquare {
   width: 70%;
 }
@@ -121,26 +109,26 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 1.2vh;
   height: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px rgb(192, 192, 192);
-  border-radius: 9vh;
+  box-shadow: inset 0 0 5px rgb(255, 32, 32);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #fbe32b;
-  border: ridge 0.7vh #fc7c04;
+  background: #fff2f2;
+  border: ridge 0.1vh #fb7676;
   box-shadow: 0px 0px 1px 1px #f88d14 inset, 1px 1px 2px 1px #fbfaf9;
-  border-radius: 9px;
+  border-radius: 7px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
   background: rgb(248, 166, 14);
-  box-shadow: 0px 0px 1px 1px #0d0705, 1px 1px 1px 1px #fbf9f9 inset;
+  box-shadow: 0px 0px 1px 1px #f7c8b9, 1px 1px 1px 1px #fbf9f9 inset;
 }

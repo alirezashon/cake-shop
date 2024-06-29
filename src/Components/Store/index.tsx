@@ -70,15 +70,14 @@ const Store: React.FC<Props> = ({ data, total }) => {
 
   useEffect(() => {
     const fetchRemainingProducts = async () => {
+      // total < sortedata.length && 
       for (let i = 2; i <= totalPages; i++) {
         await fetchMoreProducts(i)
         await new Promise((resolve) => setTimeout(resolve, 100)) // Delay between requests
       }
     }
-
     fetchRemainingProducts()
   }, [totalPages])
-
 
   const scrollLeft = () => {
     if (refs.categoryBoxRef.current) {

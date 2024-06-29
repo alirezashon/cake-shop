@@ -27,7 +27,7 @@ const Handler: React.FC<Props> = ({
   categories,
 }) => {
   return (
-    <div style={{ display: 'grid', gap: '1vh' }}>
+    <div style={{ display: 'grid' }}>
       <Main />
       <Store data={[categories, initialProducts]} total={initialTotal} />
       <BackeCake />

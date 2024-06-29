@@ -1,11 +1,10 @@
 /** @format */
 .navBar {
   width: 100%;
-  background: linear-gradient(
-    25deg,
-    rgb(245, 253, 223),
-    rgb(238, 249, 196),
-    rgb(243, 255, 225)
+  background: repeating-radial-gradient(
+    rgb(255, 241, 241),
+    rgb(255, 239, 239),
+    rgb(245, 226, 226)
   );
   display: flex;
   position: fixed;
@@ -25,7 +24,7 @@
 }
 
 .searchInput {
-  border: 1px solid #e4f4a2;
+  border: 1px solid #f2c7c7;
   outline: none;
   border-radius: 1vh;
   padding: 0.5rem 1rem;
@@ -33,22 +32,24 @@
   box-sizing: border-box;
 }
 .searchInput::placeholder {
-  color: #afe32c;
+  color: #e79090;
 }
 
 .searchIcon {
   font-size: 4vh;
-  color: #e5edce;
+  color: #f9cdcd;
   position: absolute;
   margin-left: 7%;
 }
 .drawer {
   width: 40vw;
   height: 100vh;
-  background: radial-gradient(
-    rgba(162, 217, 95, 0.809),
-    rgba(147, 183, 75, 0.5)
+  background: repeating-radial-gradient(
+    rgb(255, 241, 241),
+    rgb(255, 239, 239),
+    rgb(245, 226, 226)
   );
+  color: #e32c2c;
   direction: rtl;
   overflow-y: auto;
   overflow-x: hidden;
@@ -63,11 +64,12 @@
 }
 
 .itemBox {
-  background: radial-gradient(rgba(204, 227, 141, 0.5), rgba(86, 183, 75, 0.5));
+  background: radial-gradient(rgb(255, 217, 217), rgb(219, 148, 148));
   cursor: pointer;
   margin: 1vh;
   padding: 1vh;
-  border: 0.5vh ridge rgba(161, 227, 141, 0.5);
+  border: 0.5vh ridge rgb(245, 255, 243);
+  border-radius: 1vh;
 }
 
 .itemBox:hover {
@@ -75,10 +77,10 @@
 }
 
 .item {
-  background: linear-gradient(
-    244deg,
-    rgba(244, 251, 222, 0.5),
-    rgba(68, 116, 32, 0.926)
+  background: repeating-radial-gradient(
+    rgb(255, 241, 241),
+    rgb(255, 239, 239),
+    rgb(245, 226, 226)
   );
   border: 0.2vh ridge rgba(236, 251, 255, 0.912);
   border-radius: 0.5vh;
@@ -88,35 +90,24 @@
 .item:hover {
   transform: translate(1vh);
 }
-
-.category {
-  background: linear-gradient(
-    44deg,
-    rgba(89, 171, 38, 0.5),
-    rgba(239, 254, 216, 0.5)
-  );
-  margin: 1vh;
-  padding: 1vh;
-  border: 0.3vh ridge rgb(255, 255, 255);
-  border-radius: 0.4vh;
-}
-
 .options,
 .subOptions {
-  background: radial-gradient(
-    rgba(234, 255, 191, 0.815),
-    rgba(151, 183, 75, 0.5)
+  border-bottom: .1vh dashed rgb(233, 52, 52);
+  background: repeating-radial-gradient(
+    rgb(255, 241, 241),
+    rgb(255, 239, 239),
+    rgb(245, 226, 226)
   );
+  border-radius: 2vh;
   padding: 1vh;
   margin: 1vh;
 }
 
-.subOptions:hover,
-.category:hover,
+
 .options:hover {
   transform: scale(1.04);
   font-weight: bold;
-  color: #f8feff;
+  color: #ff97d2;
 }
 
 .image {
@@ -125,8 +116,8 @@
 }
 
 .navIcon {
-  background: rgb(252, 255, 243);
-  color: rgb(53, 163, 26);
+  background: rgb(250, 220, 220);
+  color: rgb(233, 52, 52);
   width: 5vh;
   height: 5vh;
   font-size: 3vh;
@@ -146,10 +137,10 @@
 .profile {
   margin: 0 2vh;
   font-size: 5vh;
-  color: #e5f3a3;
-  background-color: rgb(53, 163, 26);
-  border-radius: 23vh;
+  color: #fff0f0;
+  background-color: rgb(246, 108, 108);
   border: 0.3vh rgb(239, 255, 234) dashed;
+  border-radius: 23vh;
   cursor: pointer;
 }
 

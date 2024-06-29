@@ -1,9 +1,3 @@
-/**
- * components/ChatUI.module.css
- *
- * @format
- */
-
 .chatContainer {
   position: fixed;
   bottom: 5vh;
@@ -13,7 +7,7 @@
 .chatIcon {
   padding: 1.5vh;
   border: 0.3vh dashed rgb(238, 245, 110);
-  background: radial-gradient(#ff6600, #d88225);
+  background: radial-gradient(#d82525, #ff7676);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -78,8 +72,8 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-.chatBG{
-  position:static;
+.chatBG {
+  position: static;
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -116,7 +110,7 @@
   padding: 1vh;
   border: 1px solid #cccccc;
   border-radius: 5px;
-  outline: none;	
+  outline: none;
 }
 
 .sendButton {
@@ -132,6 +126,6 @@
 @media (max-width: 999px) {
   .chatBox {
     width: 90vw;
-	height: 87vh;
+    height: 87vh;
   }
 }
