@@ -3,19 +3,18 @@ import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs'
 import { MdAddCircle, MdDeleteForever } from 'react-icons/md'
 import { IoIosArrowForward } from 'react-icons/io'
 import { useRef, useState, RefObject, useEffect } from 'react'
-import { Product, Category } from '@/Interfaces'
+import { ProductInterface, Category } from '@/Interfaces'
 import Image from 'next/image'
 import { FaMinus } from 'react-icons/fa'
 import { Add, Get, Remove } from '../Basket/Actions'
 import { useBasket } from '@/Context/Basket'
 import { FaBasketShopping } from 'react-icons/fa6'
 import { searchEngine } from './content'
-import { GiCrossMark } from 'react-icons/gi'
 import { Toast } from 'primereact/toast'
 import { BiSearch } from 'react-icons/bi'
 import { GetFave, AddFave, RemoveFave } from './Favorites'
 interface Props {
-  data: [Category[], Product[]]
+  data: [Category[], ProductInterface[]]
   total: number
 }
 const Store: React.FC<Props> = ({ data, total }) => {
@@ -26,44 +25,33 @@ const Store: React.FC<Props> = ({ data, total }) => {
     categoryBoxRef: useRef<HTMLDivElement>(null),
   }
   const { basket, setBasket } = useBasket()
-  const [sortedata, setSortedata] = useState<Product[]>(data[1])
-  const [showProducto, setShowProducto] = useState<Product | null>(null)
+  const [sortedata, setSortedata] = useState<ProductInterface[]>(data[1])
+  const [showProducto, setShowProducto] = useState<ProductInterface | null>(null)
   const [productover, setProductover] = useState<number | null>(null)
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
   const [isMobile, setIsMobile] = useState(true)
   const [favorites, setFavorites] = useState<string[]>([])
 
   const toast = useRef<Toast>(null)
-  const totalPages = Math.ceil(total / 15)
+  const totalPages = Math.ceil(total / 25)
 
   const fetchAllProducts = async () => {
-    try {
-      const allProducts = []
-      for (let i = 1; i <= totalPages; i++) {
-        const res = await fetch('/api/GET/products', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            authType: 'G&E!T*P^R$O#D$U^C@T*S',
-            page: i,
-            limit: 15,
-          }),
-        })
-
-        if (!res.ok) {
-          throw new Error('Failed to fetch more products')
-        }
-
-        const result = await res.json()
-        if (result.success) {
-          allProducts.push(...result.products)
-        }
+    for (let i = 2; i <= totalPages; i++) {
+      const res = await fetch('/api/GET/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          authType: 'G&E!T*P^R$O#D$U^C@T*S',
+          page: i,
+          limit: 25,
+        }),
+      })
+      const result = await res.json()
+      if (result.success) {
+        setSortedata((prv) => [...prv, ...result.products])
       }
-      setSortedata(allProducts)
-    } catch (error) {
-      console.error('Error fetching all products:', error)
     }
   }
 
@@ -219,6 +207,7 @@ const Store: React.FC<Props> = ({ data, total }) => {
               data[0].map((cat, catindex) => (
                 <div key={catindex} className={styles.category}>
                   <Image
+                    loading='lazy'
                     src={`data:image/jpeg;base64,${cat.src}`}
                     alt={cat.name}
                     width={200}
@@ -313,6 +302,7 @@ const Store: React.FC<Props> = ({ data, total }) => {
                 onMouseLeave={() => setProductover(null)}
               >
                 <Image
+                  loading='lazy'
                   src={`data:image/jpeg;base64,${product.src}`}
                   onClick={() => setShowProducto(product)}
                   alt={product.title}
@@ -369,50 +359,14 @@ const Store: React.FC<Props> = ({ data, total }) => {
                 </div>
               </div>
             ))}
-            {showProducto && (
-              <div className={styles.productself}>
-                <GiCrossMark
-                  onClick={() => setShowProducto(null)}
-                  size={'4vh'}
-                  className={'cross'}
-                />
-                <p className={styles.producTitlef}>{showProducto?.title}</p>
-                <Image
-                  src={`data:image/jpeg;base64,${showProducto?.src}`}
-                  alt={showProducto?.title}
-                  width={444}
-                  height={444}
-                  className={styles.productimagelf}
-                />
-                <p className={styles.productprice}>
-                  قیمت {showProducto?.price + ' تومان '}
-                  <div className={styles.pricactionself}>
-                    {showProducto && basket[1]?.includes(showProducto._id) ? (
-                      PriceAction(
-                        `${basket[0].find((d) => {
-                          if (
-                            d.split('*2%2&7(7)5%5!1@2')[2] === showProducto._id
-                          )
-                            return d
-                        })}`,
-                        '5vh'
-                      )
-                    ) : (
-                      <MdAddCircle
-                        className={styles.inceriment}
-                        size={'4vh'}
-                        onClick={() =>
-                          increment(showProducto._id, showProducto.price)
-                        }
-                      />
-                    )}
-                  </div>
-                </p>
-                <p className={styles.productDescriptelf}>
-                  {showProducto?.description}
-                </p>
+            {Array.apply(0, Array(total - sortedata.length)).map((x, i) => (
+              <div className={`${styles.product} ${styles.loadingPlaceholder}`}>
+                <div className={styles.productimage} />
+                <div className={styles.productDescription} />
+                <p className={styles.producTitle} />
+                <div className={styles.priceaction} />
               </div>
-            )}
+            ))}
           </div>
         </div>
       </div>

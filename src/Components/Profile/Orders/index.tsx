@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import styles from './index.module.css'
-import { Product } from '@/Interfaces'
+import { ProductInterface } from '@/Interfaces'
 import Link from 'next/link'
 
 interface OrderProducts {
@@ -13,7 +13,7 @@ interface OrderProducts {
 interface Order {
   ticketID: string
   status: string
-  products: [Product]
+  products: [ProductInterface]
   totalPrice: number
   attachment: string
 }

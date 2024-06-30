@@ -6,7 +6,7 @@ import ProductSchema from '../../../../models/Data/Product'
 import db from '../../../../utils/index.js'
 import ClientSession from '../../../../models/Client/Session'
 import Client from '../../../../models/Client'
-import { Product} from '../../../../Interfaces'
+import { ProductInterface} from '../../../../Interfaces'
 const Shop = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === 'POST') {
@@ -25,7 +25,7 @@ const Shop = async (req: NextApiRequest, res: NextApiResponse) => {
               const productsID = products?.map((product: string) =>
                 product.split('*2%2&7(7)5%5!1@2')
               )
-              const data: Product[] = []
+              const data: ProductInterface[] = []
               await Promise.all(
                 productsID.map(async (id: string) => {
                   const post = await ProductSchema.findOne({ _id: id[2] })
@@ -52,7 +52,7 @@ const Shop = async (req: NextApiRequest, res: NextApiResponse) => {
                 client: session.client,
                 products: data
                   .filter((post) => post !== null)
-                  .map((product: Product) => product._id),
+                  .map((product: ProductInterface) => product._id),
                 totalPrice,
                 attachment,
               }

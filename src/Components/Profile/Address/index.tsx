@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 import {removeAddress} from './handler'
 import { Toast } from 'primereact/toast'
 import { MdDeleteSweep } from 'react-icons/md'
-import Add from './add'
+import Add from '../../Address'
 
 const Map = dynamic(() => import('./map'), {
   ssr: false,

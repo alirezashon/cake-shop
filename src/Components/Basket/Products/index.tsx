@@ -6,12 +6,12 @@ import { FaMinus } from "react-icons/fa"
 import { MdAddCircle } from "react-icons/md"
 import React, { useEffect, useState } from "react"
 import { Add, Get, Remove } from "../Actions"
-import { Product } from "../../../Interfaces"
+import {  ProductInterface } from "../../../Interfaces"
 import { useBasket } from "@/Context/Basket"
 
 interface Props {
   setLoading: boolean
-  basketData: Product[]
+  basketData: ProductInterface[]
 }
 const Products: React.FC<Props> = ({
   setLoading,
@@ -37,9 +37,9 @@ const Products: React.FC<Props> = ({
     <>
       {isloading
         ? Array.apply(0, Array(7)).map((x, i) => (
-            <div key={i} className={styles.loading}>
-              <div className={styles.loadingRect}></div>
-              <div className={styles.loadingSquare}></div>
+            <div key={i} className={'loading'}>
+              <div className={'loadingRect'}></div>
+              <div className={'loadingSquare'}></div>
             </div>
           ))
         : basketData?.map((obj) => (

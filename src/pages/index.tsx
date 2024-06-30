@@ -1,6 +1,6 @@
 import { NextSeo } from 'next-seo'
 import { GetServerSideProps, NextPage } from 'next'
-import { Category, Product } from '../Interfaces'
+import { Category, ProductInterface } from '../Interfaces'
 import dynamic from 'next/dynamic'
 import Layout from '@/Layouts'
 
@@ -10,7 +10,7 @@ const Handler = dynamic(() => import('../Handler'), {
 
 interface Props {
   categories: Category[]
-  initialProducts: Product[]
+  initialProducts: ProductInterface[]
   initialTotal: number
 }
 
@@ -83,7 +83,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
         body: JSON.stringify({
           authType: 'G&E!T*P^R$O#D$U^C@T*S',
           page: 1,
-          limit: 15,
+          limit: 25,
         }),
       }
     )

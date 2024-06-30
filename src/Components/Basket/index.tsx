@@ -5,11 +5,11 @@ import styles from './index.module.css'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { GiCrossMark } from 'react-icons/gi'
 import Products from './Products'
-import { Product } from '@/Interfaces'
+import { ProductInterface } from '@/Interfaces'
 import { useBasket } from '@/Context/Basket'
 
 interface BasketProps {
-  basketData: Product[]
+  basketData: ProductInterface[]
   isBasketOpen: boolean
   setIsBasketOpen: (value: boolean) => void
 }
@@ -44,7 +44,6 @@ const Basket: React.FC<BasketProps> = ({
   }
   return (
     <>
-      {isLoading && <div></div>}
       {isBasketOpen ? (
         <div className={`${styles.basketDrawer}  `} id='openBox'>
           <div className={styles.basketHeader}>

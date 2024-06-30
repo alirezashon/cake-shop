@@ -1,6 +1,6 @@
-import { Product } from '@/Interfaces'
+import { ProductInterface } from '@/Interfaces'
 
-export const generateSEO = (product: Product | null) => {
+export const generateSEO = (product: ProductInterface | null) => {
   if (!product) {
     return {
       title: 'فروشگاه',

@@ -277,6 +277,7 @@
   gap: 1vh;
   border: 0.1vh solid #ff9191;
 }
+
 .product {
   border: 0.1vh solid #ea4848;
   position: relative;
@@ -330,10 +331,12 @@
   align-items: center;
   border-top: 0.1vh solid #e47c75;
 }
+
 .heartIcon {
   font-size: 4vh;
   color: #f9500e;
 }
+
 .controlBox {
   display: flex;
   justify-content: space-around;
@@ -341,6 +344,32 @@
   border-radius: 2vh;
   align-items: center;
 }
+
+.loadingPlaceholder .productimage,
+.loadingPlaceholder .productDescription,
+.loadingPlaceholder .producTitle,
+.loadingPlaceholder .priceaction {
+  background-color: #e0e0e0;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #f0f0f0;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}
+
+.observer {
+  height: 1px;
+  visibility: hidden;
+}
+
 .productprice {
 }
 

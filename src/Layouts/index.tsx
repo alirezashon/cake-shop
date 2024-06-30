@@ -2,11 +2,11 @@ import Navigation from "../Components/Navigation"
 import Head from "next/head"
 import { BasketProvider } from "@/Context/Basket"
 import { useEffect, useState } from "react"
-import { Product } from "@/Interfaces"
+import { ProductInterface } from "@/Interfaces"
 import { Get } from "@/Components/Basket/Actions"
 
 const Layout = ({ children }: any) => {
-  const [basketData, setBasketData] = useState<Product[]>([])
+  const [basketData, setBasketData] = useState<ProductInterface[]>([])
 
   const getData = async () => {
     try {
@@ -36,12 +36,10 @@ const Layout = ({ children }: any) => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='../../public/images/icon.png' />
       </Head>
-      <BasketProvider>
         <div>
           <Navigation basketData={basketData} />
           <main >{children}</main>
         </div>
-      </BasketProvider>
     </>
   )
 }

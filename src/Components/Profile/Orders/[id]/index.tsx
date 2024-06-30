@@ -1,11 +1,11 @@
 /** @format */
 
-import { Product } from '@/Interfaces'
+import { ProductInterface } from '@/Interfaces'
 import { GetServerSideProps, NextPage } from 'next'
 import styles from './index.module.css'
 
 interface OrderProducts {
-	products: Product[]
+	products: ProductInterface[]
 	orders: Order
 }
 interface Order {
@@ -13,7 +13,7 @@ interface Order {
 	ticketID: string
 	status: string
 	client: string
-	products: [Product] | String
+	products: [ProductInterface] | String
 	totalPrice: number
 }
 

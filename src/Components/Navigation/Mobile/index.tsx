@@ -6,7 +6,7 @@ import { RefObject, useEffect, useRef, useState } from "react"
 import { items } from "../items"
 import { FaUserCircle } from "react-icons/fa"
 import Basket from "../../Basket"
-import { Product } from "../../../Interfaces"
+import { ProductInterface } from "../../../Interfaces"
 import { BiSearch } from "react-icons/bi"
 
 interface Items {
@@ -18,7 +18,7 @@ interface subOption {
   products: string[]
 }
 interface NavProps {
-  basketData: Product[]
+  basketData: ProductInterface[]
   isBasketOpen: boolean
   setIsBasketOpen: (value: boolean) => void
 }

@@ -42,7 +42,7 @@
   align-items: center;
   padding: 0.2vh 1vh;
   text-align: center;
-  background: radial-gradient(rgba(178, 32, 32, 0.9), rgba(208, 36, 36, 0.901));
+  background: radial-gradient(rgba(255, 123, 123, 0.9), rgba(250, 180, 180, 0.901));
   border-bottom: .3vh solid #ffffff;
 }
 
@@ -85,20 +85,21 @@
   width: 90%;
   padding: 1vh;
   margin-bottom: 5px;
-  border-radius: 0.4vh 1vh 2vh 1vh;
   word-wrap: break-word;
   direction: rtl;
 }
 
 .userMessage {
   float: right;
-  background: radial-gradient(#e95b5b, #b12e2e);
+  border-radius: .7vh  0 0 2vh;
+  background: radial-gradient(#e95b5b, #e86767);
   color: white;
 }
 
 .otherMessage {
+  border-radius: 0 .7vh  2vh 0;
   color: #a00101;
-  background-color: #e2f0b0;
+  background-color: #fefffa;
 }
 
 .inputContainer {

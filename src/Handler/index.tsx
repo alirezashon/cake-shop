@@ -1,4 +1,4 @@
-import { Category, Product } from '../Interfaces'
+import { Category, ProductInterface } from '../Interfaces'
 import dynamic from 'next/dynamic'
 import styles from './index.module.css'
 
@@ -16,7 +16,7 @@ const Footer = dynamic(() => import('../Components/Footer'), {
 })
 
 interface Props {
-  initialProducts: Product[]
+  initialProducts: ProductInterface[]
   initialTotal: number
   categories: Category[]
 }

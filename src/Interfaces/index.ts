@@ -1,12 +1,20 @@
-export interface Product {
+export interface ProductInterface {
   _id: string
   title: string
   src: string
+  subImages: string[]
   price: number
   calories: number
   categories: string
+  comments: string[]
   description: string
   keywords: string[]
+}
+export interface CommentInterface {
+  client: string
+  content: string
+  response: string
+  time: string
 }
 
 export interface Category {
@@ -49,7 +57,7 @@ export interface Order {
   status: string
   address: string
   client: string
-  products: [Product]
+  products: [ProductInterface]
   totalPrice: number
   attachment: string
 }
@@ -64,9 +72,9 @@ export interface Information {
 }
 export interface ClientProfile {
   _id: string
-  client:string
+  client: string
   email: string
-  chat:string
+  chat: string
   name: string
   nationalCode: string
   information: Information[]

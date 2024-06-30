@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react'
 import Mobile from './Mobile'
 import DesktopNav from './PC'
-import { Product } from '@/Interfaces'
+import { ProductInterface } from '@/Interfaces'
 
 interface NavProps {
-  basketData: Product[]
+  basketData: ProductInterface[]
 }
 const Navbar: React.FC<NavProps> = ({ basketData }) => {
   const [isMobile, setIsMobile] = useState(true)

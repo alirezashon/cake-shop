@@ -7,7 +7,7 @@ import { items } from '../items'
 import Image from 'next/image'
 import Basket from '@/Components/Basket'
 import { FaUserCircle } from 'react-icons/fa'
-import { Product } from '../../../Interfaces'
+import { ProductInterface } from '../../../Interfaces'
 import { BiSearch } from 'react-icons/bi'
 import { ProgressSpinner } from 'primereact/progressspinner'
 
@@ -20,7 +20,7 @@ interface subOption {
   products: string[]
 }
 interface NavProps {
-  basketData: Product[]
+  basketData: ProductInterface[]
   isBasketOpen: boolean
   setIsBasketOpen: (value: boolean) => void
 }
