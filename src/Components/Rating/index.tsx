@@ -38,11 +38,11 @@ const StarRating: React.FC = () => {
             onMouseLeave={handleMouseLeave}
           />
           {displayRating > index && displayRating < index + 1 ? (
-            <BsStarHalf size={'3vh'} color='gold' />
+            <BsStarHalf size={'2.5vh'} color='gold' />
           ) : displayRating >= index + 1 ? (
-            <BsStarFill size={'3vh'} color='gold' />
+            <BsStarFill size={'2.5vh'} color='gold' />
           ) : (
-            <BsStar size={'3vh'} color='gold' />
+            <BsStar size={'2.5vh'} color='gold' />
           )}
         </div>
       ))}

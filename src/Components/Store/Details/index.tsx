@@ -87,11 +87,10 @@ const Details: React.FC<Props> = ({ post }) => {
             <div className={styles.headLinePoint}>
               ۸۷.۲% رضایت از کالا عملکرد عالی
             </div>
-            <div className={styles.pricolories}>
+            <div className={styles.price}>
               <div>
                 {`${post.price}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} تومان
               </div>
-              <div className={styles.calories}>کالری {post.calories}</div>
             </div>
             <div className={styles.producto}>
               <div className={styles.title}>{post.title}</div>
@@ -155,7 +154,16 @@ const Details: React.FC<Props> = ({ post }) => {
                 // sendit()
               }}
             >
-              <div className={styles.productBoxRow}>
+              <div
+                className={styles.closeButton}
+                onClick={() => setShowForm(false)}
+              >
+                ✕
+              </div>
+              <div className={styles.starBox}>
+                <StarRating />
+              </div>
+              <div className={styles.addCommentRow}>
                 <input
                   ref={refs.name as RefObject<HTMLInputElement>}
                   placeholder={`نام . . .`}
@@ -182,20 +190,19 @@ const Details: React.FC<Props> = ({ post }) => {
                   <ShowRating displayRating={comment.rates} />
                 </div>
                 <div className={styles.comment}>
-                  <div className={styles.sender}>{comment.client}
-                  <div className={styles.time}>{comment.content.time}</div>
-                     </div>
+                  <div className={styles.sender}>
+                    {comment.client}
+                    <div className={styles.time}>{comment.content.time}</div>
+                  </div>
                   <div className={styles.text}>{comment.content.txt}</div>
                 </div>
                 <div className={styles.response}>
-                    <div className={styles.admin}>
-                      {'  ادمین '}
-                      <div className={styles.time}>{comment.response.time}</div>
-                    </div>
-                </div>
-                  <div className={styles.adminText}>
-                    {comment.response.txt}
+                  <div className={styles.admin}>
+                    {'  ادمین '}
+                    <div className={styles.time}>{comment.response.time}</div>
                   </div>
+                </div>
+                <div className={styles.adminText}>{comment.response.txt}</div>
               </div>
             ))}
           </div>

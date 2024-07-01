@@ -121,7 +121,7 @@
   width: 100%;
   margin: 1vh;
 }
-.pricolories {
+.price{
   display: flex;
   justify-content: space-around;
   font-size: 2vh;
@@ -142,7 +142,8 @@
   background-color: #ff6161;
 }
 .addToBasket:hover,
-.addComment:hover {
+.addComment:hover,
+.submito:hover {
   transform: scale(1.1);
 }
 
@@ -242,14 +243,47 @@
   background-color: #136380;
 }
 .addCommentForm {
-  background-color: #ffffff;
-  width: 60%;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #5f5e5e6a;
+  z-index: 6;
 }
-.productBoxRow {
+.closeButton {
+  width: 5vh;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 7vh;
+  padding: 2vh;
+  border-radius: 7vh;
+  color: rgb(255, 255, 255);
+  margin: 1vh;
+  border: 0.3vh dashed rgb(255, 249, 68);
+  background-color: rgb(255, 73, 73);
+  cursor: pointer;
+}
+.closeButton:hover {
+  transform: rotate(360deg) scale(1.3);
+}
+.starBox {
+  background-color: #ffffff;
+  padding: 1vh 5vh;
+  border-radius: 2vh;
+  border: 0.3vh dashed rgb(226, 220, 38);
+}
+.addCommentRow {
   width: 70%;
 }
-.productBoxRow input,
-.productBoxRow textarea {
+.addCommentRow input,
+.addCommentRow textarea {
   width: 100%;
   margin: 1vh;
   padding: 1vh;
@@ -257,43 +291,44 @@
   outline: none;
   border: 0.1vh solid rgb(184, 184, 184);
 }
-.productBoxRow textarea {
+.addCommentRow textarea {
   height: 20vh;
   padding: 2vh;
   border-radius: 4vh;
 }
 .submito {
-  background-color: orange;
+  background-color: rgb(255, 34, 34);
+  color: #ffffff;
   border: none;
   border-radius: 2vh;
   padding: 1vh 3vh;
 }
 @media (max-width: 999px) {
-  .screenBox {
-    border-width: 1vh;
-    width: 99%;
-    margin: 0;
-    padding: 1vh 2vh 0 0;
-  }
-  .priceRow {
-    width: 33.3%;
-    margin-left: 33.3%;
-  }
-  .screenBody {
+  .content {
     width: 100%;
-
-    border-width: 1vh;
-    margin: 0.7vh;
+    flex-direction: column-reverse;
   }
-
-  .detailsBox {
-    display: flex;
-    flex-direction: column;
-  }
-  .related {
-    border-left: 0.7vh double rgb(107, 3, 182);
+  .namategory {
     width: 100%;
-    border-radius: 0 7vh 0 0;
-    position: relative;
+    text-wrap: nowrap;
+  }
+  .galleryBox {
+    width: 56%;
+  }
+  .basket {
+    background-color: #ffffff;
+    width: 44%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    font-size: 1.3vh;
+  }
+  .controlBox{
+    height: fit-content;
+  }
+  
+  .inceriment,
+  .deceriment {
+    width: 12%;
   }
 }
