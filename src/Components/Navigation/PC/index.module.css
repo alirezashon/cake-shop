@@ -23,7 +23,7 @@
   height: 9vh;
   width: 100vw;
   padding: 0.2vh 7vh;
-  border-bottom: 0.4vh rgba(251, 255, 239, 0.9) double;
+  border-bottom: 0.1vh rgba(255, 196, 196, 0.9) solid;
 }
 .searchBar {
   direction: rtl;

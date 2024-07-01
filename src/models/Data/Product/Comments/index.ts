@@ -4,9 +4,21 @@ import mongoose from 'mongoose'
 
 const commentSchema = new mongoose.Schema({
   client: { type: String, required: true },
-  content: { type: String, required: true },
-  response:String,
-  time: { type: Date, default: new Date() },
+  content: {
+    txt: { type: String, required: true },
+    time: {
+      type: Date,
+      default: () => new Date(new Date().toISOString().slice(4, 15)),
+    },
+  },
+  response: {
+    txt: { type: String, required: true },
+    time: {
+      type: Date,
+      default: () => new Date(new Date().toISOString().slice(4, 15)),
+    },
+  },
+  rates: Number,
 })
 
 const Comment =

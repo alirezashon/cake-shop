@@ -1,22 +1,34 @@
-
 import styles from './index.module.css'
-import Carouselali from '../../../Components/Carouselali'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
+import Carouselali from './Gallery'
 import { MdAddCircle } from 'react-icons/md'
 import { FaMinus } from 'react-icons/fa'
-import Link from 'next/link'
 import { Add, Remove, Get } from '../../../Components/Basket/Actions'
 import Image from 'next/image'
-import Related from '../../../Components/Related'
-import { useEffect } from 'react'
+import { RefObject, useEffect, useRef, useState } from 'react'
 import { useBasket } from '@/Context/Basket'
 import { ProductInterface } from '@/Interfaces'
+import Modal from '../../Modal'
+import StarRating from '@/Components/Rating'
+import ShowRating from '@/Components/Rating/ShowRates'
 interface Props {
   post: ProductInterface
 }
 
 const Details: React.FC<Props> = ({ post }) => {
   const { basket, setBasket } = useBasket()
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [showForm, setShowForm] = useState<boolean>(false)
+
+  const refs: {
+    [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement>
+  } = {
+    name: useRef<HTMLInputElement>(null),
+    content: useRef<HTMLTextAreaElement>(null),
+  }
+  const addToBasket = (id: string, price: number) => {
+    increment(id, price)
+    setShowModal(true)
+  }
 
   const increment = (id: string, price: number) => {
     Add(id, price)
@@ -34,14 +46,23 @@ const Details: React.FC<Props> = ({ post }) => {
 
   return (
     <>
+      <Modal
+        show={showModal}
+        data={{ title: 'این کالا به سبد خرید اضافه شد!', message: post.title }}
+        onClose={() => setShowModal(false)}
+      />
+
       <div className={styles.screenBox}>
-        <div className={styles.related}>
-          <Related searchString='' />
-        </div>
-        <div className={styles.priceRow}>
-          <span> {post.price} تومان </span>
-        </div>
-        <div className={styles.screenBody}>
+        <div className={styles.content}>
+          <div className={styles.galleryBox}>
+            <Carouselali
+              structure={post.subImages.map((subImage) => ({
+                src: subImage,
+                alt: post.title,
+              }))}
+            />
+          </div>
+
           <div className={styles.screenIssueLogoBox}>
             <Image
               width={1111}
@@ -51,113 +72,137 @@ const Details: React.FC<Props> = ({ post }) => {
               src='/images/icon.png'
             />
           </div>
-          <div className={styles.container}>
-            <div className={styles.title}>
-              <span>{post.title} </span>
+          <div className={styles.postDetails}>
+            <div className={styles.namategory}>
+              <h4>{post.categories}</h4>/<h5>{post.title}</h5>
             </div>
+            <div className={styles.description}>{post.description}</div>
+          </div>
 
-            <div className={styles.detailsBox}>
-              <div className={styles.innerPostBox}>
-                <div className={styles.postBox}>
-                  <div className={styles.postDetails}>
-                    <div className={styles.textBox}>
-                      <p className={styles.text}>
-                        <span>نام : </span>
-                        <span>{post.title} </span>
-                      </p>
-                    </div>
-
-                    <div className={styles.detailsRow}>
-                      <span>کالری : </span>
-                      <span>{post.calories} </span>
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.imageBox}>
-                  <Link target='blank' href={`/Post/${post.title}`}>
-                    <Image
-                      src={`data:image/jpeg;base64,${post.src}`}
-                      alt={post.description}
-                      width={777}
-                      height={200}
-                      className={styles.image}
-                    />
-                  </Link>
-                </div>
-                {basket[1] && basket[1].includes(post._id) ? (
-                  <div className={styles.productDetails}>
-                    <div className={styles.details}>
-                      <div className={styles.priceBox}>
-                        مجموع :
-                        {post.price *
-                          parseInt(
-                            basket[0][basket[1].indexOf(post._id)].split(
-                              '*2%2&7(7)5%5!1@2'
-                            )[1]
-                          )}
+          <div className={styles.basket}>
+            <div className={styles.basketHead}>
+              <Image src={'/images/icon.png'} width={77} height={77} alt='' />
+              کیک خونه
+            </div>
+            <div className={styles.headLinePoint}>
+              ۸۷.۲% رضایت از کالا عملکرد عالی
+            </div>
+            <div className={styles.pricolories}>
+              <div>
+                {`${post.price}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} تومان
+              </div>
+              <div className={styles.calories}>کالری {post.calories}</div>
+            </div>
+            <div className={styles.producto}>
+              <div className={styles.title}>{post.title}</div>
+              <Image
+                className={styles.mainImage}
+                src={`data:image/jpeg;base64,${post.subImages[0]}`}
+                // src={`data:image/jpeg;base64,${post.src}`}
+                width={777}
+                height={777}
+                alt=''
+              />
+              <div style={{ direction: 'ltr' }}>
+                <StarRating />
+              </div>
+              <div className={styles.priceAction}>
+                {parseInt(
+                  `${
+                    basket[0][basket[1].indexOf(post._id)]?.split(
+                      '*2%2&7(7)5%5!1@2'
+                    )[3]
+                  }`
+                ) > 0 ? (
+                  <div className={styles.details}>
+                    <div className={styles.controlBox}>
+                      <MdAddCircle
+                        className={styles.inceriment}
+                        onClick={() => increment(post._id, post.price)}
+                      />
+                      <div className={styles.count}>
+                        {`${
+                          basket[0][basket[1].indexOf(post._id)]?.split(
+                            '*2%2&7(7)5%5!1@2'
+                          )[3]
+                        } `}
+                        عدد در سبد شما
                       </div>
-                      <div className={styles.controlBox}>
-                        <MdAddCircle
-                          className={styles.inceriment}
-                          size={'3vh'}
-                          onClick={() => increment(post._id, post.price)}
-                        />
-                        <p className={styles.count}>
-                          {post._id &&
-                            parseInt(
-                              basket[0][basket[1].indexOf(post._id)].split(
-                                '*2%2&7(7)5%5!1@2'
-                              )[1]
-                            )}
-                        </p>
-                        <FaMinus
-                          className={styles.deceriment}
-                          size={'3vh'}
-                          onClick={() => decrement(post._id)}
-                        />
-                      </div>
+                      <FaMinus
+                        className={styles.deceriment}
+                        onClick={() => decrement(post._id)}
+                      />
                     </div>
                   </div>
                 ) : (
-                  <div className={styles.innerPriceBasketBox}>
-                    <div
-                      className={styles.priceBasket}
-                      onClick={() => increment(post._id, post.price)}
-                    >
-                      <div className={styles.iconBox}>
-                        <AiOutlineShoppingCart
-                          size={'5vh'}
-                          color={'rgb(255,255,255)'}
-                          className={styles.icon}
-                        />
-                        <p className={styles.quantity}>{post.comments}</p>
-                      </div>
-                      <a className={styles.price}> {post.price} تومان </a>
-                    </div>
+                  <div
+                    className={styles.addToBasket}
+                    onClick={() => addToBasket(post._id, post.price)}
+                  >
+                    افزودن به سبد خرید
                   </div>
                 )}
               </div>
-              <div className={styles.carouselaliBox}>
-                <Carouselali
-                  structure={post.subImages.map((subImage) => ({
-                    src: subImage,
-                    alt: post.title,
-                  }))}
+            </div>
+          </div>
+        </div>
+        <div className={styles.commentSection}>
+          {showForm ? (
+            <form
+              className={styles.addCommentForm}
+              onSubmit={(e) => {
+                e.preventDefault()
+                // sendit()
+              }}
+            >
+              <div className={styles.productBoxRow}>
+                <input
+                  ref={refs.name as RefObject<HTMLInputElement>}
+                  placeholder={`نام . . .`}
                 />
+                <textarea
+                  ref={refs.content as RefObject<HTMLTextAreaElement>}
+                  placeholder={'متن پیام خود را وارد کنید . . .'}
+                ></textarea>
               </div>
+              <input value={'ارسال'} type='submit' className={styles.submito} />
+            </form>
+          ) : (
+            <div
+              className={styles.addComment}
+              onClick={() => setShowForm(true)}
+            >
+              ثبت دیدگاه
             </div>
-            <div className={styles.bottomBox}>
-              <div className={styles.detailsRow}>
-                <span>توضیحات : </span>
-                <span>{post.description} </span>
+          )}
+          <div className={styles.existComments}>
+            {post.comments.map((comment) => (
+              <div className={styles.commentBox}>
+                <div className={styles.rates}>
+                  <ShowRating displayRating={comment.rates} />
+                </div>
+                <div className={styles.comment}>
+                  <div className={styles.sender}>{comment.client}
+                  <div className={styles.time}>{comment.content.time}</div>
+                     </div>
+                  <div className={styles.text}>{comment.content.txt}</div>
+                </div>
+                <div className={styles.response}>
+                    <div className={styles.admin}>
+                      {'  ادمین '}
+                      <div className={styles.time}>{comment.response.time}</div>
+                    </div>
+                </div>
+                  <div className={styles.adminText}>
+                    {comment.response.txt}
+                  </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
     </>
   )
 }
-
 
 export default Details

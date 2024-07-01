@@ -96,7 +96,7 @@ const PC: React.FC<NavProps> = ({
       )}
       <nav className={styles.navBar}>
         <div className={styles.itemsBox}>
-          <Image src={'/images/icon.png'} width={55} height={55} alt='' />
+          <Image src={'/images/icon.png'} width={123} height={123} alt='' style={{width:'22vh'}} />
           {items &&
             items.map((item: Items, itemIndex) => (
               <Link

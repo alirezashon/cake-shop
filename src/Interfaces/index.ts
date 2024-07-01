@@ -6,15 +6,15 @@ export interface ProductInterface {
   price: number
   calories: number
   categories: string
-  comments: string[]
+  comments: CommentInterface[]
   description: string
   keywords: string[]
 }
 export interface CommentInterface {
   client: string
-  content: string
-  response: string
-  time: string
+  content: {txt:string,time:string}
+  response:{txt:string,time:string}
+  rates:number
 }
 
 export interface Category {
