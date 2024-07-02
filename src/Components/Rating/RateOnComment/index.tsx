@@ -1,25 +1,16 @@
 import React, { useState } from 'react'
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs'
 interface Props {
-  id: string
+  setRates:(rate:number)=>void
 }
-const StarRating: React.FC<Props> = ({ id }) => {
+const CommentRating: React.FC<Props> = ({ setRates  }) => {
   const [rating, setRating] = useState<number>(0)
   const [hoverRating, setHoverRating] = useState<number | null>(null)
 
   const handleClick = async (index: number, isHalf: boolean) => {
     const newRating = isHalf ? index + 0.5 : index + 1
+    setRates(newRating)
     setRating(newRating)
-    const res = await fetch(`/api/data/Post/Client/rating`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id,
-        rate: rating,
-        authType: '*a)s*o&t(a^r*t@e!e$',
-      }),
-    })
-    await res.json()
   }
 
   const handleMouseEnter = (index: number, isHalf: boolean) => {
@@ -81,4 +72,4 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 }
 
-export default StarRating
+export default CommentRating

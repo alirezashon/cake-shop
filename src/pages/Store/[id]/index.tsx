@@ -20,7 +20,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          category: '@L$L%O%F#D%M^',
           title: title, // Updated to use the post title as ID
           authType: 'G&E!T*P^R$O#D$U^C@T*S',
         }),

@@ -4,8 +4,8 @@ export interface ProductInterface {
   src: string
   subImages: string[]
   price: number
-  calories: number
   categories: string
+  rates:number
   comments: CommentInterface[]
   description: string
   keywords: string[]

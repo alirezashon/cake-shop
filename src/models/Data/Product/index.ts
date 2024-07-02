@@ -4,10 +4,9 @@ import mongoose from 'mongoose'
 
 const productSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  src: { type: String, required: true },
-  subImages:[ { type: String}],
+  src: { type: Buffer, required: true },
+  subImages:[ { type: Buffer}],
   price: { type: Number },
-  calories: { type: Number },
   categories: String,
   comments: [{
     type: mongoose.Schema.Types.ObjectId,

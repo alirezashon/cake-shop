@@ -13,7 +13,7 @@ const FindProduct = async (req: NextApiRequest, res: NextApiResponse) => {
 
         const skipCount = (page - 1) * limit
 
-        const products = await Product.find({},'src').skip(skipCount).limit(limit)
+        const products = await Product.find({},'src title price description').skip(skipCount).limit(limit)
         console.log(totalProducts)
         console.log(req.body)
         if (page === 1) {

@@ -10,6 +10,7 @@ import { ProductInterface } from '@/Interfaces'
 import Modal from '../../Modal'
 import StarRating from '@/Components/Rating'
 import ShowRating from '@/Components/Rating/ShowRates'
+import CommentRating from '@/Components/Rating/RateOnComment'
 interface Props {
   post: ProductInterface
 }
@@ -20,10 +21,11 @@ const Details: React.FC<Props> = ({ post }) => {
   const [showForm, setShowForm] = useState<boolean>(false)
 
   const refs: {
-    [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement>
+    [key: string]: RefObject<HTMLInputElement | HTMLTextAreaElement | number>
   } = {
     name: useRef<HTMLInputElement>(null),
     content: useRef<HTMLTextAreaElement>(null),
+    rate: useRef<number>(5),
   }
   const addToBasket = (id: string, price: number) => {
     increment(id, price)
@@ -42,8 +44,26 @@ const Details: React.FC<Props> = ({ post }) => {
 
   useEffect(() => {
     setBasket(Get())
+    console.log(post)
   }, [setBasket])
 
+  const addComment = async (id: string) => {
+    const res = await fetch('/api/data/Post/Client/addComment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id,
+        comment: {
+          client:`${refs.name.current?.valueOf}`,
+          content:`${refs.content.current?.valueOf}` ,
+          rates:`${refs.rate.current?.valueOf}`
+        },
+        authType: '(a&D*m%o$t^C@e$n%t(A)m)',
+      }),
+    })
+    const postData = await res.json()
+    res.ok&& location.reload()
+  }
   return (
     <>
       <Modal
@@ -54,14 +74,17 @@ const Details: React.FC<Props> = ({ post }) => {
 
       <div className={styles.screenBox}>
         <div className={styles.content}>
-          <div className={styles.galleryBox}>
-            <Carouselali
-              structure={post.subImages.map((subImage) => ({
-                src: subImage,
-                alt: post.title,
-              }))}
-            />
-          </div>
+          {post.subImages?.length > 0 && (
+            <div className={styles.galleryBox}>
+              <Carouselali
+                structure={post.subImages.map((subImage) => ({
+                  src: subImage,
+                  alt: post.title,
+                }))}
+              />
+            </div>
+          )}
+          <ShowRating displayRating={post.rates} />
 
           <div className={styles.screenIssueLogoBox}>
             <Image
@@ -96,14 +119,13 @@ const Details: React.FC<Props> = ({ post }) => {
               <div className={styles.title}>{post.title}</div>
               <Image
                 className={styles.mainImage}
-                src={`data:image/jpeg;base64,${post.subImages[0]}`}
-                // src={`data:image/jpeg;base64,${post.src}`}
+                src={`data:image/jpeg;base64,${Buffer.from(post.src).toString('base64')}`}
                 width={777}
                 height={777}
                 alt=''
               />
               <div style={{ direction: 'ltr' }}>
-                <StarRating />
+                <StarRating id={post._id} />
               </div>
               <div className={styles.priceAction}>
                 {parseInt(
@@ -161,7 +183,7 @@ const Details: React.FC<Props> = ({ post }) => {
                 ✕
               </div>
               <div className={styles.starBox}>
-                <StarRating />
+                {/* <CommentRating setRates={(count:number)=>refs.rate.current?.value = parseInt(`${count}`)} /> */}
               </div>
               <div className={styles.addCommentRow}>
                 <input
@@ -173,7 +195,7 @@ const Details: React.FC<Props> = ({ post }) => {
                   placeholder={'متن پیام خود را وارد کنید . . .'}
                 ></textarea>
               </div>
-              <input value={'ارسال'} type='submit' className={styles.submito} />
+              <input value={'ارسال'} type='submit' className={styles.submito} onClick={()=>addComment(post._id)}/>
             </form>
           ) : (
             <div

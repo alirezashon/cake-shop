@@ -62,8 +62,8 @@ const ImageGallery: React.FC<Props> = ({ structure }) => {
         <Image
           layout='fill'
           objectFit='cover'
-          src={`data:image/jpeg;base64,${selectedImage.src}`}
-          alt={selectedImage.alt}
+          src={`data:image/jpeg;base64,${selectedImage?.src}`}
+          alt={selectedImage?.alt}
           className={`${styles.mainImage} ${
             isFullscreen ? styles.fullscreen : ''
           }`}

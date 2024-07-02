@@ -275,22 +275,23 @@
   width: 100%;
   text-align: center;
   gap: 1vh;
-  border: 0.1vh solid #ff9191;
+  border: 0.1vh solid #ffc3c3;
 }
 
 .product {
-  border: 0.1vh solid #ea4848;
+  border: 0.1vh solid #ffadad;
   position: relative;
   display: flex;
   flex-direction: column;
   height: 48vh;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   direction: rtl;
-  border-radius: 0 0 2vh 2vh;
+  border-radius: 1vh;
 }
 
 .productimage {
-  width: 100%;
+  width: 90%;
   height: 67%;
   transition: opacity 0.3s ease;
   cursor: pointer;
@@ -329,7 +330,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-top: 0.1vh solid #e47c75;
+  border-top: 0.1vh solid #ffb2ad;
 }
 
 .heartIcon {
@@ -373,15 +374,12 @@
 .productprice {
 }
 
-@media (max-width: 777px) {
+@media (max-width: 876px) {
   .container {
     display: block;
   }
   .basketSide {
-    width: 80%;
-    height: 80vh;
-    position: absolute;
-    z-index: 7;
+    display: none;
   }
   .menuSide {
     width: 100%;

@@ -1,16 +1,25 @@
 /** @format */
 
 import { NextApiRequest, NextApiResponse } from 'next'
-import Product from '../../../../../../models/Data/Product'
+import Product from '../../../../../../models/Data/Product/index'
 import db from '../../../../../../utils/index.js'
+import { ProductInterface } from '@/Interfaces'
 const Page = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === 'POST') {
-      const { title, authType } = req.body
-      if (authType === 'G&E!T*P^R$O#D$U^C@T*S') {
+      const { id, comment, authType } = req.body
+      if (authType === '(a&D*m%o$t^C@e$n%t(A)m)') {
         await db.connectToShop()
-        const products = await Product.findOne({ title })
-        res.status(200).json({ success: true, products })
+        const products: ProductInterface | null = await Product.findOne({
+          _id: id,
+        })
+
+        if (products) {
+          const updated = products
+          updated.comments = [...updated.comments, comment]
+          await Product.findByIdAndUpdate({ id, updated })
+          res.status(200).json({ success: true, products })
+        }
       } else {
         res.status(407).json({ success: false, message: 'Invalid Auth Type' })
       }

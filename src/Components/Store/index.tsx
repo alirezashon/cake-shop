@@ -26,7 +26,9 @@ const Store: React.FC<Props> = ({ data, total }) => {
   }
   const { basket, setBasket } = useBasket()
   const [sortedata, setSortedata] = useState<ProductInterface[]>(data[1])
-  const [showProducto, setShowProducto] = useState<ProductInterface | null>(null)
+  const [showProducto, setShowProducto] = useState<ProductInterface | null>(
+    null
+  )
   const [productover, setProductover] = useState<number | null>(null)
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
   const [isMobile, setIsMobile] = useState(true)
@@ -257,27 +259,15 @@ const Store: React.FC<Props> = ({ data, total }) => {
                             key={subIndex}
                             className={styles.enginoption}
                             onClick={() =>
-                              parent[0] === 'قیمت'
-                                ? option === 'گرانترین'
-                                  ? setSortedata(
-                                      [...sortedata].sort(
-                                        (a, b) => b.price - a.price
-                                      )
-                                    )
-                                  : setSortedata(
-                                      [...sortedata].sort(
-                                        (a, b) => a.price - b.price
-                                      )
-                                    )
-                                : parent[0] === 'کالری' && option === 'بیشترین'
+                              parent[0] === 'قیمت' && option === 'گرانترین'
                                 ? setSortedata(
                                     [...sortedata].sort(
-                                      (a, b) => b.calories - a.calories
+                                      (a, b) => b.price - a.price
                                     )
                                   )
                                 : setSortedata(
                                     [...sortedata].sort(
-                                      (a, b) => a.calories - b.calories
+                                      (a, b) => a.price - b.price
                                     )
                                   )
                             }
@@ -303,7 +293,9 @@ const Store: React.FC<Props> = ({ data, total }) => {
               >
                 <Image
                   loading='lazy'
-                  src={`data:image/jpeg;base64,${product.src}`}
+                  src={`data:image/jpeg;base64,${Buffer.from(
+                    product.src
+                  ).toString('base64')}`}
                   onClick={() => setShowProducto(product)}
                   alt={product.title}
                   style={{ opacity: productover === productindex ? 0.2 : 1 }}
