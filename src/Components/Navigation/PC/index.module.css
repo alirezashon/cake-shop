@@ -21,36 +21,10 @@
   direction: rtl;
   text-align: center;
   height: 9vh;
-  width: 100vw;
+  width: 80vw;
+  margin-left: 10%;
   padding: 0.2vh 7vh;
   border-bottom: 0.1vh rgba(255, 196, 196, 0.9) solid;
-}
-.searchBar {
-  direction: rtl;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  position: relative;
-}
-
-.searchInput {
-  border: 1px solid #f2c7c7;
-  outline: none;
-  border-radius: 1vh;
-  padding: 0.5rem 1rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-.searchInput::placeholder {
-  color: #e79090;
-}
-
-.searchIcon {
-  font-size: 4vh;
-  color: #f9cdcd;
-  position: absolute;
-  margin-left: 7%;
 }
 .itemsBox {
   z-index: 7;
@@ -68,26 +42,24 @@
 .item:hover {
   animation: borderero 1s;
 }
-
+.catypeBox{
+  display: flex;
+}
 .productsopenItemsBox {
   max-height: 50vh;
   overflow-y: auto;
   z-index: -1;
   animation: openItems 1s;
   background-color: #fdf3f3;
-  box-shadow: 0px 0px 2px 0px rgb(246, 200, 200);
-  border-bottom: .7vh ridge rgb(255, 179, 179);
-  border-right: .7vh ridge rgb(238, 155, 155);
-  width: 100px;
-  border-radius: 0 0 11vh 1vh;
+  width: 30%;
+  margin-left: -10%;
+  border-radius: 1vh;
   position: absolute;
   top: 9.2vh;
   padding: 1vh 0;
 }
 
 .productBox {
-  width: 90%;
-  margin-right: 8%;
   border-bottom: 0.1vh solid rgb(255, 222, 222);
   border-radius: 1vh;
   background-color: rgb(255, 255, 255);
@@ -108,7 +80,17 @@
   color: rgb(241, 10, 10);
   font-weight: bolder;
 }
-
+.typeBox{
+  width:22vw;
+  margin: 5vh;
+  position: absolute;
+  background-color: #ffffff;
+}
+.type{
+  margin: 1vh;
+  border-bottom: .1vh solid #ffd2d2;
+}
+.type:last-child{border: none;}
 .leftSide {
   width: 37%;
   display: flex;
@@ -143,9 +125,9 @@
 }
 
 .profile {
-  font-size: 6vh;
+  font-size: 4vh;
   color: #fbffe8;
-  background-color: rgb(246, 108, 108);
+  color: rgb(246, 108, 108);
   border-radius: 23vh;
   border: 0.3vh rgb(239, 255, 234) dashed;
   cursor: pointer;

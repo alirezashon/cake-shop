@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import styles from './index.module.css'
 import { RefObject, useEffect, useRef, useState } from 'react'
-import { items } from '../items'
+import { Items, items } from '../items'
 import Image from 'next/image'
 import Basket from '@/Components/Basket'
 import { FaUserCircle } from 'react-icons/fa'
@@ -11,14 +11,6 @@ import { ProductInterface } from '../../../Interfaces'
 import { BiSearch } from 'react-icons/bi'
 import { ProgressSpinner } from 'primereact/progressspinner'
 
-interface Items {
-  category: string
-  brands: string[] | subOption[]
-}
-interface subOption {
-  brand: string
-  products: string[]
-}
 interface NavProps {
   basketData: ProductInterface[]
   isBasketOpen: boolean
@@ -41,10 +33,6 @@ const PC: React.FC<NavProps> = ({
   } | null>()
   const [loading, setLoading] = useState<boolean>(false)
   const [notindex, setNotindex] = useState<number>(0)
-
-  const openItemBox = (th: number, ex: number) => {
-    setOpenItemWind({ th: th, ex: ex })
-  }
 
   const closeNav = (event: MouseEvent) => {
     const t = document.getElementById('openBox')
@@ -89,88 +77,85 @@ const PC: React.FC<NavProps> = ({
     <>
       {loading && (
         <ProgressSpinner
-          style={{ width: '5vh', height: '5vh' ,position:'absolute',top:'45vh',left:'45vw'}}
+          style={{
+            width: '5vh',
+            height: '5vh',
+            position: 'absolute',
+            top: '45vh',
+            left: '45vw',
+          }}
           strokeWidth='2'
           animationDuration='.5s'
         />
       )}
       <nav className={styles.navBar}>
         <div className={styles.itemsBox}>
-          <Image src={'/images/icon.png'} width={123} height={123} alt='' style={{width:'22vh'}} />
-          {items &&
-            items.map((item: Items, itemIndex) => (
-              <Link
-                key={itemIndex}
-                href={`/${item.category}`}
-                className={styles.item}
-                onMouseOver={() =>
-                  openItemBox(
-                    typeof item.brands[0] === 'object'
-                      ? (window.innerWidth * 13) / 100 +
-                          ((window.innerWidth * 13) / 100) * item.brands.length
-                      : (window.innerWidth * 22) / 100,
-                    itemIndex
-                  )
-                }
-              >
-                {item.category}
-              </Link>
-            ))}
-          {openItemWind &&
-            items.map(
-              (item, index) =>
-                index === openItemWind.ex &&
-                Array.isArray(item.brands) && (
-                  <div
-                    id='openBox	'
-                    className={styles.productsopenItemsBox}
-                    style={{
-                      width: `${openItemWind.th}px`,
-                      right: `${index * 12}vw`,
-                      display: `${
-                        typeof item.brands[0] === 'object' ? 'flex' : 'block'
-                      }`,
-                    }}
-                    key={index}
-                  >
-                    {item.brands.map((option, optionIndex) => (
-                      <div key={optionIndex}>
-                        {typeof option === 'string' ? (
-                          <div className={styles.productBox}>
+          <Image
+            src={'/images/icon.png'}
+            width={123}
+            height={123}
+            alt=''
+            style={{ width: '22vh' }}
+          />
+             {items &&
+            items.map((item:Items, itemIndex) => (
+              <>
+                <Link
+                  key={itemIndex}
+                  id={`${itemIndex === 3 && 'item'}`}
+                  href={`/${item.name}`}
+                  className={styles.item}
+                  onMouseOver={() => setOpenItemWind({ ex: itemIndex, th: -1 })}
+                >
+                  {item.name}
+                </Link>
+                {itemIndex === openItemWind?.ex &&
+                  Array.isArray(item.category) && (
+                    <div className={styles.catypeBox} onMouseLeave={()=>setOpenItemWind(null)}>
+                      <div
+                        id='openBox'
+                        className={styles.productsopenItemsBox}
+                        style={{
+                          left: `${
+                            document.getElementById('item')?.offsetLeft
+                          }px`,
+                        }}
+                      >
+                        {item.category.map((subItem, subIndex) => (
+                          <div
+                            className={styles.productBox}
+                            key={subIndex}
+                            onMouseOver={() =>
+                              setOpenItemWind({
+                                ex: openItemWind.ex,
+                                th: subIndex,
+                              })
+                            }
+                          >
                             <Link
-                              href={`${item.category}/${option}`}
+                              href={`/${subItem.name}`}
                               className={styles.products}
                             >
-                              {option}
+                              {subItem.name}
                             </Link>
                           </div>
-                        ) : (
-                          <div className={styles.categoryBox}>
-                            <Link
-                              key={optionIndex}
-                              href={`${item.category}/${option.brand}`}
-                              className={`${styles.productop} ${styles.products} `}
-                            >
-                              <h6>{option.brand}</h6>
-                            </Link>
-                            {option.products.map(
-                              (subOption, subOptionIndex) => (
-                                <Link
-                                  key={subOptionIndex}
-                                  href={`${item.category}/${option.brand}/${subOption}`}
-                                  className={styles.producto}
-                                >
-                                  {subOption}
-                                </Link>
-                              )
-                            )}
-                          </div>
-                        )}
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                )
-            )}
+                      {openItemWind?.th !== -1 && (
+                        <div className={styles.typeBox}>
+                          {item?.category[openItemWind.th]?.type?.map(
+                            (type, typeIndex) => (
+                              <div className={styles.type} key={typeIndex}>
+                                {type}
+                              </div>
+                            )
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+              </>
+            ))}
         </div>
         <div className={styles.leftSide}>
           <div className={styles.iconBox}>
@@ -189,7 +174,7 @@ const PC: React.FC<NavProps> = ({
             />
           </div>
           <div>
-            <form className={styles.searchBar}>
+            {/* <form className={styles.searchBar}>
               <input
                 ref={refs.search as RefObject<HTMLInputElement>}
                 className={styles.searchInput}
@@ -197,7 +182,7 @@ const PC: React.FC<NavProps> = ({
                 placeholder={'جستجو ...'}
               />
               <BiSearch className={styles.searchIcon} />
-            </form>
+            </form> */}
           </div>
         </div>
       </nav>

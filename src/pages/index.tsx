@@ -34,54 +34,54 @@ const RootPage: NextPage<Props> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  try {
-    const categoriesRes = await fetch(
-      `http://localhost:${process.env.PRODUCTION_PORT}/api/GET/categories`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          authType: 'G&E!T*P^R$O#D$U^C@T*S',
-        }),
-      }
-    )
-    const categoriesResult = await categoriesRes.json()
-    const categories = categoriesResult.categories || []
+// export const getServerSideProps: GetServerSideProps<Props> = async () => {
+//   try {
+//     const categoriesRes = await fetch(
+//       `http://localhost:${process.env.PRODUCTION_PORT}/api/GET/categories`,
+//       {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//           authType: 'G&E!T*P^R$O#D$U^C@T*S',
+//         }),
+//       }
+//     )
+//     const categoriesResult = await categoriesRes.json()
+//     const categories = categoriesResult.categories || []
 
-    const productsRes = await fetch(
-      `http://localhost:${process.env.PRODUCTION_PORT}/api/GET/products`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          authType: 'G&E!T*P^R$O#D$U^C@T*S',
-          page: 1,
-          limit: 25,
-        }),
-      }
-    )
+//     const productsRes = await fetch(
+//       `http://localhost:${process.env.PRODUCTION_PORT}/api/GET/products`,
+//       {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//           authType: 'G&E!T*P^R$O#D$U^C@T*S',
+//           page: 1,
+//           limit: 25,
+//         }),
+//       }
+//     )
 
-    if (!productsRes.ok) {
-      throw new Error('Failed to fetch initial products')
-    }
+//     if (!productsRes.ok) {
+//       throw new Error('Failed to fetch initial products')
+//     }
 
-    const { products, totalProducts } = await productsRes.json()
+//     const { products, totalProducts } = await productsRes.json()
 
-    return {
-      props: {
-        initialProducts: products,
-        initialTotal: totalProducts,
-        categories,
-      },
-    }
-  } catch (error) {
-    console.error('Error fetching initial props:', error)
-    return { props: { initialProducts: [], initialTotal: 0, categories: [] } }
-  }
-}
+//     return {
+//       props: {
+//         initialProducts: products,
+//         initialTotal: totalProducts,
+//         categories,
+//       },
+//     }
+//   } catch (error) {
+//     console.error('Error fetching initial props:', error)
+//     return { props: { initialProducts: [], initialTotal: 0, categories: [] } }
+//   }
+// }
 export const config = {
   api: {
     responseLimit: '128mb',

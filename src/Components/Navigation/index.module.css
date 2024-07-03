@@ -1,0 +1,14 @@
+.mobile {
+  display: hidden;
+}
+.pc {
+  display: hidden;
+}
+@media (max-width: 876px) {
+  .pc {
+    display: hidden;
+  }
+  .mobile {
+    display: block;
+  }
+}

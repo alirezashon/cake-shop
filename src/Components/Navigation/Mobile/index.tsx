@@ -3,20 +3,13 @@
 import Link from "next/link"
 import styles from "./index.module.css"
 import { RefObject, useEffect, useRef, useState } from "react"
-import { items } from "../items"
 import { FaUserCircle } from "react-icons/fa"
 import Basket from "../../Basket"
 import { ProductInterface } from "../../../Interfaces"
 import { BiSearch } from "react-icons/bi"
+import { Items, items } from '../items'
 
-interface Items {
-  category: string
-  brands: string[] | subOption[]
-}
-interface subOption {
-  brand: string
-  products: string[]
-}
+
 interface NavProps {
   basketData: ProductInterface[]
   isBasketOpen: boolean
@@ -78,16 +71,16 @@ const Mobile: React.FC<NavProps> = ({
                   href={`${item.category}`}
                   className={styles.products}
                 >
-                  {item.category}
+                  {item.name}
                 </Link>
               </h5>
               {drawer.item === index &&
-                items[drawer.item].brands.map((data, subIndex) =>
+                items[drawer.item].category?.map((data, subIndex) =>
                   typeof data === "string" ? (
                     <Link
                       key={subIndex}
                       href={`${item.category}/${
-                        items[drawer.item].brands
+                        items[drawer.item].category
                       }/${data}`}
                     >
                       <h5 className={styles.options}>{`${data}`}</h5>
@@ -102,17 +95,17 @@ const Mobile: React.FC<NavProps> = ({
                       >
                         <Link
                           key={subIndex}
-                          href={`${item.category}/${data.brand}`}
+                          href={`${item.category}/${data.name}`}
                           className={styles.products}
                         >
-                          {data.brand}
+                          {data.name}
                         </Link>
                       </h5>
                       {subIndex === drawer.category &&
-                        data.products.map((subOption, subOptionIndex) => (
+                        data.type?.map((subOption, subOptionIndex) => (
                           <Link
                             key={subOptionIndex}
-                            href={`${item.category}/${data.brand}/${subOption}`}
+                            href={`${item.category}/${data.type}/${subOption}`}
                             className={styles.products}
                           >
                             <h5

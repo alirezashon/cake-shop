@@ -1,13 +1,10 @@
-
-
 .basketBall {
-  font-size: 6vh;
-  background-color: rgb(246, 108, 108);
+  font-size: 4vh;
+  color: rgb(246, 108, 108);
   border: 0.3vh rgb(239, 255, 234) dashed;
   width: fit-content;
   margin-top: 1vh;
   text-align: center;
-  padding: 1vh;
   border-radius: 11vh;
   cursor: pointer;
   z-index: 33;
@@ -93,7 +90,7 @@
 }
 
 .confirm:hover {
-  transform: scale(.9);
+  transform: scale(0.9);
   border: 0.2vh ridge rgb(250, 222, 255);
 }
 

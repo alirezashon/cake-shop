@@ -22,7 +22,7 @@ export const generateSEO = (product: ProductInterface | null) => {
       description: `${product.description}`,
       images: [
         {
-          url: `data:image/jpeg;base64,${product.src}`,
+          url: `/images/icon.png`,
           width: 800,
           height: 600,
           alt: `${product.title}`,

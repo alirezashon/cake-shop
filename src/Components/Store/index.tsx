@@ -71,7 +71,7 @@ const Store: React.FC<Props> = ({ data, total }) => {
   }
 
   useEffect(() => {
-    if (sortedata.length !== total) {
+    if (total && sortedata?.length !== total) {
       fetchAllProducts()
     }
   }, [total])
@@ -220,7 +220,7 @@ const Store: React.FC<Props> = ({ data, total }) => {
               onClick={scrollLeft}
             />
             {data &&
-              data[0].map((cat, catindex) => (
+              data[0]?.map((cat, catindex) => (
                 <div key={catindex} className={styles.category}>
                   <Image
                     loading='lazy'
@@ -366,8 +366,22 @@ const Store: React.FC<Props> = ({ data, total }) => {
                 </div>
               </div>
             ))}
-            {Array.apply(0, Array(total - sortedata.length)).map((x, i) => (
-              <div className={`${styles.product} ${styles.loadingPlaceholder}`}>
+            {Array.apply(
+              0,
+              Array(
+                Math.max(
+                  0,
+                  (Number.isFinite(total) ? total : 10) -
+                    (sortedata && Array.isArray(sortedata)
+                      ? sortedata.length
+                      : 0)
+                )
+              )
+            ).map((x, i) => (
+              <div
+                className={`${styles.product} ${styles.loadingPlaceholder}`}
+                key={i}
+              >
                 <div className={styles.productimage} />
                 <div className={styles.productDescription} />
                 <p className={styles.producTitle} />

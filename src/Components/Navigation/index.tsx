@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Mobile from './Mobile'
 import DesktopNav from './PC'
 import { ProductInterface } from '@/Interfaces'
+import styles from './index.module.css'
 
 interface NavProps {
   basketData: ProductInterface[]
@@ -31,13 +32,15 @@ const Navbar: React.FC<NavProps> = ({ basketData }) => {
   return (
     <nav style={{ marginBottom: `${isMobile ? '5  vh' : '6vh'}`, zIndex: 44 }}>
       {isMobile ? (
-        <Mobile
-          basketData={basketData}
-          isBasketOpen={isBasketOpen}
-          setIsBasketOpen={setIsBasketOpen}
-        />
+        <div className={styles.moblie}>
+          <Mobile
+            basketData={basketData}
+            isBasketOpen={isBasketOpen}
+            setIsBasketOpen={setIsBasketOpen}
+          />
+        </div>
       ) : (
-        <div>
+        <div className={styles.pc}>
           <DesktopNav
             basketData={basketData}
             isBasketOpen={isBasketOpen}
@@ -48,5 +51,4 @@ const Navbar: React.FC<NavProps> = ({ basketData }) => {
     </nav>
   )
 }
-
 export default Navbar

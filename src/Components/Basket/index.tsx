@@ -69,7 +69,6 @@ const Basket: React.FC<BasketProps> = ({
         <div>
           <AiOutlineShoppingCart
             className={styles.basketBall}
-            color={'white'}
             onClick={() => setIsBasketOpen(true)}
           />
           {basket[3] > 0 && (
