@@ -13,6 +13,10 @@ import { searchEngine } from './content'
 import { Toast } from 'primereact/toast'
 import { BiSearch } from 'react-icons/bi'
 import { GetFave, AddFave, RemoveFave } from './Favorites'
+import { useRouter } from 'next/router'
+import { generateSEO } from './SEO'
+import Product from '@/models/Data/Product'
+import { NextSeo } from 'next-seo'
 interface Props {
   data: [Category[], ProductInterface[]]
   total: number
@@ -26,35 +30,44 @@ const Store: React.FC<Props> = ({ data, total }) => {
   }
   const { basket, setBasket } = useBasket()
   const [sortedata, setSortedata] = useState<ProductInterface[]>(data[1])
-  const [showProducto, setShowProducto] = useState<ProductInterface | null>(
-    null
-  )
   const [productover, setProductover] = useState<number | null>(null)
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
   const [isMobile, setIsMobile] = useState(true)
   const [favorites, setFavorites] = useState<string[]>([])
 
-  const toast = useRef<Toast>(null)
   const totalPages = Math.ceil(total / 25)
+  const fetchPage = (page: number) => {
+    return fetch('/api/GET/products', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        authType: 'G&E!T*P^R$O#D$U^C@T*S',
+        page: page,
+        limit: 25,
+      }),
+    }).then((res) => res.json())
+  }
 
-  const fetchAllProducts = async () => {
+  const fetchAllProducts = () => {
+    let promise = Promise.resolve()
+
     for (let i = 2; i <= totalPages; i++) {
-      const res = await fetch('/api/GET/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          authType: 'G&E!T*P^R$O#D$U^C@T*S',
-          page: i,
-          limit: 25,
-        }),
+      promise = promise.then(() => {
+        return fetchPage(i)
+          .then((result) => {
+            if (result.success) {
+              setSortedata((prv) => [...prv, ...result.products])
+            }
+          })
+          .catch((error) => {
+            console.error(`Failed to fetch page ${i}`, error)
+          })
       })
-      const result = await res.json()
-      if (result.success) {
-        setSortedata((prv) => [...prv, ...result.products])
-      }
     }
+
+    return promise
   }
 
   useEffect(() => {
@@ -131,6 +144,7 @@ const Store: React.FC<Props> = ({ data, total }) => {
       </div>
     )
   }
+
   return (
     <>
       <Toast />
@@ -291,29 +305,30 @@ const Store: React.FC<Props> = ({ data, total }) => {
                 onMouseOver={() => setProductover(productindex)}
                 onMouseLeave={() => setProductover(null)}
               >
+                <NextSeo {...generateSEO(product)} />
                 <Image
                   loading='lazy'
                   src={`data:image/jpeg;base64,${Buffer.from(
                     product.src
                   ).toString('base64')}`}
-                  onClick={() => setShowProducto(product)}
+                  onClick={() => useRouter().push(`/Store/${product.title}`)}
                   alt={product.title}
                   style={{ opacity: productover === productindex ? 0.2 : 1 }}
-                  width={777}
-                  height={777}
+                  width={1212}
+                  height={1212}
                   className={styles.productimage}
                 />
                 {productover === productindex && (
                   <div
                     className={styles.productDescription}
-                    onClick={() => setShowProducto(product)}
+                    onClick={() => useRouter().push(`/Store/${product.title}`)}
                   >
                     {product.description}
                   </div>
                 )}
                 <p
                   className={styles.producTitle}
-                  onClick={() => setShowProducto(product)}
+                  onClick={() => useRouter().push(`/Store/${product.title}`)}
                 >
                   {product.title}
                 </p>

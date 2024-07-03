@@ -17,7 +17,7 @@ export const generateSEO = (product: ProductInterface | null) => {
     description: `${product.description}`,
     openGraph: {
       type: 'website',
-      url: `https://yourwebsite.com/product/${product._id}`,
+      url: `https://cakekhonegi.ir/Store/${product.title}`,
       title: `${product.title} - خرید کنید`,
       description: `${product.description}`,
       images: [
