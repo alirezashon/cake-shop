@@ -4,6 +4,7 @@ import Product from '../../../../models/Data/Product'
 
 const FindProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
+    console.log(req.method)
     if (req.method === 'POST') {
       const { authType, page, limit} = req.body
       if (authType === 'G&E!T*P^R$O#D$U^C@T*S') {
@@ -24,6 +25,7 @@ const FindProduct = async (req: NextApiRequest, res: NextApiResponse) => {
       } else {
         res.status(407).json({ success: false, message: 'Invalid Auth Type' })
       }
+  
     } else {
       res.status(409).json({ success: false, message: 'Invalid Request Type' })
     }

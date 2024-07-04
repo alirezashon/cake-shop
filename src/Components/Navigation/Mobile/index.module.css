@@ -1,17 +1,14 @@
 /** @format */
 .navBar {
   width: 100%;
-  background: repeating-radial-gradient(
-    rgb(255, 241, 241),
-    rgb(255, 239, 239),
-    rgb(245, 226, 226)
-  );
+  background: rgb(255, 255, 255);
   display: flex;
   position: fixed;
   padding: 1vh;
   z-index: 7;
   top: 0;
   justify-content: space-between;
+  border-bottom: 1px solid #f2c7c7;
   align-items: center;
 }
 .searchBar {
@@ -44,12 +41,9 @@
 .drawer {
   width: 40vw;
   height: 100vh;
-  background: repeating-radial-gradient(
-    rgb(255, 241, 241),
-    rgb(255, 239, 239),
-    rgb(245, 226, 226)
-  );
-  color: #e32c2c;
+  background: rgb(255, 255, 255);
+  border-right: 1px solid #e79090;
+  color: #6d5151;
   direction: rtl;
   overflow-y: auto;
   overflow-x: hidden;
@@ -64,59 +58,49 @@
 }
 
 .itemBox {
-  background: radial-gradient(rgb(255, 217, 217), rgb(219, 148, 148));
+  background: rgb(255, 255, 255);
   cursor: pointer;
-  margin: 1vh;
-  padding: 1vh;
-  border: 0.5vh ridge rgb(245, 255, 243);
-  border-radius: 1vh;
 }
-
-.itemBox:hover {
-  border: dashed 0.2vh rgba(248, 255, 236, 0.912);
-}
-
 .item {
-  background: repeating-radial-gradient(
-    rgb(255, 241, 241),
-    rgb(255, 239, 239),
-    rgb(245, 226, 226)
-  );
-  border: 0.2vh ridge rgba(236, 251, 255, 0.912);
   border-radius: 0.5vh;
   padding: 1vh;
+  border-radius: 1vh;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  border-bottom: solid 1px rgb(251, 223, 223);
+}
+.item:hover {
+  color: #d84b4b;
+  transform: translate(1vh);
 }
 
-.item:hover {
-  transform: translate(1vh);
+.category{
+  border-bottom: solid 1px rgb(255, 147, 147);
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.directionIcon:hover{
+  color: #d84b4b;
 }
 .options,
 .subOptions {
-  border-bottom: .1vh dashed rgb(233, 52, 52);
-  background: repeating-radial-gradient(
-    rgb(255, 241, 241),
-    rgb(255, 239, 239),
-    rgb(245, 226, 226)
-  );
+  border-bottom: 0.1vh solid rgb(172, 164, 164);
   border-radius: 2vh;
   padding: 1vh;
   margin: 1vh;
 }
-
-
-.options:hover {
-  transform: scale(1.04);
-  font-weight: bold;
-  color: #ff97d2;
+.subOptions:hover{
+  background-color: #fccece;
+  color: #d84b4b;
 }
-
 .image {
   width: 5vh;
   height: 5vh;
 }
 
 .navIcon {
-  background: rgb(250, 220, 220);
   color: rgb(233, 52, 52);
   width: 5vh;
   height: 5vh;
@@ -125,7 +109,6 @@
   font-weight: bold;
   align-items: center;
   justify-content: center;
-  border-radius: 22vh;
   cursor: pointer;
 }
 .iconBox {

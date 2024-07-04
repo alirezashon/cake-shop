@@ -103,10 +103,11 @@ const PC: React.FC<NavProps> = ({
                 <Link
                   key={itemIndex}
                   id={`${itemIndex === 3 && 'item'}`}
-                  href={`/${item.name}`}
+                  href={`/${item.link}`}
                   className={styles.item}
                   onMouseOver={() => setOpenItemWind({ ex: itemIndex, th: -1 })}
                 >
+
                   {item.name}
                 </Link>
                 {itemIndex === openItemWind?.ex &&

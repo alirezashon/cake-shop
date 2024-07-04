@@ -14,6 +14,8 @@ const Main: React.FC = () => {
         alt=''
       />
       <section className={styles.productsSection}>
+      <div className={styles.background_gif}></div>
+      <div className={styles.background_gi}></div>
         <h2>سفارش انواع کیک و شیرینی</h2>
         <div className={styles.products}>
           <div className={styles.product}>

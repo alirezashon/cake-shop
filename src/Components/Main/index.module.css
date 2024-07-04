@@ -6,6 +6,32 @@
   box-sizing: border-box;
   animation: fadeIn 2s;
 }
+.background_gif {
+  position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -1;
+	background: url('../../../public/images/5.jpg') center center/auto repeat;
+	background-repeat: no-repeat;
+	background-size:cover;
+	opacity: 0.8;
+}
+.background_gi {
+  position: absolute;
+	top: 300vh;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -1;
+	background: #1d0101 url('../../../public/images/3.jpg') center center/auto repeat;
+	background-repeat: no-repeat;
+	background-size: cover;
+	opacity: 0.8;
+}
+
+
 .topImage {
   left: 0;
   z-index: -1;

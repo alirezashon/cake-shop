@@ -7,6 +7,7 @@ import { GiCrossMark } from 'react-icons/gi'
 import Products from './Products'
 import { ProductInterface } from '@/Interfaces'
 import { useBasket } from '@/Context/Basket'
+import { TbShoppingBagX } from 'react-icons/tb'
 
 interface BasketProps {
   basketData: ProductInterface[]
@@ -58,11 +59,22 @@ const Basket: React.FC<BasketProps> = ({
             </div>
           </div>
           <div className={styles.basketBase}>
-            {/* {isloading ? <div className={styles.loading}></div> :} */}
             <Products setLoading={isLoading} basketData={basketData} />
-            <div className={styles.confirm} onClick={getBuy}>
-              ثبت سفارش
-            </div>
+            {basket.length > 0 ? (
+              <>
+                <div className={styles.confirm} onClick={getBuy}>
+                  ثبت سفارش
+                </div>
+              </>
+            ) : (
+              <>
+                <TbShoppingBagX className={styles.emptyBasket} />
+                <p>سبد خرید شما خالیست</p>
+                <div className={styles.confirm} onClick={getBuy}>
+                  برو به فروشگاه
+                </div>
+              </>
+            )}
           </div>
         </div>
       ) : (

@@ -15,21 +15,23 @@ import { BiSearch } from 'react-icons/bi'
 import { GetFave, AddFave, RemoveFave } from './Favorites'
 import { useRouter } from 'next/router'
 import { generateSEO } from './SEO'
-import Product from '@/models/Data/Product'
 import { NextSeo } from 'next-seo'
+import { useProducts } from '@/Context/Products'
+
 interface Props {
-  data: [Category[], ProductInterface[]]
+  category: Category[]
   total: number
 }
-const Store: React.FC<Props> = ({ data, total }) => {
+const Store: React.FC<Props> = ({ category, total }) => {
   const refs: {
     [key: string]: RefObject<HTMLInputElement | HTMLDivElement>
   } = {
     search: useRef<HTMLInputElement>(null),
     categoryBoxRef: useRef<HTMLDivElement>(null),
   }
+  const { products } = useProducts()
   const { basket, setBasket } = useBasket()
-  const [sortedata, setSortedata] = useState<ProductInterface[]>(data[1])
+  const [sortedata, setSortedata] = useState<ProductInterface[]>(products)
   const [productover, setProductover] = useState<number | null>(null)
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
   const [isMobile, setIsMobile] = useState(true)
@@ -53,7 +55,7 @@ const Store: React.FC<Props> = ({ data, total }) => {
   const fetchAllProducts = () => {
     let promise = Promise.resolve()
 
-    for (let i = 2; i <= totalPages; i++) {
+    for (let i = 3; i <= totalPages; i++) {
       promise = promise.then(() => {
         return fetchPage(i)
           .then((result) => {
@@ -179,9 +181,9 @@ const Store: React.FC<Props> = ({ data, total }) => {
                   <div className={styles.titlePrice}>
                     <p>
                       {`${
-                        data &&
-                        data[1][
-                          data[1].findIndex(
+                        sortedata &&
+                        sortedata[
+                          sortedata?.findIndex(
                             (pro) =>
                               pro._id === product.split('*2%2&7(7)5%5!1@2')[2]
                           )
@@ -190,9 +192,9 @@ const Store: React.FC<Props> = ({ data, total }) => {
                     </p>
                     <p>
                       {`${
-                        data &&
-                        data[1][
-                          data[1].findIndex(
+                        sortedata &&
+                        sortedata[
+                          sortedata?.findIndex(
                             (pro) =>
                               pro._id === product.split('*2%2&7(7)5%5!1@2')[2]
                           )
@@ -219,20 +221,19 @@ const Store: React.FC<Props> = ({ data, total }) => {
               className={styles.leftDirection}
               onClick={scrollLeft}
             />
-            {data &&
-              data[0]?.map((cat, catindex) => (
-                <div key={catindex} className={styles.category}>
-                  <Image
-                    loading='lazy'
-                    src={`data:image/jpeg;base64,${cat.src}`}
-                    alt={cat.name}
-                    width={200}
-                    height={200}
-                    className={styles.categorimage}
-                  />
-                  <div className={styles.categoryName}>{cat.name}</div>
-                </div>
-              ))}
+            {category?.map((cat, catindex) => (
+              <div key={catindex} className={styles.category}>
+                <Image
+                  loading='lazy'
+                  src={`data:image/jpeg;base64,${cat.src}`}
+                  alt={cat.name}
+                  width={200}
+                  height={200}
+                  className={styles.categorimage}
+                />
+                <div className={styles.categoryName}>{cat.name}</div>
+              </div>
+            ))}
             <IoIosArrowForward
               className={styles.rightDirection}
               onClick={scrollRight}

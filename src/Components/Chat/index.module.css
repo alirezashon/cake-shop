@@ -42,17 +42,14 @@
   align-items: center;
   padding: 0.2vh 1vh;
   text-align: center;
-  background: radial-gradient(rgba(255, 123, 123, 0.9), rgba(250, 180, 180, 0.901));
+  background-color: #ffffff;
   border-bottom: .3vh solid #ffffff;
 }
 
 .cross {
   transition: transform 0.7s;
   color: rgb(244, 94, 0);
-  background-color: #fff7f7f8;
-  border-radius: 0 0 7vh 7vh;
   padding: 0.3vh;
-  border: 0.1vh dashed rgb(245, 151, 27);
 }
 
 .cross:hover {
@@ -104,7 +101,7 @@
 
 .inputContainer {
   border-top: .4vh ridge rgb(205, 43, 43);
-  background-color: #ffdada;
+  background-color: #ffffff;
   display: flex;
   padding: 10px;
 }

@@ -1,7 +1,6 @@
 
 
 .postsContainer {
-	border: ridge .3vh #f7d19b;
 	box-shadow: 1px 1px 4px 1px rgba(245, 202, 83, 0.9);
 	padding: 1vh;
 	margin: 1vh 0vh;
@@ -14,7 +13,6 @@
 
 .postsContainer:hover {
 	z-index: 1;
-	border: 0.7vh double rgba(229, 208, 111, 0.912);
 	transform: translate(-1vh, -1vh);
 }
 

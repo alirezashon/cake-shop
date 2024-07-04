@@ -1,18 +1,13 @@
-/** @format */
-@keyframes borderero {
-  0% {
-    border-bottom: 0.1vh ridge rgb(243, 131, 27);
-  }
-}
+
 @keyframes openItems {
   0% {
-    transform: translateY(-100%);
+    transform: translateY(50%);
   }
 }
 
 .navBar {
   background-color: #ffffff;
-  color: rgb(195, 11, 23);
+  color: rgb(108, 15, 22);
   position: fixed;
   top: 0;
   z-index: 44;
@@ -25,6 +20,7 @@
   margin-left: 10%;
   padding: 0.2vh 7vh;
   border-bottom: 0.1vh rgba(255, 196, 196, 0.9) solid;
+  border-radius:0 0 2vh 2vh;
 }
 .itemsBox {
   z-index: 7;
@@ -40,7 +36,7 @@
   text-wrap: nowrap;
 }
 .item:hover {
-  animation: borderero 1s;
+  color: #f89393;
 }
 .catypeBox{
   display: flex;

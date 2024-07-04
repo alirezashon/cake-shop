@@ -1,14 +1,13 @@
 /** @format */
 
-import Link from "next/link"
-import styles from "./index.module.css"
-import { RefObject, useEffect, useRef, useState } from "react"
-import { FaUserCircle } from "react-icons/fa"
-import Basket from "../../Basket"
-import { ProductInterface } from "../../../Interfaces"
-import { BiSearch } from "react-icons/bi"
+import Link from 'next/link'
+import styles from './index.module.css'
+import { RefObject, useEffect, useRef, useState } from 'react'
+import { FaUserCircle } from 'react-icons/fa'
+import Basket from '../../Basket'
+import { ProductInterface } from '../../../Interfaces'
+import { BiSearch } from 'react-icons/bi'
 import { Items, items } from '../items'
-
 
 interface NavProps {
   basketData: ProductInterface[]
@@ -38,15 +37,34 @@ const Mobile: React.FC<NavProps> = ({
     }
   }
   useEffect(() => {
-    window.addEventListener("click", closeNav)
+    window.addEventListener('click', closeNav)
 
     return () => {
-      window.removeEventListener("click", closeNav)
+      window.removeEventListener('click', closeNav)
     }
   }, [drawer, setDrawer])
+
+  const toggleDrawerItem = (index: number) => {
+    setDrawer((prevDrawer) => {
+      if (prevDrawer?.item === index) {
+        return { ...prevDrawer, item: -1, category: -1 }
+      }
+      return { item: index, category: -1 }
+    })
+  }
+
+  const toggleDrawerCategory = (itemIndex: number, categoryIndex: number) => {
+    setDrawer((prevDrawer) => {
+      if (prevDrawer?.item === itemIndex && prevDrawer?.category === categoryIndex) {
+        return { ...prevDrawer, category: -1 }
+      }
+      return { item: itemIndex, category: categoryIndex }
+    })
+  }
+
   return (
     <>
-      {loading && <div className={"loadingSpin"}></div>}
+      {loading && <div className={'loadingSpin'}></div>}
       {drawer ? (
         <div className={styles.drawer}>
           <div className={styles.searchBox}>
@@ -55,28 +73,33 @@ const Mobile: React.FC<NavProps> = ({
                 ref={refs.search as RefObject<HTMLInputElement>}
                 className={styles.searchInput}
                 type='search'
-                placeholder={"جستجو ..."}
+                placeholder={'جستجو ...'}
               />
               <BiSearch className={styles.searchIcon} />
             </form>
           </div>
           {items.map((item: Items, index) => (
             <div key={index} className={styles.itemBox}>
-              <h5
+              <div
                 className={styles.item}
-                onClick={() => setDrawer({ item: index, category: -1 })}
+                onClick={() => toggleDrawerItem(index)}
               >
                 <Link
                   key={index}
-                  href={`${item.category}`}
-                  className={styles.products}
+                  href={`${item.link}`}
+                  className={styles.product}
                 >
                   {item.name}
                 </Link>
-              </h5>
+                {item.category && (
+                  <p className={styles.directionIcon}>
+                    &#x2BC6;
+                  </p>
+                )}
+              </div>
               {drawer.item === index &&
                 items[drawer.item].category?.map((data, subIndex) =>
-                  typeof data === "string" ? (
+                  typeof data === 'string' ? (
                     <Link
                       key={subIndex}
                       href={`${item.category}/${
@@ -86,11 +109,11 @@ const Mobile: React.FC<NavProps> = ({
                       <h5 className={styles.options}>{`${data}`}</h5>
                     </Link>
                   ) : (
-                    <div key={index}>
+                    <div key={subIndex}>
                       <h5
                         className={styles.category}
                         onClick={() =>
-                          setDrawer({ item: index, category: subIndex })
+                          toggleDrawerCategory(index, subIndex)
                         }
                       >
                         <Link
@@ -100,12 +123,17 @@ const Mobile: React.FC<NavProps> = ({
                         >
                           {data.name}
                         </Link>
+                        <p
+                       className={styles.directionIcon}
+                        >
+                          &#x2BC6;
+                        </p>
                       </h5>
                       {subIndex === drawer.category &&
                         data.type?.map((subOption, subOptionIndex) => (
                           <Link
                             key={subOptionIndex}
-                            href={`${item.category}/${data.type}/${subOption}`}
+                            href={`${item.category}/${data.name}/${subOption}`}
                             className={styles.products}
                           >
                             <h5
@@ -139,7 +167,7 @@ const Mobile: React.FC<NavProps> = ({
             <div>
               <FaUserCircle
                 className={styles.profile}
-                onClick={() => (window.location.href = "/profile")}
+                onClick={() => (window.location.href = '/profile')}
               />
             </div>
           </div>

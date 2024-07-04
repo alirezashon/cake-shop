@@ -1,4 +1,5 @@
 .container {
+  background: #ffffff75;
   margin: 1vh;
   display: flex;
   justify-content: space-around;

@@ -63,7 +63,6 @@ const List: React.FC<Props> = ({
                       category.find((cat) => cat._id === product.categories)
                         ?.name}
                   </td>
-                  <td>{product?.calories}</td>
                   <td>{product?.description}</td>
 
                   <td>{product.keywords}</td>
