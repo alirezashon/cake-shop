@@ -28,7 +28,7 @@
   width: 28vw;
   height: 80vh;
   background-color: #f4f4f4;
-  border: 0.5vh double #f16c6c;
+  border: 1px solid #f5a2a2;
   overflow-y: auto;
   box-shadow: 1px 1px 0.1vh 1px rgb(205, 43, 43) inset;
   border-radius: 5px;

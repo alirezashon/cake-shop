@@ -11,7 +11,7 @@ const ChatUI = () => {
   const [newMessage, setNewMessage] = useState('')
   const [socket, setSocket] = useState<Socket | null>(null)
 
-  useEffect(() => {
+  const connectSocket = () => {
     const socketIo: Socket = io({
       path: '/api/socket',
     })
@@ -39,10 +39,23 @@ const ChatUI = () => {
     return () => {
       socketIo.disconnect()
     }
-  }, [])
+  }
 
   const send = () => {
-    
+    const messageObject: Chat = {
+      sender: '*u&$e#',
+      content: newMessage,
+      time: new Date().toISOString(),
+    }
+
+    setMessages((prev) => {
+      if (prev === null) return null
+      return {
+        ...prev,
+        chats: [...prev.chats, messageObject],
+      }
+    })
+
     if (socket) {
       socket.emit('sendMessage', {
         authType: '&M%e$A#g$e#I%n&Z*',
@@ -82,6 +95,12 @@ const ChatUI = () => {
   useEffect(() => {
     if (!messages) getHistory()
   }, [messages])
+
+  useEffect(() => {
+    if (showChat && !socket) {
+      connectSocket()
+    }
+  }, [showChat])
 
   return (
     <div className={styles.chatContainer}>

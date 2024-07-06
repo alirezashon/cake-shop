@@ -1,39 +1,119 @@
-/* components/Main.module.css */
-.mainContainer {
-  width: 100%;
-  padding: 20px;
-  font-size: 2vh;
-  box-sizing: border-box;
-  animation: fadeIn 2s;
+@keyframes showImage {
+  0% {
+    transform: translateX(-100%);
+  }
 }
-.background_gif {
+.mainContainer {
+  width: 100vw;
+  padding: 1vh;
+  font-size: 2vh;
+  margin-bottom: 122vh;
+}
+.carousel {
+  width: 100%;
+}
+
+.topBackground {
+  animation: showImage 1s;
   position: absolute;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: -1;
-	background: url('../../../public/images/5.jpg') center center/auto repeat;
-	background-repeat: no-repeat;
-	background-size:cover;
-	opacity: 0.8;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  opacity: 0.8;
+  transition: background 1s ease-in-out;
+}
+
+.prevButton,
+.nextButton {
+  position: absolute;
+  top: 50%;
+  width: 5vh;
+  height: 5vh;
+  border: 1px solid #ff9191b8;
+  font-size: 4vh;
+  border-radius: 4vh;
+  background-color: rgba(255, 255, 255, 0.621);
+  color: rgb(197, 68, 68);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prevButton {
+  left: 10px;
+}
+
+.nextButton {
+  right: 10px;
+}
+.prevButton:hover,
+.nextButton:hover {
+  transform: scale(1.1)rotate(23deg);
 }
 .background_gi {
   position: absolute;
-	top: 300vh;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: -1;
-	background: #1d0101 url('../../../public/images/3.jpg') center center/auto repeat;
-	background-repeat: no-repeat;
-	background-size: cover;
-	opacity: 0.8;
+  top: 300vh;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: #1d0101 url('../../../public/images/3.jpg') center center/auto
+    repeat;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+}
+
+.productBox{
+margin-top: 120vh;
 }
 
 
+
+/* section 3 */
+.backgroundContainer {
+  display: flex;
+  justify-content: center;
+}
+.leftImageSide,
+.rightImageSide {
+  width: 30%;
+  perspective: 60vh;
+  position: absolute;
+  height: 40vh;
+}
+.leftImageSide {
+  left: 0;
+}
+.mainImageSide {
+  margin-top: 40vh;
+  width: 90%;
+  height: 70vh;
+}
+.rightImageSide {
+  right: 0;
+}
+.leftImage {
+}
+.mainImage {
+  border-radius: 4vh;
+  width: 100%;
+  height: 100vh;
+}
+.rightImage {
+}
+.leftImage,
+.rightImage {
+  transform: rotateY(14deg);
+  width: 100%;
+  height: 100%;
+}
 .topImage {
   left: 0;
+  top: 180vh;
   z-index: -1;
   position: absolute;
   height: 80vh;
@@ -41,12 +121,17 @@
 }
 .productsSection {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .productsSection h2 {
-  font-size: 2.5em;
-  color: #ff4081;
-  margin-bottom: 20px;
+  color: #590d0d;
+  background-color: #ffffff;
+  border-radius: 1vh 3vh;
+  padding: 1vh 2vh;
 }
 
 .products {
@@ -71,7 +156,7 @@
   transform: scale(1.05);
 }
 
-.mainCakeImage{
+.mainCakeImage {
   width: 100%;
   height: 30vh;
   border-radius: 10px;

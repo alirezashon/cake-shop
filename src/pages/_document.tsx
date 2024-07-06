@@ -1,12 +1,12 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang='en'>
       <Head />
-      <link rel='icon' href='../public/images/icon.png' />
+      <link rel='shortcut icon' href='/images/icon.png' />
 
-        <Main />
-        <NextScript />
+      <Main />
+      <NextScript />
     </Html>
   )
 }
