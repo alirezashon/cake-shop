@@ -4,8 +4,7 @@ import Product from '../../../../models/Data/Product'
 
 const FindProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    console.log(req.method)
-    if (req.method === 'POST') {
+     if (req.method === 'POST') {
       const { authType, page, limit} = req.body
       if (authType === 'G&E!T*P^R$O#D$U^C@T*S') {
         await db.connectToShop()

@@ -30,7 +30,7 @@ const Navbar: React.FC<NavProps> = ({ basketData }) => {
   }, [])
 
   return (
-    <nav style={{ marginBottom: `${isMobile ? '5  vh' : '6vh'}`, zIndex: 44 }}>
+    <nav className={styles.nav} style={{ marginBottom: `${isMobile ? '5  vh' : '6vh'}`, zIndex: 44 }}>
       {isMobile ? (
         <div className={styles.moblie}>
           <Mobile

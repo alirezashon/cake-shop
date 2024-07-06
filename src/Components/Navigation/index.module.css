@@ -5,6 +5,9 @@
   display: hidden;
 }
 @media (max-width: 876px) {
+  .nav{
+    margin-bottom: 9vh;
+  }
   .pc {
     display: hidden;
   }

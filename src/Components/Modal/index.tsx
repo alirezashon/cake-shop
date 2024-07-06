@@ -1,5 +1,5 @@
 // components/Modal.tsx
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 type ModalProps = {
   show: boolean
@@ -11,21 +11,36 @@ type ModalProps = {
 }
 
 const Modal: React.FC<ModalProps> = ({ show, data, onClose }) => {
+  const [progress, setProgress] = useState(100)
+
   useEffect(() => {
     if (show) {
-      const timer = setTimeout(() => {
-        onClose()
-      }, 5000) // Hide after 5 seconds
+      setProgress(100)
+      const totalDuration = 4000 // total duration of the timer in milliseconds
+      const updateInterval = 100 // update the progress bar every 100 milliseconds
+      const decrement = (100 / totalDuration) * updateInterval // decrement percentage per update
 
-      return () => clearTimeout(timer)
+      const timer = setInterval(() => {
+        setProgress((prev) => {
+          const nextProgress = prev - decrement
+          if (nextProgress <= 0) {
+            clearInterval(timer)
+            onClose()
+            return 0
+          }
+          return nextProgress
+        })
+      }, updateInterval)
+
+      return () => clearInterval(timer)
     }
   }, [show, onClose])
 
   if (!show) return null
-
   return (
     <div style={modalStyles.overlay}>
       <div style={modalStyles.content}>
+        <div style={{ ...modalStyles.progressBar, width: `${progress}%` }} />
         <span style={modalStyles.close} onClick={onClose}>
           &times;
         </span>
@@ -50,7 +65,7 @@ const modalStyles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex:7
+    zIndex: 7,
   },
   content: {
     backgroundColor: '#fff',
@@ -61,6 +76,14 @@ const modalStyles = {
     position: 'relative' as 'relative',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
   },
+  progressBar: {
+    position: 'absolute' as 'absolute',
+    top: 0,
+    left: 0,
+    height: '2px',
+    backgroundColor: '#4CAF50',
+    transition: 'width 0.1s linear',
+  },
   close: {
     position: 'absolute' as 'absolute',
     top: '10px',
@@ -69,7 +92,7 @@ const modalStyles = {
     fontSize: '18px',
   },
   title: {
-    color: '#4CAF50', // Green color for the title
+    color: '#4CAF50',
     fontSize: '18px',
     marginBottom: '10px',
   },

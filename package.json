@@ -33,5 +33,6 @@
     "@types/react-dom": "^18",
     "eslint": "^9.4.0",
     "typescript": "5.4.5"
-  }
+  },
+  "proxy": "http://localhost:3872"
 }

@@ -44,7 +44,6 @@ const Details: React.FC<Props> = ({ post }) => {
 
   useEffect(() => {
     setBasket(Get())
-    console.log(post)
   }, [setBasket])
 
   const addComment = async (id: string) => {
@@ -54,15 +53,15 @@ const Details: React.FC<Props> = ({ post }) => {
       body: JSON.stringify({
         id,
         comment: {
-          client:`${refs.name.current?.valueOf}`,
-          content:`${refs.content.current?.valueOf}` ,
-          rates:`${refs.rate.current?.valueOf}`
+          client: `${refs.name.current?.valueOf}`,
+          content: `${refs.content.current?.valueOf}`,
+          rates: `${refs.rate.current?.valueOf}`,
         },
         authType: '(a&D*m%o$t^C@e$n%t(A)m)',
       }),
     })
     const postData = await res.json()
-    res.ok&& location.reload()
+    res.ok && location.reload()
   }
   return (
     <>
@@ -119,7 +118,9 @@ const Details: React.FC<Props> = ({ post }) => {
               <div className={styles.title}>{post.title}</div>
               <Image
                 className={styles.mainImage}
-                src={`data:image/jpeg;base64,${Buffer.from(post.src).toString('base64')}`}
+                src={`data:image/jpeg;base64,${Buffer.from(post.src).toString(
+                  'base64'
+                )}`}
                 width={777}
                 height={777}
                 alt=''
@@ -195,7 +196,12 @@ const Details: React.FC<Props> = ({ post }) => {
                   placeholder={'متن پیام خود را وارد کنید . . .'}
                 ></textarea>
               </div>
-              <input value={'ارسال'} type='submit' className={styles.submito} onClick={()=>addComment(post._id)}/>
+              <input
+                value={'ارسال'}
+                type='submit'
+                className={styles.submito}
+                onClick={() => addComment(post._id)}
+              />
             </form>
           ) : (
             <div

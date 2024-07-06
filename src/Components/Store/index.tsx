@@ -13,7 +13,6 @@ import { searchEngine } from './content'
 import { Toast } from 'primereact/toast'
 import { BiSearch } from 'react-icons/bi'
 import { GetFave, AddFave, RemoveFave } from './Favorites'
-import { useRouter } from 'next/router'
 import { generateSEO } from './SEO'
 import { NextSeo } from 'next-seo'
 import { useProducts } from '@/Context/Products'
@@ -312,7 +311,7 @@ const Store: React.FC<Props> = ({ category, total }) => {
                   src={`data:image/jpeg;base64,${Buffer.from(
                     product.src
                   ).toString('base64')}`}
-                  onClick={() => useRouter().push(`/Store/${product.title}`)}
+                  onClick={() => open(`/Store/${product.title}`)}
                   alt={product.title}
                   style={{ opacity: productover === productindex ? 0.2 : 1 }}
                   width={1212}
@@ -322,14 +321,14 @@ const Store: React.FC<Props> = ({ category, total }) => {
                 {productover === productindex && (
                   <div
                     className={styles.productDescription}
-                    onClick={() => useRouter().push(`/Store/${product.title}`)}
+                    onClick={() => open(`/Store/${product.title}`)}
                   >
                     {product.description}
                   </div>
                 )}
                 <p
                   className={styles.producTitle}
-                  onClick={() => useRouter().push(`/Store/${product.title}`)}
+                  onClick={() => open(`/Store/${product.title}`)}
                 >
                   {product.title}
                 </p>

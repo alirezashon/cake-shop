@@ -1,3 +1,6 @@
+@keyframes basketOpen {
+  0%{transform: translateX(-100%);}
+}
 .basketBall {
   font-size: 4vh;
   color: rgb(246, 108, 108);
