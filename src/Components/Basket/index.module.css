@@ -21,12 +21,12 @@
   justify-content: center;
   background-color: rgb(248, 177, 23);
   border-radius: 22vh;
-  width: 2.5vh;
-  height: 2.5vh;
+  width: 2vh;
+  height: 2vh;
   font-size: 1.2vh;
   border: 0.2vh ridge rgb(255, 236, 230);
   color: #ffffff;
-  top: 1.7vh;
+  top: 1.8vh;
 }
 
 .basketDrawer {
@@ -105,10 +105,7 @@
   .basketDrawer {
     width: 55%;
   }
-  .basketBall {
-    font-size: 5vh;
-    margin: 0;
-  }
+
   .basketHeader {
     flex-direction: row-reverse;
   }

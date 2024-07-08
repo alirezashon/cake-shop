@@ -62,11 +62,9 @@
 }
 .productBox:hover {
   transform: scale(1.01);
-  background-color: rgb(255, 244, 244);
+  background-color: rgb(255, 255, 255);
 }
 .products {
-  border-radius: 0 0 11vh 1vh;
-  background-color: #fbffe8;
   margin: 1vh;
   text-wrap: nowrap;
   display: block;
@@ -94,21 +92,6 @@
   flex-direction: row-reverse;
   justify-content: space-between;
 }
-
-.navButton {
-  border-radius: 1vh;
-  padding: 1vh;
-  margin: 3vh;
-}
-
-.navButton:hover {
-  background: linear-gradient(
-    333deg,
-    rgba(212, 216, 179, 0.9),
-    rgba(37, 45, 70, 0.9)
-  );
-}
-
 .icon {
   font-size: 5vh;
 }

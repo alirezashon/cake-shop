@@ -51,11 +51,11 @@
 }
 .prevButton:hover,
 .nextButton:hover {
-  transform: scale(1.1)rotate(23deg);
+  transform: scale(1.1) rotate(23deg);
 }
 .background_gi {
   position: absolute;
-  top: 300vh;
+  top: 444vh;
   left: 0;
   width: 100vw;
   height: 100vh;
@@ -67,11 +67,9 @@
   opacity: 0.8;
 }
 
-.productBox{
-margin-top: 120vh;
+.productBox {
+  margin-top: 20vh;
 }
-
-
 
 /* section 3 */
 .backgroundContainer {
@@ -113,7 +111,7 @@ margin-top: 120vh;
 }
 .topImage {
   left: 0;
-  top: 180vh;
+  top: 100vh;
   z-index: -1;
   position: absolute;
   height: 80vh;
@@ -196,8 +194,11 @@ margin-top: 120vh;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 876px) {
+  .productsSection {
+    position: absolute;
+  }
   .product {
-    width: 40%;
+    min-width: 40%;
   }
 }

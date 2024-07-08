@@ -33,7 +33,6 @@ const Store: React.FC<Props> = ({ category, total }) => {
   const [sortedata, setSortedata] = useState<ProductInterface[]>(products)
   const [productover, setProductover] = useState<number | null>(null)
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
-  const [isMobile, setIsMobile] = useState(true)
   const [favorites, setFavorites] = useState<string[]>([])
 
   const totalPages = Math.ceil(total / 25)
@@ -72,33 +71,18 @@ const Store: React.FC<Props> = ({ category, total }) => {
   }
 
   useEffect(() => {
-    if (total && sortedata?.length !== total) {
+    if (total && sortedata?.length < total) {
       fetchAllProducts()
     }
-  }, [total])
+    setFavorites(GetFave())
+    setBasket(Get())
+  }, [total, setBasket, setFavorites])
 
   const scrollLeft = () => {
     if (refs.categoryBoxRef.current) {
       refs.categoryBoxRef.current.scrollBy({ left: -100, behavior: 'smooth' })
     }
   }
-  useEffect(() => {
-    setFavorites(GetFave())
-    setBasket(Get())
-    if (innerWidth < 777) {
-      setIsMobile(true)
-    }
-    const handleResize = () => {
-      setIsMobile(innerWidth <= 777)
-    }
-
-    handleResize()
-    addEventListener('resize', handleResize)
-
-    return () => {
-      removeEventListener('resize', handleResize)
-    }
-  }, [])
 
   const scrollRight = () => {
     if (refs.categoryBoxRef.current) {
@@ -125,7 +109,9 @@ const Store: React.FC<Props> = ({ category, total }) => {
   }
   const PriceAction = (product: string, fontSize: string) => {
     return (
+    
       <div className={styles.priceAction}>
+    
         <MdAddCircle
           className={styles.inceriment}
           size={fontSize}
@@ -150,70 +136,6 @@ const Store: React.FC<Props> = ({ category, total }) => {
     <>
       <Toast />
       <div className={styles.container}>
-        {!isMobile && (
-          <div className={styles.basketSide}>
-            <div className={styles.basketHead}>
-              <div>
-                {basket[0]?.reduce((acc, d) => {
-                  const parts = d.split('*2%2&7(7)5%5!1@2')
-                  const prico = parseInt(parts[3])
-                  return acc + prico
-                }, 0) || 0}
-                محصول در سبد خرید
-              </div>
-              <MdDeleteForever className={styles.garbage} />
-            </div>
-            <div className={styles.basketDetail}>
-              <p>هزینه ی کل</p>
-
-              {`${
-                basket[0]?.reduce((acc, d) => {
-                  const parts = d.split('*2%2&7(7)5%5!1@2')
-                  const prico = parseInt(parts[3]) * parseInt(parts[1])
-                  return acc + prico
-                }, 0) || 0
-              } تومان `}
-            </div>
-            <div className={styles.productInBasket}>
-              {basket[0]?.map((product) => (
-                <div className={styles.basketController}>
-                  <div className={styles.titlePrice}>
-                    <p>
-                      {`${
-                        sortedata &&
-                        sortedata[
-                          sortedata?.findIndex(
-                            (pro) =>
-                              pro._id === product.split('*2%2&7(7)5%5!1@2')[2]
-                          )
-                        ]?.title
-                      }`}
-                    </p>
-                    <p>
-                      {`${
-                        sortedata &&
-                        sortedata[
-                          sortedata?.findIndex(
-                            (pro) =>
-                              pro._id === product.split('*2%2&7(7)5%5!1@2')[2]
-                          )
-                        ]?.price
-                      }`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                      تومان
-                    </p>
-                  </div>
-                  {PriceAction(product, '3vh')}
-                </div>
-              ))}
-            </div>
-            <button
-              className={styles.buy}
-              onClick={() => (location.href = '/newReq/pay')}
-            >
-              تکمیل خرید
-            </button>
-          </div>
-        )}
         <div className={styles.menuSide}>
           <div className={styles.categoryBox} ref={refs.categoryBoxRef}>
             <IoIosArrowForward

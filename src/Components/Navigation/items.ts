@@ -14,7 +14,6 @@ export const items: Items[] = [
   { name: 'صفحه اصلی', link: '/' },
   { name: 'درباره ما', link: '/about-us' },
   { name: 'کیک سفارشی', link: '/custom-cake' },
-  { name: 'تماس با ما', link: '/contact-us' },
   {
     name: 'فروشگاه',
     link: '/Store',
@@ -67,4 +66,5 @@ export const items: Items[] = [
       },
     ],
   },
+  { name: 'تماس با ما', link: '/contact-us' },
 ]

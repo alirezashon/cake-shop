@@ -1,45 +1,11 @@
 .container {
-  background: #ffffff75;
   margin: 1vh;
   display: flex;
   justify-content: space-around;
-  font-size: 2vh;
+  font-size: 2vh;  
   color: #af0b0b;
 }
-.basketSide {
-  direction: rtl;
-  width: 27%;
-  height: 67vh;
-  overflow-y: auto;
-  background-color: white;
-  border: 0.1vh solid rgb(237, 147, 145);
-  border-radius: 1vh 1vh 0 0;
-}
-.basketHead {
-  height: 15%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0.4vh 3vh;
-  align-items: center;
-}
-.garbage {
-  color: rgb(246, 63, 26);
-  font-size: 3vh;
-}
-.basketDetail {
-  border-block: 0.1vh #fe8181 solid;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.basketController {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 0.1vh solid rgb(255, 60, 60);
-  align-items: center;
-  padding: 0.4vh 3vh;
-  height: 33%;
-}
+
 .priceAction {
   justify-content: space-around;
   width: 33%;
@@ -67,23 +33,10 @@
 .deceriment:hover {
   transform: scale(1.1) rotate(180deg);
 }
-.buy {
-  top: 67vh;
-  padding: 1vh;
-  width: 100%;
-  background-color: rgb(163, 26, 26);
-  left: 2%;
-  color: #ffffff;
-  border: 0.4vh solid rgb(224, 72, 72);
-  border-radius: 0 0 1vh 1vh;
-}
-.buy:hover {
-  cursor: pointer;
-  transform: scale(0.9);
-}
+
 /* end of basket */
 .menuSide {
-  width: 67%;
+  width: 97%;
 }
 .categoryBox {
   display: flex;
@@ -187,7 +140,6 @@
 }
 .searchEngine {
   display: flex;
-  border: solid 0.2vh #df8181;
   width: 30%;
   justify-content: space-around;
 }
@@ -271,7 +223,7 @@
   display: grid;
   justify-content: space-around;
   padding: 2vh 0;
-  grid-template-columns: repeat(auto-fit, minmax(32%, 0fr));
+  grid-template-columns: repeat(auto-fit, minmax(22%, 0fr));
   width: 100%;
   text-align: center;
   gap: 1vh;

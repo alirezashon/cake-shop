@@ -1,9 +1,5 @@
 import Navigation from "../Components/Navigation"
 import Head from "next/head"
-import { BasketProvider } from "@/Context/Basket"
-import { useEffect, useState } from "react"
-import { ProductInterface } from "@/Interfaces"
-import { Get } from "@/Components/Basket/Actions"
 
 const Layout = ({ children }: any) => {
   return (
@@ -16,7 +12,7 @@ const Layout = ({ children }: any) => {
       </Head>
         <div>
           <Navigation />
-          <main >{children}</main>
+          <main style={{marginTop:'12vh'}} >{children}</main>
         </div>
     </>
   )

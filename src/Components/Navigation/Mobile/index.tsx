@@ -148,18 +148,15 @@ const Mobile: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
           </div>
 
           <div className={styles.iconBox}>
-            <div>
               <Basket
                 isBasketOpen={isBasketOpen}
                 setIsBasketOpen={setIsBasketOpen}
               />
-            </div>
-            <div>
+
               <FaUserCircle
                 className={styles.profile}
                 onClick={() => (window.location.href = '/profile')}
               />
-            </div>
           </div>
         </div>
       )}

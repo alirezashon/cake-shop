@@ -1,145 +1,3 @@
-const products: ProductInterface[] = [
-  {
-    _id: '1',
-    title: 'Product 1',
-    src: '/images/1.jpg',
-    subImages: [],
-    price: 2999,
-    categories: 'Category 1',
-    rates: 4.5,
-    comments: [],
-    description: 'Description for product 1',
-    keywords: ['keyword1', 'keyword2'],
-  },
-  {
-    _id: '2',
-    title: 'Product 2',
-    src: '/images/2.jpg',
-    subImages: [],
-    price: 1999,
-    categories: 'Category 2',
-    rates: 4.0,
-    comments: [],
-    description: 'Description for product 2',
-    keywords: ['keyword3', 'keyword4'],
-  },
-  {
-    _id: '1',
-    title: 'Product 1',
-    src: '/images/1.jpg',
-    subImages: [],
-    price: 2999,
-    categories: 'Category 1',
-    rates: 4.5,
-    comments: [],
-    description: 'Description for product 1',
-    keywords: ['keyword1', 'keyword2'],
-  },
-  {
-    _id: '2',
-    title: 'Product 2',
-    src: '/images/2.jpg',
-    subImages: [],
-    price: 1999,
-    categories: 'Category 2',
-    rates: 4.0,
-    comments: [],
-    description: 'Description for product 2',
-    keywords: ['keyword3', 'keyword4'],
-  },{
-    _id: '1',
-    title: 'Product 1',
-    src: '/images/1.jpg',
-    subImages: [],
-    price: 2999,
-    categories: 'Category 1',
-    rates: 4.5,
-    comments: [],
-    description: 'Description for product 1',
-    keywords: ['keyword1', 'keyword2'],
-  },
-  {
-    _id: '2',
-    title: 'Product 2',
-    src: '/images/2.jpg',
-    subImages: [],
-    price: 1999,
-    categories: 'Category 2',
-    rates: 4.0,
-    comments: [],
-    description: 'Description for product 2',
-    keywords: ['keyword3', 'keyword4'],
-  },{
-    _id: '1',
-    title: 'Product 1',
-    src: '/images/1.jpg',
-    subImages: [],
-    price: 2999,
-    categories: 'Category 1',
-    rates: 4.5,
-    comments: [],
-    description: 'Description for product 1',
-    keywords: ['keyword1', 'keyword2'],
-  },
-  {
-    _id: '2',
-    title: 'Product 2',
-    src: '/images/2.jpg',
-    subImages: [],
-    price: 1999,
-    categories: 'Category 2',
-    rates: 4.0,
-    comments: [],
-    description: 'Description for product 2',
-    keywords: ['keyword3', 'keyword4'],
-  },{
-    _id: '1',
-    title: 'Product 1',
-    src: '/images/1.jpg',
-    subImages: [],
-    price: 2999,
-    categories: 'Category 1',
-    rates: 4.5,
-    comments: [],
-    description: 'Description for product 1',
-    keywords: ['keyword1', 'keyword2'],
-  },
-  {
-    _id: '2',
-    title: 'Product 2',
-    src: '/images/2.jpg',
-    subImages: [],
-    price: 1999,
-    categories: 'Category 2',
-    rates: 4.0,
-    comments: [],
-    description: 'Description for product 2',
-    keywords: ['keyword3', 'keyword4'],
-  },{
-    _id: '1',
-    title: 'Product 1',
-    src: '/images/1.jpg',
-    subImages: [],
-    price: 2999,
-    categories: 'Category 1',
-    rates: 4.5,
-    comments: [],
-    description: 'Description for product 1',
-    keywords: ['keyword1', 'keyword2'],
-  },
-  {
-    _id: '2',
-    title: 'Product 2',
-    src: '/images/2.jpg',
-    subImages: [],
-    price: 1999,
-    categories: 'Category 2',
-    rates: 4.0,
-    comments: [],
-    description: 'Description for product 2',
-    keywords: ['keyword3', 'keyword4'],
-  },
-]
 import styles from './index.module.css'
 import { ProductInterface } from '@/Interfaces'
 import { useRef, useEffect, RefObject, useState } from 'react'
@@ -148,6 +6,7 @@ import Image from 'next/image'
 import { Add, Get, Remove } from '../../Basket/Actions'
 import { GiCrossMark } from 'react-icons/gi'
 import { useBasket } from '@/Context/Basket'
+import { useProducts } from '@/Context/Products'
 import { MdAddCircle } from 'react-icons/md'
 import { FaMinus } from 'react-icons/fa'
 import { GetFave, AddFave, RemoveFave } from '../../Store/Favorites'
@@ -155,6 +14,8 @@ import Modal from '@/Components/Modal'
 
 const ProductCarousel: React.FC = () => {
   const { basket, setBasket } = useBasket()
+  const { products } = useProducts()
+  const [data, setdata] = useState<ProductInterface[]>(products)
   const [showModal, setShowModal] = useState<boolean>(false)
   const [productover, setProductover] = useState<number | null>(null)
   const [showProducto, setShowProducto] = useState<ProductInterface | null>(
@@ -175,17 +36,17 @@ const ProductCarousel: React.FC = () => {
             setShowModal(false)
           }, 5000)
         )
+    }
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        showProducto &&
+        !document
+          .querySelector(`.${styles.productself}`)
+          ?.contains(event.target as Node)
+      ) {
+        setShowProducto(null)
       }
-      const handleClickOutside = (event: MouseEvent) => {
-        if (
-          showProducto &&
-          !document
-            .querySelector(`.${styles.productself}`)
-            ?.contains(event.target as Node)
-        ) {
-          setShowProducto(null)
-        }
-      }
+    }
     if (showProducto) {
       document.addEventListener('mousedown', handleClickOutside)
     } else {
@@ -232,6 +93,7 @@ const ProductCarousel: React.FC = () => {
   }
   return (
     <>
+      {products.length}
       <div className={styles.carouselContainer}>
         <div className={styles.productBox} ref={refs.productBoxRef}>
           <IoIosArrowForward
@@ -248,7 +110,9 @@ const ProductCarousel: React.FC = () => {
               <Image
                 onClick={() => setShowProducto(product)}
                 loading='lazy'
-                src={`${product.src}`}
+                src={`data:image/jpeg;base64,${Buffer.from(
+                  product.src
+                ).toString('base64')}`}
                 alt={product.title}
                 width={1200}
                 height={1200}
@@ -269,7 +133,9 @@ const ProductCarousel: React.FC = () => {
                 </div>
               )}
               <div className={styles.productPrice}>
-                {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                {product.price
+                  ?.toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 تومان
               </div>
             </div>
@@ -297,16 +163,18 @@ const ProductCarousel: React.FC = () => {
               />
               <p className={styles.producTitlef}>{showProducto?.title}</p>
               <Image
-                // src={`data:image/jpeg;base64,${showProducto?.src}`}
-                src={showProducto?.src}
+                src={`data:image/jpeg;base64,${Buffer.from(
+                  showProducto?.src
+                ).toString('base64')}`}
                 alt={showProducto?.title}
+                onClick={()=>open(`/Store/${showProducto?.title}`)}
                 width={444}
                 height={444}
                 className={styles.productimagelf}
               />
               <div className={styles.productPrice}>
                 {showProducto.price
-                  .toString()
+                  ?.toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 تومان
               </div>

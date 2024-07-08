@@ -100,7 +100,7 @@ justify-content: space-between;
   height: 5vh;
 }
 
-.navIcon {
+.navIcon  {
   color: rgb(233, 52, 52);
   width: 5vh;
   height: 5vh;
@@ -113,13 +113,15 @@ justify-content: space-between;
 }
 .iconBox {
   display: flex;
-  justify-content: flex-end;
-  min-width: 50%;
+  align-items: center;
+  width: 20%;
+  left: 0;
+  justify-content: space-around;
+
 }
 
 .profile {
-  margin: 0 2vh;
-  font-size: 5vh;
+  font-size: 3vh;
   color: rgb(108, 15, 22);
   border-radius: 23vh;
   cursor: pointer;
