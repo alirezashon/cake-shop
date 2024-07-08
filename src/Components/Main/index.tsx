@@ -96,9 +96,8 @@ const Main: React.FC = () => {
           </div>
         </div>
 
-        <div className={styles.background_gi}></div>
-        <h2>سفارش انواع کیک و شیرینی</h2>
-        <div className={styles.products}>
+        <h2 onClick={()=>open('/Store')}>سفارش انواع کیک و شیرینی</h2>
+        <div className={styles.productsBox}>
           <div className={styles.product}>
             <Image
               src='/images/icon.png'
@@ -159,6 +158,27 @@ const Main: React.FC = () => {
             height={1212}
             alt=''
           />
+            <Image
+            className={styles.mainImage}
+            src={'/images/1.jpg'}
+            width={1515}
+            height={1212}
+            alt=''
+          />
+            <Image
+            className={styles.mainImage}
+            src={'/images/1.jpg'}
+            width={1515}
+            height={1212}
+            alt=''
+          />
+            <Image
+            className={styles.mainImage}
+            src={'/images/1.jpg'}
+            width={1515}
+            height={1212}
+            alt=''
+          />
         </div>
         <div className={styles.rightImageSide} style={{ perspective: '60vh' }}>
           <Image
@@ -178,7 +198,7 @@ const Main: React.FC = () => {
 
       <div className={styles.leftImageSide} style={{ perspective: '60vh' }}>
         <Image
-          className={styles.leftImage}
+          className={styles.bottomReftImage}
           src={'/images/a3.png'}
           width={1515}
           height={1212}
@@ -190,7 +210,7 @@ const Main: React.FC = () => {
       </div>
       <div className={styles.rightImageSide} style={{ perspective: '60vh' }}>
         <Image
-          className={styles.rightImage}
+          className={styles.bottomRightImage}
           src={'/images/a4.png'}
           width={1515}
           height={1212}

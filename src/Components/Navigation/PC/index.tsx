@@ -37,7 +37,7 @@ const PC: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
     const t = document.getElementById('openBox')
     if (
       openItemWind &&
-      window.innerHeight / 1.8 < event.clientY &&
+      window.innerHeight / 1.2 < event.clientY &&
       !t?.contains(event.target as Node)
     ) {
       setOpenItemWind(null)

@@ -93,7 +93,6 @@ const ProductCarousel: React.FC = () => {
   }
   return (
     <>
-      {products.length}
       <div className={styles.carouselContainer}>
         <div className={styles.productBox} ref={refs.productBoxRef}>
           <IoIosArrowForward

@@ -3,7 +3,7 @@ import styles from './index.module.css'
 import Layout from '@/Layouts'
 import dynamic from 'next/dynamic'
 
-const Map = dynamic(() => import('./map'), {
+const Map = dynamic(() => import('../../Components/Map/ContactMap/map'), {
   ssr: false,
 })
 
