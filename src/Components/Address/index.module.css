@@ -31,7 +31,7 @@
 }
 
 .searchInput {
-  border: 2px solid #ffb6b6;
+  border: 1px solid #ffe9e9;
   outline: none;
   border-radius: 1vh;
   padding: 0.5rem 1rem;
@@ -44,9 +44,29 @@
 
 .searchIcon {
   font-size: 4vh;
-  color: #eb8686;
+  color: #ffc8c8;
   position: absolute;
   margin-left: 7%;
+}
+.dropdown {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  max-height: 40vh;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  z-index: 1000;
+}
+
+.dropdownItem {
+  padding: 1vh;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background: #f0f0f0;
 }
 .addressContainer {
   width: 100%;
@@ -175,6 +195,7 @@
   }
   .searchBar {
     width: 90%;
+    margin-bottom: 12vh;
   }
 
   .formBox {

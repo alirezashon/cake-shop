@@ -3,11 +3,11 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-
 export async function middleware(req: NextRequest) {
   if (
     req.nextUrl.pathname === '/profile' ||
-    req.nextUrl.pathname === '/newReq/pay'
+    req.nextUrl.pathname === '/newReq/pay' ||
+    req.nextUrl.pathname === '/newReq/custom-order'
   ) {
     const token = req.cookies.get('CTFlEoiSHkeNnToMBLiShoOekn3kN2y@k' || '')
     if (!token) {

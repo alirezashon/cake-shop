@@ -8,7 +8,7 @@ const alirezaman = new Date()
 const orderSchema = new mongoose.Schema({
 	ticketID: {
 		type: String,
-		default: `CIB-${moment()
+		default: `CAKE-${moment()
 			.locale('fa')
 			.format(
 				'YYMMDD'

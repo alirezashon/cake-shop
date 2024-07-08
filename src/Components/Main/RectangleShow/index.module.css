@@ -1,13 +1,3 @@
-.productBox {
-  display: flex;
-  width: 100%;
-  height: 33vh;
-  padding: 0.5vh 4vh;
-  overflow-x: hidden;
-  border-radius: 1vh;
-  background-color: #ffffff;
-  border: 0.1vh solid rgb(249, 178, 178);
-}
 .containerShow {
   width: 100vw;
   height: 100vh;
@@ -39,7 +29,7 @@
   width: 100%;
   margin: 1vh;
 }
-.price{
+.price {
   display: flex;
   justify-content: space-around;
   font-size: 2vh;
@@ -78,7 +68,7 @@
 .controlBox {
   border: double 0.5vh rgb(255, 241, 241);
   background: radial-gradient(rgb(255, 225, 225), rgb(255, 218, 218));
-  width: 94%;
+  width: 44%;
   height: 5vh;
   display: flex;
   justify-content: space-between;
@@ -89,8 +79,9 @@
 }
 .inceriment,
 .deceriment {
+  cursor: pointer;
   border-radius: 4vh;
-  width: 7%;
+  width: 11%;
   display: block;
   text-align: center;
   height: 100%;
@@ -119,18 +110,17 @@
 .productDescriptelf {
   color: #600f0a;
 }
-.producto {
-  display: grid;
-  justify-content: space-around;
-  padding: 2vh 0;
-  grid-template-columns: repeat(auto-fit, minmax(32%, 0fr));
-  grid-template-rows: repeat(auto-fit, minmax(2fr));
-  width: 100%;
-  text-align: center;
-  gap: 1vh;
-  border: 0.1vh solid #b9ff91;
-}
 
+.productBox {
+  display: flex;
+  width: 100%;
+  height: 33vh;
+  padding: 0.5vh 3vh;
+  overflow-x: hidden;
+  border-radius: 1vh;
+  background-color: #ffffff;
+  border: 0.1vh solid rgb(249, 178, 178);
+}
 .product {
   margin: 2vh;
   border-radius: 7px;
@@ -142,7 +132,7 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  width: 22%;
+  min-width: 17vw;
 }
 .product:hover {
   transform: scale(0.9);
@@ -166,7 +156,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width:100%;
+  width: 100%;
   border-radius: 6px 6px 0 0;
   height: 60%;
   font-size: 5vh;
@@ -198,4 +188,25 @@
   width: 20%;
   height: 100%;
   border-radius: 0.5vh;
+}
+@media (max-width: 876px) {
+  .productself {
+    width: 88%;
+    left: 5%;
+  }
+  .productBox {
+    height: 25vh;
+  }
+  .product {
+    width: 44%;
+  }
+  .controlBox {
+    width: 81%;
+  }
+  .leftDirection,
+  .rightDirection {
+    font-size: 3vh;
+    margin: 0 1vh;
+    margin-top: 10vh;
+  }
 }

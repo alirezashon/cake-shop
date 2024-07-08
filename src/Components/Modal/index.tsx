@@ -16,7 +16,7 @@ const Modal: React.FC<ModalProps> = ({ show, data, onClose }) => {
   useEffect(() => {
     if (show) {
       setProgress(100)
-      const totalDuration = 4000 // total duration of the timer in milliseconds
+      const totalDuration = 2000 // total duration of the timer in milliseconds
       const updateInterval = 100 // update the progress bar every 100 milliseconds
       const decrement = (100 / totalDuration) * updateInterval // decrement percentage per update
 
@@ -46,7 +46,7 @@ const Modal: React.FC<ModalProps> = ({ show, data, onClose }) => {
         </span>
         <h2 style={modalStyles.title}>{data.title}</h2>
         <p style={modalStyles.message}>{data.message}</p>
-        <button style={modalStyles.button} onClick={onClose}>
+        <button style={modalStyles.button} onClick={()=>open('/newReq/pay')}>
           برو به سبد خرید
         </button>
       </div>
@@ -97,12 +97,12 @@ const modalStyles = {
     marginBottom: '10px',
   },
   message: {
-    color: '#333', // Darker color for the message
+    color: '#333',
     fontSize: '16px',
     marginBottom: '20px',
   },
   button: {
-    backgroundColor: '#FF4D4F', // Red color for the button
+    backgroundColor: '#FF4D4F',
     color: '#fff',
     border: 'none',
     borderRadius: '4px',

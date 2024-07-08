@@ -30,7 +30,7 @@ export const addAddress = async (
     toast.current?.show({
       severity: 'info',
       summary: 'در حال ثبت',
-      detail: 'موفق',
+      detail: ' . . . پردازش سرور',
       life: 3000,
     })
     const response = await fetch('/api/Auth/Register/InsertAddress', {
@@ -51,6 +51,7 @@ export const addAddress = async (
         detail: 'موفق',
         life: 3000,
       })
+      location.reload()
     } else {
       toast.current?.show({
         severity: 'error',

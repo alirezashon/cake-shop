@@ -7,21 +7,14 @@ import { Items, items } from '../items'
 import Image from 'next/image'
 import Basket from '@/Components/Basket'
 import { FaUserCircle } from 'react-icons/fa'
-import { ProductInterface } from '../../../Interfaces'
-import { BiSearch } from 'react-icons/bi'
 import { ProgressSpinner } from 'primereact/progressspinner'
 
 interface NavProps {
-  basketData: ProductInterface[]
   isBasketOpen: boolean
   setIsBasketOpen: (value: boolean) => void
 }
 
-const PC: React.FC<NavProps> = ({
-  basketData,
-  isBasketOpen,
-  setIsBasketOpen,
-}) => {
+const PC: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
   const refs: {
     [key: string]: RefObject<HTMLInputElement | HTMLDivElement>
   } = {
@@ -97,22 +90,26 @@ const PC: React.FC<NavProps> = ({
             alt=''
             style={{ width: '22vh' }}
           />
-             {items &&
-            items.map((item:Items, itemIndex) => (
+          {items &&
+            items.map((item: Items, itemIndex) => (
               <>
                 <Link
+                  rel='noopener noreferrer'
+                  target='_blank'
                   key={itemIndex}
                   id={`${itemIndex === 3 && 'item'}`}
                   href={`/${item.link}`}
                   className={styles.item}
                   onMouseOver={() => setOpenItemWind({ ex: itemIndex, th: -1 })}
                 >
-
                   {item.name}
                 </Link>
                 {itemIndex === openItemWind?.ex &&
                   Array.isArray(item.category) && (
-                    <div className={styles.catypeBox} onMouseLeave={()=>setOpenItemWind(null)}>
+                    <div
+                      className={styles.catypeBox}
+                      onMouseLeave={() => setOpenItemWind(null)}
+                    >
                       <div
                         id='openBox'
                         className={styles.productsopenItemsBox}
@@ -163,7 +160,6 @@ const PC: React.FC<NavProps> = ({
             <Basket
               isBasketOpen={isBasketOpen}
               setIsBasketOpen={setIsBasketOpen}
-              basketData={basketData}
             />
 
             <FaUserCircle

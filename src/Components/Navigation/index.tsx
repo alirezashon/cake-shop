@@ -3,13 +3,10 @@
 import { useState, useEffect } from 'react'
 import Mobile from './Mobile'
 import DesktopNav from './PC'
-import { ProductInterface } from '@/Interfaces'
 import styles from './index.module.css'
 
-interface NavProps {
-  basketData: ProductInterface[]
-}
-const Navbar: React.FC<NavProps> = ({ basketData }) => {
+
+const Navbar: React.FC= () => {
   const [isMobile, setIsMobile] = useState(true)
   const [isBasketOpen, setIsBasketOpen] = useState<boolean>(false)
 
@@ -34,7 +31,6 @@ const Navbar: React.FC<NavProps> = ({ basketData }) => {
       {isMobile ? (
         <div className={styles.moblie}>
           <Mobile
-            basketData={basketData}
             isBasketOpen={isBasketOpen}
             setIsBasketOpen={setIsBasketOpen}
           />
@@ -42,7 +38,6 @@ const Navbar: React.FC<NavProps> = ({ basketData }) => {
       ) : (
         <div className={styles.pc}>
           <DesktopNav
-            basketData={basketData}
             isBasketOpen={isBasketOpen}
             setIsBasketOpen={setIsBasketOpen}
           />

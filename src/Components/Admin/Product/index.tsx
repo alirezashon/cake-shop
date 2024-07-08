@@ -1,11 +1,11 @@
 /** @format */
 
-import { useRef, RefObject, useState, useEffect } from "react"
-import styles from "../Inserto.module.css"
-import List from "./List"
-import { Toast } from "primereact/toast"
-import { Category,  ProductInterface } from "@/Interfaces"
-import Image from "next/image"
+import { useRef, RefObject, useState, useEffect } from 'react'
+import styles from '../Inserto.module.css'
+import List from './List'
+import { Toast } from 'primereact/toast'
+import { Category, ProductInterface } from '@/Interfaces'
+import Image from 'next/image'
 const ProductManager: React.FC = () => {
   const toast = useRef<Toast>(null)
 
@@ -14,33 +14,35 @@ const ProductManager: React.FC = () => {
   } = {
     title: useRef<HTMLInputElement>(null),
     src: useRef<HTMLInputElement>(null),
+    subImages: useRef<HTMLInputElement>(null),
     price: useRef<HTMLInputElement>(null),
     calories: useRef<HTMLInputElement>(null),
     category: useRef<HTMLSelectElement>(null),
     description: useRef<HTMLInputElement>(null),
     keywords: useRef<HTMLInputElement>(null),
   }
-  const [image, setImage] = useState<string>()
-  const [action, setAction] = useState<string>("(*I&n()s*e(r&t*^%t^O&n*E(")
+  const [image, setImage] = useState<Buffer | null>(null)
+  const [subImages, setSubImages] = useState<Buffer[]>([])
+  const [action, setAction] = useState<string>('(*I&n()s*e(r&t*^%t^O&n*E(')
   const [data, setData] = useState<ProductInterface[] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [editItemId, setEditItemId] = useState<string | null>(null)
   const [categories, setCategories] = useState<Category[] | null>(null)
   const keys = [
     [
-      "(*I&n()s*e(r&t*^%t^O&n*E(",
-      ")U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(",
-      "&d*E%e#t&*^%s^waf#$^e$o%f@",
+      '(*I&n()s*e(r&t*^%t^O&n*E(',
+      ')U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(',
+      '&d*E%e#t&*^%s^waf#$^e$o%f@',
     ],
-    ["ایجاد", "به روزرسانی", "حذف"],
+    ['ایجاد', 'به روزرسانی', 'حذف'],
   ]
   const getData = async () => {
     try {
-      const response = await fetch("/api/data/Post/Admin/Product/GET", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/data/Post/Admin/Product/GET', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          authType: "^c(a)ta*sEa0c(Tzol&i^*o%l#sA!",
+          authType: '^c(a)ta*sEa0c(Tzol&i^*o%l#sA!',
         }),
       })
 
@@ -52,18 +54,18 @@ const ProductManager: React.FC = () => {
         console.log(result)
       } else {
         toast.current?.show({
-          severity: "error",
-          summary: "Secondary",
-          detail: " نا موفق",
+          severity: 'error',
+          summary: 'Secondary',
+          detail: ' نا موفق',
           life: 3000,
         })
         setIsLoading(false)
       }
     } catch (error) {
       toast.current?.show({
-        severity: "error",
-        summary: "Secondary",
-        detail: " نا موفق",
+        severity: 'error',
+        summary: 'Secondary',
+        detail: ' نا موفق',
         life: 3000,
       })
       setIsLoading(false)
@@ -71,12 +73,12 @@ const ProductManager: React.FC = () => {
   }
   useEffect(() => {
     if (editItemId && data) {
-      setAction(")U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(")
+      setAction(')U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(')
       const itemToEdit = data.find((item) => item._id === editItemId)
       if (itemToEdit) {
         refs.title.current!.value = itemToEdit?.title
         refs.description.current!.value = itemToEdit?.description
-        refs.keywords.current!.value = itemToEdit?.keywords?.join(",") || ""
+        refs.keywords.current!.value = itemToEdit?.keywords?.join(',') || ''
         itemToEdit.categories
         refs.category.current!.value = itemToEdit.src
       }
@@ -91,72 +93,93 @@ const ProductManager: React.FC = () => {
     refs.keywords,
     refs.category,
   ])
-  const setFile = () => {
-    const reader = new FileReader()
-    reader.onloadend = () => {
-      const imageData = reader.result?.toString().split(",")[1]
-      setImage(imageData)
-    }
+  const readFileAsBuffer = (file: File): Promise<Buffer> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const buffer = Buffer.from(reader.result as ArrayBuffer)
+        resolve(buffer)
+      }
+      reader.onerror = (error) => reject(error)
+      reader.readAsArrayBuffer(file)
+    })
+  }
+
+  const setFile = async () => {
     const imageFile =
       refs.src.current instanceof HTMLInputElement && refs.src.current.files
         ? refs.src.current.files[0]
         : null
-    imageFile && reader.readAsDataURL(imageFile)
+    if (imageFile) {
+      const buffer = await readFileAsBuffer(imageFile)
+      setImage(buffer)
+    }
   }
+
+  const setSubImageFiles = async () => {
+    const imageFiles =
+      refs.subImages.current instanceof HTMLInputElement &&
+      refs.subImages.current.files
+        ? Array.from(refs.subImages.current.files)
+        : []
+    const buffers = await Promise.all(imageFiles.map(readFileAsBuffer))
+    setSubImages(buffers)
+  }
+
   const inserToDB = async () => {
     try {
       toast.current?.show({
-        severity: "info",
-        summary: "",
-        detail: "در حال اجرای درخواست ...",
+        severity: 'info',
+        summary: '',
+        detail: 'در حال اجرای درخواست ...',
         life: 3000,
       })
       const dataToSend = {
-        authType: "^c(a)t*E(Tso^soalsgfs^$#m!",
+        authType: '^c(a)t*E(Tso^soalsgfs^$#m!',
         data: {
-          title: refs.title.current?.value || "",
+          title: refs.title.current?.value || '',
           src: image,
           price: parseInt(`${refs.price?.current?.value}`),
           calories: parseInt(`${refs.calories?.current?.value}`),
-          categories: refs.category.current?.value || "",
-          description: refs.description?.current?.value || "",
-          keywords: refs.keywords.current?.value.split(",") || [],
+          categories: refs.category.current?.value || '',
+          description: refs.description?.current?.value || '',
+          keywords: refs.keywords.current?.value.split(',') || [],
         },
         action: action,
       }
 
       const url =
-        action === "(*I&n()s*e(r&t*^%t^O&n*E("
+        action === '(*I&n()s*e(r&t*^%t^O&n*E('
           ? `/api/data/Post/Admin/Product`
           : `/api/data/Post/Admin/Product?aydi=${editItemId}`
       const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToSend),
       })
 
       const data = await response.json()
       if (data.success) {
         toast.current?.show({
-          severity: "success",
-          summary: "Secondary",
-          detail: "موفق",
+          severity: 'success',
+          summary: 'Secondary',
+          detail: 'موفق',
           life: 3000,
         })
         location.reload()
       } else {
         toast.current?.show({
-          severity: "error",
-          summary: "Secondary",
-          detail: " نا موفق",
+          severity: 'error',
+          summary: 'Secondary',
+          detail: ' نا موفق',
           life: 3000,
         })
       }
     } catch (error) {
       toast.current?.show({
-        severity: "warn",
-        summary: "Secondary",
-        detail: "خطا",
+        severity: 'warn',
+        summary: 'Secondary',
+        detail: 'خطا',
         life: 3000,
       })
     }
@@ -196,8 +219,20 @@ const ProductManager: React.FC = () => {
       >
         {Object.keys(refs).map((refName, index) => (
           <div key={index} className={styles.productBoxRow}>
+            <div key={index} className={styles.productBoxRow}>
+              <label className={styles.customFileUpload}>
+                <input
+                  ref={refs.subImages as RefObject<HTMLInputElement>}
+                  placeholder={'subImages'}
+                  multiple={true}
+                  type={'file'}
+                  onChange={() => setSubImageFiles()}
+                />
+                {`${refName}`}
+              </label>
+            </div>
             <label>{refName}</label>
-            {refName === "src" && image && (
+            {refName === 'src' && image && (
               <Image
                 src={`data:image/jpeg;base64,${image}`}
                 alt={``}
@@ -205,12 +240,12 @@ const ProductManager: React.FC = () => {
                 height={77}
               />
             )}
-            {refName !== "category" ? (
+            {refName !== 'category' ? (
               <input
                 ref={refs[refName] as RefObject<HTMLInputElement>}
                 placeholder={refName}
-                type={refName === "src" ? "file" : "text"}
-                onChange={() => refName === "src" && setFile()}
+                type={refName === 'src' ? 'file' : 'text'}
+                onChange={() => refName === 'src' && setFile()}
               />
             ) : (
               categories && (

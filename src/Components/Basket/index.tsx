@@ -2,20 +2,17 @@
 
 import { useEffect, useState } from 'react'
 import styles from './index.module.css'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
+import {SlBasket } from 'react-icons/sl'
 import { GiCrossMark } from 'react-icons/gi'
 import Products from './Products'
-import { ProductInterface } from '@/Interfaces'
 import { useBasket } from '@/Context/Basket'
 import { TbShoppingBagX } from 'react-icons/tb'
 
 interface BasketProps {
-  basketData: ProductInterface[]
   isBasketOpen: boolean
   setIsBasketOpen: (value: boolean) => void
 }
 const Basket: React.FC<BasketProps> = ({
-  basketData,
   isBasketOpen,
   setIsBasketOpen,
 }) => {
@@ -59,7 +56,7 @@ const Basket: React.FC<BasketProps> = ({
             </div>
           </div>
           <div className={styles.basketBase}>
-            <Products setLoading={isLoading} basketData={basketData} />
+            <Products loading={isLoading} />
             {basket.length > 0 ? (
               <>
                 <div className={styles.confirm} onClick={getBuy}>
@@ -79,7 +76,7 @@ const Basket: React.FC<BasketProps> = ({
         </div>
       ) : (
         <div>
-          <AiOutlineShoppingCart
+          <SlBasket
             className={styles.basketBall}
             onClick={() => setIsBasketOpen(true)}
           />

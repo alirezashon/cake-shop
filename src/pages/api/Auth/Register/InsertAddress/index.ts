@@ -16,6 +16,7 @@ const InsertAddress = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log(information)
     await db.connect2DB()
     if (!token) {
+      console.log('not token')
       return res
         .status(401)
         .json({ message: 'Unauthorized: No token provided', success: false })
@@ -23,8 +24,10 @@ const InsertAddress = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const kalim = token.split('#')[1].replace(/"$/, '')
     const session = await ClientSession.findOne({ key: kalim })
-
+console.log(kalim,session)
     if (!session || session.key !== kalim) {
+      console.log('token not match')
+
       return res.status(401).json({ success: false })
     }
 

@@ -11,8 +11,8 @@
 }
 .formBox {
   animation: animatopenPc 1.5s;
-  background: radial-gradient(rgb(210, 237, 160), rgb(208, 252, 172));
-  border: 0.5vh double rgb(217, 233, 41);
+  background: radial-gradient(rgb(255, 227, 227), rgb(255, 222, 222));
+  border: 0.5vh double rgb(246, 149, 149);
   width: 50%;
   height: 70vh;
   border-radius: 1vh;
@@ -37,12 +37,12 @@
   margin: 4vh;
   width: 100%;
   border-radius: 1vh;
-  background: radial-gradient(rgb(210, 237, 160), rgb(138, 227, 65));
-  border: 0.7vh double rgba(216, 255, 192, 0.9);
+  background: radial-gradient(rgb(237, 160, 160), rgb(249, 149, 149));
+  border: 0.7vh double rgba(255, 192, 192, 0.9);
 }
 
 .form input {
-  border: 0.4vh double rgba(175, 226, 55, 0.9);
+  border: 0.4vh double rgba(255, 208, 208, 0.9);
   outline: none;
   height: 5vh;
   width: 80%;
@@ -59,7 +59,7 @@
   width: fit-content;
   color: rgb(255, 252, 247);
   border-radius: 1vh;
-  background: linear-gradient(2deg, rgb(32, 78, 4), rgb(146, 222, 39));
+  background: linear-gradient(2deg, rgb(159, 29, 29), rgb(222, 39, 39));
 }
 .submit:hover {
   background: linear-gradient(2deg, rgb(255, 236, 28), rgb(222, 158, 39));

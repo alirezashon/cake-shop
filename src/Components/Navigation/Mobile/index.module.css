@@ -120,9 +120,7 @@ justify-content: space-between;
 .profile {
   margin: 0 2vh;
   font-size: 5vh;
-  color: #fff0f0;
-  background-color: rgb(246, 108, 108);
-  border: 0.3vh rgb(239, 255, 234) dashed;
+  color: rgb(108, 15, 22);
   border-radius: 23vh;
   cursor: pointer;
 }

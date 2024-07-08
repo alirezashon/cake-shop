@@ -2,14 +2,11 @@
   0%{transform: translateX(-100%);}
 }
 .basketBall {
-  font-size: 4vh;
-  color: rgb(246, 108, 108);
-  border: 0.3vh rgb(239, 255, 234) dashed;
-  width: fit-content;
-  margin-top: 1vh;
+  font-size: 3vh;
+  color: rgb(126, 37, 44);
   text-align: center;
-  border-radius: 11vh;
   cursor: pointer;
+  margin-top: 1vh;
   z-index: 33;
 }
 

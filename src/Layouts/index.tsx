@@ -6,28 +6,6 @@ import { ProductInterface } from "@/Interfaces"
 import { Get } from "@/Components/Basket/Actions"
 
 const Layout = ({ children }: any) => {
-  const [basketData, setBasketData] = useState<ProductInterface[]>([])
-
-  const getData = async () => {
-    try {
-      const response = await fetch("/api/data/Post/Client/bulk", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          bulkID: Get()[1],
-          authType: "G&E!T*P^R$O#D$U^C@T*B^u$l*K$",
-        }),
-      })
-      const result = await response.json()
-      setBasketData(result.products)
-    } catch (error) {
-      console.error("Error fetching data:", error)
-    }
-  }
-  useEffect(() => {
-    getData()
-  }, [])
-
   return (
     <>
       <Head>
@@ -37,7 +15,7 @@ const Layout = ({ children }: any) => {
         <link rel='icon' href='../../public/images/icon.png' />
       </Head>
         <div>
-          <Navigation basketData={basketData} />
+          <Navigation />
           <main >{children}</main>
         </div>
     </>

@@ -2,16 +2,20 @@ import Image from 'next/image'
 import styles from './index.module.css'
 import { useEffect, useRef, useState } from 'react'
 import { MdDriveFolderUpload } from 'react-icons/md'
-import { createOrder, getAddress } from './handler'
+import { createcustomOrder, createOrder, getAddress } from './handler'
 import { Toast } from 'primereact/toast'
 import { Information } from '@/Interfaces'
 import Address from '../Address'
 import { ProgressSpinner } from 'primereact/progressspinner'
 import { GiCrossMark } from 'react-icons/gi'
-
-const Payment: React.FC = () => {
+interface Props {
+  goal: string
+}
+const Payment: React.FC<Props> = ({ goal }) => {
   const src = useRef<HTMLInputElement>(null)
-  const [image, setImage] = useState<string>()
+  const selectAddressRef = useRef<HTMLSelectElement>(null)
+
+  const [image, setImage] = useState<string>('')
   const [sending, setSending] = useState<boolean>(false)
   const [addresses, setAddresses] = useState<Information[] | null>()
   const [loading, setLoading] = useState<boolean>()
@@ -35,20 +39,70 @@ const Payment: React.FC = () => {
     }
   }
   useEffect(() => {
-    !addresses && getAddress(setAddresses, setLoading).then(()=>!addresses && setAddingAddress(true))
+    !addresses &&
+      getAddress(setAddresses, setLoading).then(
+        () => !addresses && setAddingAddress(true)
+      )
   }, [])
+
+  const createIt = async () => {
+    if (goal === '&f*o)n(g*o)l$s@i#k$a^') {
+      createOrder(
+        setSending,
+        image,
+        `${selectAddressRef.current?.value}`,
+        toast
+      )
+    } else if (goal === '(M)a&s^z$X@d%F)7^') {
+      createcustomOrder(
+        setSending,
+        image,
+        `${selectAddressRef.current?.value}`,
+        toast
+      )
+    }
+  }
   return (
     <>
       <Toast />
       <div className={styles.container}>
-        <div  
+        <div
           className={styles.addressBox}
           style={{ display: `${addingAddress ? 'block' : 'flex'}` }}
         >
+          <div className={styles.selectAddressBox}>
+            <p>انتخاب آدرس</p>
+            {loading ? (
+              <ProgressSpinner
+                style={{ width: '5vh', height: '5vh' }}
+                strokeWidth='8'
+                fill='var(--surface-ground)'
+                animationDuration='.5s'
+              />
+            ) : (
+              addresses && (
+                <select className={styles.selectList} ref={selectAddressRef}>
+                  {addresses?.map((addr, index) => (
+                    <option key={index} value={addr.address}>
+                      {addr.address +
+                        ' پلاک ' +
+                        addr.houseUnit +
+                        ' واحد ' +
+                        addr.houseNumber}
+                    </option>
+                  ))}
+                </select>
+              )
+            )}
+          </div>
           {addingAddress ? (
             <div className={styles.addAddressBox}>
-              <p>ثبت آدرس</p>
-              <GiCrossMark size={'4vh'} className={'cross'} onClick={()=>setAddingAddress(false)}/>
+              <GiCrossMark
+                size={'4vh'}
+                className={'cross'}
+                onClick={() => setAddingAddress(false)}
+              />
+              <p> ثبت آدرس جدید</p>
               <Address />
             </div>
           ) : (
@@ -57,27 +111,6 @@ const Payment: React.FC = () => {
               onClick={() => setAddingAddress(true)}
             >
               افزودن آدرس جدید
-            </div>
-          )}
-          {addresses?.length === 0 ? (
-            <Address />
-          ) : (
-            <div className={styles.selectAddressBox}>
-              <p>انتخاب آدرس</p>
-              {loading ? (
-                <ProgressSpinner
-                  style={{ width: '5vh', height: '5vh' }}
-                  strokeWidth='8'
-                  fill='var(--surface-ground)'
-                  animationDuration='.5s'
-                />
-              ) : (
-                <select className={styles.selectList}>
-                  {addresses?.map((addr) => (
-                    <option>{addr.address}</option>
-                  ))}
-                </select>
-              )}
             </div>
           )}
         </div>
@@ -109,9 +142,7 @@ const Payment: React.FC = () => {
               ) : (
                 image && (
                   <div className={styles.send}>
-                    <p onClick={() => createOrder(setSending, image, toast)}>
-                      ارسال
-                    </p>
+                    <p onClick={() => createIt()}>ارسال</p>
                   </div>
                 )
               )}

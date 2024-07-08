@@ -1,0 +1,75 @@
+.container {
+  direction: rtl;
+  margin-top: 12vh;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+.select,
+.input,
+.textarea {
+  background: linear-gradient(
+    222deg,
+    rgb(255, 255, 255) 60%,
+    rgb(237, 233, 233) 90%
+  );
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  transition: background 3s;
+}
+.select:hover,
+.input:hover,
+.textarea:hover {
+  background: #ffffff;
+}
+.textarea {
+  height: 30vh;
+  border-radius: 0 0 0 4vh;
+}
+.attributes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+  gap: 1vh;
+  justify-content: space-around;
+  width: 100%;
+}
+.selectBox {
+  display: flex;
+  flex-direction: column;
+}
+.selectBox p {
+  opacity: 0.5;
+}
+.row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.submit {
+  padding: 0.75rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.submit:hover {
+  background-color: #45a049;
+}   
+@media (max-width: 876px) {
+  .attributes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40%, 0fr));
+  }
+}

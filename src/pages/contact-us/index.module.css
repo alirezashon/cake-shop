@@ -37,9 +37,9 @@ justify-content: center;
     width: 30%;
 }
 .imagesBox{
-  grid-template-columns: repeat(auto-fit,minmax(48%,1fr));
     display: grid;
     width: 60%;
+    grid-template-columns: repeat(auto-fit,minmax(48%,1fr));
 }
 .images{
 width: 100%;
@@ -47,16 +47,4 @@ height: 30vh;
 }
 .images:hover{
     transform: scale(1.1);
-}
-@media(max-width:876px) {
-  .topBox,.middleBox,.bottomBox{
-    width: 100%;
-  }
-  .bottomBox p{
-    width: 40%;
-  }
-  .imagesBox{
-    width: 50%;
-    grid-template-columns: repeat(auto-fit,minmax(78%,1fr));
-  }  
 }

@@ -7,16 +7,11 @@
 .addAddressBox {
   text-align: center;
 }
-.cross{
-  background-color: #ffffff;
-  font-size: 4vh;
-  border-radius: 4vh;
-  padding: .2vh;
-  color: #ff4d07;
-}
+
 .addAddressBox p{
-  color: #e60e0e;
-  border-bottom: ridge 1.3vh rgb(255, 215, 215);
+  margin-bottom: 4vh;
+  color: #f86e6e;
+  border-bottom: solid 1px rgb(255, 215, 215);
 }
 .addrAddBtn {
   height: fit-content;
