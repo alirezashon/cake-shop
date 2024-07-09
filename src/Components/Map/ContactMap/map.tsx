@@ -20,7 +20,7 @@ const Map: React.FC = () => {
     <div>
       <MapContainer
         style={{
-          height: '40vh',
+          height: '60vh',
           width: '99.81',
           zIndex: 1,
         }}

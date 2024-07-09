@@ -80,61 +80,8 @@ const Main: React.FC = () => {
         height={1212}
         alt=''
       />
-      <section className={styles.productsSection}>
-        <div className={styles.carousel}>
-          <div
-            className={styles.topBackground}
-            style={{
-              background: `url(${images[currentImageIndex]}) center center/cover no-repeat`,
-            }}
-          ></div>
-          <div className={styles.prevButton} onClick={handlePrevious}>
-            {'<'}
-          </div>
-          <div className={styles.nextButton} onClick={handleNext}>
-            {'>'}
-          </div>
-        </div>
-
-        <h2 onClick={()=>open('/Store')}>سفارش انواع کیک و شیرینی</h2>
-        <div className={styles.productsBox}>
-          <div className={styles.product}>
-            <Image
-              src='/images/icon.png'
-              width={1515}
-              height={1212}
-              alt=''
-              className={styles.mainCakeImage}
-            />
-            <h3>کیک سفارشی</h3>
-            <p>چاپ تصویر همراه با انتخاب اشکال گوناگون کیک</p>
-          </div>
-          <div className={styles.product}>
-            <Image
-              src='/images/icon.png'
-              width={1515}
-              height={1212}
-              alt=''
-              className={styles.mainCakeImage}
-            />
-            <h3>کافی شاپی</h3>
-            <p>سفارش انبوه کیک های بسته بندی با بهترین کیفیت</p>
-          </div>
-          <div className={styles.product}>
-            <Image
-              src='/images/icon.png'
-              width={1515}
-              height={1212}
-              alt=''
-              className={styles.mainCakeImage}
-            />
-            <h3>شیرینی</h3>
-            <p>فروش انواع شیرینی با بهترین قیمت و کیفیت </p>
-          </div>
-        </div>
-      </section>
-      <div className={styles.productBox}>
-        <ProductCarousel />
+      <div className={styles.gotorder}>
+        <h2>سفارش انواع کیک و شیرینی</h2>
       </div>
 
       <div className={styles.backgroundContainer} onMouseMove={handleMouseMove}>
@@ -150,36 +97,7 @@ const Main: React.FC = () => {
             }}
           />
         </div>
-        <div className={styles.mainImageSide}>
-          <Image
-            className={styles.mainImage}
-            src={'/images/1.jpg'}
-            width={1515}
-            height={1212}
-            alt=''
-          />
-            <Image
-            className={styles.mainImage}
-            src={'/images/1.jpg'}
-            width={1515}
-            height={1212}
-            alt=''
-          />
-            <Image
-            className={styles.mainImage}
-            src={'/images/1.jpg'}
-            width={1515}
-            height={1212}
-            alt=''
-          />
-            <Image
-            className={styles.mainImage}
-            src={'/images/1.jpg'}
-            width={1515}
-            height={1212}
-            alt=''
-          />
-        </div>
+
         <div className={styles.rightImageSide} style={{ perspective: '60vh' }}>
           <Image
             className={styles.rightImage}
@@ -196,32 +114,117 @@ const Main: React.FC = () => {
         </div>
       </div>
 
-      <div className={styles.leftImageSide} style={{ perspective: '60vh' }}>
-        <Image
-          className={styles.bottomReftImage}
-          src={'/images/a3.png'}
-          width={1515}
-          height={1212}
-          alt=''
+      {/* <div className={styles.carousel}>
+        <div
+          className={styles.topBackground}
           style={{
-            transform: `rotateY(${rotationOnScroll.rotateY}deg) rotateX(${rotationOnScroll.rotateX}deg)`,
+            background: `url(${images[currentImageIndex]}) center center/cover no-repeat`,
           }}
-        />
+        ></div>
+        <div className={styles.prevButton} onClick={handlePrevious}>
+          {'<'}
+        </div>
+        <div className={styles.nextButton} onClick={handleNext}>
+          {'>'}
+        </div>
+      </div> */}
+      <section className={styles.productsSection}>
+        <div className={styles.product}>
+          <h3>کیک سفارشی</h3>
+          <Image
+            src='/images/icon.png'
+            width={1515}
+            height={1212}
+            alt=''
+            className={styles.mainCakeImage}
+          />
+          <p>چاپ تصویر همراه با انتخاب اشکال گوناگون کیک</p>
+        </div>
+        <div className={styles.product}>
+          <h3>کافی شاپی</h3>
+          <Image
+            src='/images/icon.png'
+            width={1515}
+            height={1212}
+            alt=''
+            className={styles.mainCakeImage}
+          />
+          <p>سفارش انبوه کیک های بسته بندی با بهترین کیفیت</p>
+        </div>
+        <div className={styles.product}>
+          <h3>شیرینی</h3>
+          <Image
+            src='/images/icon.png'
+            width={1515}
+            height={1212}
+            alt=''
+            className={styles.mainCakeImage}
+          />
+          <p>فروش انواع شیرینی با بهترین قیمت و کیفیت </p>
+        </div>
+      </section>
+
+      <div className={styles.RectangleShow}>
+        <ProductCarousel />
       </div>
-      <div className={styles.rightImageSide} style={{ perspective: '60vh' }}>
-        <Image
-          className={styles.bottomRightImage}
-          src={'/images/a4.png'}
-          width={1515}
-          height={1212}
-          alt=''
-          style={{
-            transform: `rotateY(${-rotationOnScroll.rotateY}deg) rotateX(${
-              rotationOnScroll.rotateX
-            }deg)`,
-          }}
-        />
-      </div>
+      <section className={styles.bottomSection}>
+        <div className={styles.mainImageSide}>
+          <Image
+            className={styles.mainImage}
+            src={'/images/1.jpg'}
+            width={1515}
+            height={1212}
+            alt=''
+          />
+          <Image
+            className={styles.mainImage}
+            src={'/images/1.jpg'}
+            width={1515}
+            height={1212}
+            alt=''
+          />
+          <Image
+            className={styles.mainImage}
+            src={'/images/1.jpg'}
+            width={1515}
+            height={1212}
+            alt=''
+          />
+          <Image
+            className={styles.mainImage}
+            src={'/images/1.jpg'}
+            width={1515}
+            height={1212}
+            alt=''
+          />
+        </div>
+        <div className={styles.leftImageSide} style={{ perspective: '60vh' }}>
+          <Image
+            className={styles.bottomReftImage}
+            src={'/images/a3.png'}
+            width={1515}
+            height={1212}
+            alt=''
+            style={{
+              transform: `rotateY(${rotationOnScroll.rotateY}deg) rotateX(${rotationOnScroll.rotateX}deg)`,
+            }}
+          />
+        </div>
+        <div className={styles.rightImageSide} style={{ perspective: '60vh' }}>
+          <Image
+            className={styles.bottomRightImage}
+            src={'/images/a4.png'}
+            width={1515}
+            height={1212}
+            alt=''
+            style={{
+              transform: `rotateY(${-rotationOnScroll.rotateY}deg) rotateX(${
+                rotationOnScroll.rotateX
+              }deg)`,
+            }}
+          />
+        </div>
+      </section>
     </div>
   )
 }

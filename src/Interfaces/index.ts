@@ -16,12 +16,6 @@ export interface CommentInterface {
   response:{txt:string,time:string}
   rates:number
 }
-// export interface CustomOrderInterface{
-//   type:string,
-//   weight:number,
-
-// }
-
 export interface Category {
   _id: string
   name: string

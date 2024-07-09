@@ -1,98 +1,68 @@
-/* components/Main.module.css */
-.mainContainer {
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  animation: fadeIn 2s;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.header h1 {
-  font-size: 3em;
-  margin: 0;
-  color: #ff4081;
-}
-
-.header p {
-  font-size: 1.2em;
-  color: #555;
-}
-
-.productsSection {
-  text-align: center;
-}
-
-.productsSection h2 {
-  font-size: 2.5em;
-  color: #ff4081;
-  margin-bottom: 20px;
-}
-
-.products {
+.container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.product {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  margin: 10px;
-  padding: 20px;
-  width: 250px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
-
-.product:hover {
-  transform: scale(1.05);
-}
-
-.product img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.product h3 {
-  font-size: 1.5em;
-  margin: 10px 0;
-}
-
-.product p {
-  color: #555;
-}
-
-.basketSection {
-  margin-top: 50px;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom, #ffe5e5, #ffffff);
   text-align: center;
 }
 
-.basketSection h2 {
-  font-size: 2.5em;
-  color: #ff4081;
+.title {
+  color: #d68080;
 }
 
-.basketSection p {
-  font-size: 1.2em;
+.cupcakeWrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.cupcakeContainer {
+  max-width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cupcakeImage {
+  width: 25vh;
+  height: 20vh;
+}
+.cupcakeImage:hover {
+  transform: rotateY(150deg);
+}
+
+.cupcakeLabel {
+  z-index: 1;
+  width: 81%;
+  border-radius: 1vh;
+  background: #f9f9f9;
+  padding: 1vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.cupcakeLabel:hover{
+  transform: scaleX(1.1)
+}
+
+.cupcakeName {
+  font-size: 24px;
+  font-weight: bold;
+  color: #d68080;
+}
+
+.cupcakeDescription {
+  font-size: 16px;
   color: #555;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.baseImage {
+  margin-top: -2vh;
+  width: 45%;
+  height: 30vh;
 }
 
-@media (max-width: 768px) {
-  .product {
-    width: 90%;
+@media (max-width:876px) {
+  .cupcakeContainer{max-width: 48%;}
+  .cupcakeContainer:last-child{
+    display: none;
   }
 }

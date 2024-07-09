@@ -1,0 +1,106 @@
+.container {
+  display: grid;
+  justify-content: space-around;
+  padding: 2vh 0;
+  grid-template-columns: repeat(auto-fit, minmax(22%, 0fr));
+  text-align: center;
+  gap: 1vh;
+}
+.productDescriptelf {
+  background-color: #ffc3c3;
+}
+.product {
+  border: 0.1vh solid #d8c3c3;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 48vh;
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+  border-radius: 1vh;
+}
+
+.productimage {
+  width: 90%;
+  height: 60%;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.productDescription {
+  position: absolute;
+  border: 0.2vh ridge #e2938f;
+  background-color: #e8b7b2;
+  padding: 0.5vh;
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.product:hover .productimage {
+  opacity: 0.2;
+}
+
+.product:hover .productDescription {
+  opacity: 1;
+}
+
+.producTitle {
+  width: 100%;
+  background-color: #cecece;
+  justify-content: flex-start;
+}
+
+.priceaction {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 0.1vh solid #d9bebc;
+}
+
+.heartIcon {
+  font-size: 4vh;
+  color: #f9500e;
+}
+
+.controlBox {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+  border-radius: 2vh;
+  align-items: center;
+}
+.emptyContainer{
+display: flex;
+}
+.gotoStore{
+  background-color: rgb(255, 34, 34);
+  color: #ffffff;
+  border-radius: 2vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 1%;
+  top: 50vh;
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  border-radius: 0.5vh;
+  height: 4vh;
+  cursor: pointer;
+}
+
+.confirm:hover {
+  transform: scale(0.9);
+  border: 0.2vh ridge rgb(250, 222, 255);
+}
+.emptyBasket {
+  font-size: 5vh;
+  margin-top: 33vh;
+}

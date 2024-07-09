@@ -64,13 +64,13 @@ const Basket: React.FC<BasketProps> = ({
                 </div>
               </>
             ) : (
-              <>
+              <div className={styles.emptyContainer}>
                 <TbShoppingBagX className={styles.emptyBasket} />
                 <p>سبد خرید شما خالیست</p>
-                <div className={styles.confirm} onClick={getBuy}>
+                <div className={styles.gotoStore} onClick={()=>open('/Store')}>
                   برو به فروشگاه
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>

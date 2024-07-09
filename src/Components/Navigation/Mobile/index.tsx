@@ -8,6 +8,7 @@ import Basket from '../../Basket'
 import { ProductInterface } from '../../../Interfaces'
 import { BiSearch } from 'react-icons/bi'
 import { Items, items } from '../items'
+import { BsSuitHeart } from 'react-icons/bs'
 
 interface NavProps {
   isBasketOpen: boolean
@@ -157,6 +158,8 @@ const Mobile: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
                 className={styles.profile}
                 onClick={() => (window.location.href = '/profile')}
               />
+            <BsSuitHeart className={styles.profile} onClick={()=>open('/favorites')}/>
+
           </div>
         </div>
       )}

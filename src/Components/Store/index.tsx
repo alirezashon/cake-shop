@@ -109,9 +109,7 @@ const Store: React.FC<Props> = ({ category, total }) => {
   }
   const PriceAction = (product: string, fontSize: string) => {
     return (
-    
       <div className={styles.priceAction}>
-    
         <MdAddCircle
           className={styles.inceriment}
           size={fontSize}
@@ -146,7 +144,9 @@ const Store: React.FC<Props> = ({ category, total }) => {
               <div key={catindex} className={styles.category}>
                 <Image
                   loading='lazy'
-                  src={`data:image/jpeg;base64,${cat.src}`}
+                  src={`data:image/jpeg;base64,${Buffer.from(cat.src).toString(
+                    'base64'
+                  )}`}
                   alt={cat.name}
                   width={200}
                   height={200}

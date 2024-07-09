@@ -7,26 +7,34 @@ const Map = dynamic(() => import('../../Components/Map/ContactMap/map'), {
   ssr: false,
 })
 
-const AboutUS = () => {
+const ContactUS = () => {
   return (
     <Layout>
       <div className={styles.container}>
-        <div className={styles.topBox}>
-          <p>
-            021-88941993 021-77748464 021-22756410 09226869767 تهران » تهرانپارس
-            تهران - نیاوران تهران - چهارراه ولیعصر روابط عمومی 09226869767{' '}
-          </p>
+        <div className={styles.contactBox}>
+          <div className={styles.paragraphs}>
+            <p>021-88941993</p>
+            <p>021-77748464</p>
+            <p>021-22756410</p>
+            <p>09226869767</p>
+            <p>چهارراه ولیعصر</p>
+            <p> تهران - تهرانپارس</p>
+            <p> تهران - نیاوران</p>
+          </div>
           <Image
             src={'/images/icon.png'}
             width={923}
             height={923}
             alt=''
             className={styles.logo}
-          />
-      </div>
+            />
         </div>
-     <Map/>
+            <p>روابط عمومی 09226869767</p>
+      </div>
+      <div className={styles.mapBox}>
+      <Map />
+      </div>
     </Layout>
   )
 }
-export default AboutUS
+export default ContactUS

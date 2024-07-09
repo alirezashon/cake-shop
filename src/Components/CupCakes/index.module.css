@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom, #ffe5e5, #ffffff);
+  text-align: center;
+  height: 100vh;
+  margin-top: -12vh;
+  padding-top: 12vh;
+}
+
+.title {
+  color: #d68080;
+}
+
+.cupcakeWrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.cupcakeContainer {
+  max-width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cupcakeImage {
+  width: 25vh;
+  height: 20vh;
+}
+.cupcakeImage:hover {
+  transform: rotateY(150deg);
+}
+
+.cupcakeLabel {
+  z-index: 1;
+  width: 81%;
+  border-radius: 1vh;
+  background: #f9f9f9;
+  padding: 1vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.cupcakeLabel:hover{
+  transform: scaleX(1.1)
+}
+
+.cupcakeName {
+  font-size: 24px;
+  font-weight: bold;
+  color: #d68080;
+}
+
+.cupcakeDescription {
+  font-size: 16px;
+  color: #555;
+}
+
+.baseImage {
+  margin-top: -2vh;
+  width: 45%;
+  height: 30vh;
+}
+
+@media (max-width:876px) {
+  .cupcakeContainer{max-width: 48%;}
+  .cupcakeContainer:last-child{
+    display: none;
+  }
+}

@@ -8,7 +8,7 @@ import Image from 'next/image'
 import Basket from '@/Components/Basket'
 import { FaUserCircle } from 'react-icons/fa'
 import { ProgressSpinner } from 'primereact/progressspinner'
-
+import { BsSuitHeart } from 'react-icons/bs'
 interface NavProps {
   isBasketOpen: boolean
   setIsBasketOpen: (value: boolean) => void
@@ -169,6 +169,7 @@ const PC: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
                 window.location.href = '/profile'
               }}
             />
+            <BsSuitHeart className={styles.profile} onClick={()=>open('/favorites')}/>
           </div>
           <div>
             {/* <form className={styles.searchBar}>
