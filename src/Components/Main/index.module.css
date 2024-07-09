@@ -11,7 +11,7 @@
     opacity: 1;
   }
 }
-.mainContainer {
+.mainContainer {  
   width: 100vw;
   padding: 1vh;
   font-size: 2vh;
@@ -64,13 +64,13 @@
 .topImage {
   left: 0;
   z-index: -1;
-  top: 69vh;
+  top:100vh;
   position: absolute;
-  height: 100vh;
+  height: 78vh;
   width: 100vw;
 }
 .RectangleShow {
-  margin-top: 69vh;
+  margin-top: 75vh;
 }
 
 .backgroundContainer {
@@ -164,17 +164,26 @@
   border-radius: 2vh;
   transform: scale(0.8);
 }
-.productsSection {
+.productsSection{
+  background: linear-gradient(to top, #ffe5e5, #ffffff);
+  display: flex;
+  padding: 4vh 0 ;
+  flex-direction: column;
+
+}
+
+.productBox{
   display: grid;
+  margin-top: 7vh;
   grid-template-columns: repeat(auto-fit, minmax(18%, 0fr));
   gap: 2vh;
   justify-content: center;
   width: 100%;
   text-align: center;
-  position: absolute;
   left: 0;
 }
 .product {
+  height: fit-content;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -195,18 +204,18 @@
 .product h3 {
   font-size: 1.5em;
   margin: 10px 0;
-  color: #d52323;
-  background-color: #fff6f6;
+  color: #d68080;
   width: 100%;
+  border-bottom: 1px solid #f7d7d7;
 }
 .product p {
-  width: 67%;
-  color: #555;
+  border-top: 1px solid #f7d7d7;
+  padding: .5vh 7%;
+  color: #ec6f6f;
 }
-.bottomSection{
+.bottomSection {
   margin-bottom: 77vh;
 }
-
 @media (max-width: 876px) {
   .rightImageSide {
     margin-top: 23vh;

@@ -44,20 +44,8 @@
   padding: 1vh;
   text-align: center;
 }
-.productBoxRow input[type="file"] {
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-color: #4caf50;
-  color: white;
-  font-size: 36px;
-  font-weight: bold;
-  line-height: 100px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+/* .productBoxRow input[type="file"] {
+ } */
 
 .productBoxRow textarea {
   width: 60%;

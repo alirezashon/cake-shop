@@ -1,7 +1,7 @@
 export interface ProductInterface {
   _id: string
   title: string
-  src: string
+  src: string | Buffer
   subImages: string[]
   price: number
   categories: string
@@ -20,7 +20,7 @@ export interface Category {
   _id: string
   name: string
   src: string
-  keywords: [string]
+  keywords: string[]
 }
 
 export interface Story {

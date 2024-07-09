@@ -152,8 +152,7 @@
 }
 
 .searchIndex {
-  border: solid 0.1vh #df8181;
-  background: linear-gradient(#ffaaaa, #ffe4e4);
+  background: linear-gradient(#fee8e8, #ffe4e4);
   padding: 0.5vh 1vh;
   border-radius: 1vh;
   cursor: pointer;
@@ -174,10 +173,9 @@
 }
 
 .enginoption {
-  color: #ffffff;
+  color: #e05c5c;
   text-wrap: nowrap;
-  border: 0.3vh ridge rgb(192, 71, 71);
-  background-color: rgb(203, 71, 71);
+  border:1px solid rgb(192, 71, 71);
   padding: 0.5vh 1vh;
   border-radius: 1vh;
   margin-top: 0.7vh;
@@ -186,6 +184,8 @@
   cursor: pointer;
 }
 .enginoption:hover {
+  color: #ffffff;
+  background-color: #df8181;
   transform: scale(1.1);
 }
 

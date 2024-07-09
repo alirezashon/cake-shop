@@ -29,6 +29,7 @@ const ProductCarousel: React.FC = () => {
     productBoxRef: useRef<HTMLDivElement>(null),
   }
   useEffect(() => {
+    console.log(products)
     if (showModal) {
       return () =>
         clearTimeout(
@@ -110,8 +111,8 @@ const ProductCarousel: React.FC = () => {
                 onClick={() => setShowProducto(product)}
                 loading='lazy'
                 src={`data:image/jpeg;base64,${Buffer.from(
-                  product.src
-                ).toString('base64')}`}
+                  product?.src
+                ).toString('base64')}`} 
                 alt={product.title}
                 width={1200}
                 height={1200}

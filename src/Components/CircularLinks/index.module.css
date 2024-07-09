@@ -1,24 +1,29 @@
 /** @format */
 
 .container {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+	display: flex;
+	justify-content: space-around;
+	max-width: 100%;
+	border: #ffe8e8 1px solid;
+	padding: 1vh;
 	justify-items: center;
 	gap: 1vh;
+	overflow-x: auto;
 }
 
-.model {
+.name{
+	color: #ff8989;
 	text-align: center;
 }
 
 .image {
-	background-color: rgb(241, 200, 118);
+	background-color: rgb(255, 181, 181);
 	border-radius: 22vh;
 	padding: .5vh;
 }
 
 @media (max-width: 777px) {
 	.container {
-		grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
 	}
 }

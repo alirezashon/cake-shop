@@ -63,5 +63,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
     return { props: { initialProducts: [] } }
   }
 }
+export const config = {
+  api: {
+    responseLimit: '128mb',
+  },
+}
 
 export default RootPage

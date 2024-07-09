@@ -36,7 +36,9 @@ const List: React.FC<Props> = ({ data, isLoading, setEditItemId }) => {
                   <td>{category.name}</td>
                   <td>
                     <Image
-                      src={`data:image/jpeg;base64,${category.src}`}
+                      src={`data:image/jpeg;base64,${Buffer.from(
+                        category.src
+                      ).toString('base64')}`}
                       alt={``}
                       width={77}
                       height={77}

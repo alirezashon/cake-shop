@@ -6,8 +6,13 @@ import List from './List'
 import { Toast } from 'primereact/toast'
 import { Category, ProductInterface } from '@/Interfaces'
 import Image from 'next/image'
+import { readFileAsBuffer } from '../lib'
 const ProductManager: React.FC = () => {
   const toast = useRef<Toast>(null)
+  const dataCache = useRef<{
+    product: ProductInterface[]
+    category: Category[]
+  } | null>(null)
 
   const refs: {
     [key: string]: RefObject<HTMLInputElement | HTMLSelectElement>
@@ -21,7 +26,7 @@ const ProductManager: React.FC = () => {
     description: useRef<HTMLInputElement>(null),
     keywords: useRef<HTMLInputElement>(null),
   }
-  const [image, setImage] = useState<Buffer | null>(null)
+  const [image, setImage] = useState<Buffer | null | string>(null)
   const [subImages, setSubImages] = useState<Buffer[]>([])
   const [action, setAction] = useState<string>('(*I&n()s*e(r&t*^%t^O&n*E(')
   const [data, setData] = useState<ProductInterface[] | null>(null)
@@ -37,6 +42,12 @@ const ProductManager: React.FC = () => {
     ['ایجاد', 'به روزرسانی', 'حذف'],
   ]
   const getData = async () => {
+    if (dataCache.current) {
+      setData(dataCache.current.product)
+      setCategories(dataCache.current.category)
+      setIsLoading(false)
+      return
+    }
     try {
       const response = await fetch('/api/data/Post/Admin/Product/GET', {
         method: 'POST',
@@ -51,7 +62,7 @@ const ProductManager: React.FC = () => {
         setData(result.product)
         setCategories(result.category)
         setIsLoading(false)
-        console.log(result)
+        dataCache.current = result
       } else {
         toast.current?.show({
           severity: 'error',
@@ -75,12 +86,12 @@ const ProductManager: React.FC = () => {
     if (editItemId && data) {
       setAction(')U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(')
       const itemToEdit = data.find((item) => item._id === editItemId)
+      itemToEdit?.src && setImage(itemToEdit?.src)
       if (itemToEdit) {
         refs.title.current!.value = itemToEdit?.title
         refs.description.current!.value = itemToEdit?.description
         refs.keywords.current!.value = itemToEdit?.keywords?.join(',') || ''
-        itemToEdit.categories
-        refs.category.current!.value = itemToEdit.src
+        refs.category.current!.value = itemToEdit?.categories
       }
     }
 
@@ -93,17 +104,6 @@ const ProductManager: React.FC = () => {
     refs.keywords,
     refs.category,
   ])
-  const readFileAsBuffer = (file: File): Promise<Buffer> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        const buffer = Buffer.from(reader.result as ArrayBuffer)
-        resolve(buffer)
-      }
-      reader.onerror = (error) => reject(error)
-      reader.readAsArrayBuffer(file)
-    })
-  }
 
   const setFile = async () => {
     const imageFile =
@@ -219,22 +219,12 @@ const ProductManager: React.FC = () => {
       >
         {Object.keys(refs).map((refName, index) => (
           <div key={index} className={styles.productBoxRow}>
-            <div key={index} className={styles.productBoxRow}>
-              <label className={styles.customFileUpload}>
-                <input
-                  ref={refs.subImages as RefObject<HTMLInputElement>}
-                  placeholder={'subImages'}
-                  multiple={true}
-                  type={'file'}
-                  onChange={() => setSubImageFiles()}
-                />
-                {`${refName}`}
-              </label>
-            </div>
             <label>{refName}</label>
             {refName === 'src' && image && (
               <Image
-                src={`data:image/jpeg;base64,${image}`}
+                src={`data:image/jpeg;base64,${Buffer.from(image).toString(
+                  'base64'
+                )}`}
                 alt={``}
                 width={77}
                 height={77}
@@ -244,8 +234,13 @@ const ProductManager: React.FC = () => {
               <input
                 ref={refs[refName] as RefObject<HTMLInputElement>}
                 placeholder={refName}
-                type={refName === 'src' ? 'file' : 'text'}
-                onChange={() => refName === 'src' && setFile()}
+                type={['src', 'subImages'].includes(refName) ? 'file' : 'text'}
+                multiple={refName === 'subImages' && true}
+                onChange={() =>
+                  refName === 'src'
+                    ? setFile()
+                    : refName === 'subImages' && setSubImageFiles()
+                }
               />
             ) : (
               categories && (

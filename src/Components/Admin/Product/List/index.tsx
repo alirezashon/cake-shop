@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { MdEditDocument } from 'react-icons/md'
 import styles from '../../List.module.css' // Update with your CSS file path
-import { Category, ProductInterface} from '@/Interfaces'
+import { Category, ProductInterface } from '@/Interfaces'
 
 interface Props {
   data: ProductInterface[] | null
@@ -51,7 +51,9 @@ const List: React.FC<Props> = ({
 
                   <td>
                     <Image
-                      src={`data:image/jpeg;base64,${product.src}`}
+                      src={`data:image/jpeg;base64,${Buffer.from(
+                        product.src
+                      ).toString('base64')}`}
                       alt={``}
                       width={77}
                       height={77}
@@ -64,7 +66,6 @@ const List: React.FC<Props> = ({
                         ?.name}
                   </td>
                   <td>{product?.description}</td>
-
                   <td>{product.keywords}</td>
                   <td>
                     <MdEditDocument

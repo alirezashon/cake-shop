@@ -1,11 +1,12 @@
 /** @format */
 
-import { useRef, RefObject, useState, useEffect } from "react"
-import styles from "../Inserto.module.css"
-import List from "./List"
-import { Toast } from "primereact/toast"
-import { Category } from "@/Interfaces"
-import Image from "next/image"
+import { useRef, RefObject, useState, useEffect } from 'react'
+import styles from '../Inserto.module.css'
+import List from './List'
+import { Toast } from 'primereact/toast'
+import { Category } from '@/Interfaces'
+import Image from 'next/image'
+import { readFileAsBuffer } from '../lib'
 const CategoryManager: React.FC = () => {
   const toast = useRef<Toast>(null)
 
@@ -16,27 +17,27 @@ const CategoryManager: React.FC = () => {
     src: useRef<HTMLInputElement>(null),
     keywords: useRef<HTMLInputElement>(null),
   }
-  const [image, setImage] = useState<string>()
-  const [action, setAction] = useState<string>("(*I&n()s*e(r&t*^%t^O&n*E(")
+  const [image, setImage] = useState<Buffer | null | string>(null)
+  const [action, setAction] = useState<string>('(*I&n()s*e(r&t*^%t^O&n*E(')
   const [data, setData] = useState<Category[] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [editItemId, setEditItemId] = useState<string | null>(null)
 
   const keys = [
     [
-      "(*I&n()s*e(r&t*^%t^O&n*E(",
-      ")U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(",
-      "&d*E%e#t&*^%s^waf#$^e$o%f@",
+      '(*I&n()s*e(r&t*^%t^O&n*E(',
+      ')U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(',
+      '&d*E%e#t&*^%s^waf#$^e$o%f@',
     ],
-    ["ایجاد", "به روزرسانی", "حذف"],
+    ['ایجاد', 'به روزرسانی', 'حذف'],
   ]
   const getData = async () => {
     try {
-      const response = await fetch("/api/data/Post/Admin/Category/GET", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/data/Post/Admin/Category/GET', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          authType: "^c(a)ta*sEa)*(t)A&g^o%s#x%sA!",
+          authType: '^c(a)ta*sEa)*(t)A&g^o%s#x%sA!',
         }),
       })
 
@@ -46,18 +47,18 @@ const CategoryManager: React.FC = () => {
         setIsLoading(false)
       } else {
         toast.current?.show({
-          severity: "error",
-          summary: "Secondary",
-          detail: " نا موفق",
+          severity: 'error',
+          summary: 'Secondary',
+          detail: ' نا موفق',
           life: 3000,
         })
         setIsLoading(false)
       }
     } catch (error) {
       toast.current?.show({
-        severity: "error",
-        summary: "Secondary",
-        detail: " نا موفق",
+        severity: 'error',
+        summary: 'Secondary',
+        detail: ' نا موفق',
         life: 3000,
       })
       setIsLoading(false)
@@ -65,73 +66,71 @@ const CategoryManager: React.FC = () => {
   }
   useEffect(() => {
     if (editItemId && data) {
-      setAction(")U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(")
+      setAction(')U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(')
       const itemToEdit = data.find((item) => item._id === editItemId)
       if (itemToEdit) {
         refs.name.current!.value = itemToEdit?.name
-        refs.keywordsEn.current!.value = itemToEdit?.keywords?.join(",") || ""
-
+        refs.keywords.current!.value = itemToEdit?.keywords?.join(',') || ''
         setImage(itemToEdit.src)
       }
     }
     !data && getData()
   }, [editItemId, data, refs.name, refs.keywords])
-  const setFile = () => {
-    const reader = new FileReader()
-    reader.onloadend = () => {
-      const imageData = reader.result?.toString().split(",")[1]
-      setImage(imageData)
-    }
+
+  const setFile = async () => {
     const imageFile =
       refs.src.current instanceof HTMLInputElement && refs.src.current.files
         ? refs.src.current.files[0]
         : null
-    imageFile && reader.readAsDataURL(imageFile)
+    if (imageFile) {
+      const buffer = await readFileAsBuffer(imageFile)
+      setImage(buffer)
+    }
   }
   const inserToDB = async () => {
     try {
       const dataToSend = {
-        authType: "^c(a)t*E(T*t(A&g*o^x^o$s#m!",
+        authType: '^c(a)t*E(T*t(A&g*o^x^o$s#m!',
         data: {
           src: image,
-          name: refs.name.current?.value || "",
-          keywords: refs.keywords.current?.value?.split(",") || [],
+          name: refs.name.current?.value || '',
+          keywords: refs.keywords.current?.value?.split(',') || [],
         },
         action: action,
       }
 
       const url =
-        action === "(*I&n()s*e(r&t*^%t^O&n*E("
+        action === '(*I&n()s*e(r&t*^%t^O&n*E('
           ? `/api/data/Post/Admin/Category`
           : `/api/data/Post/Admin/Category?aydi=${editItemId}`
       const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToSend),
       })
 
       const data = await response.json()
       if (data.success) {
         toast.current?.show({
-          severity: "success",
-          summary: "Secondary",
-          detail: "موفق",
+          severity: 'success',
+          summary: 'Secondary',
+          detail: 'موفق',
           life: 3000,
         })
         location.reload()
       } else {
         toast.current?.show({
-          severity: "error",
-          summary: "Secondary",
-          detail: " نا موفق",
+          severity: 'error',
+          summary: 'Secondary',
+          detail: ' نا موفق',
           life: 3000,
         })
       }
     } catch (error) {
       toast.current?.show({
-        severity: "warn",
-        summary: "Secondary",
-        detail: "خطا",
+        severity: 'warn',
+        summary: 'Secondary',
+        detail: 'خطا',
         life: 3000,
       })
     }
@@ -168,7 +167,7 @@ const CategoryManager: React.FC = () => {
         {Object.keys(refs).map((refName, index) => (
           <div key={index} className={styles.productBoxRow}>
             <label>{refName}</label>
-            {refName === "src" && image && (
+            {refName === 'src' && image && (
               <Image
                 src={`data:image/jpeg;base64,${image}`}
                 alt={``}
@@ -179,8 +178,8 @@ const CategoryManager: React.FC = () => {
             <input
               ref={refs[refName] as RefObject<HTMLInputElement>}
               placeholder={refName}
-              type={refName === "src" ? "file" : "text"}
-              onChange={() => refName === "src" && setFile()}
+              type={refName === 'src' ? 'file' : 'text'}
+              onChange={() => refName === 'src' && setFile()}
             />
           </div>
         ))}

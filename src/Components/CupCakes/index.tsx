@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import styles from './index.module.css'
+import ProductCarousel from '../Main/RectangleShow'
 
 const CupcakeDisplay = () => {
   return (
@@ -73,6 +74,7 @@ const CupcakeDisplay = () => {
           />
         </div>
       </div>
+
     </div>
   )
 }

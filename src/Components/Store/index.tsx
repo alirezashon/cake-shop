@@ -76,7 +76,27 @@ const Store: React.FC<Props> = ({ category, total }) => {
     }
     setFavorites(GetFave())
     setBasket(Get())
-  }, [total, setBasket, setFavorites])
+    const handleHashChange = () => {
+      const categoryTag = window.location.hash.substring(1)
+      if (categoryTag) {
+        const sortedProducts = [...products].sort((a, b) => {
+          if (a.categories === categoryTag && b.categories !== categoryTag)
+            return -1
+          if (a.categories !== categoryTag && b.categories === categoryTag)
+            return 1
+          return 0
+        })
+        setSortedata(sortedProducts)
+      } else {
+        setSortedata(products)
+      }
+    }
+    window.addEventListener('hashchange', handleHashChange, false)
+    handleHashChange()
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange, false)
+    }
+  }, [total, setBasket, setFavorites, products])
 
   const scrollLeft = () => {
     if (refs.categoryBoxRef.current) {

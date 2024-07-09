@@ -13,12 +13,13 @@ const CircularLinks: React.FC<Props> = ({ data }) => {
           <Link
             key={index}
             href={`/Store/#${item.name}`}
-            className={styles.model}
+            className={styles.name}
           >
             <Image
-              src={`data:image/jpeg;base64,${Buffer.from(item.src).toString(
-                'base64'
-              )}`}
+            src={`${item.src}`}
+              // src={`data:image/jpeg;base64,${Buffer.from(item.src).toString(
+              //   'base64'
+              // )}`}
               alt={item.name}
               className={styles.image}
               width={99}
