@@ -112,9 +112,10 @@ const ProductCarousel: React.FC = () => {
                 loading='lazy'
                 src={`data:image/jpeg;base64,${Buffer.from(
                   product?.src
-                ).toString('base64')}`} 
+                ).toString('base64')}`}
                 alt={product.title}
                 width={1200}
+                priority
                 height={1200}
                 className={styles.categorimage}
               />
@@ -163,13 +164,14 @@ const ProductCarousel: React.FC = () => {
               />
               <p className={styles.producTitlef}>{showProducto?.title}</p>
               <Image
+                priority
                 src={`data:image/jpeg;base64,${Buffer.from(
                   showProducto?.src
                 ).toString('base64')}`}
                 alt={showProducto?.title}
-                onClick={()=>open(`/Store/${showProducto?.title}`)}
-                width={444}
-                height={444}
+                onClick={() => open(`/Store/${showProducto?.title}`)}
+                width={1222}
+                height={1222}
                 className={styles.productimagelf}
               />
               <div className={styles.productPrice}>

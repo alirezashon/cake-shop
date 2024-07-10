@@ -1,20 +1,20 @@
 /** @format */
 
-import { NextApiRequest, NextApiResponse } from "next"
-import Category from "../../../../../../models/Data/Category"
-import db from "../../../../../../utils"
+import { NextApiRequest, NextApiResponse } from 'next'
+import Category from '../../../../../../models/Data/Category'
+import db from '../../../../../../utils'
 
 const cateBrand = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    if (req.method === "POST") {
+    if (req.method === 'POST') {
       const { aydi } = req.query
       const { authType, data, action } = req.body
-      if (authType === "^c(a)t*E(T*t(A&g*o^x^o$s#m!") {
+      if (authType === '^c(a)t*E(T*t(A&g*o^x^o$s#m!') {
         await db.connect2DB()
-        if (action === "(*I&n()s*e(r&t*^%t^O&n*E(") {
+        if (action === '(*I&n()s*e(r&t*^%t^O&n*E(') {
           await Category.create(data)
           res.status(200).json({ success: true })
-        } else if (action === ")U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(") {
+        } else if (action === ')U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(') {
           if (aydi && aydi.length > 0) {
             ;(await Category.findOneAndUpdate({ _id: aydi }, data))
               ? res.status(200).json({ success: true })
@@ -22,7 +22,7 @@ const cateBrand = async (req: NextApiRequest, res: NextApiResponse) => {
           } else {
             res.status(402).json({ success: false })
           }
-        } else if (action === "&d*E%e#t&*^%s^waf#$^e$o%f@") {
+        } else if (action === '&d*E%e#t&*^%s^waf#$^e$o%f@') {
           if (aydi && aydi.length > 0) {
             ;(await Category.findByIdAndDelete({ _id: aydi }, data))
               ? res.status(200).json({ success: true })
@@ -41,7 +41,15 @@ const cateBrand = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } catch (err) {
     res.status(500).json({ success: false, message: `Server Error => ${err}` })
+    console.log(err)
   }
+}
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '220mb',
+    },
+  },
 }
 
 export default cateBrand

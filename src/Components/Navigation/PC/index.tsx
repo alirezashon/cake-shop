@@ -131,7 +131,9 @@ const PC: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
                             }
                           >
                             <Link
-                              href={`/${subItem.name}`}
+                              rel='noopener noreferrer'
+                              target='_blank'
+                              href={`/Store#${subItem.name}`}
                               className={styles.products}
                             >
                               {subItem.name}
@@ -143,8 +145,15 @@ const PC: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
                         <div className={styles.typeBox}>
                           {item?.category[openItemWind.th]?.type?.map(
                             (type, typeIndex) => (
-                              <div className={styles.type} key={typeIndex}>
-                                {type}
+                              <div className={styles.type}>
+                                <Link
+                                  rel='noopener noreferrer'
+                                  target='_blank'
+                                  href={`/Store#${type}`}
+                                  key={typeIndex}
+                                >
+                                  {type}
+                                </Link>
                               </div>
                             )
                           )}
@@ -169,7 +178,10 @@ const PC: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
                 window.location.href = '/profile'
               }}
             />
-            <BsSuitHeart className={styles.profile} onClick={()=>open('/favorites')}/>
+            <BsSuitHeart
+              className={styles.profile}
+              onClick={() => open('/favorites')}
+            />
           </div>
           <div>
             {/* <form className={styles.searchBar}>

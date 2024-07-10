@@ -77,7 +77,8 @@ const Store: React.FC<Props> = ({ category, total }) => {
     setFavorites(GetFave())
     setBasket(Get())
     const handleHashChange = () => {
-      const categoryTag = window.location.hash.substring(1)
+      const categoryTag = decodeURIComponent(window.location.hash.substring(1))
+      console.log(categoryTag)
       if (categoryTag) {
         const sortedProducts = [...products].sort((a, b) => {
           if (a.categories === categoryTag && b.categories !== categoryTag)
@@ -163,7 +164,6 @@ const Store: React.FC<Props> = ({ category, total }) => {
             {category?.map((cat, catindex) => (
               <div key={catindex} className={styles.category}>
                 <Image
-                  loading='lazy'
                   src={`data:image/jpeg;base64,${Buffer.from(cat.src).toString(
                     'base64'
                   )}`}
@@ -249,7 +249,7 @@ const Store: React.FC<Props> = ({ category, total }) => {
               >
                 <NextSeo {...generateSEO(product)} />
                 <Image
-                  loading='lazy'
+                  priority
                   src={`data:image/jpeg;base64,${Buffer.from(
                     product.src
                   ).toString('base64')}`}
@@ -267,7 +267,7 @@ const Store: React.FC<Props> = ({ category, total }) => {
                   >
                     {product.description}
                   </div>
-                )}
+                )}  
                 <p
                   className={styles.producTitle}
                   onClick={() => open(`/Store/${product.title}`)}

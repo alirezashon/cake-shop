@@ -11,7 +11,7 @@ interface Props {
 const List: React.FC<Props> = ({ data, isLoading, setEditItemId }) => {
   return (
     <div className={styles.tableContainer}>
-      <div className={styles.header}>لیست عکس های کتگوری</div>
+      <div className={styles.header}>دسته بندی ها</div>
       {isLoading ? (
         Array.apply(0, Array(7)).map((x, i) => (
           <div key={i} className={styles.loading}>

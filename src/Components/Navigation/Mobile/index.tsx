@@ -86,7 +86,7 @@ const Mobile: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
                   rel='noopener noreferrer'
                   target='_blank'
                   key={index}
-                  href={`${item.link}`}
+                  href={`/Store#${item.name}`}
                   className={styles.product}
                 >
                   {item.name}
@@ -100,7 +100,7 @@ const Mobile: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
                   typeof data === 'string' ? (
                     <Link
                       key={subIndex}
-                      href={`${item.category}/${
+                      href={`/${item.category}/${
                         items[drawer.item].category
                       }/${data}`}
                     >

@@ -21,7 +21,6 @@ const ProductManager: React.FC = () => {
     src: useRef<HTMLInputElement>(null),
     subImages: useRef<HTMLInputElement>(null),
     price: useRef<HTMLInputElement>(null),
-    calories: useRef<HTMLInputElement>(null),
     category: useRef<HTMLSelectElement>(null),
     description: useRef<HTMLInputElement>(null),
     keywords: useRef<HTMLInputElement>(null),
@@ -89,6 +88,7 @@ const ProductManager: React.FC = () => {
       itemToEdit?.src && setImage(itemToEdit?.src)
       if (itemToEdit) {
         refs.title.current!.value = itemToEdit?.title
+        refs.price.current!.value = `${itemToEdit?.price}`
         refs.description.current!.value = itemToEdit?.description
         refs.keywords.current!.value = itemToEdit?.keywords?.join(',') || ''
         refs.category.current!.value = itemToEdit?.categories
@@ -140,9 +140,9 @@ const ProductManager: React.FC = () => {
           title: refs.title.current?.value || '',
           src: image,
           price: parseInt(`${refs.price?.current?.value}`),
-          calories: parseInt(`${refs.calories?.current?.value}`),
           categories: refs.category.current?.value || '',
           description: refs.description?.current?.value || '',
+          subImages: subImages,
           keywords: refs.keywords.current?.value.split(',') || [],
         },
         action: action,
@@ -230,6 +230,18 @@ const ProductManager: React.FC = () => {
                 height={77}
               />
             )}
+            {refName === 'subImages' &&
+              subImages &&
+              subImages.map((img) => (
+                <Image
+                  src={`data:image/jpeg;base64,${Buffer.from(img).toString(
+                    'base64'
+                  )}`}
+                  alt={``}
+                  width={77}
+                  height={77}
+                />
+              ))}
             {refName !== 'category' ? (
               <input
                 ref={refs[refName] as RefObject<HTMLInputElement>}
