@@ -96,46 +96,16 @@ const Mobile: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
                 )}
               </div>
               {drawer.item === index &&
-                items[drawer.item].category?.map((data, subIndex) =>
-                  typeof data === 'string' ? (
-                    <Link
-                      key={subIndex}
-                      href={`/${item.category}/${
-                        items[drawer.item].category
-                      }/${data}`}
-                    >
-                      <h5 className={styles.options}>{`${data}`}</h5>
-                    </Link>
-                  ) : (
-                    <div key={subIndex}>
-                      <h5
-                        className={styles.category}
-                        onClick={() => toggleDrawerCategory(index, subIndex)}
-                      >
-                        <Link
-                          key={subIndex}
-                          href={`${item.category}/${data.name}`}
-                          className={styles.products}
-                        >
-                          {data.name}
-                        </Link>
-                        <p className={styles.directionIcon}>&#x2BC6;</p>
-                      </h5>
-                      {subIndex === drawer.category &&
-                        data.type?.map((subOption, subOptionIndex) => (
-                          <Link
-                            key={subOptionIndex}
-                            href={`${item.category}/${data.name}/${subOption}`}
-                            className={styles.products}
-                          >
-                            <h5
-                              className={styles.subOptions}
-                            >{`${subOption}`}</h5>
-                          </Link>
-                        ))}
-                    </div>
-                  )
-                )}
+                items[drawer.item]?.category?.map((data, subIndex) => (
+                  <Link
+                    key={subIndex}
+                    href={`/${item.category}/${
+                      items[drawer.item].category
+                    }/${data}`}
+                  >
+                    <h5 className={styles.options}>{`${data}`}</h5>
+                  </Link>
+                ))}
             </div>
           ))}
         </div>
@@ -149,17 +119,19 @@ const Mobile: React.FC<NavProps> = ({ isBasketOpen, setIsBasketOpen }) => {
           </div>
 
           <div className={styles.iconBox}>
-              <Basket
-                isBasketOpen={isBasketOpen}
-                setIsBasketOpen={setIsBasketOpen}
-              />
+            <Basket
+              isBasketOpen={isBasketOpen}
+              setIsBasketOpen={setIsBasketOpen}
+            />
 
-              <FaUserCircle
-                className={styles.profile}
-                onClick={() => (window.location.href = '/profile')}
-              />
-            <BsSuitHeart className={styles.profile} onClick={()=>open('/favorites')}/>
-
+            <FaUserCircle
+              className={styles.profile}
+              onClick={() => (window.location.href = '/profile')}
+            />
+            <BsSuitHeart
+              className={styles.profile}
+              onClick={() => open('/favorites')}
+            />
           </div>
         </div>
       )}
