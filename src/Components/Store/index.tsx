@@ -243,8 +243,8 @@ const Store: React.FC<Props> = ({ category, total }) => {
                   onClick={() => open(`/Store/${product.title}`)}
                   alt={product.title}
                   style={{ opacity: productover === productindex ? 0.2 : 1 }}
-                  width={312}
-                  height={312}
+                  width={712}
+                  height={712}
                   className={styles.productimage}
                 />
                 {productover === productindex && (
