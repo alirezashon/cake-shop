@@ -17,7 +17,8 @@
           if (products) {
             const updated = products
             updated.rates = (products.rates + parseInt(rate)) / 2
-            await Product.findByIdAndUpdate( id, updated )
+            console.log(updated)
+            await Product.findOneAndUpdate({_id: id}, updated )
             res.status(200).json({ success: true, products })
           }
         } else {

@@ -20,7 +20,6 @@ const StarRating: React.FC<Props> = ({ id }) => {
       }),
     })
     await res.json()
-    console.log(res)
   }
 
   const handleMouseEnter = (index: number, isHalf: boolean) => {

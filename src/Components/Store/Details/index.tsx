@@ -62,6 +62,7 @@ const Details: React.FC<Props> = ({ post }) => {
     })
     const postData = await res.json()
     res.ok && location.reload()
+    console.log(post)
   }
   return (
     <>
@@ -70,7 +71,6 @@ const Details: React.FC<Props> = ({ post }) => {
         data={{ title: 'این کالا به سبد خرید اضافه شد!', message: post.title }}
         onClose={() => setShowModal(false)}
       />
-
       <div className={styles.screenBox}>
         <div className={styles.content}>
           {post.subImages?.length > 0 && (
@@ -184,7 +184,7 @@ const Details: React.FC<Props> = ({ post }) => {
                 ✕
               </div>
               <div className={styles.starBox}>
-                {/* <CommentRating setRates={(count:number)=>refs.rate.current?.value = parseInt(`${count}`)} /> */}
+              <StarRating id={post._id} />
               </div>
               <div className={styles.addCommentRow}>
                 <input

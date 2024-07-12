@@ -13,11 +13,10 @@ const Page = async (req: NextApiRequest, res: NextApiResponse) => {
         const products: ProductInterface | null = await Product.findOne({
           _id: id,
         })
-
         if (products) {
           const updated = products
           updated.comments = [...updated.comments, comment]
-          await Product.findByIdAndUpdate({ id, updated })
+          await Product.findOneAndUpdate({ _id:id },updated)
           res.status(200).json({ success: true, products })
         }
       } else {

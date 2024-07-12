@@ -16,6 +16,7 @@ import { GetFave, AddFave, RemoveFave } from './Favorites'
 import { generateSEO } from './SEO'
 import { NextSeo } from 'next-seo'
 import { useProducts } from '@/Context/Products'
+import { io } from 'socket.io-client'
 
 interface Props {
   category: Category[]
@@ -35,44 +36,31 @@ const Store: React.FC<Props> = ({ category, total }) => {
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
   const [favorites, setFavorites] = useState<string[]>([])
 
-  const totalPages = Math.ceil(total / 25)
-  const fetchPage = (page: number) => {
-    return fetch('/api/GET/products', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        authType: 'G&E!T*P^R$O#D$U^C@T*S',
-        page: page,
-        limit: 25,
-      }),
-    }).then((res) => res.json())
-  }
-
-  const fetchAllProducts = () => {
-    let promise = Promise.resolve()
-
-    for (let i = 3; i <= totalPages; i++) {
-      promise = promise.then(() => {
-        return fetchPage(i)
-          .then((result) => {
-            if (result.success) {
-              setSortedata((prv) => [...prv, ...result.products])
-            }
-          })
-          .catch((error) => {
-            console.error(`Failed to fetch page ${i}`, error)
-          })
-      })
-    }
-
-    return promise
-  }
-
   useEffect(() => {
-    if (total && sortedata?.length < total) {
-      fetchAllProducts()
+    const socket = io({
+      path: '/api/socket/Store',
+    })
+
+    socket.emit('getStore', { authType: 'authorized' })
+
+    socket.on('product', (product: ProductInterface) => {
+      setSortedata((prevProducts) => [...prevProducts, product])
+    })
+
+    socket.on('done', () => {
+      socket.disconnect()
+    })
+
+    socket.on('unauthorized', (message: string) => {
+      socket.disconnect()
+    })
+
+    socket.on('error', (message: string) => {
+      socket.disconnect()
+    })
+
+    return () => {
+      socket.disconnect()
     }
     setFavorites(GetFave())
     setBasket(Get())
@@ -250,14 +238,13 @@ const Store: React.FC<Props> = ({ category, total }) => {
                 <NextSeo {...generateSEO(product)} />
                 <Image
                   priority
-                  src={`data:image/jpeg;base64,${Buffer.from(
-                    product.src
-                  ).toString('base64')}`}
+                  src={`data:image/jpeg;base64,
+                   ${product.src}`}
                   onClick={() => open(`/Store/${product.title}`)}
                   alt={product.title}
                   style={{ opacity: productover === productindex ? 0.2 : 1 }}
-                  width={1212}
-                  height={1212}
+                  width={312}
+                  height={312}
                   className={styles.productimage}
                 />
                 {productover === productindex && (
@@ -267,7 +254,7 @@ const Store: React.FC<Props> = ({ category, total }) => {
                   >
                     {product.description}
                   </div>
-                )}  
+                )}
                 <p
                   className={styles.producTitle}
                   onClick={() => open(`/Store/${product.title}`)}
