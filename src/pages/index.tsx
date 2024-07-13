@@ -51,11 +51,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
       throw new Error('Failed to fetch initial products')
     }
 
-    const { products } = await productsRes.json()
-
+    const { productsWithImages } = await productsRes.json()
     return {
       props: {
-        initialProducts: products,
+        initialProducts: productsWithImages,
       },
     }
   } catch (error) {

@@ -104,8 +104,8 @@
 }
 
 .productimagelf {
-  height: 50%;
-  width: 80%;
+  height: 60%;
+  width: 70%;
 }
 .productDescriptelf {
   color: #600f0a;
@@ -114,7 +114,7 @@
 .productBox {
   display: flex;
   width: 100%;
-  height: 44vh;
+  height: 50vh;
   padding: 0.5vh 3vh;
   overflow-x: hidden;
   border-radius: 1vh;
@@ -153,13 +153,9 @@
   color: #ea4e45;
 }
 .categorimage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   border-radius: 6px 6px 0 0;
-  height: 60%;
-  font-size: 5vh;
+  height: 77%;
 }
 .leftDirection,
 .rightDirection {

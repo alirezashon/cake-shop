@@ -37,33 +37,30 @@ const Store: React.FC<Props> = ({ category, total }) => {
   const [favorites, setFavorites] = useState<string[]>([])
 
   useEffect(() => {
-    const socket = io({
-      path: '/api/socket/Store',
-    })
-
-    socket.emit('getStore', { authType: 'authorized' })
-
-    socket.on('product', (product: ProductInterface) => {
-      setSortedata((prevProducts) => [...prevProducts, product])
-    })
-
-    socket.on('done', () => {
-      socket.disconnect()
-    })
-
-    socket.on('unauthorized', (message: string) => {
-      socket.disconnect()
-    })
-
-    socket.on('error', (message: string) => {
-      socket.disconnect()
-    })
-
-    return () => {
-      socket.disconnect()
-    }
+    ;(async () => {
+      const socket = io({
+        path: '/api/socket/Store',
+      })
+      socket.emit('getStore', { authType: '(m&n)w%I@t!n^O%l%a&v*E)' })
+      socket.on('product', (product: ProductInterface) => {
+        setSortedata((prevProducts) => [...prevProducts, product])
+      })
+      socket.on('done', () => {
+        socket.disconnect()
+      })
+      socket.on('unauthorized', (message: string) => {
+        socket.disconnect()
+      })
+      socket.on('error', (message: string) => {
+        socket.disconnect()
+      })
+      return () => {
+        socket.disconnect()
+      }
+    })()
     setFavorites(GetFave())
     setBasket(Get())
+
     const handleHashChange = () => {
       const categoryTag = decodeURIComponent(window.location.hash.substring(1))
       console.log(categoryTag)
@@ -85,7 +82,7 @@ const Store: React.FC<Props> = ({ category, total }) => {
     return () => {
       window.removeEventListener('hashchange', handleHashChange, false)
     }
-  }, [total, setBasket, setFavorites, products])
+  }, [setBasket, setFavorites, products])
 
   const scrollLeft = () => {
     if (refs.categoryBoxRef.current) {

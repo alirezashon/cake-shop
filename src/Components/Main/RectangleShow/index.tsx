@@ -15,7 +15,6 @@ import Modal from '@/Components/Modal'
 const ProductCarousel: React.FC = () => {
   const { basket, setBasket } = useBasket()
   const { products } = useProducts()
-  const [data, setdata] = useState<ProductInterface[]>(products)
   const [showModal, setShowModal] = useState<boolean>(false)
   const [productover, setProductover] = useState<number | null>(null)
   const [showProducto, setShowProducto] = useState<ProductInterface | null>(
@@ -29,7 +28,6 @@ const ProductCarousel: React.FC = () => {
     productBoxRef: useRef<HTMLDivElement>(null),
   }
   useEffect(() => {
-    console.log(products)
     if (showModal) {
       return () =>
         clearTimeout(
@@ -79,7 +77,6 @@ const ProductCarousel: React.FC = () => {
     setBasket(Get())
   }
   const addToBasket = (id: string, price: number) => {
-    console.log('hay allredim')
     increment(id, price)
     setShowModal(true)
   }
@@ -105,18 +102,16 @@ const ProductCarousel: React.FC = () => {
               key={productindex}
               onMouseOver={() => setProductover(productindex)}
               onMouseLeave={() => setProductover(null)}
+              onClick={() => setShowProducto(product)}
               className={styles.product}
             >
               <Image
                 onClick={() => setShowProducto(product)}
-                loading='lazy'
-                src={`data:image/jpeg;base64,${Buffer.from(
-                  product?.src
-                ).toString('base64')}`}
+                src={`data:image/jpeg;base64,${product?.src}`}
                 alt={product.title}
-                width={1200}
-                priority
-                height={1200}
+                quality={100}
+                width={800}
+                height={500}
                 className={styles.categorimage}
               />
               <div
@@ -164,10 +159,7 @@ const ProductCarousel: React.FC = () => {
               />
               <p className={styles.producTitlef}>{showProducto?.title}</p>
               <Image
-                priority
-                src={`data:image/jpeg;base64,${Buffer.from(
-                  showProducto?.src
-                ).toString('base64')}`}
+                src={`data:image/jpeg;base64,${showProducto?.src}`}
                 alt={showProducto?.title}
                 onClick={() => open(`/Store/${showProducto?.title}`)}
                 width={1222}
