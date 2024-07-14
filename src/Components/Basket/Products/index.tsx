@@ -30,20 +30,19 @@ const Products: React.FC<Props> = ({ loading }) => {
     const result = await response.json()
     setBasketData(result.products)
   }
+
   useEffect(() => {
     getData()
-    if (basket[0]) {
-      if (basket[0].length > 0) {
-        const basketItemIds = basket[0].map(
-          (item) => item.split('*2%2&7(7)5%5!1@2')[2]
-        )
-        const items = products.filter((product) =>
-          basketItemIds.includes(product._id)
-        )
-        setBasketData(items)
-      }
+    if (basket[0] && basket[0].length > 0) {
+      const basketItemIds = basket[0].map(
+        (item) => item.split('*2%2&7(7)5%5!1@2')[2]
+      )
+      const items = products.filter((product) =>
+        basketItemIds.includes(product._id)
+      )
+      setBasketData(items)
     }
-  }, [])
+  }, [basket])
 
   const increment = (id: string, price: number) => {
     Add(id, price)
