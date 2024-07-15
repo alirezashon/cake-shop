@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { Get } from '@/Components/Basket/Actions'
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
 
 interface BasketContextProps {
   basket: [string[], string[], number, number]
@@ -14,6 +15,9 @@ export const BasketProvider = ({ children }: { children: ReactNode }) => {
     0,
     0,
   ])
+  useEffect(()=>{
+    setBasket(Get())
+  },[setBasket])
 
   return (
     <BasketContext.Provider value={{ basket, setBasket }}>

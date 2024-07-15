@@ -67,10 +67,9 @@
 }
 
 .basketBase {
-  margin-top: 3vh;
+  background-color: #f17171;
   animation: basketOpen 1s;
-  width: 99%;
-  height: inherit;
+  height:87%;
   background-color: rgba(255, 255, 255, 0.99);
   border-left: none;
   border-radius: 0vh 1vh 1vh 0vh;

@@ -21,7 +21,6 @@ const FindProduct = async (req: NextApiRequest, res: NextApiResponse) => {
         const bucket = new mongoose.mongo.GridFSBucket(conn.db, {
           bucketName: 'images',
         })
-        console.log(bucket)
 
         const getImageBase64 = (
           id: mongoose.Types.ObjectId

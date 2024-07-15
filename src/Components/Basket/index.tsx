@@ -17,7 +17,7 @@ const Basket: React.FC<BasketProps> = ({
   setIsBasketOpen,
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { basket, setBasket } = useBasket()
+  const { basket } = useBasket()
 
   const closeNav = (event: MouseEvent) => {
     if (

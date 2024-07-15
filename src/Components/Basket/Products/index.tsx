@@ -28,7 +28,7 @@ const Products: React.FC<Props> = ({ loading }) => {
       }),
     })
     const result = await response.json()
-    setBasketData(result.products)
+    setBasketData(result.ConvertedProducts)
   }
 
   useEffect(() => {
@@ -66,9 +66,7 @@ const Products: React.FC<Props> = ({ loading }) => {
             <div key={obj._id} className={styles.postsContainer}>
               <div className={styles.productBox}>
                 <Image
-                  src={`data:image/jpeg;base64,${Buffer.from(obj.src).toString(
-                    'base64'
-                  )}`}
+                  src={`data:image/jpeg;base64,${obj.src}`}
                   alt={obj.description}
                   width={222}
                   height={222}

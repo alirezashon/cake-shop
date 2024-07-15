@@ -103,7 +103,6 @@
 	align-items: center;
 }
 .payDetail {
-	position: absolute;
 	display: flex;
 	flex-direction: column-reverse;
 	background-color: #ffffff;
