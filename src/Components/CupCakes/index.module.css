@@ -1,7 +1,14 @@
 @keyframes showit {
-  0%{opacity: 0; transform: translateY(-70%);}
-  30%{opacity: .5;}
-  100%{opacity: 1;}
+  0% {
+    opacity: 0;
+    transform: translateY(-70%);
+  }
+  30% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .container {
   display: flex;
@@ -19,7 +26,7 @@
 }
 
 .cupcakeWrapper {
-  animation: 1s showit ;
+  animation: 1s showit;
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -38,7 +45,7 @@
   cursor: grabbing;
 }
 .cupcakeImage:hover {
-  transform:rotate(5deg);
+  transform: rotate(5deg);
 }
 
 .cupcakeLabel {
@@ -49,8 +56,8 @@
   padding: 1vh;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.cupcakeLabel:hover{
-  transform: scaleX(1.1)
+.cupcakeLabel:hover {
+  transform: scaleX(1.1);
 }
 
 .cupcakeName {
@@ -69,10 +76,31 @@
   width: 45%;
   height: 30vh;
 }
-.baseImage:hover{transform: rotateY(180deg);}
-@media (max-width:876px) {
-  .cupcakeContainer{max-width: 48%;}
-  .cupcakeContainer:last-child{
+.baseImage:hover {
+  transform: rotateY(180deg);
+}
+@media (max-width: 876px) {
+  .container {
+    height: 70vh;
+  }
+  .cupcakeName{
+    font-size: 1.3vh;
+  }
+  .cupcakeDescription{
+    font-size: 1vh;
+  }
+  .cupcakeImage {
+    height: 12vh;
+    width: 50%;
+  }
+  .baseImage {
+    width: 27%;
+    height: 18vh;
+  }
+  .cupcakeContainer {
+    max-width: 48%;
+  }
+  .cupcakeContainer:last-child {
     display: none;
   }
 }

@@ -114,7 +114,7 @@ const Main: React.FC = () => {
         height={1212}
         alt=''
       />
-      <div className={styles.gotorder}>
+      <div className={styles.gotorder} onClick={()=>open('/Store')}>
         <h2>سفارش انواع کیک و شیرینی</h2>
       </div>
       <div className={styles.backgroundContainer} onMouseMove={handleMouseMove}>

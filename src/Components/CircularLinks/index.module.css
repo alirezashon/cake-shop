@@ -24,6 +24,8 @@
 
 @media (max-width: 777px) {
 	.container {
+		height:22vh;
 		grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
 	}
+	.name{font-size: 1.3vh;}
 }
