@@ -23,6 +23,7 @@
 }
 .productsSection {
   text-align: center;
+  
 }
 
 .productsSection h2 {
@@ -30,60 +31,47 @@
   color: #ff4081;
   margin-bottom: 20px;
 }
-
-.products {
-  cursor: pointer;
-  display: flex;
-  flex-wrap: wrap;
+.productBox {
+  display: grid;
+  margin-top: 7vh;
+  grid-template-columns: repeat(auto-fit, minmax(18%, 0fr));
+  gap: 2vh;
   justify-content: center;
+  width: 100%;
+  text-align: center;
+  left: 0;
 }
-
 .product {
+  height: fit-content;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
-  margin: 10px;
-  padding: 20px;
-  width: 250px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
 .product:hover {
   transform: scale(1.05);
 }
-
 .mainCakeImage {
   width: 100%;
   height: 30vh;
   border-radius: 10px;
 }
-
 .product h3 {
   font-size: 1.5em;
   margin: 10px 0;
-  color: #ff4040;
+  color: #d68080;
+  width: 100%;
+  border-bottom: 1px solid #f7d7d7;
 }
-
 .product p {
-  color: #555;
+  border-top: 1px solid #f7d7d7;
+  padding: 0.5vh 7%;
+  color: #ec6f6f;
 }
-
-.basketSection {
-  margin-top: 50px;
-  text-align: center;
-}
-
-.basketSection h2 {
-  font-size: 2.5em;
-  color: #ff4081;
-}
-
-.basketSection p {
-  font-size: 1.2em;
-  color: #555;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -94,7 +82,13 @@
 }
 
 @media (max-width: 768px) {
-  .product {
-    width: 40%;
+.productBox{
+  grid-template-columns: repeat(auto-fit, minmax(38%, 0fr));
+
+}
+  .cakomage{
+    width: 45%;
+    left: -9%;
+    margin-top: -5vh;
   }
 }

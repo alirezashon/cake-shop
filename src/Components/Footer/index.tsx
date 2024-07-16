@@ -22,8 +22,9 @@ const Main: React.FC = () => {
       />
       <section className={styles.productsSection}>
         <h2>ارسال به تمام نقاط تهران</h2>
-        <div className={styles.products}>
+        <div className={styles.productBox}>
           <div className={styles.product}>
+            <h3>کیک سفارشی</h3>
             <Image
               src='/images/icon.png'
               width={1515}
@@ -31,10 +32,10 @@ const Main: React.FC = () => {
               alt=''
               className={styles.mainCakeImage}
             />
-            <h3>کیک سفارشی</h3>
             <p>چاپ تصویر همراه با انتخاب اشکال گوناگون کیک</p>
           </div>
           <div className={styles.product}>
+            <h3>کافی شاپی</h3>
             <Image
               src='/images/icon.png'
               width={1515}
@@ -42,7 +43,6 @@ const Main: React.FC = () => {
               alt=''
               className={styles.mainCakeImage}
             />
-            <h3>کافی شاپی</h3>
             <p>سفارش انبوه کیک های بسته بندی با بهترین کیفیت</p>
           </div>
         </div>

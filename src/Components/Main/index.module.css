@@ -227,12 +227,14 @@
     height: 60vh;
   }
   .backgroundContainer {
-    top: 67vh;
+    top: 107vh;
   }
-  .leftImageSide{display: none;}
- .rightImageSide {
+  .leftImageSide {
+    display: none;
+  }
+  .rightImageSide {
     display: block;
-margin-top: -20vh;
+    margin-top: -20vh;
     width: 100vw;
   }
   .productsSection {
@@ -256,5 +258,4 @@ margin-top: -20vh;
   .bottomSection {
     margin-bottom: 100vh;
   }
-
 }
