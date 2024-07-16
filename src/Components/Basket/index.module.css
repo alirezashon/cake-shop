@@ -1,5 +1,7 @@
 @keyframes basketOpen {
-  0%{transform: translateX(-100%);}
+  0% {
+    transform: translateX(-100%);
+  }
 }
 .basketBall {
   font-size: 3vh;
@@ -37,7 +39,7 @@
   border-radius: 0 4vh 0 0;
   height: 100vh;
   background-color: rgb(255, 255, 255);
-  border-right: ridge .6vh rgba(255, 166, 166, 0.926);
+  border-right: ridge 0.6vh rgba(255, 166, 166, 0.926);
   position: fixed;
   z-index: 33;
 }
@@ -69,7 +71,7 @@
 .basketBase {
   background-color: #f17171;
   animation: basketOpen 1s;
-  height:87%;
+  height: 87%;
   background-color: rgba(255, 255, 255, 0.99);
   border-left: none;
   border-radius: 0vh 1vh 1vh 0vh;
@@ -103,10 +105,13 @@
 @media (max-width: 787px) {
   .basketDrawer {
     width: 67%;
+    height: 100%;
   }
-
   .basketHeader {
     flex-direction: row-reverse;
+  }
+  .calculateBox {
+    min-width: 80%;
   }
   .productCount {
     margin-top: -3.7vh;
