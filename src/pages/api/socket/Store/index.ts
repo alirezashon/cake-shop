@@ -33,8 +33,7 @@ const socketManager = async (
     res.socket.server.io = io
 
     io.on('connection', async (socket) => {
-      console.log('A user connected')
-
+ 
       socket.on('getStore', async ({ authType }) => {
         if (authType !== '(m&n)w%I@t!n^O%l%a&v*E)') {
           socket.emit('unauthorized', 'Unauthorized access')
@@ -91,7 +90,6 @@ const socketManager = async (
       })
 
       socket.on('disconnect', () => {
-        console.log('A user disconnected')
       })
     })
   }

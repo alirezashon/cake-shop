@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import db from '../../../../utils/index.js'
 import Product from '../../../../models/Data/Product'
-import mongoose from 'mongoose'
+import { getImageBase64 } from '@/lib'
 
 const FindProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -17,27 +17,8 @@ const FindProduct = async (req: NextApiRequest, res: NextApiResponse) => {
           .skip(skipCount)
           .limit(limit)
 
-        const conn = mongoose.connection
-        const bucket = new mongoose.mongo.GridFSBucket(conn.db, {
-          bucketName: 'images',
-        })
 
-        const getImageBase64 = (
-          id: mongoose.Types.ObjectId
-        ): Promise<string> => {
-          return new Promise((resolve, reject) => {
-            const bufferChunks: Buffer[] = []
-            bucket
-              .openDownloadStream(id)
-              .on('data', (chunk) => bufferChunks.push(chunk))
-              .on('error', (error) => reject(error))
-              .on('end', () => {
-                const buffer = Buffer.concat(bufferChunks)
-                resolve(buffer.toString('base64'))
-              })
-          })
-        }
-
+     
         const productsWithImages = await Promise.all(
           products.map(async (product) => {
             const srcBase64 = await getImageBase64(product.src)

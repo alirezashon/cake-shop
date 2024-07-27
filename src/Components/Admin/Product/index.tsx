@@ -1,5 +1,3 @@
-/** @format */
-
 import { useRef, RefObject, useState, useEffect } from 'react'
 import styles from '../Inserto.module.css'
 import List from './List'
@@ -7,10 +5,10 @@ import { Toast } from 'primereact/toast'
 import { Category, ProductInterface } from '@/Interfaces'
 import Image from 'next/image'
 import { readFileAsBuffer } from '../lib'
+import { io } from 'socket.io-client'
 const ProductManager: React.FC = () => {
   const toast = useRef<Toast>(null)
   const dataCache = useRef<{
-    product: ProductInterface[]
     category: Category[]
   } | null>(null)
 
@@ -28,7 +26,7 @@ const ProductManager: React.FC = () => {
   const [image, setImage] = useState<Buffer | null | string>(null)
   const [subImages, setSubImages] = useState<Buffer[]>([])
   const [action, setAction] = useState<string>('(*I&n()s*e(r&t*^%t^O&n*E(')
-  const [data, setData] = useState<ProductInterface[] | null>(null)
+  const [data, setData] = useState<ProductInterface[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [editItemId, setEditItemId] = useState<string | null>(null)
   const [categories, setCategories] = useState<Category[] | null>(null)
@@ -42,7 +40,6 @@ const ProductManager: React.FC = () => {
   ]
   const getData = async () => {
     if (dataCache.current) {
-      setData(dataCache.current.product)
       setCategories(dataCache.current.category)
       setIsLoading(false)
       return
@@ -58,7 +55,6 @@ const ProductManager: React.FC = () => {
 
       if (response.ok) {
         const result = await response.json()
-        setData(result.product)
         setCategories(result.category)
         setIsLoading(false)
         dataCache.current = result
@@ -82,6 +78,28 @@ const ProductManager: React.FC = () => {
     }
   }
   useEffect(() => {
+    ;(async () => {
+      const socket = io({
+        path: '/api/socket/Store',
+      })
+      socket.emit('getStore', { authType: '(m&n)w%I@t!n^O%l%a&v*E)' })
+      socket.on('product', (product: ProductInterface) => {
+        setData((prevProducts) => [...prevProducts, product])
+      })
+      socket.on('done', () => {
+        socket.disconnect()
+      })
+      socket.on('unauthorized', (message: string) => {
+        socket.disconnect()
+      })
+      socket.on('error', (message: string) => {
+        socket.disconnect()
+      })
+      return () => {
+        socket.disconnect()
+      }
+    })()
+
     if (editItemId && data) {
       setAction(')U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(')
       const itemToEdit = data.find((item) => item._id === editItemId)
@@ -95,7 +113,7 @@ const ProductManager: React.FC = () => {
       }
     }
 
-    !data && getData()
+    getData()
   }, [
     editItemId,
     data,

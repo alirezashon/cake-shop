@@ -118,9 +118,7 @@ const Details: React.FC<Props> = ({ post }) => {
               <div className={styles.title}>{post.title}</div>
               <Image
                 className={styles.mainImage}
-                src={`data:image/jpeg;base64,${Buffer.from(post.src).toString(
-                  'base64'
-                )}`}
+                src={`data:image/jpeg;base64,${post.src}`}
                 width={777}
                 height={777}
                 alt=''
