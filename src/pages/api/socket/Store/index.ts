@@ -7,6 +7,7 @@ import { Server as HTTPServer } from 'http'
 import { Socket as NetSocket } from 'net'
 import { Server as IOServer } from 'socket.io'
 import mongoose from 'mongoose'
+import { getImageBase64 } from '@/lib'
 
 interface SocketServer extends HTTPServer {
   io?: IOServer
@@ -33,7 +34,6 @@ const socketManager = async (
     res.socket.server.io = io
 
     io.on('connection', async (socket) => {
- 
       socket.on('getStore', async ({ authType }) => {
         if (authType !== '(m&n)w%I@t!n^O%l%a&v*E)') {
           socket.emit('unauthorized', 'Unauthorized access')
@@ -50,21 +50,8 @@ const socketManager = async (
 
           const products = await Product.find().exec()
 
-          const getImageBase64 = (
-            id: mongoose.Types.ObjectId
-          ): Promise<string> => {
-            return new Promise((resolve, reject) => {
-              const bufferChunks: Buffer[] = []
-              bucket
-                .openDownloadStream(id)
-                .on('data', (chunk) => bufferChunks.push(chunk))
-                .on('error', (error) => reject(error))
-                .on('end', () => {
-                  const buffer = Buffer.concat(bufferChunks)
-                  resolve(buffer.toString('base64'))
-                })
-            })
-          }
+          socket.emit('count', products.length)
+          let sentCount = 0
 
           for (const product of products) {
             const srcBase64 = await getImageBase64(product.src)
@@ -80,17 +67,19 @@ const socketManager = async (
               src: srcBase64,
               subImages: subImagesBase64,
             })
+            sentCount++
+            if (sentCount === products.length) {
+              socket.emit('done')
+              socket.disconnect()
+            }
           }
-
-          socket.emit('done')
         } catch (error) {
           console.error(error)
           socket.emit('error', 'Internal server error')
         }
       })
 
-      socket.on('disconnect', () => {
-      })
+      socket.on('disconnect', () => {})
     })
   }
 

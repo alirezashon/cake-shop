@@ -1,16 +1,19 @@
 import { useRef, RefObject, useState, useEffect } from 'react'
 import styles from '../Inserto.module.css'
 import List from './List'
-import { Toast } from 'primereact/toast'
 import { Category, ProductInterface } from '@/Interfaces'
 import Image from 'next/image'
 import { readFileAsBuffer } from '../lib'
-import { io } from 'socket.io-client'
-const ProductManager: React.FC = () => {
-  const toast = useRef<Toast>(null)
-  const dataCache = useRef<{
-    category: Category[]
-  } | null>(null)
+import { Toast } from 'primereact/toast'
+
+interface Props {
+  data: ProductInterface[] 
+  category: Category[] | null
+  isLoading: boolean
+  toast: RefObject<Toast>
+}
+const ProductManager:React.FC<Props> = ({data,category,isLoading,toast}) => {
+
 
   const refs: {
     [key: string]: RefObject<HTMLInputElement | HTMLSelectElement>
@@ -26,10 +29,7 @@ const ProductManager: React.FC = () => {
   const [image, setImage] = useState<Buffer | null | string>(null)
   const [subImages, setSubImages] = useState<Buffer[]>([])
   const [action, setAction] = useState<string>('(*I&n()s*e(r&t*^%t^O&n*E(')
-  const [data, setData] = useState<ProductInterface[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [editItemId, setEditItemId] = useState<string | null>(null)
-  const [categories, setCategories] = useState<Category[] | null>(null)
   const keys = [
     [
       '(*I&n()s*e(r&t*^%t^O&n*E(',
@@ -38,71 +38,12 @@ const ProductManager: React.FC = () => {
     ],
     ['ایجاد', 'به روزرسانی', 'حذف'],
   ]
-  const getData = async () => {
-    if (dataCache.current) {
-      setCategories(dataCache.current.category)
-      setIsLoading(false)
-      return
-    }
-    try {
-      const response = await fetch('/api/data/Post/Admin/Product/GET', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          authType: '^c(a)ta*sEa0c(Tzol&i^*o%l#sA!',
-        }),
-      })
 
-      if (response.ok) {
-        const result = await response.json()
-        setCategories(result.category)
-        setIsLoading(false)
-        dataCache.current = result
-      } else {
-        toast.current?.show({
-          severity: 'error',
-          summary: 'Secondary',
-          detail: ' نا موفق',
-          life: 3000,
-        })
-        setIsLoading(false)
-      }
-    } catch (error) {
-      toast.current?.show({
-        severity: 'error',
-        summary: 'Secondary',
-        detail: ' نا موفق',
-        life: 3000,
-      })
-      setIsLoading(false)
-    }
-  }
+  
   useEffect(() => {
-    ;(async () => {
-      const socket = io({
-        path: '/api/socket/Store',
-      })
-      socket.emit('getStore', { authType: '(m&n)w%I@t!n^O%l%a&v*E)' })
-      socket.on('product', (product: ProductInterface) => {
-        setData((prevProducts) => [...prevProducts, product])
-      })
-      socket.on('done', () => {
-        socket.disconnect()
-      })
-      socket.on('unauthorized', (message: string) => {
-        socket.disconnect()
-      })
-      socket.on('error', (message: string) => {
-        socket.disconnect()
-      })
-      return () => {
-        socket.disconnect()
-      }
-    })()
-
     if (editItemId && data) {
       setAction(')U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(')
-      const itemToEdit = data.find((item) => item._id === editItemId)
+      const itemToEdit = data?.find((item) => item._id === editItemId)
       itemToEdit?.src && setImage(itemToEdit?.src)
       if (itemToEdit) {
         refs.title.current!.value = itemToEdit?.title
@@ -113,7 +54,6 @@ const ProductManager: React.FC = () => {
       }
     }
 
-    getData()
   }, [
     editItemId,
     data,
@@ -204,10 +144,10 @@ const ProductManager: React.FC = () => {
   }
   return (
     <>
-      <Toast ref={toast} />
+      {data.length}
       <List
         data={data}
-        category={categories}
+        category={category}
         isLoading={isLoading}
         setEditItemId={setEditItemId}
       />
@@ -240,9 +180,7 @@ const ProductManager: React.FC = () => {
             <label>{refName}</label>
             {refName === 'src' && image && (
               <Image
-                src={`data:image/jpeg;base64,${Buffer.from(image).toString(
-                  'base64'
-                )}`}
+                src={`data:image/jpeg;base64,${image}`}
                 alt={``}
                 width={77}
                 height={77}
@@ -273,7 +211,7 @@ const ProductManager: React.FC = () => {
                 }
               />
             ) : (
-              categories && (
+              category && (
                 <>
                   <select
                     ref={refs.category as RefObject<HTMLSelectElement>}
@@ -281,7 +219,7 @@ const ProductManager: React.FC = () => {
                     onChange={(e) => setAction(e.target.value)}
                     value={refs.category.current?.value}
                   >
-                    {categories.map((category) => (
+                    {category.map((category) => (
                       <option key={category._id} value={category._id}>
                         {category.name}
                       </option>

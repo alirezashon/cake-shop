@@ -36,28 +36,29 @@ const Store: React.FC<Props> = ({ category, total }) => {
   const [enginConf, setEnginConf] = useState<[number, number] | null>(null) //open state , selected option
   const [favorites, setFavorites] = useState<string[]>([])
 
+  const connecTocket = () => {
+    const socket = io({
+      path: '/api/socket/Store',
+    })
+    socket.emit('getStore', { authType: '(m&n)w%I@t!n^O%l%a&v*E)' })
+    socket.on('product', (product: ProductInterface) => {
+      setSortedata((prevProducts) => [...prevProducts, product])
+    })
+    socket.on('done', () => {
+      socket.disconnect()
+    })
+    socket.on('unauthorized', (message: string) => {
+      socket.disconnect()
+    })
+    socket.on('error', (message: string) => {
+      socket.disconnect()
+    })
+    return () => {
+      socket.disconnect()
+    }
+  }
   useEffect(() => {
-    ;(async () => {
-      const socket = io({
-        path: '/api/socket/Store',
-      })
-      socket.emit('getStore', { authType: '(m&n)w%I@t!n^O%l%a&v*E)' })
-      socket.on('product', (product: ProductInterface) => {
-        setSortedata((prevProducts) => [...prevProducts, product])
-      })
-      socket.on('done', () => {
-        socket.disconnect()
-      })
-      socket.on('unauthorized', (message: string) => {
-        socket.disconnect()
-      })
-      socket.on('error', (message: string) => {
-        socket.disconnect()
-      })
-      return () => {
-        socket.disconnect()
-      }
-    })()
+    connecTocket()
     setFavorites(GetFave())
     setBasket(Get())
 
@@ -138,6 +139,7 @@ const Store: React.FC<Props> = ({ category, total }) => {
 
   return (
     <>
+      {sortedata.length}
       <Toast />
       <div className={styles.container}>
         <div className={styles.menuSide}>
