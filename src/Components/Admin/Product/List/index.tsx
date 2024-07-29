@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { MdEditDocument } from 'react-icons/md'
-import styles from '../../List.module.css' 
+import styles from '../../List.module.css'
 import { Category, ProductInterface } from '@/Interfaces'
 
 interface Props {
@@ -8,12 +8,14 @@ interface Props {
   category: Category[] | null
   isLoading: boolean
   setEditItemId: (id: string) => void
+  setPrvState: () => void
 }
 const List: React.FC<Props> = ({
   data,
   category,
   isLoading,
   setEditItemId,
+  setPrvState,
 }) => {
   return (
     <div className={styles.tableContainer}>
@@ -67,7 +69,10 @@ const List: React.FC<Props> = ({
                   <td>
                     <MdEditDocument
                       className={styles.actionButton}
-                      onClick={() => setEditItemId(product._id)}
+                      onClick={() => {
+                        setPrvState()
+                        setEditItemId(product._id)
+                      }}
                     />
                   </td>
                 </tr>

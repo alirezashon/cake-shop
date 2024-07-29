@@ -7,14 +7,17 @@ import { readFileAsBuffer } from '../lib'
 import { Toast } from 'primereact/toast'
 
 interface Props {
-  data: ProductInterface[] 
+  data: ProductInterface[]
   category: Category[] | null
   isLoading: boolean
   toast: RefObject<Toast>
 }
-const ProductManager:React.FC<Props> = ({data,category,isLoading,toast}) => {
-
-
+const ProductManager: React.FC<Props> = ({
+  data,
+  category,
+  isLoading,
+  toast,
+}) => {
   const refs: {
     [key: string]: RefObject<HTMLInputElement | HTMLSelectElement>
   } = {
@@ -39,29 +42,18 @@ const ProductManager:React.FC<Props> = ({data,category,isLoading,toast}) => {
     ['ایجاد', 'به روزرسانی', 'حذف'],
   ]
 
-  
-  useEffect(() => {
-    if (editItemId && data) {
-      setAction(')U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(')
-      const itemToEdit = data?.find((item) => item._id === editItemId)
-      itemToEdit?.src && setImage(itemToEdit?.src)
-      if (itemToEdit) {
-        refs.title.current!.value = itemToEdit?.title
-        refs.price.current!.value = `${itemToEdit?.price}`
-        refs.description.current!.value = itemToEdit?.description
-        refs.keywords.current!.value = itemToEdit?.keywords?.join(',') || ''
-        refs.category.current!.value = itemToEdit?.categories
-      }
+  const setPrvState = () => {
+    setAction(')U*p)d(sa@!$!2s1!23r2%a$t#e@i*n(')
+    const itemToEdit = data?.find((item) => item._id === editItemId)
+    itemToEdit?.src && setImage(itemToEdit?.src)
+    if (itemToEdit) {
+      refs.title.current!.value = itemToEdit?.title
+      refs.price.current!.value = `${itemToEdit?.price}`
+      refs.description.current!.value = itemToEdit?.description
+      refs.keywords.current!.value = itemToEdit?.keywords?.join(',') || ''
+      refs.category.current!.value = itemToEdit?.categories
     }
-
-  }, [
-    editItemId,
-    data,
-    refs.title,
-    refs.description,
-    refs.keywords,
-    refs.category,
-  ])
+  }
 
   const setFile = async () => {
     const imageFile =
@@ -150,6 +142,7 @@ const ProductManager:React.FC<Props> = ({data,category,isLoading,toast}) => {
         category={category}
         isLoading={isLoading}
         setEditItemId={setEditItemId}
+        setPrvState={setPrvState}
       />
       <div className={styles.radioBox}>
         {keys[1].map((act, index) => (

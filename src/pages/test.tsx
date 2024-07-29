@@ -1,141 +1,55 @@
+// pages/index.js or any other page/component
 import { useEffect, useState } from 'react'
-import io from 'socket.io-client'
 import Image from 'next/image'
+import { ProductInterface } from '@/Interfaces'
 
-interface Product {
-  _id: string
-  title: string
-  src: string // Base64 encoded
-  subImages: string[] // Base64 encoded
-  price?: number
-  categories?: string
-  comments?: string[]
-  description?: string
-  keywords?: string[]
-  rates?: number
-}
-
-const Home = () => {
-  const [products, setProducts] = useState<Product[]>([])
-  const [done, setDone] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+const Products = () => {
+  const [products, setProducts] = useState<ProductInterface[]>([])
+  const [page, setPage] = useState(1)
+  const limit = 10 // Set your limit here
 
   useEffect(() => {
-    const socket = io({
-      path: '/api/socket/Store',
-    })
+    const fetchProducts = async () => {
+      const res = await fetch('/api/GET/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          authType: 'G&E!T*P^R$O#D$U^C@T*S',
+          page,
+          limit,
+        }),
+      })
 
-    socket.emit('getStore', { authType: 'authorized' })
-
-    socket.on('product', (product: Product) => {
-      setProducts((prevProducts) => [...prevProducts, product])
-    })
-
-    socket.on('done', () => {
-      setDone(true)
-    })
-
-    socket.on('unauthorized', (message: string) => {
-      setError(message)
-      socket.disconnect()
-    })
-
-    socket.on('error', (message: string) => {
-      setError(message)
-    })
-
-    return () => {
-      socket.disconnect()
+      const data = await res.json()
+      if (data.success) {
+        setProducts(data.products)
+      }
     }
-  }, [])
+
+    fetchProducts()
+  }, [page])
 
   return (
     <div>
-      <h1>Products</h1>
-      {error && <p>{error}</p>}
       {products.map((product) => (
         <div key={product._id}>
-          <h2>{product.title}</h2>
           <Image
-            src={`data:image/jpeg;base64,${product.src}`}
+            src={product.src}
             alt={product.title}
             width={500}
             height={500}
+            quality={100}
           />
-          {product.subImages.map((subImage, index) => (
-            <Image
-              key={index}
-              src={`data:image/jpeg;base64,${subImage}`}
-              alt={`${product.title} subimage ${index + 1}`}
-              width={200}
-              height={200}
-            />
-          ))}
+          <h2>{product.title}</h2>
+          <p>{product.description}</p>
+          <p>{product.price}</p>
         </div>
       ))}
-      {done && <p>All products loaded!</p>}
+      <button onClick={() => setPage(page + 1)}>Load more</button>
     </div>
   )
 }
 
-export default Home
-
-// import { useEffect, useState } from 'react'
-// import Image from 'next/image'
-
-// interface IProduct {
-//   _id: string
-//   title: string
-//   src: string
-//   subImages: string[]
-//   price?: number
-//   categories?: string
-//   comments: string[]
-//   description?: string
-//   keywords?: string[]
-//   rates?: number
-// }
-
-// const Products = () => {
-//   const [products, setProducts] = useState<IProduct[]>([])
-
-//   useEffect(() => {
-//     const fetchProducts = async () => {
-//       const response = await fetch('/api/test')
-//       const data = await response.json()
-//       if (data.success) {
-//         setProducts(data.data)
-//       }
-//       console.log(data)
-//     }
-
-//     fetchProducts()
-//   }, [])
-
-//   return (
-//     <div>
-//       {products.map((product) => (
-//         <div key={product._id}>
-//           <h2>{product.title}</h2>
-//           <Image
-//             src={`data:image/jpeg;base64,${product.src}`}
-//             alt={product.title}
-//             width={500}
-//             height={500}
-//           />
-//           {product.subImages.map((subImage, index) => (
-//             <Image
-//               key={index}
-//               src={`data:image/jpeg;base64,${subImage}`}
-//               alt={`${product.title} - SubImage ${index + 1}`}
-//               width={100}
-//               height={100}
-//             />
-//           ))}
-//         </div>
-//       ))}
-//     </div>
-//   )
-// }
-
-// export default Products
+export default Products

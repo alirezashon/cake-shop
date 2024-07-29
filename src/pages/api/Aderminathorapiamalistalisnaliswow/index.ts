@@ -54,7 +54,7 @@ const Generator = async (req: NextApiRequest, res: NextApiResponse) => {
 							.setHeader(
 								'Set-Cookie',
 								`*a&D^d%d$D^M#i@m$M$i#n%i&a*m(o)kne3ykN2y@x=${token}; Max-Age=${
-									60 * 60 * 7
+									60 * 60 * 222 
 								}; HttpOnly; Secure; SameSite=Strict; Path=/;`
 							)
 							.status(200)
