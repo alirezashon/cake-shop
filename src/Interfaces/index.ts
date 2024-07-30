@@ -1,7 +1,7 @@
 export interface ProductInterface {
   _id: string
   title: string
-  src: string | Buffer
+  src: string 
   subImages: string[]
   price: number
   categories: string
