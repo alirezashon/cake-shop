@@ -1,17 +1,17 @@
-// pages/index.tsx
-import { useEffect, useRef, useCallback, useState } from 'react';
-import Image from 'next/image';
-import { useProducts } from '@/Context/Products';
-import { ProductInterface } from '@/Interfaces';
+
+import { useEffect, useRef, useCallback, useState, memo } from 'react'
+import Image from 'next/image'
+import { ProductInterface } from '@/Interfaces'
 
 const Products = () => {
-  const { products, setProducts } = useProducts();
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const loadMoreRef = useRef<HTMLDivElement | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [products, setProducts ] = useState<ProductInterface[]>([])
+  const [page, setPage] = useState(1)
+  const observerRef = useRef<IntersectionObserver | null>(null)
+  const loadMoreRef = useRef<HTMLDivElement | null>(null)
+  const [loading, setLoading] = useState(false)
 
   const fetchProducts = async (page: number) => {
-    setLoading(true);
+    setLoading(true)
     const res = await fetch('/api/GET/products', {
       method: 'POST',
       headers: {
@@ -22,51 +22,52 @@ const Products = () => {
         page: page,
         limit: 10,
       }),
-    });
+    })
 
-    const data = await res.json();
+    const data = await res.json()
     if (data.success) {
-      setProducts((prev) => [...prev, ...data.products]);
+      setProducts((prev) => [...prev, ...data.products])
     }
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
-  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
-    const target = entries[0];
-    if (target.isIntersecting && !loading) {
-      setPage((prev) => prev + 1);
-    }
-  }, [loading]);
+  const handleObserver = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const target = entries[0]
+      if (target.isIntersecting && !loading) {
+        setPage((prev) => prev + 1)
+      }
+    },
+    [loading]
+  )
 
   useEffect(() => {
     if (page > 1) {
-      fetchProducts(page);
+      fetchProducts(page)
     }
-  }, [page]);
+  }, [page])
 
   useEffect(() => {
-    if (products.length === 0) {
-      fetchProducts(1);
-    }
-  }, []);
+    fetchProducts(1)
+  }, [])
 
   useEffect(() => {
-    if (observerRef.current) observerRef.current.disconnect();
+    if (observerRef.current) observerRef.current.disconnect()
 
     observerRef.current = new IntersectionObserver(handleObserver, {
       threshold: 0.7,
-    });
+    })
 
-    if (loadMoreRef.current) observerRef.current.observe(loadMoreRef.current);
+    if (loadMoreRef.current) observerRef.current.observe(loadMoreRef.current)
 
     return () => {
-      if (observerRef.current) observerRef.current.disconnect();
-    };
-  }, [handleObserver]);
+      if (observerRef.current) observerRef.current.disconnect()
+    }
+  }, [handleObserver])
 
   return (
     <div>
-      {products.map((product) => (
+      {products.map((product, index) => (
         <div key={product._id}>
           <Image
             src={product.src}
@@ -82,10 +83,12 @@ const Products = () => {
       ))}
       <div ref={loadMoreRef} style={{ height: 1 }} />
     </div>
-  );
-};
+  )
+}
 
-export default Products;
+export default memo(Products)
+
+
 
 // import { useEffect, useState, useRef, useCallback } from 'react';
 // import Image from 'next/image';

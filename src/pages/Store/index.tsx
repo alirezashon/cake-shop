@@ -10,15 +10,14 @@ const Store = dynamic(() => import('../../Components/Store'), {
 
 interface Props {
   categories: Category[]
-  initialTotal: number
 }
 
-const RootPage: NextPage<Props> = ({ categories, initialTotal }) => {
+const RootPage: NextPage<Props> = ({ categories }) => {
   return (
     <>
       <Layout>
         <NextSeo {...generateSEO()} />
-        <Store total={initialTotal} category={categories} />
+        <Store category={categories} />
       </Layout>
     </>
   )
@@ -39,34 +38,14 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const categoriesResult = await categoriesRes.json()
     const categories = categoriesResult.categories || []
 
-    const productsRes = await fetch(
-      `http://localhost:${process.env.PRODUCTION_PORT}/api/GET/products`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          authType: '*k)a(L*i^M%a$s@o(t*A(l*',
-        }),
-      }
-    )
-
-    if (!productsRes.ok) {
-      throw new Error('Failed to fetch initial products')
-    }
-
-    const { totalProducts } = await productsRes.json()
-
     return {
       props: {
-        initialTotal: totalProducts,
         categories,
       },
     }
   } catch (error) {
     console.error('Error fetching initial props:', error)
-    return { props: { initialTotal: 0, categories: [] } }
+    return { props: { categories: [] } }
   }
 }
 export const config = {
