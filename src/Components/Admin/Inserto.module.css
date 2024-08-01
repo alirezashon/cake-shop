@@ -1,145 +1,167 @@
-/** @format */
 
 .productBox {
   width: 100%;
   background: linear-gradient(
     44deg,
-    rgba(205, 235, 93, 0.9) 2%,
-    rgb(223, 243, 125) 22%,
-    rgba(59, 120, 18, 0.9) 99%
+    rgba(240, 240, 240, 0.9),
+    rgba(220, 220, 220, 0.9)
   );
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
   padding: 2vh;
+  border-radius: 8px;
 }
 
 .productBoxRow {
   background: linear-gradient(
     44deg,
-    rgba(154, 236, 13, 0.9),
-    rgba(223, 241, 142, 0.9)
+    rgba(251, 255, 228, 0.9),
+    rgba(246, 255, 226, 0.9)
   );
   margin: 1vh;
   padding: 2vh;
   display: flex;
   justify-content: space-around;
+  border-radius: 8px;
 }
 
 .productBoxRow label {
-  background: radial-gradient(rgba(5, 99, 41, 0.9), rgba(21, 192, 38, 0.9));
+  background: radial-gradient(rgba(100, 100, 100, 0.9), rgba(80, 80, 80, 0.9));
   padding: 0.5vh 1vh;
-  border: 0.2vh dashed rgb(246, 255, 201);
+  border: 0.2vh solid rgb(220, 220, 220);
   border-radius: 0.7vh;
   color: white;
-  text-wrap: nowrap;
+  white-space: nowrap;
   height: fit-content;
 }
 
 .productBoxRow input {
   outline: none;
-  border: 0.3vh ridge rgba(166, 241, 91, 0.9);
-  border-radius: 0.6vh;
+  border: 0.2vh solid rgba(200, 200, 200, 0.9);
+  border-radius: 0.5vh;
   padding: 1vh;
   text-align: center;
 }
-/* .productBoxRow input[type="file"] {
- } */
 
 .productBoxRow textarea {
   width: 60%;
   padding: 1vh;
   border-radius: 1vh;
-  border: 0.5vh rgba(169, 241, 91, 0.9) ridge;
+  border: 0.3vh solid rgba(200, 200, 200, 0.9);
   direction: rtl;
 }
 
 .productBox input[type="submit"] {
   background: linear-gradient(
     22deg,
-    rgba(187, 211, 99, 0.9),
-    rgb(176, 221, 121)
+    rgba(180, 220, 180, 0.9),
+    rgba(160, 200, 160, 0.9)
   );
+  border: 0.2vh solid rgba(150, 190, 150, 0.9);
+  border-radius: 0.5vh;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.productBox input[type="submit"]:hover {
+  background: linear-gradient(
+    22deg,
+    rgba(160, 200, 160, 0.9),
+    rgba(140, 180, 140, 0.9)
+  );
+  transform: scale(1.05);
 }
 
 .selectList {
   outline: none;
-  background: linear-gradient(55deg, #08a222, #033514, rgb(13, 135, 29));
+  background: linear-gradient(55deg, rgba(50, 50, 50, 0.9), rgba(30, 30, 30, 0.9));
   color: #ffffff;
   text-align: center;
   cursor: pointer;
-  border: double 0.5vh #d1fffd;
+  border: 0.2vh solid rgba(200, 200, 200, 0.9);
   border-radius: 0.5vh;
+  padding: 0.5vh 1vh;
+  transition: border 0.3s ease, background 0.3s ease;
 }
 
 .selectList:hover {
-  border: dashed 0.2vh #d1fffd;
-  background: linear-gradient(95deg, #a3e723, #469a18);
+  border: 0.2vh dashed rgba(200, 200, 200, 0.9);
+  background: linear-gradient(95deg, rgba(60, 60, 60, 0.9), rgba(40, 40, 40, 0.9));
   transform: scale(1.01);
 }
 
 .selectList option {
-  background-color: #dcfd37;
+  background-color: rgba(220, 220, 220, 0.9);
   color: #001e03;
 }
 
 .selectList option:nth-child(odd) {
   color: #ffffff;
-  background-color: rgba(31, 135, 13, 0.756);
-  border-end-end-radius: 22vh;
+  background-color: rgba(50, 50, 50, 0.9);
 }
-.submito{
-    background: linear-gradient(95deg, #a3e723, #469a18);
-    border: .2vh dashed rgba(13, 135, 29);    
-}
-.submito:hover{
+
+.submito {
+  background: linear-gradient(95deg, rgba(160, 200, 160, 0.9), rgba(140, 180, 140, 0.9));
+  border: 0.2vh solid rgba(150, 190, 150, 0.9);
+  padding: 1vh 2vh;
+  border-radius: 0.5vh;
   cursor: pointer;
-  transform: scale(1.1);
+  transition: background 0.3s ease, transform 0.3s ease;
 }
-.radioBox{
-  background-color: rgb(101, 192, 76);
+
+.submito:hover {
+  background: linear-gradient(95deg, rgba(140, 180, 140, 0.9), rgba(120, 160, 120, 0.9));
+  transform: scale(1.05);
+}
+
+.radioBox {
+  background-color: rgba(200, 200, 200, 0.9);
   display: flex;
   justify-content: space-around;
+  padding: 1vh;
+  border-radius: 0.5vh;
 }
+
 .checkboxInput {
-	appearance: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	width: 16px;
-	height: 16px;
-	border: 1px solid #fff2de;
-	outline: none;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-	border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ffffff;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 50%;
 }
 
 .checkboxInput:checked {
-	background-color: #a5cd39;
-	border: 1px solid #499b01;
+  background-color: #a5cd39;
+  border: 1px solid #499b01;
 }
 
 .checkboxInput:not(:checked) {
-	position: relative;
+  position: relative;
 }
 
 .checkboxInput:not(:checked):before,
 .checkboxInput:not(:checked):after {
-	content: '';
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 8px;
-	height: 2px;
-	background-color: #cb0707;
-	transition: transform 0.3s ease;
+  content: '';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 2px;
+  background-color: #cb0707;
+  transition: transform 0.3s ease;
 }
 
 .checkboxInput:not(:checked):before {
-	transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .checkboxInput:not(:checked):after {
-	transform: translate(-50%, -50%) rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
 }

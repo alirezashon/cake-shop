@@ -98,7 +98,6 @@ const CategoryManager: React.FC = () => {
         },
         action: action,
       }
-console.log(dataToSend)
       const url =
         action === '(*I&n()s*e(r&t*^%t^O&n*E('
           ? `/api/data/Post/Admin/Category`
