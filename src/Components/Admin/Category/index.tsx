@@ -109,7 +109,6 @@ const CategoryManager: React.FC = () => {
       })
 
       const data = await response.json()
-      console.log(response)
       if (data.success) {
         toast.current?.show({
           severity: 'success',
@@ -117,7 +116,6 @@ const CategoryManager: React.FC = () => {
           detail: 'موفق',
           life: 3000,
         })
-        location.reload()
       } else {
         toast.current?.show({
           severity: 'error',
@@ -169,9 +167,7 @@ const CategoryManager: React.FC = () => {
             <label>{refName}</label>
             {refName === 'src' && image && (
               <Image
-                src={`data:image/jpeg;base64,${Buffer.from(image).toString(
-                  'base64'
-                )}`}
+                src={`${image}`}
                 alt={``}
                 width={77}
                 height={77}

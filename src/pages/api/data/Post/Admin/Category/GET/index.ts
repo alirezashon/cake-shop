@@ -1,16 +1,20 @@
 /** @format */
 
-import { NextApiRequest, NextApiResponse } from "next"
-import Category from "../../../../../../../models/Data/Category"
-import db from "../../../../../../../utils"
+import { NextApiRequest, NextApiResponse } from 'next'
+import Category from '../../../../../../../models/Data/Category'
+import db from '../../../../../../../utils'
 
 const cateBrand = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    if (req.method === "POST") {
+    if (req.method === 'POST') {
       const { authType } = req.body
-      if (authType === "^c(a)ta*sEa)*(t)A&g^o%s#x%sA!") {
+      if (authType === '^c(a)ta*sEa)*(t)A&g^o%s#x%sA!') {
         await db.connect2DB()
-        const category = await Category.find({})
+        const data = await Category.find({})
+        const category = data.map((product) => ({
+          ...product.toObject(),
+          src: `/api/GET/products/${product.src}`,
+        }))
         res.status(200).json({ category })
       } else {
         res.status(407).json({ success: false })
