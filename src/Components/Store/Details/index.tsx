@@ -10,8 +10,7 @@ import { ProductInterface } from '@/Interfaces'
 import Modal from '../../Modal'
 import StarRating from '@/Components/Rating'
 import ShowRating from '@/Components/Rating/ShowRates'
-import CommentRating from '@/Components/Rating/RateOnComment'
-interface Props {
+ interface Props {
   post: ProductInterface
 }
 
@@ -118,7 +117,7 @@ const Details: React.FC<Props> = ({ post }) => {
               <div className={styles.title}>{post.title}</div>
               <Image
                 className={styles.mainImage}
-                src={`data:image/jpeg;base64,${post.src}`}
+                src={post.src}
                 width={777}
                 height={777}
                 alt=''

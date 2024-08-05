@@ -268,33 +268,33 @@
   transform: rotate(360deg) scale(1.3);
 }
 .starBox {
-  background-color: #ffffff;
+  background-color: #fdd6d6;
   padding: 1vh 5vh;
   border-radius: 2vh;
-  border: 0.3vh dashed rgb(226, 220, 38);
+  border: 1px solid rgb(253, 121, 121);
 }
 .addCommentRow {
-  width: 70%;
+  width: 40%;
 }
 .addCommentRow input,
 .addCommentRow textarea {
   width: 100%;
   margin: 1vh;
   padding: 1vh;
-  border-radius: 2vh;
+  border-radius: 1vh;
   outline: none;
   border: 0.1vh solid rgb(184, 184, 184);
 }
 .addCommentRow textarea {
   height: 20vh;
   padding: 2vh;
-  border-radius: 4vh;
+  border-radius: 1vh;
 }
 .submito {
   background-color: rgb(255, 34, 34);
   color: #ffffff;
   border: none;
-  border-radius: 2vh;
+  border-radius: 1vh;
   padding: 1vh 3vh;
 }
 @media (max-width: 999px) {
@@ -324,5 +324,8 @@
   .inceriment,
   .deceriment {
     width: 12%;
+  }
+  .addCommentRow{
+    width: 80%;
   }
 }

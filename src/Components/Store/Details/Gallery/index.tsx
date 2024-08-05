@@ -62,7 +62,7 @@ const ImageGallery: React.FC<Props> = ({ structure }) => {
         <Image
           layout='fill'
           objectFit='cover'
-          src={`data:image/jpeg;base64,${selectedImage?.src}`}
+          src={selectedImage?.src}
           alt={selectedImage?.alt}
           className={`${styles.mainImage} ${
             isFullscreen ? styles.fullscreen : ''
@@ -80,7 +80,7 @@ const ImageGallery: React.FC<Props> = ({ structure }) => {
             <Image
               layout='fill'
               objectFit='cover'
-              src={`data:image/jpeg;base64,${image.src}`}
+              src={image.src}
               alt={image.alt}
             />
           </div>
@@ -95,7 +95,7 @@ const ImageGallery: React.FC<Props> = ({ structure }) => {
             <Image
               layout='fill'
               objectFit='contain'
-              src={`data:image/jpeg;base64,${selectedImage.src}`}
+              src={selectedImage.src}
               alt='Fullscreen Image'
               className={styles.fullscreenImage}
             />

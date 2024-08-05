@@ -51,7 +51,9 @@ const ProductManager: React.FC<Props> = ({
       refs.price.current!.value = `${itemToEdit?.price}`
       refs.description.current!.value = itemToEdit?.description
       refs.keywords.current!.value = itemToEdit?.keywords?.join(',') || ''
-      refs.category.current!.value = itemToEdit?.categories
+      if (refs.category.current) {
+        refs.category.current.value = itemToEdit.categories || ''
+      }
     }
   }
 
@@ -107,7 +109,7 @@ const ProductManager: React.FC<Props> = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToSend),
       })
-
+console.log(response)
       const data = await response.json()
       if (data.success) {
         toast.current?.show({
@@ -116,7 +118,6 @@ const ProductManager: React.FC<Props> = ({
           detail: 'موفق',
           life: 3000,
         })
-        location.reload()
       } else {
         toast.current?.show({
           severity: 'error',

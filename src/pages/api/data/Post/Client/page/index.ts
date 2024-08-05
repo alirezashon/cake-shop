@@ -3,7 +3,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Product from '../../../../../../models/Data/Product'
 import db from '../../../../../../utils/index.js'
-import { getImageBase64 } from '@/lib'
 const Page = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === 'POST') {
@@ -12,9 +11,13 @@ const Page = async (req: NextApiRequest, res: NextApiResponse) => {
         await db.connectToShop()
         const product = await Product.findOne({ title })
         if (product) {
-          const srcBase64 = await getImageBase64(product.src)
-          const products = { ...product.toObject(), src: srcBase64 }
-          console.log(srcBase64)
+          const products = {
+            ...product.toObject(),
+            src: `/api/GET/products/${product.src}`,
+            subImages: product.subImages.map(
+              (sub: string) => `/api/GET/products/${sub}`
+            ),
+          }
           res.status(200).json({ success: true, products })
         } else {
           res.status(201)
