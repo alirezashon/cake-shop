@@ -13,7 +13,7 @@ const Footer = dynamic(() => import('../Components/Footer'), {
 
 const Handler: React.FC = () => {
   return (
-    <div style={{ display: 'grid' , width:'100vw' }}>
+    <div >
       <CupcakeDisplay />
       <Main />
       <Footer />
